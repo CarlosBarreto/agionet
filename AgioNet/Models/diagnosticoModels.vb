@@ -230,3 +230,61 @@ Public Class AsignarEstacionModel
     Private _User As String
 End Class
 
+'2013.02.13
+Public Class MaterialMasterModel
+    ' Properties
+    Public Property Alt As String
+        Get
+            Return Me._Alt
+        End Get
+        Set(ByVal value As String)
+            Me._Alt = value
+        End Set
+    End Property
+
+    Public Property Description As String
+        Get
+            Return Me._Description
+        End Get
+        Set(ByVal value As String)
+            Me._Description = value
+        End Set
+    End Property
+
+    Public Property Lvl As String
+        Get
+            Return Me._lvl
+        End Get
+        Set(ByVal value As String)
+            Me._lvl = value
+        End Set
+    End Property
+
+    Public Property PartNo As String
+        Get
+            Return Me._PartNo
+        End Get
+        Set(ByVal value As String)
+            Me._PartNo = value
+        End Set
+    End Property
+
+    Public Property SKUNo As String
+        Get
+            Return Me._SKUNo
+        End Get
+        Set(ByVal value As String)
+            Me._SKUNo = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _Alt As String
+    Private _Description As String
+    Private _lvl As String
+    Private _PartNo As String
+    Private _SKUNo As String
+End Class
+
+
