@@ -2,7 +2,7 @@
 Imports System.Drawing
 Imports System.Drawing.Text
 
-Public Class agGlobals
+Module agGlobals
     '// Fields
     Public Const __DATABASE__ As String = "AgioNet v1.3"
     Public Const __ENPASSWD__ As String = "00Ag10t3ch00"
@@ -332,5 +332,4 @@ Public Class agGlobals
         Public TEXTLOG As String
         Public CREATEBY As String
     End Structure
-
-End Class
+End Module

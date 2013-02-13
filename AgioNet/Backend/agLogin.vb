@@ -1,4 +1,4 @@
-﻿Imports AgioNet.agGlobals
+﻿Imports AgioNet._agGlobals
 Imports System.Data.SqlClient
 
 Public Class agLogin
