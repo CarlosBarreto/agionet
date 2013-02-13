@@ -1,6 +1,42 @@
 ﻿Imports System.ComponentModel
 Imports System.ComponentModel.DataAnnotations
 Imports System.Globalization
+'2013.02.13
+Public Class AsignarEstacionModel
+    ' Properties
+    Public Property Estacion As String
+        Get
+            Return Me._Estacion
+        End Get
+        Set(ByVal value As String)
+            Me._Estacion = value
+        End Set
+    End Property
+
+    Public Property TestID As String
+        Get
+            Return Me._TestID
+        End Get
+        Set(ByVal value As String)
+            Me._TestID = value
+        End Set
+    End Property
+
+    Public Property User As String
+        Get
+            Return Me._User
+        End Get
+        Set(ByVal value As String)
+            Me._User = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _Estacion As String
+    Private _TestID As String
+    Private _User As String
+End Class
 
 '2013.02.13
 Public Class ExecTestModel
@@ -47,6 +83,53 @@ Public Class ExecTestModel
     Private _Result As String
     Private _TestID As String
     Private _TextLog As String
+End Class
+
+'2013.02.13
+Public Class MaterialMasterListModel
+    ' Properties
+    Public Property Alt As String
+        Get
+            Return Me._Alt
+        End Get
+        Set(ByVal value As String)
+            Me._Alt = value
+        End Set
+    End Property
+
+    Public Property Description As String
+        Get
+            Return Me._Description
+        End Get
+        Set(ByVal value As String)
+            Me._Description = value
+        End Set
+    End Property
+
+    Public Property PartNo As String
+        Get
+            Return Me._PartNo
+        End Get
+        Set(ByVal value As String)
+            Me._PartNo = value
+        End Set
+    End Property
+
+    Public Property SKUNo As String
+        Get
+            Return Me._SKUNo
+        End Get
+        Set(ByVal value As String)
+            Me._SKUNo = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _Alt As String
+    Private _Description As String
+    Private _PartNo As String
+    Private _SKUNo As String
 End Class
 
 '2013.02.13
@@ -104,6 +187,23 @@ Public Class RegFailureModel
     Private _Psol As String
     Private _TestID As String
     Private _User As String
+End Class
+
+'2013.02.13
+Public Class TestIDModel
+    ' Properties
+    Public Property TestID As String
+        Get
+            Return Me._TestID
+        End Get
+        Set(ByVal value As String)
+            Me._TestID = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _TestID As String
 End Class
 
 '2013.02.13
@@ -193,98 +293,12 @@ Public Class TestListModel
     Private _TESTSTART As String
 End Class
 
-'2013.02.13
-Public Class AsignarEstacionModel
-    ' Properties
-    Public Property Estacion As String
-        Get
-            Return Me._Estacion
-        End Get
-        Set(ByVal value As String)
-            Me._Estacion = value
-        End Set
-    End Property
-
-    Public Property TestID As String
-        Get
-            Return Me._TestID
-        End Get
-        Set(ByVal value As String)
-            Me._TestID = value
-        End Set
-    End Property
-
-    Public Property User As String
-        Get
-            Return Me._User
-        End Get
-        Set(ByVal value As String)
-            Me._User = value
-        End Set
-    End Property
 
 
-    ' Fields
-    Private _Estacion As String
-    Private _TestID As String
-    Private _User As String
-End Class
-
-'2013.02.13
-Public Class MaterialMasterModel
-    ' Properties
-    Public Property Alt As String
-        Get
-            Return Me._Alt
-        End Get
-        Set(ByVal value As String)
-            Me._Alt = value
-        End Set
-    End Property
-
-    Public Property Description As String
-        Get
-            Return Me._Description
-        End Get
-        Set(ByVal value As String)
-            Me._Description = value
-        End Set
-    End Property
-
-    Public Property Lvl As String
-        Get
-            Return Me._lvl
-        End Get
-        Set(ByVal value As String)
-            Me._lvl = value
-        End Set
-    End Property
-
-    Public Property PartNo As String
-        Get
-            Return Me._PartNo
-        End Get
-        Set(ByVal value As String)
-            Me._PartNo = value
-        End Set
-    End Property
-
-    Public Property SKUNo As String
-        Get
-            Return Me._SKUNo
-        End Get
-        Set(ByVal value As String)
-            Me._SKUNo = value
-        End Set
-    End Property
 
 
-    ' Fields
-    Private _Alt As String
-    Private _Description As String
-    Private _lvl As String
-    Private _PartNo As String
-    Private _SKUNo As String
-End Class
+
+
+
 
 
