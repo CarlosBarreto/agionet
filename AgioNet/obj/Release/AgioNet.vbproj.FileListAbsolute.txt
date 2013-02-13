@@ -1,0 +1,2 @@
+C:\Users\Agiotech\Documents\Visual Studio 2012\Projects\AgioNet\AgioNet\obj\Release\AgioNet.vbprojResolveAssemblyReference.cache
+C:\Users\Agiotech\Documents\Visual Studio 2012\Projects\AgioNet\AgioNet\obj\Release\AgioNet.vbproj.GenerateResource.Cache

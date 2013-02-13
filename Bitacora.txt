@@ -1,0 +1,55 @@
+*****************************************************************************
+** Author: 	Carlos Barreto
+** Date:	2013.01.11
+** Description: Bitacora AgioNet v1.3.1 
+*****************************************************************************
+2013.01.10 -- Inicio del proyecto
+2013.01.11 -- 
+	-- Se desarrolla el CSS HeaderTool
+	-- Se desarrolla el CSS layout
+	-- Actualizacion de la vista _Layout
+	
+¨	* TB001 -- Modificación de la Tabla dbo.EUSER a sys_User
+	* SP001 -- Se Crea el SP dbo.sys_UserLogin para el Login de usuarios
+	* ERR0001 - Se Crea el código de error 99001 - Fail User Login Error
+
+	Creada la carpeta Backend para el control de los procesos backend
+	  --- Se Crea la Clase Simple3Des para el Cifrado de contraseñas
+	  --- Se crea la clase Decoder para el cifrado de contraseñas
+	  --- Se crea el Module agGlobals.vb para guardar las constantes globales
+	  --- reutilización del módulo DataAccess
+	  --- Creada la clase agLogin para el loggeo de los usuarios
+
+2013.01.14 --
+	-- Modificacion al sp epermissionGetPermission
+
+2013.01.14 --
+	-- Se crea la tabla sc_OrderMaster
+	-- Se crea la tabla sc_CustomerInfo
+	-- Se crea la tabla sc_Product
+
+	* ERR0002 - Se crea el codigo de error 99002 - Incomplete info
+	* ERR0003 - Se crea el código de error 99003 - No selected
+	* ERR0003 - Se crea el código de error 99004 - Invalid OrderID
+
+2013.01.16 -- 
+	-- Creada la tabla lg_Company (Se agregan datos)
+	-- Creada la tabla lg_TrackNo
+ 	-- Creada la tabla lg_TrackNoStatus
+	-- Creada la tabla lg_TrackNoCost
+
+	-- Creado el sp lg_getOrdenesFletesSinTrackNo
+
+	-- Actualizar tabla sc_OrderMaster (agregar campo Delivery)
+	-- Actualizar SP sc_InsertOrderMaster (Agregar campo Delivery)
+
+	* ERR0004 - Se Crea el código de error 99005 - Already Info Error
+	* ERR0005 - Se crea el código de error 99006 - Invalid TrackNo
+	* ERR0006 - Se Crea el código de error 99007 - Invalid TestID Error:
+	* ERR0007 - Se crea el código de error 99008 - Invalid PartNo Error:
+
+	* ERR0008 - Se Crea el código de error 99009 - Invalid SKUNo Error:
+	* ERR0009 - Se Crea el código de error 99010 - Invalid ProductType Error:
+	* ERR0009 - Se crea el código de error 99011 - Invalid Trademark Error:
+
+®
