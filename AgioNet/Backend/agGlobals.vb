@@ -8,77 +8,77 @@
 
     '// Nested Types
     Public Structure AllOrderInfo
-        public string OrderID as string
-        public string OrderDateas string
-        public string CustomerType as string
-        public string RFC as string
-        public string Email as string
-        public string Address as string
-        public string ExternalNumber as string
-        public string InternalNumber as string
-        public string Address2 as string
-        public string City as string
-        public string State as string
-        public string Country as string
-        public string ZipCode as string
-        public string Telephone as string
-        public string Telephone2 as string
-        public string Telephone3 as string
-        public string Delivery as string
-        public string DeliveryTime as string
-        public string ProductClass as string
-        public string ProductType as string
-        public string ProductTrademark as string
-        public string ProductModel as string
-        public string ProductDescription as string
-        public string PartNumber as string
-        public string SerialNumber as string
-        public string Revision as string
-        public string ServiceType as string
-        public string FailureType as string
-        public string Comment as string
+        Public OrderID As String
+        Public OrderDate As String
+        Public CustomerType As String
+        Public RFC As String
+        Public Email As String
+        Public Address As String
+        Public ExternalNumber As String
+        Public InternalNumber As String
+        Public Address2 As String
+        Public City As String
+        Public State As String
+        Public Country As String
+        Public ZipCode As String
+        Public Telephone As String
+        Public Telephone2 As String
+        Public Telephone3 As String
+        Public Delivery As String
+        Public DeliveryTime As String
+        Public ProductClass As String
+        Public ProductType As String
+        Public ProductTrademark As String
+        Public ProductModel As String
+        Public ProductDescription As String
+        Public PartNumber As String
+        Public SerialNumber As String
+        Public Revision As String
+        Public ServiceType As String
+        Public FailureType As String
+        Public Comment As String
     End Structure
 
     Public Structure FailureView
-        public string FAILUREID as string
-        public string TESTID as string
-        public string DESCRIPTION as string
-        public string POSSIBLESOLUTION as string
-        public string FOUNDBY as string
-        public string FOUNDDATE as string
-        public string RESOLVED as string
+        Public FAILUREID As String
+        Public TESTID As String
+        Public DESCRIPTION As String
+        Public POSSIBLESOLUTION As String
+        Public FOUNDBY As String
+        Public FOUNDDATE As String
+        Public RESOLVED As String
     End Structure
     
     Public Structure PrintData
-        public string ReportedFailure as string
-        public string OrderId as string
-        public string SerialNo as string
-        public string PartNo as string
-        public string Model as string
-        public string TrackNo as string
-        public string ScanDate as string
-        public string ScanBy as string
-        public string PackType as string
-        public string PackDamage as string
-        public string NonDoucumentDamage as string
-        public string CorrectPack as string
-        public string Accesories as string
-        public string Cosmetic as string
-        public string Warranty as string
-        public string ReRepair as string
-        public string Comment as string
+        Public ReportedFailure As String
+        Public OrderId As String
+        Public SerialNo As String
+        Public PartNo As String
+        Public Model As String
+        Public TrackNo As String
+        Public ScanDate As String
+        Public ScanBy As String
+        Public PackType As String
+        Public PackDamage As String
+        Public NonDoucumentDamage As String
+        Public CorrectPack As String
+        Public Accesories As String
+        Public Cosmetic As String
+        Public Warranty As String
+        Public ReRepair As String
+        Public Comment As String
     End Structure
     
     Public Structure TestView
-        public string TESTID as string
-        public string ORDERID as string
-        public string TESTNAME as string
-        public string TESTDESCRIPTION as string
-        public string TESTRESULT as string
-        public string TESTSTART as string
-        public string TESTEND as string
-        public string TEXTLOG as string
-        public string CREATEBY as string
+        Public TESTID As String
+        Public ORDERID As String
+        Public TESTNAME As String
+        Public TESTDESCRIPTION As String
+        Public TESTRESULT As String
+        Public TESTSTART As String
+        Public TESTEND As String
+        Public TEXTLOG As String
+        Public CREATEBY As String
     End Structure
 
 End Class
