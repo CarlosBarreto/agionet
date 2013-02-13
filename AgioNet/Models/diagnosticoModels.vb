@@ -106,4 +106,92 @@ Public Class RegFailureModel
     Private _User As String
 End Class
 
+'2013.02.13
+Public Class TestListModel
+    ' Properties
+    Public Property CREATEBY As String
+        Get
+            Return Me._CREATEBY
+        End Get
+        Set(ByVal value As String)
+            Me._CREATEBY = value
+        End Set
+    End Property
+
+    Public Property ORDERID As String
+        Get
+            Return Me._ORDERID
+        End Get
+        Set(ByVal value As String)
+            Me._ORDERID = value
+        End Set
+    End Property
+
+    Public Property TESTDESCRIPTION As String
+        Get
+            Return Me._TESTDESCRIPTION
+        End Get
+        Set(ByVal value As String)
+            Me._TESTDESCRIPTION = value
+        End Set
+    End Property
+
+    Public Property TESTEND As String
+        Get
+            Return Me._TESTEND
+        End Get
+        Set(ByVal value As String)
+            Me._TESTEND = value
+        End Set
+    End Property
+
+    Public Property TESTID As String
+        Get
+            Return Me._TESTID
+        End Get
+        Set(ByVal value As String)
+            Me._TESTID = value
+        End Set
+    End Property
+
+    Public Property TESTNAME As String
+        Get
+            Return Me._TESTNAME
+        End Get
+        Set(ByVal value As String)
+            Me._TESTNAME = value
+        End Set
+    End Property
+
+    Public Property TESTRESULT As String
+        Get
+            Return Me._TESTRESULT
+        End Get
+        Set(ByVal value As String)
+            Me._TESTRESULT = value
+        End Set
+    End Property
+
+    Public Property TESTSTART As String
+        Get
+            Return Me._TESTSTART
+        End Get
+        Set(ByVal value As String)
+            Me._TESTSTART = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _CREATEBY As String
+    Private _ORDERID As String
+    Private _TESTDESCRIPTION As String
+    Private _TESTEND As String
+    Private _TESTID As String
+    Private _TESTNAME As String
+    Private _TESTRESULT As String
+    Private _TESTSTART As String
+End Class
+
+
 
