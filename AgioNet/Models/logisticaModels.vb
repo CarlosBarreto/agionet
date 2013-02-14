@@ -283,3 +283,41 @@ Public Class OrderLogisticaModel
     Private _OrderID As String
 End Class
 
+' 2013.02.14
+Public Class ScanOrderModel
+    ' Properties
+    Public Property Comment As String
+        Get
+            Return Me._Comment
+        End Get
+        Set(ByVal value As String)
+            Me._Comment = value
+        End Set
+    End Property
+
+    Public Property IsSerialNumber As Boolean
+        Get
+            Return Me._IsSerialNumber
+        End Get
+        Set(ByVal value As Boolean)
+            Me._IsSerialNumber = value
+        End Set
+    End Property
+
+    <Required> _
+    Public Property OrderID As String
+        Get
+            Return Me._OrderID
+        End Get
+        Set(ByVal value As String)
+            Me._OrderID = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _Comment As String
+    Private _IsSerialNumber As Boolean
+    Private _OrderID As String
+End Class
+

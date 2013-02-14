@@ -41,12 +41,16 @@
             Return Me.RedirectToAction("ordenes_cflete")
         End Function
 
+        ' 2013.02.14
+        ' GET: /logistica/agregar_esp_trackno
         <Authorize> _
         Public Function agregar_esp_trackno(ByVal model As OrderLogisticaModel) As ActionResult
             Me.Session.Add("OrderID", model.OrderID)
             Return Me.View
         End Function
 
+        ' 2014.02.14
+        ' POST: /logistica/agregar_trackno
         <HttpPost, Authorize> _
         Public Function agregar_trackno(ByVal model As AgregarTrackNoModel) As ActionResult
             Dim result As ActionResult
@@ -54,7 +58,9 @@
             Dim str As String = String.Empty
             Dim model2 As AgregarTrackNoModel = model
             Try
-                Me.DR = Me.DA.ExecuteSP("lg_TrackNo_AssignTrackNo", New Object() {model2.OrderID, model2.CaseType, model2.OutBound, model2.InBound, model2.OutBound2, model2.CarrierName, model2.Weight, model2.Height, model2.Lenght, model2.width, model2.Field1, model2.Field2, model2.Reference, Me.User.Identity.Name})
+                Me.DR = Me.DA.ExecuteSP("lg_TrackNo_AssignTrackNo", model2.OrderID, model2.CaseType, model2.OutBound, model2.InBound, _
+                                        model2.OutBound2, model2.CarrierName, model2.Weight, model2.Height, model2.Lenght, model2.width, _
+                                        model2.Field1, model2.Field2, model2.Reference, Me.User.Identity.Name)
                 If (Me.DA.LastErrorMessage = "") Then
                     Do While Me.DR.Read
                         str = DR(0)
@@ -63,64 +69,65 @@
                     Me.TempData.Item("ErrMsg") = Me.DA.LastErrorMessage
                     Return Me.View
                 End If
+
                 If Not Me.DR.IsClosed Then
                     Me.DR.Close()
                 End If
+            Catch ex As Exception
+                Return View()
+            Finally
                 Me.DA.Dispose()
-            Catch exception1 As Exception
-                ProjectData.SetProjectError(exception1)
-                Dim exception As Exception = exception1
-                Me.TempData.Item("ErrMsg") = exception.Message
-                Me.DA.Dispose()
-                result = Me.View
-                ProjectData.ClearProjectError()
-                Return result
-                ProjectData.ClearProjectError()
             End Try
+
             Me.TempData.Item("ErrMsg") = str
             Me.Session.Remove("OrderID")
             Return Me.RedirectToAction("ordenes_cflete")
-            model2 = Nothing
-            Return result
         End Function
 
+        ' 2013.02.14
+        ' GET: /logistica/agregar_trackno
         <Authorize> _
         Public Function agregar_trackno(ByVal model As OrderLogisticaModel) As ActionResult
             Me.Session.Add("OrderID", model.OrderID)
             Return Me.View
         End Function
 
+        ' 2013.02.14
+        ' GET: /logistica/GenerateExcel
         <Authorize> _
         Public Function GenerateExcel() As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
-            Dim modelArray As OrderListModel() = New OrderListModel(&H65 - 1) {}
+            Dim modelArray(100) As OrderListModel
             Dim index As Integer = 0
+
             Try
-                Me.DR = Me.DA.ExecuteSP("lg_getPendientesRecoleccion", New Object(0 - 1) {})
+                Me.DR = Me.DA.ExecuteSP("lg_getPendientesRecoleccion")
                 If (Me.DA._LastErrorMessage <> "") Then
                     Me.TempData.Item("ErrMsg") = Me.DA.LastErrorMessage
                     Me.DA.Dispose()
                     Return Me.RedirectToAction("index")
                 End If
+
                 If Me.DR.HasRows Then
                     Do While Me.DR.Read
                         Dim model As New OrderListModel With { _
                             .OrderID = DR(0), _
-                            .OrderDate = Conversions.ToString(Me.DR.Item(1)), _
-                            .CustomerName = Conversions.ToString(Me.DR.Item(2)), _
-                            .Email = Conversions.ToString(Me.DR.Item(3)), _
-                            .Delivery = Conversions.ToString(Me.DR.Item(4)), _
-                            .DeliveryTime = Conversions.ToString(Me.DR.Item(5)), _
-                            .ProductClass = Conversions.ToString(Me.DR.Item(6)), _
-                            .ProductType = Conversions.ToString(Me.DR.Item(7)), _
-                            .ProductModel = Conversions.ToString(Me.DR.Item(8)), _
-                            .PartNo = Conversions.ToString(Me.DR.Item(9)), _
-                            .SerialNo = Conversions.ToString(Me.DR.Item(10)) _
+                            .OrderDate = DR(1), _
+                            .CustomerName = DR(2), _
+                            .Email = DR(3), _
+                            .Delivery = DR(4), _
+                            .DeliveryTime = DR(5), _
+                            .ProductClass = DR(6), _
+                            .ProductType = DR(7), _
+                            .ProductModel = DR(8), _
+                            .PartNo = DR(9), _
+                            .SerialNo = DR(10) _
                         }
                         modelArray(index) = model
                         index += 1
                     Loop
-                    modelArray = DirectCast(Utils.CopyArray(DirectCast(modelArray, Array), New OrderListModel(((index - 1) + 1) - 1) {}), OrderListModel())
+                    ' -- Actualizado por Carlos Barreto 
+                    ReDim Preserve modelArray(index - 1)
                 Else
                     index = 0
                     modelArray(index) = New OrderListModel With { _
@@ -137,20 +144,18 @@
                         .SerialNo = "No Data" _
                     }
                     index += 1
-                    modelArray = DirectCast(Utils.CopyArray(DirectCast(modelArray, Array), New OrderListModel(((index - 1) + 1) - 1) {}), OrderListModel())
+                    ' -- Actualizado por Carlos Barreto 
+                    ReDim Preserve modelArray(index - 1)
                 End If
-            Catch exception1 As Exception
-                ProjectData.SetProjectError(exception1)
-                Dim exception As Exception = exception1
-                Me.TempData.Item("ErrMsg") = exception.Message
-                Dim result As ActionResult = Me.RedirectToAction("index")
-                ProjectData.ClearProjectError()
-                Return result
-                ProjectData.ClearProjectError()
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                Return Me.RedirectToAction("index")
             End Try
+
             If (Not Me.DR.IsClosed And Me.DR.HasRows) Then
                 Me.DR.Close()
             End If
+
             Me.DA.Dispose()
             Me.TempData.Item("Model") = modelArray
             Return Me.View
@@ -172,35 +177,35 @@
                     Do While Me.DR.Read
                         code = DR(0)
                         model2 = New CreateOrderModel With { _
-                            .CustomerName = Conversions.ToString(Me.DR.Item(2)), _
-                            .RazonSocial = Conversions.ToString(Me.DR.Item(3)), _
-                            .CustomerReference = Conversions.ToString(Me.DR.Item(4)), _
-                            .RFC = Conversions.ToString(Me.DR.Item(5)), _
-                            .Email = Conversions.ToString(Me.DR.Item(6)), _
-                            .Address = Conversions.ToString(Me.DR.Item(7)), _
-                            .ExternalNumber = Conversions.ToString(Me.DR.Item(8)), _
-                            .InternalNumber = Conversions.ToString(Me.DR.Item(9)), _
-                            .Address2 = Conversions.ToString(Me.DR.Item(10)), _
-                            .City = Conversions.ToString(Me.DR.Item(11)), _
-                            .State = Conversions.ToString(Me.DR.Item(12)), _
-                            .Country = Conversions.ToString(Me.DR.Item(13)), _
-                            .ZipCode = Conversions.ToString(Me.DR.Item(14)), _
-                            .Telephone = Conversions.ToString(Me.DR.Item(15)), _
-                            .Telephone2 = Conversions.ToString(Me.DR.Item(&H10)), _
-                            .Telephone3 = Conversions.ToString(Me.DR.Item(&H11)), _
-                            .Delivery = Conversions.ToString(Me.DR.Item(&H12)), _
-                            .DeliveryTime = Conversions.ToString(Me.DR.Item(&H13)), _
-                            .ProductClass = Conversions.ToString(Me.DR.Item(&H15)), _
-                            .ProductType = Conversions.ToString(Me.DR.Item(&H16)), _
-                            .ProductTrademark = Conversions.ToString(Me.DR.Item(&H17)), _
-                            .ProductModel = Conversions.ToString(Me.DR.Item(&H18)), _
-                            .productDescription = Conversions.ToString(Me.DR.Item(&H19)), _
-                            .PartNumber = Conversions.ToString(Me.DR.Item(&H1A)), _
-                            .SerialNumber = Conversions.ToString(Me.DR.Item(&H1B)), _
-                            .Revision = Conversions.ToString(Me.DR.Item(&H1C)), _
-                            .ServiceType = Conversions.ToString(Me.DR.Item(&H1D)), _
-                            .FailureType = Conversions.ToString(Me.DR.Item(30)), _
-                            .Comment = Conversions.ToString(Me.DR.Item(&H1F)) _
+                            .CustomerName = DR(2)), _
+                            .RazonSocial = DR(3)), _
+                            .CustomerReference = DR(4)), _
+                            .RFC = DR(5)), _
+                            .Email = DR(6)), _
+                            .Address = DR(7)), _
+                            .ExternalNumber = DR(8)), _
+                            .InternalNumber = DR(9)), _
+                            .Address2 = DR(10)), _
+                            .City = DR(11)), _
+                            .State = DR(12)), _
+                            .Country = DR(13)), _
+                            .ZipCode = DR(14)), _
+                            .Telephone = DR(15)), _
+                            .Telephone2 = DR(&H10)), _
+                            .Telephone3 = DR(&H11)), _
+                            .Delivery = DR(&H12)), _
+                            .DeliveryTime = DR(&H13)), _
+                            .ProductClass = DR(&H15)), _
+                            .ProductType = DR(&H16)), _
+                            .ProductTrademark = DR(&H17)), _
+                            .ProductModel = DR(&H18)), _
+                            .productDescription = DR(&H19)), _
+                            .PartNumber = DR(&H1A)), _
+                            .SerialNumber = DR(&H1B)), _
+                            .Revision = DR(&H1C)), _
+                            .ServiceType = DR(&H1D)), _
+                            .FailureType = DR(30)), _
+                            .Comment = DR(&H1F)) _
                         }
                     Loop
                 End If
@@ -302,18 +307,18 @@
                     Do While Me.DR.Read
                         Dim model As New AgregarTrackNoModel With { _
                             .OrderID = DR(0), _
-                            .CaseType = Conversions.ToString(Me.DR.Item(1)), _
-                            .OutBound = Conversions.ToString(Me.DR.Item(2)), _
-                            .InBound = Conversions.ToString(Me.DR.Item(3)), _
-                            .OutBound2 = Conversions.ToString(Me.DR.Item(4)), _
-                            .CarrierName = Conversions.ToString(Me.DR.Item(5)), _
-                            .Weight = Conversions.ToString(Me.DR.Item(6)), _
-                            .Height = Conversions.ToString(Me.DR.Item(7)), _
-                            .Lenght = Conversions.ToString(Me.DR.Item(8)), _
-                            .width = Conversions.ToString(Me.DR.Item(9)), _
-                            .Field1 = Conversions.ToString(Me.DR.Item(10)), _
-                            .Field2 = Conversions.ToString(Me.DR.Item(11)), _
-                            .Reference = Conversions.ToString(Me.DR.Item(12)) _
+                            .CaseType = DR(1)), _
+                            .OutBound = DR(2)), _
+                            .InBound = DR(3)), _
+                            .OutBound2 = DR(4)), _
+                            .CarrierName = DR(5)), _
+                            .Weight = DR(6)), _
+                            .Height = DR(7)), _
+                            .Lenght = DR(8)), _
+                            .width = DR(9)), _
+                            .Field1 = DR(10)), _
+                            .Field2 = DR(11)), _
+                            .Reference = DR(12)) _
                         }
                         modelArray(index) = model
                         index += 1
@@ -408,18 +413,18 @@
                     Do While Me.DR.Read
                         model3 = New AgregarTrackNoModel With { _
                             .OrderID = DR(0), _
-                            .CaseType = Conversions.ToString(Me.DR.Item(1)), _
-                            .OutBound = Conversions.ToString(Me.DR.Item(2)), _
-                            .InBound = Conversions.ToString(Me.DR.Item(3)), _
-                            .OutBound2 = Conversions.ToString(Me.DR.Item(4)), _
-                            .CarrierName = Conversions.ToString(Me.DR.Item(5)), _
-                            .Weight = Conversions.ToString(Me.DR.Item(6)), _
-                            .Height = Conversions.ToString(Me.DR.Item(7)), _
-                            .Lenght = Conversions.ToString(Me.DR.Item(8)), _
-                            .width = Conversions.ToString(Me.DR.Item(9)), _
-                            .Field1 = Conversions.ToString(Me.DR.Item(10)), _
-                            .Field2 = Conversions.ToString(Me.DR.Item(11)), _
-                            .Reference = Conversions.ToString(Me.DR.Item(12)) _
+                            .CaseType = DR(1)), _
+                            .OutBound = DR(2)), _
+                            .InBound = DR(3)), _
+                            .OutBound2 = DR(4)), _
+                            .CarrierName = DR(5)), _
+                            .Weight = DR(6)), _
+                            .Height = DR(7)), _
+                            .Lenght = DR(8)), _
+                            .width = DR(9)), _
+                            .Field1 = DR(10)), _
+                            .Field2 = DR(11)), _
+                            .Reference = DR(12)) _
                         }
                         model2 = model3
                     Loop
@@ -474,16 +479,16 @@
                     Do While Me.DR.Read
                         Dim model As New OrderListModel With { _
                             .OrderID = DR(0), _
-                            .OrderDate = Conversions.ToString(Me.DR.Item(1)), _
-                            .CustomerName = Conversions.ToString(Me.DR.Item(2)), _
-                            .Email = Conversions.ToString(Me.DR.Item(3)), _
-                            .Delivery = Conversions.ToString(Me.DR.Item(4)), _
-                            .DeliveryTime = Conversions.ToString(Me.DR.Item(5)), _
-                            .ProductClass = Conversions.ToString(Me.DR.Item(6)), _
-                            .ProductType = Conversions.ToString(Me.DR.Item(7)), _
-                            .ProductModel = Conversions.ToString(Me.DR.Item(8)), _
-                            .PartNo = Conversions.ToString(Me.DR.Item(9)), _
-                            .SerialNo = Conversions.ToString(Me.DR.Item(10)) _
+                            .OrderDate = DR(1)), _
+                            .CustomerName = DR(2)), _
+                            .Email = DR(3)), _
+                            .Delivery = DR(4)), _
+                            .DeliveryTime = DR(5)), _
+                            .ProductClass = DR(6)), _
+                            .ProductType = DR(7)), _
+                            .ProductModel = DR(8)), _
+                            .PartNo = DR(9)), _
+                            .SerialNo = DR(10)) _
                         }
                         modelArray(index) = model
                         index += 1
@@ -540,16 +545,16 @@
                     Do While Me.DR.Read
                         Dim model As New OrderListModel With { _
                             .OrderID = DR(0), _
-                            .OrderDate = Conversions.ToString(Me.DR.Item(1)), _
-                            .CustomerName = Conversions.ToString(Me.DR.Item(2)), _
-                            .Email = Conversions.ToString(Me.DR.Item(3)), _
-                            .Delivery = Conversions.ToString(Me.DR.Item(4)), _
-                            .DeliveryTime = Conversions.ToString(Me.DR.Item(5)), _
-                            .ProductClass = Conversions.ToString(Me.DR.Item(6)), _
-                            .ProductType = Conversions.ToString(Me.DR.Item(7)), _
-                            .ProductModel = Conversions.ToString(Me.DR.Item(8)), _
-                            .PartNo = Conversions.ToString(Me.DR.Item(9)), _
-                            .SerialNo = Conversions.ToString(Me.DR.Item(10)) _
+                            .OrderDate = DR(1)), _
+                            .CustomerName = DR(2)), _
+                            .Email = DR(3)), _
+                            .Delivery = DR(4)), _
+                            .DeliveryTime = DR(5)), _
+                            .ProductClass = DR(6)), _
+                            .ProductType = DR(7)), _
+                            .ProductModel = DR(8)), _
+                            .PartNo = DR(9)), _
+                            .SerialNo = DR(10)) _
                         }
                         modelArray(index) = model
                         index += 1
@@ -606,16 +611,16 @@
                     Do While Me.DR.Read
                         Dim model As New OrderListModel With { _
                             .OrderID = DR(0), _
-                            .OrderDate = Conversions.ToString(Me.DR.Item(1)), _
-                            .CustomerName = Conversions.ToString(Me.DR.Item(2)), _
-                            .Email = Conversions.ToString(Me.DR.Item(3)), _
-                            .Delivery = Conversions.ToString(Me.DR.Item(4)), _
-                            .DeliveryTime = Conversions.ToString(Me.DR.Item(5)), _
-                            .ProductClass = Conversions.ToString(Me.DR.Item(6)), _
-                            .ProductType = Conversions.ToString(Me.DR.Item(7)), _
-                            .ProductModel = Conversions.ToString(Me.DR.Item(8)), _
-                            .PartNo = Conversions.ToString(Me.DR.Item(9)), _
-                            .SerialNo = Conversions.ToString(Me.DR.Item(10)) _
+                            .OrderDate = DR(1)), _
+                            .CustomerName = DR(2)), _
+                            .Email = DR(3)), _
+                            .Delivery = DR(4)), _
+                            .DeliveryTime = DR(5)), _
+                            .ProductClass = DR(6)), _
+                            .ProductType = DR(7)), _
+                            .ProductModel = DR(8)), _
+                            .PartNo = DR(9)), _
+                            .SerialNo = DR(10)) _
                         }
                         modelArray(index) = model
                         index += 1
@@ -671,16 +676,16 @@
                     Do While Me.DR.Read
                         Dim model As New OrderListModel With { _
                             .OrderID = DR(0), _
-                            .OrderDate = Conversions.ToString(Me.DR.Item(1)), _
-                            .CustomerName = Conversions.ToString(Me.DR.Item(2)), _
-                            .Email = Conversions.ToString(Me.DR.Item(3)), _
-                            .Delivery = Conversions.ToString(Me.DR.Item(4)), _
-                            .DeliveryTime = Conversions.ToString(Me.DR.Item(5)), _
-                            .ProductClass = Conversions.ToString(Me.DR.Item(6)), _
-                            .ProductType = Conversions.ToString(Me.DR.Item(7)), _
-                            .ProductModel = Conversions.ToString(Me.DR.Item(8)), _
-                            .PartNo = Conversions.ToString(Me.DR.Item(9)), _
-                            .SerialNo = Conversions.ToString(Me.DR.Item(10)) _
+                            .OrderDate = DR(1)), _
+                            .CustomerName = DR(2)), _
+                            .Email = DR(3)), _
+                            .Delivery = DR(4)), _
+                            .DeliveryTime = DR(5)), _
+                            .ProductClass = DR(6)), _
+                            .ProductType = DR(7)), _
+                            .ProductModel = DR(8)), _
+                            .PartNo = DR(9)), _
+                            .SerialNo = DR(10)) _
                         }
                         modelArray(index) = model
                         index += 1
