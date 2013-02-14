@@ -2,6 +2,113 @@
 Imports System.ComponentModel.DataAnnotations
 Imports System.Globalization
 
+'2013.02.14
+Public Class AppFailureInfoModel
+    ' Properties
+    Public Property FailureDescription As String
+        Get
+            Return Me._FailureDescription
+        End Get
+        Set(ByVal value As String)
+            Me._FailureDescription = value
+        End Set
+    End Property
+
+    Public Property FailureID As String
+        Get
+            Return Me._FailureID
+        End Get
+        Set(ByVal value As String)
+            Me._FailureID = value
+        End Set
+    End Property
+
+    Public Property FoundBy As String
+        Get
+            Return Me._FoundBy
+        End Get
+        Set(ByVal value As String)
+            Me._FoundBy = value
+        End Set
+    End Property
+
+    Public Property FoundDate As String
+        Get
+            Return Me._FoundDate
+        End Get
+        Set(ByVal value As String)
+            Me._FoundDate = value
+        End Set
+    End Property
+
+    Public Property Log As String
+        Get
+            Return Me._Log
+        End Get
+        Set(ByVal value As String)
+            Me._Log = value
+        End Set
+    End Property
+
+    Public Property OrderID As String
+        Get
+            Return Me._OrderID
+        End Get
+        Set(ByVal value As String)
+            Me._OrderID = value
+        End Set
+    End Property
+
+    Public Property PossibleSolution As String
+        Get
+            Return Me._PossibleSolution
+        End Get
+        Set(ByVal value As String)
+            Me._PossibleSolution = value
+        End Set
+    End Property
+
+    Public Property TestDescription As String
+        Get
+            Return Me._TestDescription
+        End Get
+        Set(ByVal value As String)
+            Me._TestDescription = value
+        End Set
+    End Property
+
+    Public Property TestID As String
+        Get
+            Return Me._TestID
+        End Get
+        Set(ByVal value As String)
+            Me._TestID = value
+        End Set
+    End Property
+
+    Public Property TestResult As String
+        Get
+            Return Me._TestResult
+        End Get
+        Set(ByVal value As String)
+            Me._TestResult = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _FailureDescription As String
+    Private _FailureID As String
+    Private _FoundBy As String
+    Private _FoundDate As String
+    Private _Log As String
+    Private _OrderID As String
+    Private _PossibleSolution As String
+    Private _TestDescription As String
+    Private _TestID As String
+    Private _TestResult As String
+End Class
+
 ' 2013.02.14
 Public Class CreateOrderModel
     ' Properties
