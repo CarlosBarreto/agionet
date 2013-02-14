@@ -697,6 +697,8 @@ Namespace AgioNet
                 Return Me.PartialView("_OrderInfoPartial")
             End Function
 
+            ' 2013.02.13
+            ' GET: /diagnostico/loadTestInfo
             <Authorize> _
             Public Function loadTestInfo() As PartialViewResult
                 Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
@@ -704,7 +706,8 @@ Namespace AgioNet
                 Dim num As Integer = 0
                 Try
                     Dim model2 As TestInfoModel
-                    Me.DR = Me.DA.ExecuteSP("dg_getTestDetail", New Object() {RuntimeHelpers.GetObjectValue(Me.TempData.Item("TestID"))})
+                    Me.DR = Me.DA.ExecuteSP("dg_getTestDetail", Me.TempData.Item("TestID"))
+
                     If (Me.DA._LastErrorMessage <> "") Then
                         Me.TempData.Item("ErrMsg") = Me.DA.LastErrorMessage
                         Me.DA.Dispose()
@@ -725,17 +728,18 @@ Namespace AgioNet
                     If Me.DR.HasRows Then
                         Do While Me.DR.Read
                             model2 = New TestInfoModel With { _
-                                .TestID = DR(0)), _
-                                .OrderID = DR(1)), _
-                                .TestName = DR(2)), _
-                                .TestDescription = DR(3)), _
-                                .TestStart = DR(4)), _
-                                .TestEnd = DR(5)), _
-                                .TestResult = DR(6)), _
-                                .CreateBy = DR(7)) _
+                                .TestID = DR(0), _
+                                .OrderID = DR(1), _
+                                .TestName = DR(2), _
+                                .TestDescription = DR(3), _
+                                .TestStart = DR(4), _
+                                .TestEnd = DR(5), _
+                                .TestResult = DR(6), _
+                                .CreateBy = DR(7) _
                             }
                             model = model2
                         Loop
+
                         If (Not Me.DR.IsClosed And Me.DR.HasRows) Then
                             Me.DR.Close()
                         End If
@@ -755,46 +759,52 @@ Namespace AgioNet
                         num += 1
                     End If
                 Catch exception1 As Exception
-                    ProjectData.SetProjectError(exception1)
-                    Dim exception As Exception = exception1
-                    Me.TempData.Item("ErrMsg") = exception.Message
+                    Me.TempData.Item("ErrMsg") = exception1.Message
                     Me.DA.Dispose()
-                    ProjectData.ClearProjectError()
                 End Try
+
                 Me.TempData.Item("Model") = model
                 Me.TempData.Keep("OrderID")
                 Return Me.PartialView("_TestInfoPartial")
+
             End Function
 
+            '2013.02.13
+            ' GET: /diagnostico/LoadWnOrderInfo
             Public Function LoadWnOrderInfo() As PartialViewResult
                 Return Me.PartialView("_wnOrderInfoPartial")
             End Function
 
+            '2013.02.13
+            ' GET: /diagnostico/pedir_aprobar
             <Authorize> _
             Public Function pedir_aprobar() As ActionResult
                 Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
-                Dim modelArray As TestListModel() = New TestListModel(&H65 - 1) {}
+                Dim modelArray(100) As TestListModel
                 Dim index As Integer = 0
+
                 If Me.HasOrderID Then
                     Try
                         Dim model As TestListModel
-                        Dim reader As SqlDataReader = Me.DA.ExecuteSP("dg_GetTestListByOrder", New Object() {RuntimeHelpers.GetObjectValue(Me.Session.Item("OrderID")), ""})
+                        Dim reader As SqlDataReader = Me.DA.ExecuteSP("dg_GetTestListByOrder", Me.Session.Item("OrderID"), "")
                         If reader.HasRows Then
                             Do While reader.Read
                                 model = New TestListModel With { _
-                                    .TESTID = reader(0)), _
-                                    .ORDERID = reader(1)), _
-                                    .TESTNAME = reader(2)), _
-                                    .TESTDESCRIPTION = reader(3)), _
-                                    .TESTRESULT = reader(4)), _
-                                    .TESTSTART = reader(5)), _
-                                    .TESTEND = reader(6)), _
-                                    .CREATEBY = reader(7)) _
+                                    .TESTID = reader(0), _
+                                    .ORDERID = reader(1), _
+                                    .TESTNAME = reader(2), _
+                                    .TESTDESCRIPTION = reader(3), _
+                                    .TESTRESULT = reader(4), _
+                                    .TESTSTART = reader(5), _
+                                    .TESTEND = reader(6), _
+                                    .CREATEBY = reader(7) _
                                 }
                                 modelArray(index) = model
                                 index += 1
                             Loop
-                            modelArray = DirectCast(Utils.CopyArray(DirectCast(modelArray, Array), New TestListModel(((index - 1) + 1) - 1) {}), TestListModel())
+
+                            '-- Actualizado por Carlos Barreto
+                            ReDim Preserve modelArray(index - 1)
                         Else
                             model = New TestListModel With { _
                                 .TESTID = "NO DATA", _
@@ -808,11 +818,11 @@ Namespace AgioNet
                             }
                             modelArray(index) = model
                             index += 1
-                            modelArray = DirectCast(Utils.CopyArray(DirectCast(modelArray, Array), New TestListModel(((index - 1) + 1) - 1) {}), TestListModel())
+                            '-- Actualizado por Carlos Barreto
+                            ReDim Preserve modelArray(index - 1)
                         End If
                     Catch exception1 As Exception
-                        ProjectData.SetProjectError(exception1)
-                        Dim exception As Exception = exception1
+                        index = 0
                         modelArray(index) = New TestListModel With { _
                             .TESTID = "NO DATA", _
                             .ORDERID = "NO DATA", _
@@ -824,13 +834,12 @@ Namespace AgioNet
                             .CREATEBY = "NO DATA" _
                         }
                         index += 1
-                        modelArray = DirectCast(Utils.CopyArray(DirectCast(modelArray, Array), New TestListModel(((index - 1) + 1) - 1) {}), TestListModel())
+                        '-- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
                         Me.DA.Dispose()
-                        Dim result As ActionResult = Me.View
-                        ProjectData.ClearProjectError()
-                        Return result
-                        ProjectData.ClearProjectError()
+                        Return Me.View
                     End Try
+
                     Me.TempData.Item("Model") = modelArray
                     Return Me.View
                 End If
