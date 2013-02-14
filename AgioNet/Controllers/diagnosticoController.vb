@@ -846,6 +846,8 @@ Namespace AgioNet
                 Return Me.RedirectToAction("Index")
             End Function
 
+            ' 2013.02.13
+            ' POST: /diagnostico/pedir_aprobar
             <Authorize, HttpPost> _
             Public Function pedir_aprobar(ByVal model As ReqApprovalModel) As ActionResult
                 Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
@@ -854,20 +856,28 @@ Namespace AgioNet
                 Dim txtSubject As String = String.Empty
                 Dim txtMessage As String = String.Empty
                 Try
-                    Me.DR = Me.DA.ExecuteSP("dg_ReqApproval", New Object() {RuntimeHelpers.GetObjectValue(Me.Session.Item("OrderID")), model.Comment, Me.User.Identity.Name})
+                    Me.DR = Me.DA.ExecuteSP("dg_ReqApproval", Session.Item("OrderID"), model.Comment, Me.User.Identity.Name)
+
                     If (Me.DA._LastErrorMessage = "") Then
-                        Me.TempData.Item("ErrMsg") = Operators.ConcatenateObject("Se ha mandado la solicitud de aprobación para la orden :", Me.Session.Item("OrderID"))
+                        Me.TempData.Item("ErrMsg") = "Se ha mandado la solicitud de aprobación para la orden :" & Session.Item("OrderID")
+
                         If Not Me.DR.IsClosed Then
                             Me.DR.Close()
                         End If
-                        Me.DR = Me.DA.ExecuteSP("sys_getDistibutionList", New Object() {"REQAPPROV"})
+
+                        Me.DR = Me.DA.ExecuteSP("sys_getDistibutionList", "REQAPPROV")
                         If Me.DR.HasRows Then
                             Do While Me.DR.Read
-                                emailAddress = DR(0))
+                                emailAddress = DR(0)
                             Loop
+
                             email.HTMLBody = True
-                            txtSubject = Conversions.ToString(Operators.ConcatenateObject("Solicitud de aprobación para la orden : ", Me.Session.Item("OrderID")))
-                            txtMessage = Conversions.ToString(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject("<p style='font-family: Arial; font-size:12px; width:800px;'>Se ha registrado una solicitud de aprobacion de reparación para la orden: <b>", Me.Session.Item("OrderID")), "</b>. Esta opción se encuentra disponible desde "), "Atención a Clientes / Aprovación de Reparación<p>"))
+                            txtSubject = "Solicitud de aprobación para la orden : " & Me.Session.Item("OrderID")
+                            txtMessage = "<p style='font-family: Arial; font-size:12px; width:800px;'> " & _
+                                         "Se ha registrado una solicitud de aprobacion de reparación para la orden: <b>" & _
+                                         Session.Item("OrderID") & "</b>. Esta opción se encuentra disponible desde " & _
+                                         "Atención a Clientes / Aprovación de Reparación<p>"
+
                             email.SendEmail(emailAddress, txtSubject, txtMessage)
                         End If
                         Me.DA.Dispose()
@@ -876,14 +886,10 @@ Namespace AgioNet
                         Me.DA.Dispose()
                     End If
                     Return Me.RedirectToAction("DiagnosticMain")
+
                 Catch exception1 As Exception
-                    ProjectData.SetProjectError(exception1)
-                    Dim exception As Exception = exception1
-                    Me.TempData.Item("ErrMsg") = exception.Message
-                    Dim result As ActionResult = Me.RedirectToAction("DiagnosticMain")
-                    ProjectData.ClearProjectError()
-                    Return result
-                    ProjectData.ClearProjectError()
+                    Me.TempData.Item("ErrMsg") = exception1.Message
+                    Return RedirectToAction("DiagnosticMain")
                 End Try
                 Return Me.View
             End Function
