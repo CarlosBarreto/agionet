@@ -901,6 +901,84 @@ Public Class TestListModel
     Private _TESTSTART As String
 End Class
 
+'2013.02.13
+Public Class ViewFoundFailureModel
+    ' Properties
+    Public Property Description As String
+        Get
+            Return Me._FDescription
+        End Get
+        Set(ByVal value As String)
+            Me._FDescription = value
+        End Set
+    End Property
+
+    Public Property FailureID As String
+        Get
+            Return Me._FailureID
+        End Get
+        Set(ByVal value As String)
+            Me._FailureID = value
+        End Set
+    End Property
+
+    Public Property FoundBy As String
+        Get
+            Return Me._FoundBy
+        End Get
+        Set(ByVal value As String)
+            Me._FailureID = value
+        End Set
+    End Property
+
+    Public Property FoundDate As String
+        Get
+            Return Me._FoundDate
+        End Get
+        Set(ByVal value As String)
+            Me._FoundDate = value
+        End Set
+    End Property
+
+    Public Property Resolved As String
+        Get
+            Return Me._Resolved
+        End Get
+        Set(ByVal value As String)
+            Me._Resolved = value
+        End Set
+    End Property
+
+    Public Property Solution As String
+        Get
+            Return Me._PSolution
+        End Get
+        Set(ByVal value As String)
+            Me._PSolution = value
+        End Set
+    End Property
+
+    Public Property TestID As String
+        Get
+            Return Me._TestID
+        End Get
+        Set(ByVal value As String)
+            Me._TestID = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _FailureID As String
+    Private _FDescription As String
+    Private _FoundBy As String
+    Private _FoundDate As String
+    Private _PSolution As String
+    Private _Resolved As String
+    Private _TestID As String
+End Class
+
+
 
 
 
