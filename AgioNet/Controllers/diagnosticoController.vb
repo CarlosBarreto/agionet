@@ -550,6 +550,9 @@ Namespace AgioNet
                 Return result
             End Function
 
+            '
+            ' 2013.02.13
+            ' GET: /diagnostico/LoadOrderInfo
             <Authorize> _
             Public Function LoadOrderInfo() As PartialViewResult
                 Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
@@ -557,10 +560,12 @@ Namespace AgioNet
                 Dim num As Integer = 0
                 Try
                     Dim model2 As OrderInfoModel
-                    Me.DR = Me.DA.ExecuteSP("sc_getOrderInfo", New Object() {RuntimeHelpers.GetObjectValue(Me.Session.Item("OrderID"))})
+                    Me.DR = Me.DA.ExecuteSP("sc_getOrderInfo", Session.Item("OrderID"))
+
                     If (Me.DA._LastErrorMessage <> "") Then
                         Me.TempData.Item("ErrMsg") = Me.DA.LastErrorMessage
                         Me.DA.Dispose()
+
                         model2 = New OrderInfoModel With { _
                             .OrderID = "No Data", _
                             .OrderDate = "No Data", _
@@ -600,45 +605,47 @@ Namespace AgioNet
                         Me.TempData.Item("Model") = model
                         Return Me.PartialView("_OrderInfoPartial")
                     End If
+
                     If Me.DR.HasRows Then
                         Do While Me.DR.Read
                             model2 = New OrderInfoModel With { _
-                                .OrderID = DR(0)), _
-                                .OrderDate = DR(1)), _
-                                .Flete = DR(2)), _
-                                .CustomerType = DR(3)), _
-                                .CustomerName = DR(4)), _
-                                .RazonSocial = DR(5)), _
-                                .Reference = DR(6)), _
-                                .RFC = DR(7)), _
-                                .Email = DR(8)), _
-                                .Address = DR(9)), _
-                                .INumber = DR(10)), _
-                                .ENumber = DR(11)), _
-                                .Address2 = DR(12)), _
-                                .City = DR(13)), _
-                                .State = DR(14)), _
-                                .Country = DR(15)), _
-                                .ZipCode = DR(&H10)), _
-                                .Tel = DR(&H11)), _
-                                .Tel2 = DR(&H12)), _
-                                .Tel3 = DR(&H13)), _
-                                .Delivery = DR(20)), _
-                                .DeliveryTime = DR(&H15)), _
-                                .ProductClass = DR(&H16)), _
-                                .ProductType = DR(&H17)), _
-                                .Trademark = DR(&H18)), _
-                                .Model = DR(&H19)), _
-                                .Description = DR(&H1A)), _
-                                .PartNo = DR(&H1B)), _
-                                .SerialNo = DR(&H1C)), _
-                                .Revision = DR(&H1D)), _
-                                .ServiceType = DR(30)), _
-                                .FailureType = DR(&H1F)), _
-                                .Comment = DR(&H20)) _
+                                .OrderID = DR(0), _
+                                .OrderDate = DR(1), _
+                                .Flete = DR(2), _
+                                .CustomerType = DR(3), _
+                                .CustomerName = DR(4), _
+                                .RazonSocial = DR(5), _
+                                .Reference = DR(6), _
+                                .RFC = DR(7), _
+                                .Email = DR(8), _
+                                .Address = DR(9), _
+                                .INumber = DR(10), _
+                                .ENumber = DR(11), _
+                                .Address2 = DR(12), _
+                                .City = DR(13), _
+                                .State = DR(14), _
+                                .Country = DR(15), _
+                                .ZipCode = DR(16), _
+                                .Tel = DR(17), _
+                                .Tel2 = DR(18), _
+                                .Tel3 = DR(19) _
+                                .Delivery = DR(20), _
+                                .DeliveryTime = DR(21), _
+                                .ProductClass = DR(22), _
+                                .ProductType = DR(23), _
+                                .Trademark = DR(24), _
+                                .Model = DR(25), _
+                                .Description = DR(26), _
+                                .PartNo = DR(27), _
+                                .SerialNo = DR(28), _
+                                .Revision = DR(29), _
+                                .ServiceType = DR(30), _
+                                .FailureType = DR(31), _
+                                .Comment = DR(32) _
                             }
                             model = model2
                         Loop
+
                         If (Not Me.DR.IsClosed And Me.DR.HasRows) Then
                             Me.DR.Close()
                         End If
@@ -683,11 +690,8 @@ Namespace AgioNet
                         num += 1
                     End If
                 Catch exception1 As Exception
-                    ProjectData.SetProjectError(exception1)
-                    Dim exception As Exception = exception1
-                    Me.TempData.Item("ErrMsg") = exception.Message
+                    Me.TempData.Item("ErrMsg") = exception1.Message
                     Me.DA.Dispose()
-                    ProjectData.ClearProjectError()
                 End Try
                 Me.TempData.Item("Model") = model
                 Return Me.PartialView("_OrderInfoPartial")

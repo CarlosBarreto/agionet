@@ -574,6 +574,93 @@ Public Class TestIDModel
 End Class
 
 '2013.02.13
+Public Class TestInfoModel
+    ' Properties
+    Public Property CreateBy As String
+        Get
+            Return Me._CreateBy
+        End Get
+        Set(ByVal value As String)
+            Me._CreateBy = value
+        End Set
+    End Property
+
+    Public Property OrderID As String
+        Get
+            Return Me._OrderID
+        End Get
+        Set(ByVal value As String)
+            Me._OrderID = value
+        End Set
+    End Property
+
+    Public Property TestDescription As String
+        Get
+            Return Me._TestDescription
+        End Get
+        Set(ByVal value As String)
+            Me._TestDescription = value
+        End Set
+    End Property
+
+    Public Property TestEnd As String
+        Get
+            Return Me._TestEnd
+        End Get
+        Set(ByVal value As String)
+            Me._TestEnd = value
+        End Set
+    End Property
+
+    Public Property TestID As String
+        Get
+            Return Me._TestID
+        End Get
+        Set(ByVal value As String)
+            Me._TestID = value
+        End Set
+    End Property
+
+    Public Property TestName As String
+        Get
+            Return Me._TestName
+        End Get
+        Set(ByVal value As String)
+            Me._TestName = value
+        End Set
+    End Property
+
+    Public Property TestResult As String
+        Get
+            Return Me._TestResult
+        End Get
+        Set(ByVal value As String)
+            Me._TestResult = value
+        End Set
+    End Property
+
+    Public Property TestStart As String
+        Get
+            Return Me._TestStart
+        End Get
+        Set(ByVal value As String)
+            Me._TestStart = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _CreateBy As String
+    Private _OrderID As String
+    Private _TestDescription As String
+    Private _TestEnd As String
+    Private _TestID As String
+    Private _TestName As String
+    Private _TestResult As String
+    Private _TestStart As String
+End Class
+
+'2013.02.13
 Public Class TestListModel
     ' Properties
     Public Property CREATEBY As String
