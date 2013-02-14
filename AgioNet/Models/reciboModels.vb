@@ -2,6 +2,73 @@
 Imports System.ComponentModel.DataAnnotations
 Imports System.Globalization
 
+' 2013.02.14 
+Public Class PendingOrdersModel
+    ' Properties
+    Public Property Customer As String
+        Get
+            Return Me._Customer
+        End Get
+        Set(ByVal value As String)
+            Me._Customer = value
+        End Set
+    End Property
+
+    Public Property Description As String
+        Get
+            Return Me._Description
+        End Get
+        Set(ByVal value As String)
+            Me._Description = value
+        End Set
+    End Property
+
+    Public Property Model As String
+        Get
+            Return Me._Model
+        End Get
+        Set(ByVal value As String)
+            Me._Model = value
+        End Set
+    End Property
+
+    Public Property OrderID As String
+        Get
+            Return Me._OrderID
+        End Get
+        Set(ByVal value As String)
+            Me._OrderID = value
+        End Set
+    End Property
+
+    Public Property ProductType As String
+        Get
+            Return Me._ProductType
+        End Get
+        Set(ByVal value As String)
+            Me._ProductType = value
+        End Set
+    End Property
+
+    Public Property SerialNo As String
+        Get
+            Return Me._SerialNo
+        End Get
+        Set(ByVal value As String)
+            Me._SerialNo = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _Customer As String
+    Private _Description As String
+    Private _Model As String
+    Private _OrderID As String
+    Private _ProductType As String
+    Private _SerialNo As String
+End Class
+
 ' 2013.02.14
 Public Class ReceiveIndfoModel
     ' Properties
@@ -109,27 +176,9 @@ Public Class ReceiveIndfoModel
     Private _Warranty As String
 End Class
 
-' 2013.02.14 
-Public Class PendingOrdersModel
+' 2013.02.14
+Public Class ScanInfoModel
     ' Properties
-    Public Property Customer As String
-        Get
-            Return Me._Customer
-        End Get
-        Set(ByVal value As String)
-            Me._Customer = value
-        End Set
-    End Property
-
-    Public Property Description As String
-        Get
-            Return Me._Description
-        End Get
-        Set(ByVal value As String)
-            Me._Description = value
-        End Set
-    End Property
-
     Public Property Model As String
         Get
             Return Me._Model
@@ -139,6 +188,7 @@ Public Class PendingOrdersModel
         End Set
     End Property
 
+    <Required> _
     Public Property OrderID As String
         Get
             Return Me._OrderID
@@ -148,12 +198,30 @@ Public Class PendingOrdersModel
         End Set
     End Property
 
-    Public Property ProductType As String
+    Public Property PartNo As String
         Get
-            Return Me._ProductType
+            Return Me._PartNo
         End Get
         Set(ByVal value As String)
-            Me._ProductType = value
+            Me._PartNo = value
+        End Set
+    End Property
+
+    Public Property ScanBy As String
+        Get
+            Return Me._ScanBy
+        End Get
+        Set(ByVal value As String)
+            Me._ScanBy = value
+        End Set
+    End Property
+
+    Public Property ScanDate As String
+        Get
+            Return Me._ScanDate
+        End Get
+        Set(ByVal value As String)
+            Me._ScanDate = value
         End Set
     End Property
 
@@ -166,14 +234,24 @@ Public Class PendingOrdersModel
         End Set
     End Property
 
+    Public Property TrackNo As String
+        Get
+            Return Me._Trackno
+        End Get
+        Set(ByVal value As String)
+            Me._Trackno = value
+        End Set
+    End Property
+
 
     ' Fields
-    Private _Customer As String
-    Private _Description As String
     Private _Model As String
     Private _OrderID As String
-    Private _ProductType As String
+    Private _PartNo As String
+    Private _ScanBy As String
+    Private _ScanDate As String
     Private _SerialNo As String
+    Private _Trackno As String
 End Class
 
 
