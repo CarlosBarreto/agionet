@@ -139,3 +139,20 @@ Public Class AgregarTrackNoModel
     Private _Width As String
 End Class
 
+' 2013.02.14
+Public Class OrderLogisticaModel
+    ' Properties
+    Public Property OrderID As String
+        Get
+            Return Me._OrderID
+        End Get
+        Set(ByVal value As String)
+            Me._OrderID = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _OrderID As String
+End Class
+

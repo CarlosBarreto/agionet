@@ -4,42 +4,41 @@
         '-- Methods
 
         ' 2013.02.14
-        ' POST: /logistica/AgregarTrackNoModel
+        ' POST: /logistica/agregar_esp_trackno
         <HttpPost, Authorize> _
         Public Function agregar_esp_trackno(ByVal model As AgregarTrackNoModel) As ActionResult
             Dim result As ActionResult
-            Me.DA = New DataAccess("localhost", "AgioNet v1.3", "aguser", "Agiotech01")
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim str As String = String.Empty
             Dim model2 As AgregarTrackNoModel = model
+
             Try
-                Me.DR = Me.DA.ExecuteSP("lg_TrackNo_AssignTrackNo", New Object() {model2.OrderID, model2.CaseType, model2.OutBound, model2.InBound, model2.OutBound2, model2.CarrierName, model2.Weight, model2.Height, model2.Lenght, model2.width, model2.Field1, model2.Field2, model2.Reference, Me.User.Identity.Name})
+                Me.DR = Me.DA.ExecuteSP("lg_TrackNo_AssignTrackNo", model2.OrderID, model2.CaseType, model2.OutBound, model2.InBound, _
+                                        model2.OutBound2, model2.CarrierName, model2.Weight, model2.Height, model2.Lenght, model2.width, _
+                                        model2.Field1, model2.Field2, model2.Reference, Me.User.Identity.Name)
                 If (Me.DA.LastErrorMessage = "") Then
                     Do While Me.DR.Read
-                        str = Conversions.ToString(Me.DR.Item(0))
+                        str = DR(0)
                     Loop
                 Else
                     Me.TempData.Item("ErrMsg") = Me.DA.LastErrorMessage
                     Return Me.View
                 End If
+
                 If Not Me.DR.IsClosed Then
                     Me.DR.Close()
                 End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                Return View()
+            Finally
                 Me.DA.Dispose()
-            Catch exception1 As Exception
-                ProjectData.SetProjectError(exception1)
-                Dim exception As Exception = exception1
-                Me.TempData.Item("ErrMsg") = exception.Message
-                Me.DA.Dispose()
-                result = Me.View
-                ProjectData.ClearProjectError()
-                Return result
-                ProjectData.ClearProjectError()
             End Try
+
             Me.TempData.Item("ErrMsg") = str
             Me.Session.Remove("OrderID")
+
             Return Me.RedirectToAction("ordenes_cflete")
-            model2 = Nothing
-            Return result
         End Function
 
         <Authorize> _
@@ -51,14 +50,14 @@
         <HttpPost, Authorize> _
         Public Function agregar_trackno(ByVal model As AgregarTrackNoModel) As ActionResult
             Dim result As ActionResult
-            Me.DA = New DataAccess("localhost", "AgioNet v1.3", "aguser", "Agiotech01")
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim str As String = String.Empty
             Dim model2 As AgregarTrackNoModel = model
             Try
                 Me.DR = Me.DA.ExecuteSP("lg_TrackNo_AssignTrackNo", New Object() {model2.OrderID, model2.CaseType, model2.OutBound, model2.InBound, model2.OutBound2, model2.CarrierName, model2.Weight, model2.Height, model2.Lenght, model2.width, model2.Field1, model2.Field2, model2.Reference, Me.User.Identity.Name})
                 If (Me.DA.LastErrorMessage = "") Then
                     Do While Me.DR.Read
-                        str = Conversions.ToString(Me.DR.Item(0))
+                        str = DR(0)
                     Loop
                 Else
                     Me.TempData.Item("ErrMsg") = Me.DA.LastErrorMessage
@@ -93,7 +92,7 @@
 
         <Authorize> _
         Public Function GenerateExcel() As ActionResult
-            Me.DA = New DataAccess("localhost", "AgioNet v1.3", "aguser", "Agiotech01")
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim modelArray As OrderListModel() = New OrderListModel(&H65 - 1) {}
             Dim index As Integer = 0
             Try
@@ -106,7 +105,7 @@
                 If Me.DR.HasRows Then
                     Do While Me.DR.Read
                         Dim model As New OrderListModel With { _
-                            .OrderID = Conversions.ToString(Me.DR.Item(0)), _
+                            .OrderID = DR(0), _
                             .OrderDate = Conversions.ToString(Me.DR.Item(1)), _
                             .CustomerName = Conversions.ToString(Me.DR.Item(2)), _
                             .Email = Conversions.ToString(Me.DR.Item(3)), _
@@ -159,7 +158,7 @@
 
         <HttpGet, Authorize> _
         Public Function hoja_individual(ByVal model As ScanOrderModel) As ActionResult
-            Me.DA = New DataAccess("localhost", "AgioNet v1.3", "aguser", "Agiotech01")
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim model2 As New CreateOrderModel
             Dim code As String = String.Empty
             Try
@@ -171,7 +170,7 @@
                 End If
                 If Me.DR.HasRows Then
                     Do While Me.DR.Read
-                        code = Conversions.ToString(Me.DR.Item(0))
+                        code = DR(0)
                         model2 = New CreateOrderModel With { _
                             .CustomerName = Conversions.ToString(Me.DR.Item(2)), _
                             .RazonSocial = Conversions.ToString(Me.DR.Item(3)), _
@@ -240,7 +239,7 @@
                 }
                 RT.PrintPDF(page2)
                 page2 = Nothing
-                Me.DA = New DataAccess("localhost", "AgioNet v1.3", "aguser", "Agiotech01")
+                Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
                 Me.DR = Me.DA.ExecuteSP("sys_AddOrderStatus", New Object() {model.OrderID, "STOCK", Me.User.Identity.Name, ("Auto: " & model.OrderID & ", formato de recolección")})
                 If (Me.DA._LastErrorMessage <> "") Then
                     Me.TempData.Item("ErrMesage") = Me.DA._LastErrorMessage
@@ -267,7 +266,7 @@
 
         <Authorize, HttpPost> _
         Public Function intransit(ByVal model As ScanOrderModel) As ActionResult
-            Me.DA = New DataAccess("localhost", "AgioNet v1.3", "aguser", "Agiotech01")
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Try
                 Me.DR = Me.DA.ExecuteSP("lg_setInTransit", New Object() {model.OrderID, Me.User.Identity.Name, model.Comment})
                 If (Me.DA._LastErrorMessage <> "") Then
@@ -289,7 +288,7 @@
         End Function
 
         Public Function modificar_guia() As ActionResult
-            Me.DA = New DataAccess("localhost", "AgioNet v1.3", "aguser", "Agiotech01")
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim modelArray As AgregarTrackNoModel() = New AgregarTrackNoModel(&H65 - 1) {}
             Dim index As Integer = 0
             Try
@@ -302,7 +301,7 @@
                 If Me.DR.HasRows Then
                     Do While Me.DR.Read
                         Dim model As New AgregarTrackNoModel With { _
-                            .OrderID = Conversions.ToString(Me.DR.Item(0)), _
+                            .OrderID = DR(0), _
                             .CaseType = Conversions.ToString(Me.DR.Item(1)), _
                             .OutBound = Conversions.ToString(Me.DR.Item(2)), _
                             .InBound = Conversions.ToString(Me.DR.Item(3)), _
@@ -360,14 +359,14 @@
         <Authorize, HttpPost> _
         Public Function modificarguia(ByVal model As AgregarTrackNoModel) As ActionResult
             Dim result As ActionResult
-            Me.DA = New DataAccess("localhost", "AgioNet v1.3", "aguser", "Agiotech01")
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim str As String = String.Empty
             Dim model2 As AgregarTrackNoModel = model
             Try
                 Me.DR = Me.DA.ExecuteSP("lg_updTrackNo", New Object() {model2.OrderID, model2.CaseType, model2.OutBound, model2.InBound, model2.OutBound2, model2.CarrierName, model2.Weight, model2.Height, model2.Lenght, model2.width, model2.Field1, model2.Field2, model2.Reference, Me.User.Identity.Name})
                 If (Me.DA.LastErrorMessage = "") Then
                     Do While Me.DR.Read
-                        str = Conversions.ToString(Me.DR.Item(0))
+                        str = DR(0)
                     Loop
                 Else
                     Me.TempData.Item("ErrMsg") = Me.DA.LastErrorMessage
@@ -395,7 +394,7 @@
         End Function
 
         Public Function modificarguia(ByVal model As ScanOrderModel) As ActionResult
-            Me.DA = New DataAccess("localhost", "AgioNet v1.3", "aguser", "Agiotech01")
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim model2 As New AgregarTrackNoModel
             Try
                 Dim model3 As AgregarTrackNoModel
@@ -408,7 +407,7 @@
                 If Me.DR.HasRows Then
                     Do While Me.DR.Read
                         model3 = New AgregarTrackNoModel With { _
-                            .OrderID = Conversions.ToString(Me.DR.Item(0)), _
+                            .OrderID = DR(0), _
                             .CaseType = Conversions.ToString(Me.DR.Item(1)), _
                             .OutBound = Conversions.ToString(Me.DR.Item(2)), _
                             .InBound = Conversions.ToString(Me.DR.Item(3)), _
@@ -461,7 +460,7 @@
 
         <Authorize> _
         Public Function ordenes_cflete() As ActionResult
-            Me.DA = New DataAccess("localhost", "AgioNet v1.3", "aguser", "Agiotech01")
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim modelArray As OrderListModel() = New OrderListModel(&H65 - 1) {}
             Dim index As Integer = 0
             Try
@@ -474,7 +473,7 @@
                 If Me.DR.HasRows Then
                     Do While Me.DR.Read
                         Dim model As New OrderListModel With { _
-                            .OrderID = Conversions.ToString(Me.DR.Item(0)), _
+                            .OrderID = DR(0), _
                             .OrderDate = Conversions.ToString(Me.DR.Item(1)), _
                             .CustomerName = Conversions.ToString(Me.DR.Item(2)), _
                             .Email = Conversions.ToString(Me.DR.Item(3)), _
@@ -527,7 +526,7 @@
 
         <Authorize> _
         Public Function ordenes_sflete() As ActionResult
-            Me.DA = New DataAccess("localhost", "AgioNet v1.3", "aguser", "Agiotech01")
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim modelArray As OrderListModel() = New OrderListModel(&H65 - 1) {}
             Dim index As Integer = 0
             Try
@@ -540,7 +539,7 @@
                 If Me.DR.HasRows Then
                     Do While Me.DR.Read
                         Dim model As New OrderListModel With { _
-                            .OrderID = Conversions.ToString(Me.DR.Item(0)), _
+                            .OrderID = DR(0), _
                             .OrderDate = Conversions.ToString(Me.DR.Item(1)), _
                             .CustomerName = Conversions.ToString(Me.DR.Item(2)), _
                             .Email = Conversions.ToString(Me.DR.Item(3)), _
@@ -593,7 +592,7 @@
 
         <Authorize> _
         Public Function pendiente_recoleccion() As ActionResult
-            Me.DA = New DataAccess("localhost", "AgioNet v1.3", "aguser", "Agiotech01")
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim modelArray As OrderListModel() = New OrderListModel(&H65 - 1) {}
             Dim index As Integer = 0
             Try
@@ -606,7 +605,7 @@
                 If Me.DR.HasRows Then
                     Do While Me.DR.Read
                         Dim model As New OrderListModel With { _
-                            .OrderID = Conversions.ToString(Me.DR.Item(0)), _
+                            .OrderID = DR(0), _
                             .OrderDate = Conversions.ToString(Me.DR.Item(1)), _
                             .CustomerName = Conversions.ToString(Me.DR.Item(2)), _
                             .Email = Conversions.ToString(Me.DR.Item(3)), _
@@ -658,7 +657,7 @@
         End Function
 
         Public Function reimprimir_formato() As ActionResult
-            Me.DA = New DataAccess("localhost", "AgioNet v1.3", "aguser", "Agiotech01")
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim modelArray As OrderListModel() = New OrderListModel(&H65 - 1) {}
             Dim index As Integer = 0
             Try
@@ -671,7 +670,7 @@
                 If Me.DR.HasRows Then
                     Do While Me.DR.Read
                         Dim model As New OrderListModel With { _
-                            .OrderID = Conversions.ToString(Me.DR.Item(0)), _
+                            .OrderID = DR(0), _
                             .OrderDate = Conversions.ToString(Me.DR.Item(1)), _
                             .CustomerName = Conversions.ToString(Me.DR.Item(2)), _
                             .Email = Conversions.ToString(Me.DR.Item(3)), _
