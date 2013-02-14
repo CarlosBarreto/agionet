@@ -139,6 +139,133 @@ Public Class AgregarTrackNoModel
     Private _Width As String
 End Class
 
+'2013.02.14
+Public Class OrderListModel
+    ' Properties
+    Public Property CustomerName As String
+        Get
+            Return Me._CustomerName
+        End Get
+        Set(ByVal value As String)
+            Me._CustomerName = value
+        End Set
+    End Property
+
+    Public Property Delivery As String
+        Get
+            Return Me._Delivery
+        End Get
+        Set(ByVal value As String)
+            Me._Delivery = value
+        End Set
+    End Property
+
+    Public Property DeliveryTime As String
+        Get
+            Return Me._DeliveryTime
+        End Get
+        Set(ByVal value As String)
+            Me._DeliveryTime = value
+        End Set
+    End Property
+
+    Public Property Email As String
+        Get
+            Return Me._Email
+        End Get
+        Set(ByVal value As String)
+            Me._Email = value
+        End Set
+    End Property
+
+    Public Property OrderDate As String
+        Get
+            Return Me._OrderDate
+        End Get
+        Set(ByVal value As String)
+            Me._OrderDate = value
+        End Set
+    End Property
+
+    Public Property OrderID As String
+        Get
+            Return Me._OrderID
+        End Get
+        Set(ByVal value As String)
+            Me._OrderID = value
+        End Set
+    End Property
+
+    Public Property PartNo As String
+        Get
+            Return Me._PartNo
+        End Get
+        Set(ByVal value As String)
+            Me._PartNo = value
+        End Set
+    End Property
+
+    Public Property ProductClass As String
+        Get
+            Return Me._ProductClass
+        End Get
+        Set(ByVal value As String)
+            Me._ProductClass = value
+        End Set
+    End Property
+
+    Public Property ProductModel As String
+        Get
+            Return Me._ProductModel
+        End Get
+        Set(ByVal value As String)
+            Me._ProductModel = value
+        End Set
+    End Property
+
+    Public Property ProductType As String
+        Get
+            Return Me._ProductType
+        End Get
+        Set(ByVal value As String)
+            Me._ProductType = value
+        End Set
+    End Property
+
+    Public Property SerialNo As String
+        Get
+            Return Me._SerialNo
+        End Get
+        Set(ByVal value As String)
+            Me._SerialNo = value
+        End Set
+    End Property
+
+    Public Property Status As String
+        Get
+            Return Me._Status
+        End Get
+        Set(ByVal value As String)
+            Me._Status = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _CustomerName As String
+    Private _Delivery As String
+    Private _DeliveryTime As String
+    Private _Email As String
+    Private _OrderDate As String
+    Private _OrderID As String
+    Private _PartNo As String
+    Private _ProductClass As String
+    Private _ProductModel As String
+    Private _ProductType As String
+    Private _SerialNo As String
+    Private _Status As String
+End Class
+
 ' 2013.02.14
 Public Class OrderLogisticaModel
     ' Properties
