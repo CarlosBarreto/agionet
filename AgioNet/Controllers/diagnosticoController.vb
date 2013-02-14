@@ -171,34 +171,35 @@ Namespace AgioNet
                 Return Me.View
             End Function
 
+            ' 2013.02.13
+            ' POST: /diagnostico/asignarestacion
             <Authorize, HttpPost> _
             Public Function asignarestacion(ByVal model As AsignarEstacionModel) As ActionResult
                 Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
-                Dim modelArray As MaterialMasterListModel() = New MaterialMasterListModel(2 - 1) {}
+                Dim modelArray As New MaterialMasterListModel
                 Try
-                    Me.DR = Me.DA.ExecuteSP("dg_AssignStation", New Object() {model.TestID, model.Estacion, model.User})
+                    Me.DR = Me.DA.ExecuteSP("dg_AssignStation", model.TestID, model.Estacion, model.User)
                     If (Me.DA._LastErrorMessage <> "") Then
                         Me.TempData.Item("ErrMsg") = Me.DA._LastErrorMessage
                         Return Me.RedirectToAction("asignar_estacion")
                     End If
                     Do While Me.DR.Read
-                        Me.TempData.Item("ErrMsg") = RuntimeHelpers.GetObjectValue(Me.DR.Item(0))
+                        Me.TempData.Item("ErrMsg") = DR(0)
                     Loop
                 Catch exception1 As Exception
-                    ProjectData.SetProjectError(exception1)
-                    Dim exception As Exception = exception1
-                    Me.TempData.Item("ErrMsg") = exception.Message
-                    ProjectData.ClearProjectError()
+                    Me.TempData.Item("ErrMsg") = exception1.Message
                 Finally
                     Me.DA.Dispose()
                 End Try
                 Return Me.RedirectToAction("asignar_estacion")
             End Function
 
+            ' 2013.02.13
+            ' GET: /diagnostico/asignarestacion
             <HttpGet, Authorize> _
             Public Function asignarestacion(ByVal model As TestIDModel) As ActionResult
                 Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
-                Dim modelArray As EstacionesModel() = New EstacionesModel(&H65 - 1) {}
+                Dim modelArray(100) As EstacionesModel
                 Try
                     Dim num As Integer
                     Me.DR = Me.DA.ExecuteSP("in_station_getInfo", New Object() {"ALL"})
@@ -207,19 +208,22 @@ Namespace AgioNet
                         Me.DA.Dispose()
                         Return Me.RedirectToAction("asignar_estacion")
                     End If
+
                     If Me.DR.HasRows Then
                         num = 0
                         Do While Me.DR.Read
                             Dim model2 As New EstacionesModel With { _
-                                .Nombre = Conversions.ToString(Me.DR.Item(0)), _
-                                .Descripcion = Conversions.ToString(Me.DR.Item(1)), _
-                                .Usuario = Conversions.ToString(Me.DR.Item(2)), _
-                                .Proceso = Conversions.ToString(Me.DR.Item(3)) _
+                                .Nombre = DR(0), _
+                                .Descripcion = DR(1), _
+                                .Usuario = DR(2), _
+                                .Proceso = DR(3) _
                             }
                             modelArray(num) = model2
                             num += 1
                         Loop
-                        modelArray = DirectCast(Utils.CopyArray(DirectCast(modelArray, Array), New EstacionesModel(((num - 1) + 1) - 1) {}), EstacionesModel())
+                        ' -- Reparado por CarlosB
+                        ReDim Preserve modelArray(num - 1)
+
                         If (Not Me.DR.IsClosed And Me.DR.HasRows) Then
                             Me.DR.Close()
                         End If
@@ -232,48 +236,48 @@ Namespace AgioNet
                             .Proceso = "No Data" _
                         }
                         num += 1
-                        modelArray = DirectCast(Utils.CopyArray(DirectCast(modelArray, Array), New EstacionesModel(((num - 1) + 1) - 1) {}), EstacionesModel())
+                        ' -- Reparado por CarlosB
+                        ReDim Preserve modelArray(num - 1)
                     End If
                 Catch exception1 As Exception
-                    ProjectData.SetProjectError(exception1)
-                    Dim exception As Exception = exception1
-                    Me.TempData.Item("ErrMsg") = exception.Message
-                    Dim result As ActionResult = Me.RedirectToAction("asignar_estacion")
-                    ProjectData.ClearProjectError()
-                    Return result
-                    ProjectData.ClearProjectError()
+                    Me.TempData.Item("ErrMsg") = exception1.Message
+                    Return RedirectToAction("asignar_estacion")
                 End Try
+
                 Me.DA.Dispose()
                 Me.TempData.Item("TestID") = model.TestID
                 Me.TempData.Item("Model") = modelArray
                 Return Me.View
             End Function
 
+            ' 2013.02.13
+            ' GET: /diagnostico/cancelar_prueba
             <Authorize> _
             Public Function cancelar_prueba() As ActionResult
                 Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
-                Dim modelArray As TestListModel() = New TestListModel(&H65 - 1) {}
+                Dim modelArray(100) As TestListModel
                 Dim index As Integer = 0
                 If Me.HasOrderID Then
                     Try
                         Dim model As TestListModel
-                        Dim reader As SqlDataReader = Me.DA.ExecuteSP("dg_GetTestListByOrder", New Object() {RuntimeHelpers.GetObjectValue(Me.Session.Item("OrderID")), ""})
+                        Dim reader As SqlDataReader = DA.ExecuteSP("dg_GetTestListByOrder", Session.Item("OrderID"), "")
                         If reader.HasRows Then
                             Do While reader.Read
                                 model = New TestListModel With { _
-                                    .TESTID = reader(0)), _
-                                    .ORDERID = reader(1)), _
-                                    .TESTNAME = reader(2)), _
-                                    .TESTDESCRIPTION = reader(3)), _
-                                    .TESTRESULT = reader(4)), _
-                                    .TESTSTART = reader(5)), _
-                                    .TESTEND = reader(6)), _
-                                    .CREATEBY = reader(7)) _
+                                    .TESTID = reader(0), _
+                                    .ORDERID = reader(1), _
+                                    .TESTNAME = reader(2), _
+                                    .TESTDESCRIPTION = reader(3), _
+                                    .TESTRESULT = reader(4), _
+                                    .TESTSTART = reader(5), _
+                                    .TESTEND = reader(6), _
+                                    .CREATEBY = reader(7) _
                                 }
                                 modelArray(index) = model
                                 index += 1
                             Loop
-                            modelArray = DirectCast(Utils.CopyArray(DirectCast(modelArray, Array), New TestListModel(((index - 1) + 1) - 1) {}), TestListModel())
+                            ' -- Actualizado por CarlosB
+                            ReDim Preserve modelArray(index - 1)
                         Else
                             model = New TestListModel With { _
                                 .TESTID = "NO DATA", _
@@ -287,11 +291,10 @@ Namespace AgioNet
                             }
                             modelArray(index) = model
                             index += 1
-                            modelArray = DirectCast(Utils.CopyArray(DirectCast(modelArray, Array), New TestListModel(((index - 1) + 1) - 1) {}), TestListModel())
+                            ' -- Actualizado por CarlosB
+                            ReDim Preserve modelArray(index - 1)
                         End If
                     Catch exception1 As Exception
-                        ProjectData.SetProjectError(exception1)
-                        Dim exception As Exception = exception1
                         modelArray(index) = New TestListModel With { _
                             .TESTID = "NO DATA", _
                             .ORDERID = "NO DATA", _
@@ -303,12 +306,10 @@ Namespace AgioNet
                             .CREATEBY = "NO DATA" _
                         }
                         index += 1
-                        modelArray = DirectCast(Utils.CopyArray(DirectCast(modelArray, Array), New TestListModel(((index - 1) + 1) - 1) {}), TestListModel())
+                        ' -- Actualizado por CarlosB
+                        ReDim Preserve modelArray(index - 1)
                         Me.DA.Dispose()
-                        Dim result As ActionResult = Me.View
-                        ProjectData.ClearProjectError()
-                        Return result
-                        ProjectData.ClearProjectError()
+                        Return View()
                     End Try
                     Me.TempData.Item("Model") = modelArray
                     Return Me.View
@@ -316,24 +317,23 @@ Namespace AgioNet
                 Return Me.RedirectToAction("Index")
             End Function
 
+            '2013.02.13
+            ' POST: /diagnostico/CancelTest
             <Authorize, HttpPost> _
             Public Function CancelTest(ByVal model As ExecTestModel) As ActionResult
                 Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
                 Try
-                    Me.DR = Me.DA.ExecuteSP("dg_CancelTest", New Object() {model.TestID, model.TextLog})
+                    Me.DR = Me.DA.ExecuteSP("dg_CancelTest", model.TestID, model.TextLog)
                     Me.DA.Dispose()
                 Catch exception1 As Exception
-                    ProjectData.SetProjectError(exception1)
-                    Dim exception As Exception = exception1
                     Me.DA.Dispose()
-                    Dim result As ActionResult = Me.View
-                    ProjectData.ClearProjectError()
-                    Return result
-                    ProjectData.ClearProjectError()
+                    Return View()
                 End Try
                 Return Me.RedirectToAction("cancelar_prueba")
             End Function
 
+            ' 2013.02.13
+            ' GET: /diagnostico/CancelTest
             <Authorize> _
             Public Function CancelTest(ByVal model As TestListModel) As ActionResult
                 Me.Session.Add("OtherTitle", "TestID")
@@ -342,13 +342,19 @@ Namespace AgioNet
                 Return Me.View
             End Function
 
+            ' 2013.02.13
+            ''' <summary>
+            ''' Funcion que elimina de la memoria, el error registrado en ErrMsg
+            ''' </summary>
+            ''' <remarks></remarks>
             Public Sub ClearErr()
-                If Operators.ConditionalCompareObjectNotEqual(Me.TempData.Item("ErrMsg"), "", False) Then
+                If Me.TempData.Item("ErrMsg") <> "" Then
                     Me.TempData.Item("ErrMsg") = ""
-                    Me.TempData.Keep("ErrMsg")
                 End If
             End Sub
 
+            ' 2013.02.13
+            ' GET: /diagnostico/DiagnosticMain
             <Authorize> _
             Public Function DiagnosticMain() As ActionResult
                 If Me.HasOrderID Then
@@ -357,60 +363,63 @@ Namespace AgioNet
                 Return Me.RedirectToAction("Index")
             End Function
 
+            ' 2013.02.13
+            ' POST: /diagnostico/DiagnosticMain
             <Authorize, HttpPost> _
-            Public Function DiagnosticoMain(ByVal model As StartDiagnosticModel) As ActionResult
+            Public Function DiagnosticMain(ByVal model As StartDiagnosticModel) As ActionResult
                 Dim result As ActionResult
                 Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
                 Dim str As String = ""
                 Try
                     Me.ClearErr()
-                    Me.DR = Me.DA.ExecuteSP("dg_OrderValidation", New Object() {model.OrderID})
+                    Me.DR = Me.DA.ExecuteSP("dg_OrderValidation", model.OrderID)
                     If (Me.DA._LastErrorMessage <> "") Then
                         Me.TempData.Item("ErrMsg") = Me.DA._LastErrorMessage
                         Return Me.View
                     End If
+
                     Do While Me.DR.Read
-                        str = Conversions.ToString(Me.DR.Item(0))
+                        str = DR(0)
                     Loop
+
                     Me.Session.Item("DiagnosticID") = str
                     Me.Session.Item("OrderID") = model.OrderID
+
                     result = Me.RedirectToAction("DiagnosticMain")
                 Catch exception1 As Exception
-                    ProjectData.SetProjectError(exception1)
-                    Dim exception As Exception = exception1
-                    Me.TempData.Item("ErrMsg") = exception.Message
-                    result = Me.View
-                    ProjectData.ClearProjectError()
-                    Return result
-                    ProjectData.ClearProjectError()
+                    Me.TempData.Item("ErrMsg") = exception1.Message
+                    Return Me.View
                 Finally
                     Me.DA.Dispose()
                 End Try
+
                 Return result
             End Function
 
+            '2013.02.13
+            ' POST: /diagnostico/ExecuteTest
             <Authorize, HttpPost> _
             Public Function ExecuteTest(ByVal model As ExecTestModel) As ActionResult
                 Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
                 Try
-                    Me.DR = Me.DA.ExecuteSP("dg_ExecTest", New Object() {model.TestID, model.Result, model.TextLog})
-                    Me.DA.Dispose()
-                    If (model.Result = "FAIL") Then
-                        Me.TempData.Item("TESTID") = model.TestID
-                        Return Me.RedirectToAction("AddFailure")
+                    Me.DR = Me.DA.ExecuteSP("dg_ExecTest", model.TestID, model.Result, model.TextLog)
+
+                    If DA._LastErrorMessage <> "" Then
+                        Me.DA.Dispose()
+                        If (model.Result = "FAIL") Then
+                            Me.TempData.Item("TESTID") = model.TestID
+                            Return Me.RedirectToAction("AddFailure")
+                        End If
                     End If
                 Catch exception1 As Exception
-                    ProjectData.SetProjectError(exception1)
-                    Dim exception As Exception = exception1
                     Me.DA.Dispose()
-                    Dim result As ActionResult = Me.View
-                    ProjectData.ClearProjectError()
-                    Return result
-                    ProjectData.ClearProjectError()
+                    Return View()
                 End Try
                 Return Me.RedirectToAction("realizar_pruebas")
             End Function
 
+            ' 2013.02.13
+            ' GET: /diagnostico/ExecuteTest
             <Authorize> _
             Public Function ExecuteTest(ByVal Model As TestListModel) As ActionResult
                 Me.Session.Add("OtherTitle", "TestID")
@@ -419,45 +428,53 @@ Namespace AgioNet
                 Return Me.View
             End Function
 
+            ' 2013.02.13
+            ' GET: /diagnostico/falla_reportada
             <Authorize> _
             Public Function falla_reportada() As ActionResult
                 Dim result As ActionResult
                 Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
                 Try
-                    Me.DR = Me.DA.ExecuteSP("dg_ViewReportedFailure", New Object() {RuntimeHelpers.GetObjectValue(Me.Session.Item("OrderID"))})
+                    Me.DR = Me.DA.ExecuteSP("dg_ViewReportedFailure", Session.Item("OrderID"))
                     If (Me.DA._LastErrorMessage = "") Then
-                        Me.TempData.Item("OrderID") = RuntimeHelpers.GetObjectValue(Me.Session.Item("OrderID"))
+                        Me.TempData.Item("OrderID") = Session.Item("OrderID")
                         Do While Me.DR.Read
-                            Me.TempData.Item("RFail") = RuntimeHelpers.GetObjectValue(Me.DR.Item(0))
+                            Me.TempData.Item("RFail") = DR(0)
                         Loop
                         Me.DA.Dispose()
                         Return Me.View
                     End If
+
                     Me.DA.Dispose()
                     result = Me.RedirectToAction("DiagnosticMain")
+
                 Catch exception1 As Exception
-                    ProjectData.SetProjectError(exception1)
-                    Dim exception As Exception = exception1
-                    result = Me.RedirectToAction("DiagnosticMain")
-                    ProjectData.ClearProjectError()
-                    Return result
-                    ProjectData.ClearProjectError()
+                    Return RedirectToAction("DiagnosticMain")
                 End Try
+
                 Return result
             End Function
 
+            '2013.02.13
+            ''' <summary>
+            ''' Para determinar si hay registrada una Orden en la session
+            ''' </summary>
+            ''' <returns></returns>
+            ''' <remarks></remarks>
             Public Function HasOrderID() As Boolean
                 Dim flag2 As Boolean = True
-                If Conversions.ToBoolean(Operators.OrObject((Me.Session.Item("OrderID") Is Nothing), Operators.CompareObjectEqual(Me.Session.Item("OrderID"), "", False))) Then
+                If Session.Item("OrderID") Is Nothing Then
                     flag2 = False
                 End If
-                If Conversions.ToBoolean(Operators.OrObject((Not Me.Session.Item("OtherTitle") Is Nothing), Operators.CompareObjectNotEqual(Me.Session.Item("OtherTitle"), "", False))) Then
+                If Not Me.Session.Item("OtherTitle") Is Nothing Then
                     Me.Session.Remove("OtherTitle")
                     Me.Session.Remove("OtherContent")
                 End If
                 Return flag2
             End Function
 
+            '2013.02.13
+            ' GET: /diagnostico/Index
             <Authorize> _
             Public Function Index() As ActionResult
                 Me.Session.Add("SubMenu", "DIAGNOSTIC")
@@ -465,6 +482,8 @@ Namespace AgioNet
                 Return Me.View
             End Function
 
+            ' 2013.02.13
+            ' POST: /diagnostico/Index
             <HttpPost, Authorize> _
             Public Function Index(ByVal model As StartDiagnosticModel) As ActionResult
                 Dim result As ActionResult
@@ -472,59 +491,61 @@ Namespace AgioNet
                 Dim str As String = ""
                 Try
                     Me.ClearErr()
-                    Me.DR = Me.DA.ExecuteSP("dg_OrderValidation", New Object() {model.OrderID})
+                    Me.DR = Me.DA.ExecuteSP("dg_OrderValidation", model.OrderID)
+
                     If (Me.DA._LastErrorMessage <> "") Then
                         Me.TempData.Item("ErrMsg") = Me.DA._LastErrorMessage
                         Return Me.View
                     End If
+
                     Do While Me.DR.Read
-                        str = Conversions.ToString(Me.DR.Item(0))
+                        str = DR(0)
                     Loop
+
                     Me.Session.Item("DiagnosticID") = str
                     Me.Session.Item("OrderID") = model.OrderID
                     result = Me.RedirectToAction("DiagnosticMain")
+
                 Catch exception1 As Exception
-                    ProjectData.SetProjectError(exception1)
-                    Dim exception As Exception = exception1
-                    Me.TempData.Item("ErrMsg") = exception.Message
-                    result = Me.View
-                    ProjectData.ClearProjectError()
-                    Return result
-                    ProjectData.ClearProjectError()
+                    Me.TempData.Item("ErrMsg") = exception1.Message
+                    Return View()
                 Finally
                     Me.DA.Dispose()
                 End Try
                 Return result
             End Function
 
+            '2013.02.13
+            ' GET: /diagnostico/inicar_diagnostico
+            <Authorize()> _
             Public Function iniciar_diagnostico() As ActionResult
                 Return Me.View
             End Function
 
+            '2013.02.13
+            ' POST: /diagnostic/iniciar_diagnostico
             <HttpPost, Authorize> _
             Public Function iniciar_diagnostico(ByVal model As StartDiagnosticModel) As ActionResult
                 Dim result As ActionResult
                 Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
                 Try
                     Me.ClearErr()
-                    Me.DR = Me.DA.ExecuteSP("dg_StartDiagnostic", New Object() {model.OrderID, Me.User.Identity.Name, model.Comment})
+                    Me.DR = Me.DA.ExecuteSP("dg_StartDiagnostic", model.OrderID, Me.User.Identity.Name, model.Comment)
+
                     If (Me.DA._LastErrorMessage = "") Then
                         Do While Me.DR.Read
-                            Me.TempData.Item("ErrMsg") = RuntimeHelpers.GetObjectValue(Me.DR.Item(0))
+                            Me.TempData.Item("ErrMsg") = DR(0)
                         Loop
                         Me.DA.Dispose()
                         Return Me.RedirectToAction("DiagnosticMain")
                     End If
+
                     Me.TempData.Item("ErrMsg") = Me.DA._LastErrorMessage
                     Me.DA.Dispose()
                     result = Me.View
                 Catch exception1 As Exception
-                    ProjectData.SetProjectError(exception1)
-                    Dim exception As Exception = exception1
+                    TempData("ErrMsg") = exception1.Message
                     result = Me.View
-                    ProjectData.ClearProjectError()
-                    Return result
-                    ProjectData.ClearProjectError()
                 End Try
                 Return result
             End Function
@@ -582,39 +603,39 @@ Namespace AgioNet
                     If Me.DR.HasRows Then
                         Do While Me.DR.Read
                             model2 = New OrderInfoModel With { _
-                                .OrderID = Conversions.ToString(Me.DR.Item(0)), _
-                                .OrderDate = Conversions.ToString(Me.DR.Item(1)), _
-                                .Flete = Conversions.ToString(Me.DR.Item(2)), _
-                                .CustomerType = Conversions.ToString(Me.DR.Item(3)), _
-                                .CustomerName = Conversions.ToString(Me.DR.Item(4)), _
-                                .RazonSocial = Conversions.ToString(Me.DR.Item(5)), _
-                                .Reference = Conversions.ToString(Me.DR.Item(6)), _
-                                .RFC = Conversions.ToString(Me.DR.Item(7)), _
-                                .Email = Conversions.ToString(Me.DR.Item(8)), _
-                                .Address = Conversions.ToString(Me.DR.Item(9)), _
-                                .INumber = Conversions.ToString(Me.DR.Item(10)), _
-                                .ENumber = Conversions.ToString(Me.DR.Item(11)), _
-                                .Address2 = Conversions.ToString(Me.DR.Item(12)), _
-                                .City = Conversions.ToString(Me.DR.Item(13)), _
-                                .State = Conversions.ToString(Me.DR.Item(14)), _
-                                .Country = Conversions.ToString(Me.DR.Item(15)), _
-                                .ZipCode = Conversions.ToString(Me.DR.Item(&H10)), _
-                                .Tel = Conversions.ToString(Me.DR.Item(&H11)), _
-                                .Tel2 = Conversions.ToString(Me.DR.Item(&H12)), _
-                                .Tel3 = Conversions.ToString(Me.DR.Item(&H13)), _
-                                .Delivery = Conversions.ToString(Me.DR.Item(20)), _
-                                .DeliveryTime = Conversions.ToString(Me.DR.Item(&H15)), _
-                                .ProductClass = Conversions.ToString(Me.DR.Item(&H16)), _
-                                .ProductType = Conversions.ToString(Me.DR.Item(&H17)), _
-                                .Trademark = Conversions.ToString(Me.DR.Item(&H18)), _
-                                .Model = Conversions.ToString(Me.DR.Item(&H19)), _
-                                .Description = Conversions.ToString(Me.DR.Item(&H1A)), _
-                                .PartNo = Conversions.ToString(Me.DR.Item(&H1B)), _
-                                .SerialNo = Conversions.ToString(Me.DR.Item(&H1C)), _
-                                .Revision = Conversions.ToString(Me.DR.Item(&H1D)), _
-                                .ServiceType = Conversions.ToString(Me.DR.Item(30)), _
-                                .FailureType = Conversions.ToString(Me.DR.Item(&H1F)), _
-                                .Comment = Conversions.ToString(Me.DR.Item(&H20)) _
+                                .OrderID = DR(0)), _
+                                .OrderDate = DR(1)), _
+                                .Flete = DR(2)), _
+                                .CustomerType = DR(3)), _
+                                .CustomerName = DR(4)), _
+                                .RazonSocial = DR(5)), _
+                                .Reference = DR(6)), _
+                                .RFC = DR(7)), _
+                                .Email = DR(8)), _
+                                .Address = DR(9)), _
+                                .INumber = DR(10)), _
+                                .ENumber = DR(11)), _
+                                .Address2 = DR(12)), _
+                                .City = DR(13)), _
+                                .State = DR(14)), _
+                                .Country = DR(15)), _
+                                .ZipCode = DR(&H10)), _
+                                .Tel = DR(&H11)), _
+                                .Tel2 = DR(&H12)), _
+                                .Tel3 = DR(&H13)), _
+                                .Delivery = DR(20)), _
+                                .DeliveryTime = DR(&H15)), _
+                                .ProductClass = DR(&H16)), _
+                                .ProductType = DR(&H17)), _
+                                .Trademark = DR(&H18)), _
+                                .Model = DR(&H19)), _
+                                .Description = DR(&H1A)), _
+                                .PartNo = DR(&H1B)), _
+                                .SerialNo = DR(&H1C)), _
+                                .Revision = DR(&H1D)), _
+                                .ServiceType = DR(30)), _
+                                .FailureType = DR(&H1F)), _
+                                .Comment = DR(&H20)) _
                             }
                             model = model2
                         Loop
@@ -700,14 +721,14 @@ Namespace AgioNet
                     If Me.DR.HasRows Then
                         Do While Me.DR.Read
                             model2 = New TestInfoModel With { _
-                                .TestID = Conversions.ToString(Me.DR.Item(0)), _
-                                .OrderID = Conversions.ToString(Me.DR.Item(1)), _
-                                .TestName = Conversions.ToString(Me.DR.Item(2)), _
-                                .TestDescription = Conversions.ToString(Me.DR.Item(3)), _
-                                .TestStart = Conversions.ToString(Me.DR.Item(4)), _
-                                .TestEnd = Conversions.ToString(Me.DR.Item(5)), _
-                                .TestResult = Conversions.ToString(Me.DR.Item(6)), _
-                                .CreateBy = Conversions.ToString(Me.DR.Item(7)) _
+                                .TestID = DR(0)), _
+                                .OrderID = DR(1)), _
+                                .TestName = DR(2)), _
+                                .TestDescription = DR(3)), _
+                                .TestStart = DR(4)), _
+                                .TestEnd = DR(5)), _
+                                .TestResult = DR(6)), _
+                                .CreateBy = DR(7)) _
                             }
                             model = model2
                         Loop
@@ -829,7 +850,7 @@ Namespace AgioNet
                         Me.DR = Me.DA.ExecuteSP("sys_getDistibutionList", New Object() {"REQAPPROV"})
                         If Me.DR.HasRows Then
                             Do While Me.DR.Read
-                                emailAddress = Conversions.ToString(Me.DR.Item(0))
+                                emailAddress = DR(0))
                             Loop
                             email.HTMLBody = True
                             txtSubject = Conversions.ToString(Operators.ConcatenateObject("Solicitud de aprobación para la orden : ", Me.Session.Item("OrderID")))
@@ -864,8 +885,8 @@ Namespace AgioNet
                         Dim index As Integer = 0
                         Do While Me.DR.Read
                             modelArray(index) = New TestIDListModel With { _
-                                .TestID = Conversions.ToString(Me.DR.Item(0)), _
-                                .TestName = Conversions.ToString(Me.DR.Item(1)) _
+                                .TestID = DR(0)), _
+                                .TestName = DR(1)) _
                             }
                             index += 1
                         Loop
@@ -1117,13 +1138,13 @@ Namespace AgioNet
                     Dim view As FailureView
                     Me.DR = Me.DA.ExecuteSP("dg_ViewFoundedFailures", New Object() {model.TestID})
                     Do While Me.DR.Read
-                        view.FAILUREID = Conversions.ToString(Me.DR.Item(0))
-                        view.TESTID = Conversions.ToString(Me.DR.Item(0))
-                        view.DESCRIPTION = Conversions.ToString(Me.DR.Item(0))
-                        view.POSSIBLESOLUTION = Conversions.ToString(Me.DR.Item(0))
-                        view.FOUNDBY = Conversions.ToString(Me.DR.Item(0))
-                        view.FOUNDDATE = Conversions.ToString(Me.DR.Item(0))
-                        view.RESOLVED = Conversions.ToString(Me.DR.Item(0))
+                        view.FAILUREID = DR(0))
+                        view.TESTID = DR(0))
+                        view.DESCRIPTION = DR(0))
+                        view.POSSIBLESOLUTION = DR(0))
+                        view.FOUNDBY = DR(0))
+                        view.FOUNDDATE = DR(0))
+                        view.RESOLVED = DR(0))
                     Loop
                     Me.TempData.Item("TestDetail") = view
                     Me.DA.Dispose()
@@ -1150,15 +1171,15 @@ Namespace AgioNet
                     Dim view As TestView
                     Me.DR = Me.DA.ExecuteSP("dg_ViewTest", New Object() {model.TESTID})
                     Do While Me.DR.Read
-                        view.TESTID = Conversions.ToString(Me.DR.Item(0))
-                        view.ORDERID = Conversions.ToString(Me.DR.Item(1))
-                        view.TESTNAME = Conversions.ToString(Me.DR.Item(2))
-                        view.TESTDESCRIPTION = Conversions.ToString(Me.DR.Item(3))
-                        view.TESTRESULT = Conversions.ToString(Me.DR.Item(4))
-                        view.TESTSTART = Conversions.ToString(Me.DR.Item(5))
-                        view.TESTEND = Conversions.ToString(Me.DR.Item(6))
-                        view.TEXTLOG = Conversions.ToString(Me.DR.Item(7))
-                        view.CREATEBY = Conversions.ToString(Me.DR.Item(8))
+                        view.TESTID = DR(0))
+                        view.ORDERID = DR(1))
+                        view.TESTNAME = DR(2))
+                        view.TESTDESCRIPTION = DR(3))
+                        view.TESTRESULT = DR(4))
+                        view.TESTSTART = DR(5))
+                        view.TESTEND = DR(6))
+                        view.TEXTLOG = DR(7))
+                        view.CREATEBY = DR(8))
                     Loop
                     Me.TempData.Item("TestDetail") = view
                     Me.DA.Dispose()
