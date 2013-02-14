@@ -526,6 +526,133 @@ Public Class RegFailureModel
     Private _User As String
 End Class
 
+' 2013.02.13
+Public Class SheduleTestModel
+    ' Properties
+    Public Property Description As String
+        Get
+            Return Me._Description
+        End Get
+        Set(ByVal value As String)
+            Me._Description = value
+        End Set
+    End Property
+
+    Public Property Failure As String
+        Get
+            Return Me._Failure
+        End Get
+        Set(ByVal value As String)
+            Me._Failure = value
+        End Set
+    End Property
+
+    Public Property Model As String
+        Get
+            Return Me._Model
+        End Get
+        Set(ByVal value As String)
+            Me._Model = value
+        End Set
+    End Property
+
+    Public Property OrderID As String
+        Get
+            Return Me._OrderID
+        End Get
+        Set(ByVal value As String)
+            Me._OrderID = value
+        End Set
+    End Property
+
+    Public Property PartNo As String
+        Get
+            Return Me._PartNo
+        End Get
+        Set(ByVal value As String)
+            Me._PartNo = value
+        End Set
+    End Property
+
+    Public Property ProductClass As String
+        Get
+            Return Me._ProductClass
+        End Get
+        Set(ByVal value As String)
+            Me._ProductClass = value
+        End Set
+    End Property
+
+    Public Property ProductType As String
+        Get
+            Return Me._ProductType
+        End Get
+        Set(ByVal value As String)
+            Me._ProductType = value
+        End Set
+    End Property
+
+    Public Property Revision As String
+        Get
+            Return Me._Revision
+        End Get
+        Set(ByVal value As String)
+            Me._Revision = value
+        End Set
+    End Property
+
+    Public Property SerialNo As String
+        Get
+            Return Me._SerialNo
+        End Get
+        Set(ByVal value As String)
+            Me._SerialNo = value
+        End Set
+    End Property
+
+    Public Property TestComment As String
+        Get
+            Return Me._TestComment
+        End Get
+        Set(ByVal value As String)
+            Me._TestComment = value
+        End Set
+    End Property
+
+    Public Property TestID As String
+        Get
+            Return Me._TestID
+        End Get
+        Set(ByVal value As String)
+            Me._TestID = value
+        End Set
+    End Property
+
+    Public Property Trademark As String
+        Get
+            Return Me._Trademark
+        End Get
+        Set(ByVal value As String)
+            Me._Trademark = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _Description As String
+    Private _Failure As String
+    Private _Model As String
+    Private _OrderID As String
+    Private _PartNo As String
+    Private _ProductClass As String
+    Private _ProductType As String
+    Private _Revision As String
+    Private _SerialNo As String
+    Private _TestComment As String
+    Private _TestID As String
+    Private _Trademark As String
+End Class
+
 '2013.02.13
 Public Class StartDiagnosticModel
     ' Properties
@@ -571,6 +698,33 @@ Public Class TestIDModel
 
     ' Fields
     Private _TestID As String
+End Class
+
+'2013.02.13
+Public Class TestIDListModel
+    ' Properties
+    Public Property TestID As String
+        Get
+            Return Me._TestID
+        End Get
+        Set(ByVal value As String)
+            Me._TestID = value
+        End Set
+    End Property
+
+    Public Property TestName As String
+        Get
+            Return Me._TestName
+        End Get
+        Set(ByVal value As String)
+            Me._TestName = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _TestID As String
+    Private _TestName As String
 End Class
 
 '2013.02.13
