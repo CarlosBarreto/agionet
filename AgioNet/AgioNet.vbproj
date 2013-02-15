@@ -219,8 +219,6 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
-    <None Include="My Project\PublishProfiles\agionet.pubxml" />
-    <None Include="My Project\PublishProfiles\AgioNet131.pubxml" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
@@ -234,8 +232,6 @@
     <Content Include="Content\images\agionet_logo.png" />
     <Content Include="Content\images\bg_line.png" />
     <EmbeddedResource Include="Content\images\logo-01.png" />
-    <EmbeddedResource Include="Content\images\logo-01.bmp" />
-    <EmbeddedResource Include="Content\images\logo-01.jpg" />
     <Content Include="Content\images\comments.jpg" />
     <Content Include="Content\images\logo-02.jpg" />
     <Content Include="Content\images\logoaqua.png" />
@@ -360,6 +356,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\temp\" />
+    <Folder Include="My Project\PublishProfiles\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

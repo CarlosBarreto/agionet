@@ -1,0 +1,851 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Agionet_Backend
+</name>
+</assembly>
+<members>
+<member name="F:Agionet_Backend.LogOn.DR">
+	<summary>
+ Contiene el DataReader que se genera en cada consulta mediante un SP
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.LogOn._errorFlag">
+	<summary>
+ Bandera que muestra si ha ocurrido un error. Si la Bandera es verdadera, ha ocurrido un error
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.LogOn._user">
+	<summary>
+ Almacena el nombre del Usuario
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.LogOn._password">
+	<summary>
+ Almacena el Password
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.LogOn._logOnMessage">
+	<summary>
+ Almacena el mensaje de resultado de la operacion. Puede contener un mensaje de error
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.LogOn._permissionList">
+	<summary>
+ Lista con Las secciones a las que el usuario tiene acceso
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.LogOn._PermissionSubList">
+	<summary>
+ Lista con los nombres de las funciones
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.LogOn.User">
+	<summary>
+ Nombre de usuario para el Login
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.LogOn.Password">
+	<summary>
+ Contraseña para el Login
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.LogOn.LogOnMessage">
+	<summary>
+ Mensaje generado en durante el proceso
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.LogOn.PermissionList">
+	<summary>
+ ''' <summary>
+ Almacena el mensaje de resultado de la operacion. Puede contener un mensaje de error
+ </summary>
+		<remarks></remarks>
+	</summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.LogOn.getPermissionList(System.String,System.String,System.String)">
+	<summary>
+ Obtiene la lista de los permisos al que el usuario tiene acceso
+ </summary>
+	<param name="Type">Tipo de permiso. MODULE, SECTION o FUNCTION</param>
+	<param name="User">Nombre del usuario</param>
+	<param name="_Module">Opcional, modulo del que es parte. Solo se usa con FUNCTION</param>
+	<remarks>
+		<para>2012.10-26 - Modificación en código que permite usar el parametro _PermissionSubList</para>
+	</remarks>
+</member><member name="T:Agionet_Backend.LogOn">
+	<summary>
+ Clase encargada de los metodos de login y permission
+ </summary>
+	<remarks>
+	</remarks>
+</member><member name="M:Agionet_Backend.Repair.#ctor">
+	<summary>
+ Constructor
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Repair.ValidateOrder(System.String)">
+	<summary>
+  Valida una orden
+ </summary>
+	<param name="OrderID">ID de la orden a valudar</param>
+	<returns>Retorna uno de estos estatus
+ <list>
+			<item>OK -- Orden Válida</item>
+			<item>INVALID -- Orden Inválida</item>
+			<item>HOLD -- Orden en HOLD</item>
+			<item>CANCEL -- Orden Cancelada</item>
+			<item>REPAIR -- Orden en reparacion</item>
+		</list>
+	</returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Repair.StartRepair(System.String,System.String,System.String)">
+	<summary>
+ Inicia el proceso de reparacion
+ </summary>
+	<param name="OrderID"></param>
+	<param name="User"></param>
+	<param name="Comment"></param>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:Agionet_Backend.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:Agionet_Backend.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="F:Agionet_Backend.ReceiveSt._OrderID">
+	<summary>
+ Contiene el ID de la orden con la que se está trabajando
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.ReceiveSt._SerialNo">
+	<summary>
+ Contiene el número de serie de la orden con la que se está trabajando
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.ReceiveSt._Model">
+	<summary>
+ Contiene el modelo de la orden con la que se está trababajando
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.ReceiveSt._ReceiveStMessage">
+	<summary>
+ Contiene el último mensaje de la estación de recibo
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.ReceiveSt.OrderID">
+	<summary>
+ ID de la Orden Actual
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.ReceiveSt.SerialNo">
+	<summary>
+ Número de serie Actual
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.ReceiveSt.Model">
+	<summary>
+ Modelo actual
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.ReceiveSt.ReceiveStMessage">
+	<summary>
+ Ultimo error / Mensaje generado por la estacion de recibo
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.ReceiveSt.#ctor">
+	<summary>
+ Constructor
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Test.AddTest(System.String,System.String,System.String,System.String)">
+	<summary>
+ Guarda en la Base de datos una nueva prueba sp dg_AddTest
+ </summary>
+	<param name="_OrderID_">El ID de la orden a la que se le ejecutó la prueba</param>
+	<param name="_Test_">El código de la prueba</param>
+	<param name="_Comment_">Comentario inicial de la prueba, este puede cambiar</param>
+	<param name="_User_">Usuario que creea la prueba</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Test.AddNewTest(System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ Genera una nueva prueba y despues se la asigna a la orden
+ </summary>
+	<param name="_OrderID_">ID del diagnostico</param>
+	<param name="_TestName_">Nombre de la prueba</param>
+	<param name="_TestDesc_">Descripcion de la prueba </param>
+	<param name="_Comment_">Commentarios acerca de la prueba</param>
+	<param name="_User_">Usuario que genera la prueba</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Test.ExexTest(System.String,System.String,System.String)">
+	<summary>
+ Executa (Cierra) una prueba
+ </summary>
+	<param name="_TestID_">ID de la prueba</param>
+	<param name="_TestResult_">Resultado de la prueba</param>
+	<param name="_TextLog_">Log de eventos / Resultados de la prueba</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Test.CancelTest(System.String,System.String)">
+	<summary>
+ Cancela una prueba siempre y cuando ésta esté activa
+ </summary>
+	<param name="_TestID_">ID de la prueba a cancelar</param>
+	<param name="_TestComment_">Commentarios acerca de la cancelación</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Test.ViewTest(System.String)">
+	<summary>
+ Muestra la información de la prueba
+ </summary>
+	<param name="_TestID_">ID de la prueba a buscar</param>
+	<returns>retornar un listado (TestView) de la información de la prueba</returns>
+	<remarks></remarks>
+</member><member name="T:Agionet_Backend.Order.customer">
+	<summary>
+ Clase que contiene los metodos y propiedades para el manejo de los datos del cliente
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.OrderMaster._orderID">
+	<summary>
+ Solo lectura. ID de la Orden
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.OrderMaster._reference">
+	<summary>
+ Referencia por parte del cliente
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.OrderMaster._customerID">
+	<summary>
+ ID del cliente. Debe estar previamente agregado
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.OrderMaster._productID">
+	<summary>
+ ID del producto. Debe estar previamente agregado
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.OrderMaster.OrderID">
+	<summary>
+ Numero de Orden generado por el Sistema
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.OrderMaster.Reference">
+	<summary>
+ Almacena la referencia por parte del cliente
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks>
+		<para>Puede Almacenar:</para>
+		<list>
+			<item>Numeros de Parte</item>
+			<item>Numeros de Serie</item>
+			<item>Codigo se servicio para el cliente</item>
+			<item>Etc</item>
+		</list>
+	</remarks>
+</member><member name="P:Agionet_Backend.Order.OrderMaster.CustomerID">
+	<summary>
+ ID del Cliente. El cliente debe estar previamente registrado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.OrderMaster.ProductID">
+	<summary>
+ ID del producto registrado para el proceso. El producto debe estar previamente registrado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Order.OrderMaster.OrderMasterInsert">
+	<summary>
+ Método para insertar un registro en la Base de Datos
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Agionet_Backend.Order.OrderMaster">
+	<summary>
+ Clase que contiene los metodos y propiedades para el manejo de OrderMaster
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Product._productID">
+	<summary>
+ Guarda el ID del producto
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Product._productClass">
+	<summary>
+ Guarda la clasificacion del producto
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Product._productType">
+	<summary>
+ Almacena el tipo de producto
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Product._productTrademark">
+	<summary>
+ Almacena la marca del producto
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Product._productModel">
+	<summary>
+ Guarda el modelo del produto
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Product._productDescription">
+	<summary>
+ Almacena una descripcion para el producto
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Product._partNumber">
+	<summary>
+ Numero de parte del producto registrado
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Product._serialNumber">
+	<summary>
+ Numero de serie del producto registrado
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Product._revision">
+	<summary>
+ Revision del producto
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Product._serviceType">
+	<summary>
+ Tipo de servicio contratado
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Product._failureType">
+	<summary>
+ Descripcion general de la falla reportada
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Product._Comment">
+	<summary>
+ Comentarios dejados por el cliente
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Product.ProductID">
+	<summary>
+ Solo lectura. Contiene el ID con el que ser registro el producto del cliente
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Product.ProductClass">
+	<summary>
+ Clasificacion del producto
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Product.ProductType">
+	<summary>
+ Tipo de producto
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Product.ProductTrademark">
+	<summary>
+  Marca que fabrico el producto
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Product.ProductModel">
+	<summary>
+ Modelo del producto
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Product.productDescription">
+	<summary>
+ Almacena una descripcion del producto
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Product.PartNumber">
+	<summary>
+ Nuemero de parte del producto
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Product.SerialNumber">
+	<summary>
+ Numero de serie del producto
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Product.Revision">
+	<summary>
+ Numero de revision del producto
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Product.ServiceType">
+	<summary>
+ Tipo de servicio que se le aplicará al producto
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Product.FailureType">
+	<summary>
+ Descripción general de la falla
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Product.Comment">
+	<summary>
+ Comentarios generales del cliente
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Order.Product.ProductInsert">
+	<summary>
+ Método para guardar el registro del producto en la Base de datos
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Agionet_Backend.Order.Product">
+	<summary>
+ Clase que contiene los metodos y propiedades para el manejo de Product
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Escala._EscalaMessage">
+	<summary>
+ Contiene el ultimo mensaje del proceso de escalación
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Escala._EscalaID">
+	<summary>
+ Contiene el ID de escala con el que se está trabajando
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Escala._OrderId">
+	<summary>
+ Contiene el ID de la orden con la que se está trabajando
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.Order.Escala._Status">
+	<summary>
+ Contiene el status actual de la escalación con la que se está trabajando
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Escala.EscalaMessage">
+	<summary>
+ Ultimo mensaje / error generado por el proceso de escalación (Escala Actual)
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Escala.EscalaID">
+	<summary>
+ ID de la Escalación Actual
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Escala.OrderID">
+	<summary>
+ ID de la Orden de la escalación actual
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.Order.Escala.Status">
+	<summary>
+ Status de la escalación actual
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Order.Escala.AddEscala(System.String,System.String,System.String,System.String)">
+	<summary>
+ Método para agregar una nueva escala 
+ </summary>
+	<param name="OrderID">ID de la orden</param>
+	<param name="Name">Nombre / Titulo de la escalación</param>
+	<param name="Description">Descripcion del problema/escalación</param>
+	<param name="User">Usuario que genera la escalación</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Order.Escala.CloseEscala(System.String,System.String,System.String)">
+	<summary>
+ Método para cerrar una escalación
+ </summary>
+	<param name="EscalaID">ID de la escala a cerrar</param>
+	<param name="Comment">Comentarios finales de la escalación. Si la orden tiene mas comentarios, 
+ se guardan junto con los comentarios anteriores</param>
+	<param name="User">Usuario que hace el cierre de la escalación</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Order.Escala.getListOFEscala(System.String)">
+	<summary>
+ Obtiene un listado de las escalaciones que se le han hecho a una orden
+ </summary>
+	<param name="OrderID">ID de la Orden</param>
+	<returns>Retorna una lista de escalaciones</returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Order.Escala.ViewEscala(System.String)">
+	<summary>
+ Obtiene la información correspondiente a una Escalación
+ </summary>
+	<param name="EscalaID">ID de la escala de la que se solicita la información</param>
+	<returns>Retorna la información de la escala</returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Order.Escala.CancelEscala(System.String,System.String)">
+	<summary>
+ Método para Cancelar una escalación
+ </summary>
+	<param name="EscalaID">ID de la Escalación a cancelar</param>
+	<param name="User">Usuario que cancela la escalación</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Order.Escala.UpdateEscala(System.String,System.String,System.String)">
+	<summary>
+ Método para agregar comentarios a una escalación (Actualizar) 
+ </summary>
+	<param name="EscalaID">ID de la Escala a actualizar</param>
+	<param name="Comment">Comentario a agregar. Si existe un comentario previo se uniran</param>
+	<param name="User">Usuario que hace la actualización</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Request.#ctor">
+	<summary>
+ Constructor
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.DataAccess._LastErrorMessage">
+	<summary>
+ Almacena el ultimo error ocurrido en la clase
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.DataAccess._dbServer">
+	<summary>
+ Almacena el nombre del servidor de Base de datos
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.DataAccess._dbDataBase">
+	<summary>
+ Almacena el nombre de la base de datos
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.DataAccess._dbUser">
+	<summary>
+ Almacena el Id de usuario de la base de datos
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.DataAccess._dbPassword">
+	<summary>
+ Almacena el password de acceso a la base de datos
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Agionet_Backend.DataAccess._xmlFilePath">
+	<summary>
+ Almacena la ruta del archivo XML de configuración
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.DataAccess.LastErrorMessage">
+	<summary>
+ Contiene el ultimo error ocurrido en el sistema
+ </summary>
+	<value>El valor inicial es una cadena en vacia</value>
+	<returns>Retorna el ultimo error ocurrido en la clase</returns>
+	<remarks>El sistema no muestra las exepciones que ocurren, debido a esto es preferible
+          que se guarde el ultimo mensaje de error para que pueda ser mostrado en la 
+          página
+ </remarks>
+</member><member name="P:Agionet_Backend.DataAccess.db_Server">
+	<summary>
+ Contiene el nombre del servidor de Base de Datos
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.DataAccess.db_DataBase">
+	<summary>
+ Contiene el nombre de la Base de Datos Accesada
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.DataAccess.db_User">
+	<summary>
+ Contiene el ID de usuario de acceso a la Base de Datos
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.DataAccess.db_Password">
+	<summary>
+ Contiene el ID password de acceso a la Base de Datos
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.DataAccess.XmlConfigurationFile">
+	<summary>
+ Contiene el path del archivo XML de configuración
+ </summary>
+	<value>El valor inicial siempre es vacío</value>
+	<returns>Retorna el path del archivo de configuración</returns>
+	<remarks></remarks>
+</member><member name="P:Agionet_Backend.DataAccess.Reader">
+	<summary>
+ Propiedad que contiene el READER de la Base de datos
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.DataAccess.#ctor(System.String,System.String,System.String,System.String)">
+	<summary>
+ Constructor SobreCargado
+ </summary>
+	<param name="Server"></param>
+	<param name="DataBase"></param>
+	<param name="UserID"></param>
+	<param name="Password"></param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.DataAccess.Dispose">
+	<summary>
+ Destructor
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.DataAccess.CadenaConexion">
+	<summary>
+ Genera una cadena de conexión / Make a new Connection String
+ </summary>
+	<returns>Connection String</returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.DataAccess.GetRecordsetQuery(System.String)">
+	<summary>
+ Ejecuta un Query SQL / Execute a SQL Query
+ </summary>
+	<param name="strSQL">SQL Query</param>
+	<returns>Retorna un DataReader / Returns a DataReader</returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.DataAccess.ExecuteQuery(System.String)">
+	<summary>
+ Executa un Query SQL sin retornar valores / Execute a SQL Query without return values
+ </summary>
+	<param name="strSQL">SQL Query</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.DataAccess.ExecuteSP(System.String,System.Object[])">
+	<summary>
+ Ejecuta un Stored Procedure con parametros / Execute a Stored Procedure with parameters 
+ </summary>
+	<param name="SPName">Nombre del Stored Procedure / Stored Procedure Name</param>
+	<param name="Parameters">Parametros del StoredProcedure / Parameters Array </param>
+	<returns>Retorna un DataReader / Returns a SQLDataReader</returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.DataAccess.ExecuteSP(System.String)">
+	<summary>
+ Ejecuta un Stored Procedured sin parametros / Exec a Stored Procedure without parameters
+ </summary>
+	<param name="SPName">Nombre del Stored Procedure / Stored Procedure Name</param>
+	<returns>Retorna un dataReader / Returns SQLDataReader</returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Diagnostic.Failure.viewReportedFailure(System.String)">
+	<summary>
+ Genera un informe con la falla que el cliente reportó
+ </summary>
+	<param name="_OrderID_">ID de la orden que se buscará</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Diagnostic.Failure.AddFoundFailure(System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ Agrega un nuevo registro de falla
+ </summary>
+	<param name="_DiagnosticID_">ID del diagnostico en el que se detectó la falla</param>
+	<param name="_FailCode_">Código de falla</param>
+	<param name="_TestID_">ID de la prueba</param>
+	<param name="_PSolution_">Posible solución de la falla.</param>
+	<param name="_By_">Usuario quien registra la falla</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Diagnostic.Failure.RemFoundFailure(System.String)">
+	<summary>
+ Elimina una falla reportada
+ </summary>
+	<param name="_FailureID_">ID de la falla</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Diagnostic.Failure.ViewFoundFailure(System.String)">
+	<summary>
+ Mustra los datos de una falla detectada
+ </summary>
+	<param name="_FailureID_">ID de la falla a buscar</param>
+	<returns>Listado de los datos de la falla</returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Diagnostic.Failure.ViewAllFailures(System.String)">
+	<summary>
+ Mustra, a manera de informe, un listado de todas las fallas detectadas de la orden
+ </summary>
+	<param name="_OrderID_">ID de la orden de la cual se quieren saber las fallas</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Diagnostic.Failure.ViewFoundedFailures(System.String)">
+	<summary>
+ Retorna un DataReader con el listado de las fallas
+ </summary>
+	<param name="_OrderID"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Diagnostic.Failure.GetFailCodeList">
+	<summary>
+ Retorna un listado de los códigos de falla
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Diagnostic.#ctor">
+	<summary>
+ Constructor
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Diagnostic.StartDiagnostic(System.String,System.String,System.String)">
+	<summary>
+ Inicia con el proceso de Diagnostico
+ </summary>
+	<param name="_OrderID_"></param>
+	<param name="_User_"></param>
+	<param name="_Comments_"></param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Diagnostic.SetDiagnosticStatus(System.String,System.String,System.String)">
+	<summary>
+ Establece un nuevo status para el diagnostico
+ </summary>
+	<param name="_OrderID_">Orden al que pertenece el diagnostico</param>
+	<param name="_StatusID_">Status que se usará</param>
+	<param name="_User_">Usuario que hace la modificacion</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Diagnostic.GetStatusList(System.String)">
+	<summary>
+ Muestra un listado de los posibles status
+ </summary>
+	<param name="_Type_"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Diagnostic.SendTorepair(System.String,System.String)">
+	<summary>
+ Termina con el proceso de Diagnostico
+ </summary>
+	<param name="_OrderID_">Orden que se cerrará</param>
+	<param name="_User_">Usuario que ejecuta la orden</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Diagnostic.OrderValidation(System.String)">
+	<summary>
+ Valida una orden
+ </summary>
+	<param name="_OrderID"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Logistic.#ctor">
+	<summary>
+ Constructor
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Logistic.AssignTrackNo">
+	<summary>
+ Asignar un TrackNo
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Logistic.UpdateTrackNo(System.String,System.String,System.String)">
+	<summary>
+ Actualizar un TrackNo
+ </summary>
+	<param name="OrderID">Numero de Orden</param>
+	<param name="TrackNo">TrackNo</param>
+	<param name="TrackType">Tipo de Transaccion OUTBOUND, INBOUND, OUTBOUND2</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Logistic.getLastStatus(System.String,System.String)">
+	<summary>
+ Obtener el ultimo status del TrackNo
+ </summary>
+	<param name="TrackNo">TrackNo a tratar</param>
+	<param name="OrderID">Si hay un OrderID, se muestran los Status de todos los TrackNo de la Orden</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Logistic.setTrackNoCost(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ Para Asignar un costo al TrackNo
+ </summary>
+	<param name="TrackNo">TrackNo</param>
+	<param name="OriginRef">ID del Origen. </param>
+	<param name="CarrierName">Nombre del carrier</param>
+	<param name="Weight"></param>
+	<param name="Height"></param>
+	<param name="Lenght"></param>
+	<param name="Width"></param>
+	<param name="TrackNoCost"></param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Logistic.getTrackNoCost(System.Object)">
+	<summary>
+ Obtiene los datos del costo del TrackNo
+ </summary>
+	<param name="TrackNo">TrackNo a buscar</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Logistic.updTrackNoCost(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ Actualiza el costo de un TrackNo
+ </summary>
+	<param name="TrackNo">TrackNo a tratar</param>
+	<param name="CarrierName">Nombre de carrier</param>
+	<param name="Weight">Nuevo peso</param>
+	<param name="Height">Nueva altura</param>
+	<param name="Lenght">Nuevo largo</param>
+	<param name="Width">Nuevo ancho</param>
+	<param name="TrackNoCost">Costo</param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Logistic.CancelTrackNo(System.String)">
+	<summary>
+ Cancela un trackNo
+ </summary>
+	<param name="TrackNo"></param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Logistic.SetTrackNoStatus(System.String,System.String,System.String)">
+	<summary>
+ Establece un nuevo status para el Trackno
+ </summary>
+	<param name="TrackNo"></param>
+	<param name="Status"></param>
+	<param name="StatusDesc"></param>
+	<remarks></remarks>
+</member><member name="M:Agionet_Backend.Logistic.TrackNoValidation(System.String)">
+	<summary>
+ Vaildar un TrackNo
+ </summary>
+	<param name="TrackNo"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

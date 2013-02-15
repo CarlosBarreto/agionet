@@ -259,7 +259,7 @@ Namespace AgioNet
                     Me.TempData.Item("ErrMesage") = Me.DA._LastErrorMessage
                 End If
                 Me.DA.Dispose()
-            Catch ex As 
+            Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
             End Try
 

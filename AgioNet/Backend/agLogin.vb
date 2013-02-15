@@ -1,5 +1,4 @@
-﻿Imports AgioNet._agGlobals
-Imports System.Data.SqlClient
+﻿Imports System.Data.SqlClient
 
 Public Class agLogin
     Inherits DataAccess
@@ -30,26 +29,25 @@ Public Class agLogin
         End If
     End Sub
 
-    Public Sub getPermissionList(Type As String, User As String, _Module As String) '(string Type, string User, string _Module = "")
+    Public Sub getPermissionList(Type As String, User As String, Optional _Module As String = "") '(string Type, string User, string _Module = "")
         Dim index As Integer = 0
-        DR = ExecuteSP("epermissionGetPermission", Type, User, _Module)
-        ReDim _permissionList(20)
-        ReDim _PermissionSubList(20)
+        Me.DR = Me.ExecuteSP("epermissionGetPermission", Type, User, _Module)
+        Me._permissionList = New String(11 - 1) {}
+        Me._PermissionSubList = New String(11 - 1) {}
 
-        If IsDBNull(DR) And DR.HasRows Then
-            While DR.Read
-                _permissionList(index) = RD(1).ToString
-                _PermissionSubList(index) = RD(0).ToString
-
-                index = index + 1
-            End While
+        If (Not Me.DR Is Nothing) Then
+            Do While Me.DR.Read
+                Me._permissionList(index) = DR(1)
+                Me._PermissionSubList(index) = DR(0)
+                index += 1
+            Loop
 
             ReDim Preserve _permissionList(index - 1)
             ReDim Preserve _PermissionSubList(index - 1)
-        End If
 
-        If Not DR.IsClosed Then
-            DR.Close()
+            If Not Me.DR.IsClosed Then
+                Me.DR.Close()
+            End If
         End If
     End Sub
 
@@ -66,7 +64,8 @@ Public Class agLogin
         End If
 
         Try
-            DR = ExecuteSP("sys_UserLogin ", _User, TextEncoding(_Password))
+            Dim textcode As String = TextEncoding(_Password)
+            DR = ExecuteSP("sys_UserLogin ", _User, textcode)
             If _LastErrorMessage <> "" Then
                 _logOnMessage = _LastErrorMessage
                 _errorFlag = True
@@ -80,17 +79,16 @@ Public Class agLogin
                 DR.Close()
             End If
         Catch ex As Exception
-            'ProjectData.SetProjectError(exception1);
-            'Exception exception = exception1;
-            'this._logOnMessage = exception.Message;
-            'this._errorFlag = true;
-            'str2 = "Error";
-            'ProjectData.ClearProjectError();
+            _logOnMessage = ex.Message
+            _errorFlag = True
+            str2 = "Error"
         End Try
+
+        Return _User
     End Function
 
     '-- Porperties
-    Public ReadOnly Property ErrorFlag As String
+    Public ReadOnly Property ErrorFlag As Boolean
         Get
             Return _errorFlag
         End Get

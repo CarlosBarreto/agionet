@@ -15,7 +15,8 @@ Public Class PDFInTransitPage
             .bBold = True _
         }
         Dim prop As New FontProp(def, 8, Color.Black)
-        Dim page As New System.Web.UI.Page(Me)
+        Dim page As New System.Web.UI.Page()
+
         MyBase.page_Cur.AddRT_MM(200, 20, New RepString(fontProp, "Formato de Recolección"))
         Dim stream As Stream = New FileStream(Me._rutaLogo, FileMode.Open, FileAccess.Read)
         MyBase.page_Cur.AddMM(20, 30, New RepImageMM(stream, 40, Double.NaN))

@@ -1,18 +1,4 @@
-﻿<!--
-<ul>
-Code
-    Dim Lista As Object ' = TempData("Modules")
-    Lista = CType(Session("Modules"), String())
-    If Not Lista Is Nothing Then    
-        For Each x As String In Lista
-            <text> <li> Html.ActionLink(x, "index", x) </li></text>
-        Next
-    End If
-End code
-</ul>
--->
-
-<ul>
+﻿<ul>
 @Code
     Dim obj As New AgioNet.agLogin
     Dim SubSec = CType(Session("Section"), String)

@@ -1,4 +1,5 @@
-﻿Imports System.Data.SqlClient
+﻿Imports Root.Reports
+Imports System.Data.SqlClient
 
 Namespace AgioNet
     Public Class reciboController
@@ -389,6 +390,7 @@ Namespace AgioNet
 
                     Dim path As String = (Me.Server.MapPath("~/Content/temp/") & code & ".jpg")
                     System.IO.File.WriteAllBytes(path, GenerarCodigo(Me.Server, code, "", 350, 40, 60))
+
                     Dim report As New PDFHojaViajera With { _
                         .RutaLogo = Me.Server.MapPath("~/Content/images/logo-01.jpg"), _
                         .RutaBarCode = path, _
