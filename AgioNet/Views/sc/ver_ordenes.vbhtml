@@ -6,7 +6,7 @@
     
     Dim Read() As AgioNet.OrderListModel = TempData("Model")
 
-    Dim grid As WebGrid = New WebGrid(Read)
+    Dim grid As WebGrid = New WebGrid(Read, rowsPerPage:=22)
 End Code
 
 <!-- Inicia diseño del formulario -->

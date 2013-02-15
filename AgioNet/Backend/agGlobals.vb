@@ -55,7 +55,7 @@ Module agGlobals
         End Select
 
         Dim pfc As New PrivateFontCollection
-        Dim Path As String = Server.MapPath("~\Content\fonts" & f)
+        Dim Path As String = Server.MapPath("~\Content\fonts\" & f)
         'System.Configuration.ConfigurationManager.AppSettings.Get("PATH_FONTS") + """ + f
         pfc.AddFontFile(Path)
         Dim fontFamily As FontFamily = pfc.Families(0)
