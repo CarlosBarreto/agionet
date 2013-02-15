@@ -612,7 +612,7 @@ Public Class StartDiagnosticModel
     Public Property Comment As String
         Get
             If ((Me._Comment = "") Or (Me._Comment Is Nothing)) Then
-                Me._Comment = ("Start order at " & Conversions.ToString(DateAndTime.Now))
+                Me._Comment = ("Start order at " & Now.ToString)
             End If
             Return Me._Comment
         End Get

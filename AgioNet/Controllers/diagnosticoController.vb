@@ -963,16 +963,16 @@ Namespace AgioNet
                     Dim reader As SqlDataReader = Me.DA.ExecuteSP("dg_GetTestListByOrder", Me.Session.Item("OrderID"), "")
                     If reader.HasRows Then
                         Do While reader.Read
-                                model = New TestListModel With { _
-                                    .TESTID = reader(0)), _
-                                    .ORDERID = reader(1)), _
-                                    .TESTNAME = reader(2)), _
-                                    .TESTDESCRIPTION = reader(3)), _
-                                    .TESTRESULT = reader(4)), _
-                                    .TESTSTART = reader(5)), _
-                                    .TESTEND = reader(6)), _
-                                    .CREATEBY = reader(7)) _
-                                }
+                            model = New TestListModel With { _
+                                .TESTID = reader(0), _
+                                .ORDERID = reader(1), _
+                                .TESTNAME = reader(2), _
+                                .TESTDESCRIPTION = reader(3), _
+                                .TESTRESULT = reader(4), _
+                                .TESTSTART = reader(5), _
+                                .TESTEND = reader(6), _
+                                .CREATEBY = reader(7) _
+                            }
                             modelArray(index) = model
                             index += 1
                         Loop

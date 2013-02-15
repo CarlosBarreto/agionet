@@ -487,10 +487,10 @@ Namespace AgioNet
                 If Me.DR.HasRows Then
                     Do While Me.DR.Read
                         model3 = New EstacionesModel With { _
-                            .Nombre = DR(0)), _
-                            .Descripcion = DR(1)), _
-                            .Usuario = DR(2)), _
-                            .Proceso = DR(3)) _
+                            .Nombre = DR(0), _
+                            .Descripcion = DR(1), _
+                            .Usuario = DR(2), _
+                            .Proceso = DR(3) _
                         }
                         model2 = model3
                     Loop
