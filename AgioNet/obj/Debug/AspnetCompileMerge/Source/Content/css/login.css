@@ -1,0 +1,103 @@
+﻿@charset "utf-8";
+/* CSS Document 
+ * Author: 		Carlos Barreto
+ * ScriptDate: 	September 2012
+*/
+
+/* Tipografías */
+@font-face {
+	font-family: 'Calibri';
+	font-weight: normal;
+	src: url('source/calibri.ttf');
+}
+
+/* Formato estandar de la pagina */
+BODY {
+	background-color:#333;
+	color: #000000;
+	font-family: "Calibri", Arial, Verdana;
+	font-size: 12px;
+	margin: 0px, 0px, 0px, 0px;
+	padding:0px, 0px, 0px, 0px;
+}
+
+/* Estilos para el fondo */
+#Contenedor {
+	color:#FFFFFF;
+	display:block;
+	height:100%;
+	margin:auto;
+	position:relative;
+    text-align:center;
+	width:350px;
+}
+/* Logo */
+.logo {
+	margin-bottom:20px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:30px;
+	
+	position:relative;
+	top:30px;
+}
+/* Formularos */
+.Button {
+	background-color:#3EC2E1;
+	border-bottom:1px outset #FFFFFF ;
+	border-left:none;
+	border-right:none;
+	border-top:none;
+	color:#FFFFFF;
+	font-size:14px;
+	margin-left:2px;
+	padding:5px;
+}
+
+.Cell {
+    /*border:1px solid #EEE;*/
+    display: inline-block;
+    width: 35%;
+}
+.Cell2 {
+    /*border:1px solid #EEE;*/
+    display: inline-block;
+    width: 20%;
+}
+#ContenedorFormulario {
+	display:block;
+	
+	margin-bottom:10px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:20px;
+	
+	position:relative;
+	text-align:center;
+    width:100%;
+}
+
+INPUT[type=text], INPUT[type=password] {
+	background-color:#4E4E4E;
+	border-bottom:1px outset #FFFFFF;
+	border-left:none;
+	border-right:none;
+	border-top:none;
+	color:#CCCCCC;
+	font-size:14px;
+	margin-left:2px;
+	margin-right:3px;
+	padding:5px;
+    width:110px;
+}
+
+.err {
+
+    color:#b6ff00;
+    font-size:14px;
+    margin-bottom:auto;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:30px;
+    width:400px;
+}

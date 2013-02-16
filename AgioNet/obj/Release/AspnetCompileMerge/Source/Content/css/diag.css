@@ -1,0 +1,107 @@
+﻿/*  -- Creation date: 2013.01.29
+    -- Checked:      
+    -- Author:   Carlos Barreto, carlos.barreto@agiotech.com
+    -- Version 1.0.0
+
+-- Reglas de Componente -- 
+.component-name
+.component-name--modifier-name
+.component-name__sub-object
+.component-name__sub-object--modifier-name
+*/
+/***************************************************************************************************************************/
+/* -- BASE -- */
+/* Sobre carga de #main*/
+#main { display:block; height:100%; margin:auto; position:relative; width:90%;  }
+/***************************************************************************************************************************/
+/* -- POSICIONAMIENTO -- */
+#main-ContIzquierda {
+    display:block;
+    float:left;
+    /*height:100%;*/
+    position:relative;
+    width:60%;
+}
+
+#main-ContDerecha {
+    display:block;
+    float:right;
+        /*height:100%;*/
+    margin-top:20px;
+    position:relative;
+    width:35%;
+}
+
+/*Solo un contenedor para los formularios*/
+#form {
+    display:block;
+    height:100%;
+    width:100%;
+}
+
+/***************************************************************************************************************************/
+/* -- MODULOS -- */
+.bg-fondoborder {
+    display:block;
+    background-color:#FAFAFA;
+    border:1px solid #AAA;
+    margin:auto;
+} 
+
+.form-aclaracion {
+    color:#808080;
+    font-family:Calibri, Arial;
+    font-size:16px;
+    height:120px;
+    margin:auto;
+    margin-top:30px;
+    padding:5px 10px 2px 10px;
+    position:relative;
+    width:80%;
+}
+
+.form-aclaracion_Title {
+    display:block;
+    color: #AAA;
+    font-size: 20px;
+    padding-left: 15px;
+    width:100%;
+}
+
+.form-aclaracion_Text {
+    display:block;
+    margin-top:15px;
+}
+
+/*Heredado de layout*/
+.form-row    { display:inline-block; font-size: 14px; height:18px; margin-bottom:2px; width: 100%; }
+.form-SpArea--dg { display:block; font-size: 14px; height:100px; margin-bottom:10px; width: 100%; }
+
+.form-Scann {
+    font-family: BebasNeue, HelveticaBlackCondensed, sans-serif, Arial;
+    font-size: 26px; /*23 px*/
+    font-weight: 400;
+}
+.form-Scann INPUT[type=text], INPUT[type=password] { font-size:36px; }
+.input-textScann   { font-size:36px; }
+.input-ButtonScann { font-family: BebasNeue, HelveticaBlackCondensed, sans-serif, Arial;  font-size: 30px; height: 45px; }
+.input-labelScann  { font-size: 36px; height: 45px; }
+
+/* Heredado de layout */
+.TituloFormulario--dg {
+    border-bottom:2px dashed #808080;
+    border-right:2px dashed #808080;
+    color:#808080;
+    display:block;
+    font-family:Calibri, Arial;
+    font-size:2em;
+    height: 25px;
+    padding-left:5px;
+    padding-bottom:3px;
+    width: 100%;
+}
+
+/***************************************************************************************************************************/
+/* -- ESTADO --*/
+
+

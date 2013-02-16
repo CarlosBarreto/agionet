@@ -626,7 +626,7 @@ Namespace AgioNet
                             .ZipCode = DR(16), _
                             .Tel = DR(17), _
                             .Tel2 = DR(18), _
-                            .Tel3 = DR(19) _
+                            .Tel3 = DR(19), _
                             .Delivery = DR(20), _
                             .DeliveryTime = DR(21), _
                             .ProductClass = DR(22), _

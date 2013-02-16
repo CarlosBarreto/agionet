@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/diagnostico/asignar_estacion.vbhtml" hash="ffffffff97fc4287" filehash="fffffe5147d8be37" flags="110000" assembly="App_Web_5201p5uo" type="ASP._Page_Views_diagnostico_asignar_estacion_vbhtml">
+    <filedeps>
+        <filedep name="/Views/diagnostico/asignar_estacion.vbhtml" />
+    </filedeps>
+</preserve>

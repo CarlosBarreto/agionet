@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/diagnostico/_ValidateOrderPartial.vbhtml" hash="ffffffff97fc4287" filehash="ffffcf5927a47294" flags="110000" assembly="App_Web_5201p5uo" type="ASP._Page_Views_diagnostico__ValidateOrderPartial_vbhtml">
+    <filedeps>
+        <filedep name="/Views/diagnostico/_ValidateOrderPartial.vbhtml" />
+    </filedeps>
+</preserve>

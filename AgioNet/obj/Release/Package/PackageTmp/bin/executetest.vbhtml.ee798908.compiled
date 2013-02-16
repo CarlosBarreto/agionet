@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/diagnostico/ExecuteTest.vbhtml" hash="ffffffff97fc4287" filehash="40980476d76e" flags="110000" assembly="App_Web_5201p5uo" type="ASP._Page_Views_diagnostico_ExecuteTest_vbhtml">
+    <filedeps>
+        <filedep name="/Views/diagnostico/ExecuteTest.vbhtml" />
+    </filedeps>
+</preserve>

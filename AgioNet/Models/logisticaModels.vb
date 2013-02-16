@@ -321,3 +321,112 @@ Public Class ScanOrderModel
     Private _OrderID As String
 End Class
 
+' 2015.02.15 
+Public Class TrackNoCostListModel
+    ' Properties
+    Public Property CustomerName As String
+        Get
+            Return Me._CustomerName
+        End Get
+        Set(ByVal value As String)
+            Me._CustomerName = value
+        End Set
+    End Property
+
+    Public Property Delivery As String
+        Get
+            Return Me._Delivery
+        End Get
+        Set(ByVal value As String)
+            Me._Delivery = value
+        End Set
+    End Property
+
+    Public Property DeliveryTime As String
+        Get
+            Return Me._DeliveryTime
+        End Get
+        Set(ByVal value As String)
+            Me._DeliveryTime = value
+        End Set
+    End Property
+
+    Public Property Email As String
+        Get
+            Return Me._Email
+        End Get
+        Set(ByVal value As String)
+            Me._Email = value
+        End Set
+    End Property
+
+    Public Property OrderDate As String
+        Get
+            Return Me._OrderDate
+        End Get
+        Set(ByVal value As String)
+            Me._OrderDate = value
+        End Set
+    End Property
+
+    Public Property OrderID As String
+        Get
+            Return Me._OrderID
+        End Get
+        Set(ByVal value As String)
+            Me._OrderID = value
+        End Set
+    End Property
+
+    Public Property ProductClass As String
+        Get
+            Return Me._ProductClass
+        End Get
+        Set(ByVal value As String)
+            Me._ProductClass = value
+        End Set
+    End Property
+
+    Public Property ProductType As String
+        Get
+            Return Me._ProductType
+        End Get
+        Set(ByVal value As String)
+            Me._ProductType = value
+        End Set
+    End Property
+
+    Public Property TrackNo As String
+        Get
+            Return Me._TrackNo
+        End Get
+        Set(ByVal value As String)
+            Me._TrackNo = value
+        End Set
+    End Property
+
+    Public Property TrackNoType As String
+        Get
+            Return Me._TrackNoType
+        End Get
+        Set(ByVal value As String)
+            Me._TrackNoType = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _CustomerName As String
+    Private _Delivery As String
+    Private _DeliveryTime As String
+    Private _Email As String
+    Private _OrderDate As String
+    Private _OrderID As String
+    Private _ProductClass As String
+    Private _ProductType As String
+    Private _TrackNo As String
+    Private _TrackNoType As String
+End Class
+
+
+

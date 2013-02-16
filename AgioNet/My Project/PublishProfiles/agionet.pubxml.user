@@ -5,9 +5,782 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LastUsedBuildConfiguration>Debug</LastUsedBuildConfiguration>
+    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
     <LastUsedPlatform>Any CPU</LastUsedPlatform>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword />
   </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/about.vbhtml.a8d08dba.compiled">
+      <publishTime>02/15/2013 17:25:36</publishTime>
+    </File>
+    <File Include="bin/addfailure.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/AgioNet.dll">
+      <publishTime>02/15/2013 19:03:31</publishTime>
+    </File>
+    <File Include="bin/AgioNet.pdb">
+      <publishTime>02/15/2013 19:03:31</publishTime>
+    </File>
+    <File Include="bin/AgioNet.xml">
+      <publishTime>02/15/2013 19:03:31</publishTime>
+    </File>
+    <File Include="bin/Agionet_Backend.dll">
+      <publishTime>12/14/2012 16:18:26</publishTime>
+    </File>
+    <File Include="bin/Agionet_Backend.pdb">
+      <publishTime>12/14/2012 16:18:26</publishTime>
+    </File>
+    <File Include="bin/agregar_esp_trackno.vbhtml.9012586d.compiled">
+      <publishTime>02/15/2013 17:25:40</publishTime>
+    </File>
+    <File Include="bin/agregar_falla.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/agregar_material.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/agregar_trackno.vbhtml.9012586d.compiled">
+      <publishTime>02/15/2013 17:25:40</publishTime>
+    </File>
+    <File Include="bin/approvalrepair.vbhtml.8ea8e309.compiled">
+      <publishTime>02/15/2013 17:25:42</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>02/15/2013 19:03:48</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>02/15/2013 19:03:46</publishTime>
+    </File>
+    <File Include="bin/App_Web_401hu0fs.dll">
+      <publishTime>02/15/2013 17:25:43</publishTime>
+    </File>
+    <File Include="bin/App_Web_4ivdvd2e.dll">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/App_Web_5v4zfzt1.dll">
+      <publishTime>02/15/2013 17:25:44</publishTime>
+    </File>
+    <File Include="bin/App_Web_abp0cep5.dll">
+      <publishTime>02/15/2013 16:14:27</publishTime>
+    </File>
+    <File Include="bin/App_Web_gy5yiohx.dll">
+      <publishTime>02/15/2013 16:14:21</publishTime>
+    </File>
+    <File Include="bin/App_Web_idvqceme.dll">
+      <publishTime>02/15/2013 16:14:25</publishTime>
+    </File>
+    <File Include="bin/App_Web_m2rslkss.dll">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/App_Web_mz5l5aeb.dll">
+      <publishTime>02/15/2013 17:25:42</publishTime>
+    </File>
+    <File Include="bin/App_Web_mzijlcf0.dll">
+      <publishTime>02/15/2013 16:14:29</publishTime>
+    </File>
+    <File Include="bin/App_Web_pwd531pd.dll">
+      <publishTime>02/15/2013 17:25:36</publishTime>
+    </File>
+    <File Include="bin/App_Web_rgtsurkz.dll">
+      <publishTime>02/15/2013 16:14:20</publishTime>
+    </File>
+    <File Include="bin/App_Web_tn40wou3.dll">
+      <publishTime>02/15/2013 17:25:34</publishTime>
+    </File>
+    <File Include="bin/App_Web_usod3ho0.dll">
+      <publishTime>02/15/2013 17:25:39</publishTime>
+    </File>
+    <File Include="bin/App_Web_wqfyepet.dll">
+      <publishTime>02/15/2013 16:14:22</publishTime>
+    </File>
+    <File Include="bin/App_Web_xkztraws.dll">
+      <publishTime>02/15/2013 16:14:30</publishTime>
+    </File>
+    <File Include="bin/App_Web_xmqmxbbl.dll">
+      <publishTime>02/15/2013 17:25:41</publishTime>
+    </File>
+    <File Include="bin/App_Web_zukuivpd.dll">
+      <publishTime>02/15/2013 16:14:28</publishTime>
+    </File>
+    <File Include="bin/App_Web_zw1aqr53.dll">
+      <publishTime>02/15/2013 16:14:24</publishTime>
+    </File>
+    <File Include="bin/aprobar_reparar.vbhtml.8ea8e309.compiled">
+      <publishTime>02/15/2013 17:25:42</publishTime>
+    </File>
+    <File Include="bin/asignarestacion.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/asignar_estacion.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/cancelar_prueba.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/canceltest.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/changepassword.vbhtml.5f83eb8c.compiled">
+      <publishTime>02/15/2013 17:25:34</publishTime>
+    </File>
+    <File Include="bin/changepasswordsuccess.vbhtml.5f83eb8c.compiled">
+      <publishTime>02/15/2013 17:25:34</publishTime>
+    </File>
+    <File Include="bin/crear_orden.vbhtml.8ea8e309.compiled">
+      <publishTime>02/15/2013 17:25:42</publishTime>
+    </File>
+    <File Include="bin/diagnosticmain.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/editarmaterial.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/editar_material.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>01/10/2013 18:34:41</publishTime>
+    </File>
+    <File Include="bin/error.vbhtml.639c3968.compiled">
+      <publishTime>02/15/2013 17:25:43</publishTime>
+    </File>
+    <File Include="bin/estaciones.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/executetest.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/falla_reportada.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/formulario_recibo.vbhtml.ed725058.compiled">
+      <publishTime>02/15/2013 17:25:41</publishTime>
+    </File>
+    <File Include="bin/generateexcel.vbhtml.9012586d.compiled">
+      <publishTime>02/15/2013 17:25:40</publishTime>
+    </File>
+    <File Include="bin/hoja_individual.vbhtml.9012586d.compiled">
+      <publishTime>02/15/2013 17:25:40</publishTime>
+    </File>
+    <File Include="bin/imprimir_hoja.vbhtml.ed725058.compiled">
+      <publishTime>02/15/2013 17:25:41</publishTime>
+    </File>
+    <File Include="bin/index.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/index.vbhtml.8ea8e309.compiled">
+      <publishTime>02/15/2013 17:25:42</publishTime>
+    </File>
+    <File Include="bin/index.vbhtml.9012586d.compiled">
+      <publishTime>02/15/2013 17:25:40</publishTime>
+    </File>
+    <File Include="bin/index.vbhtml.a8d08dba.compiled">
+      <publishTime>02/15/2013 17:25:37</publishTime>
+    </File>
+    <File Include="bin/index.vbhtml.ed725058.compiled">
+      <publishTime>02/15/2013 17:25:41</publishTime>
+    </File>
+    <File Include="bin/index.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/ingresar_orden.vbhtml.ed725058.compiled">
+      <publishTime>02/15/2013 17:25:41</publishTime>
+    </File>
+    <File Include="bin/iniciar_diagnostico.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/intransit.vbhtml.9012586d.compiled">
+      <publishTime>02/15/2013 17:25:40</publishTime>
+    </File>
+    <File Include="bin/logon.vbhtml.5f83eb8c.compiled">
+      <publishTime>02/15/2013 17:25:34</publishTime>
+    </File>
+    <File Include="bin/material_master.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>01/10/2013 18:34:43</publishTime>
+    </File>
+    <File Include="bin/modificarguia.vbhtml.9012586d.compiled">
+      <publishTime>02/15/2013 17:25:40</publishTime>
+    </File>
+    <File Include="bin/modificar_guia.vbhtml.9012586d.compiled">
+      <publishTime>02/15/2013 17:25:40</publishTime>
+    </File>
+    <File Include="bin/ordenes_cflete.vbhtml.9012586d.compiled">
+      <publishTime>02/15/2013 17:25:40</publishTime>
+    </File>
+    <File Include="bin/ordenes_sflete.vbhtml.9012586d.compiled">
+      <publishTime>02/15/2013 17:25:40</publishTime>
+    </File>
+    <File Include="bin/pedir_aprobar.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/pendiente_recoleccion.vbhtml.9012586d.compiled">
+      <publishTime>02/15/2013 17:25:40</publishTime>
+    </File>
+    <File Include="bin/print_chkpage.vbhtml.ed725058.compiled">
+      <publishTime>02/15/2013 17:25:41</publishTime>
+    </File>
+    <File Include="bin/programar_prueba.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/quitar_material.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/realizar_pruebas.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/recibo_almacen.vbhtml.ed725058.compiled">
+      <publishTime>02/15/2013 17:25:41</publishTime>
+    </File>
+    <File Include="bin/reimprimir_formato.vbhtml.9012586d.compiled">
+      <publishTime>02/15/2013 17:25:40</publishTime>
+    </File>
+    <File Include="bin/Reports.dll">
+      <publishTime>01/24/2013 09:21:11</publishTime>
+    </File>
+    <File Include="bin/scan_info.vbhtml.ed725058.compiled">
+      <publishTime>02/15/2013 17:25:41</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>01/10/2013 18:34:43</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>01/10/2013 18:34:43</publishTime>
+    </File>
+    <File Include="bin/System.Web.Providers.dll">
+      <publishTime>01/10/2013 18:34:44</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>01/10/2013 18:34:43</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>01/10/2013 18:34:43</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>01/10/2013 18:34:43</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>01/10/2013 18:34:43</publishTime>
+    </File>
+    <File Include="bin/transfer_diagnostic.vbhtml.ed725058.compiled">
+      <publishTime>02/15/2013 17:25:41</publishTime>
+    </File>
+    <File Include="bin/transfer_incoming.vbhtml.ed725058.compiled">
+      <publishTime>02/15/2013 17:25:41</publishTime>
+    </File>
+    <File Include="bin/ver_falla.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/ver_orden.vbhtml.8ea8e309.compiled">
+      <publishTime>02/15/2013 17:25:42</publishTime>
+    </File>
+    <File Include="bin/ver_ordenes.vbhtml.8ea8e309.compiled">
+      <publishTime>02/15/2013 17:25:42</publishTime>
+    </File>
+    <File Include="bin/ver_prueba.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/viewfailure.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/viewtest.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/_asignarestacionpartial.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/_asignarestacionpartialform.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/_asignarusuariopartial.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/_asignarusuariopartialform.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/_borrarestacionpartial.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/_borrarestacionpartialform.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/_crearestacionpartial.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/_editarestacionpartial.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/_editarestacionpartialform.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/_errorpartial.vbhtml.639c3968.compiled">
+      <publishTime>02/15/2013 17:25:43</publishTime>
+    </File>
+    <File Include="bin/_estacionesmainpartial.vbhtml.238635a9.compiled">
+      <publishTime>02/15/2013 17:25:38</publishTime>
+    </File>
+    <File Include="bin/_layout.vbhtml.639c3968.compiled">
+      <publishTime>02/15/2013 17:25:43</publishTime>
+    </File>
+    <File Include="bin/_layoutlogon.vbhtml.639c3968.compiled">
+      <publishTime>02/15/2013 17:25:43</publishTime>
+    </File>
+    <File Include="bin/_logonpartial.vbhtml.639c3968.compiled">
+      <publishTime>02/15/2013 17:25:43</publishTime>
+    </File>
+    <File Include="bin/_mainmenupartial.vbhtml.639c3968.compiled">
+      <publishTime>02/15/2013 17:25:43</publishTime>
+    </File>
+    <File Include="bin/_menupartial.vbhtml.639c3968.compiled">
+      <publishTime>02/15/2013 17:25:43</publishTime>
+    </File>
+    <File Include="bin/_orderinfopartial.vbhtml.ed725058.compiled">
+      <publishTime>02/15/2013 17:25:41</publishTime>
+    </File>
+    <File Include="bin/_orderinfopartial.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/_testinfopartial.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/_validateorderpartial.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="bin/_viewstart.vbhtml.65a2d1ee.compiled">
+      <publishTime>02/15/2013 17:25:44</publishTime>
+    </File>
+    <File Include="bin/_wnorderinfopartial.vbhtml.ee798908.compiled">
+      <publishTime>02/15/2013 17:25:35</publishTime>
+    </File>
+    <File Include="Content/css/diag.css">
+      <publishTime>02/05/2013 09:41:40</publishTime>
+    </File>
+    <File Include="Content/css/headerTool.css">
+      <publishTime>01/21/2013 11:16:04</publishTime>
+    </File>
+    <File Include="Content/css/images/ui-bg_diagonals-thick_18_b81900_40x40.png">
+      <publishTime>01/15/2013 12:32:52</publishTime>
+    </File>
+    <File Include="Content/css/images/ui-bg_diagonals-thick_20_666666_40x40.png">
+      <publishTime>01/15/2013 12:32:52</publishTime>
+    </File>
+    <File Include="Content/css/images/ui-bg_flat_10_000000_40x100.png">
+      <publishTime>01/15/2013 12:32:52</publishTime>
+    </File>
+    <File Include="Content/css/images/ui-bg_glass_100_f6f6f6_1x400.png">
+      <publishTime>01/15/2013 12:32:52</publishTime>
+    </File>
+    <File Include="Content/css/images/ui-bg_glass_100_fdf5ce_1x400.png">
+      <publishTime>01/15/2013 12:32:52</publishTime>
+    </File>
+    <File Include="Content/css/images/ui-bg_glass_65_ffffff_1x400.png">
+      <publishTime>01/15/2013 12:32:52</publishTime>
+    </File>
+    <File Include="Content/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png">
+      <publishTime>01/15/2013 12:32:52</publishTime>
+    </File>
+    <File Include="Content/css/images/ui-bg_highlight-soft_100_eeeeee_1x100.png">
+      <publishTime>01/15/2013 12:32:52</publishTime>
+    </File>
+    <File Include="Content/css/images/ui-bg_highlight-soft_75_ffe45c_1x100.png">
+      <publishTime>01/15/2013 12:32:52</publishTime>
+    </File>
+    <File Include="Content/css/images/ui-icons_222222_256x240.png">
+      <publishTime>01/15/2013 12:32:52</publishTime>
+    </File>
+    <File Include="Content/css/images/ui-icons_228ef1_256x240.png">
+      <publishTime>01/15/2013 12:32:52</publishTime>
+    </File>
+    <File Include="Content/css/images/ui-icons_ef8c08_256x240.png">
+      <publishTime>01/15/2013 12:32:52</publishTime>
+    </File>
+    <File Include="Content/css/images/ui-icons_ffd27a_256x240.png">
+      <publishTime>01/15/2013 12:32:52</publishTime>
+    </File>
+    <File Include="Content/css/images/ui-icons_ffffff_256x240.png">
+      <publishTime>01/15/2013 12:32:52</publishTime>
+    </File>
+    <File Include="Content/css/ing.css">
+      <publishTime>02/06/2013 10:19:36</publishTime>
+    </File>
+    <File Include="Content/css/layout.css">
+      <publishTime>02/01/2013 18:37:44</publishTime>
+    </File>
+    <File Include="Content/css/login.css">
+      <publishTime>01/10/2013 18:46:32</publishTime>
+    </File>
+    <File Include="Content/css/printing.css">
+      <publishTime>01/18/2013 10:22:32</publishTime>
+    </File>
+    <File Include="Content/css/reccss.css">
+      <publishTime>02/01/2013 13:00:00</publishTime>
+    </File>
+    <File Include="Content/css/ui-lightness/jquery-ui-1.9.2.custom.css">
+      <publishTime>01/15/2013 12:32:30</publishTime>
+    </File>
+    <File Include="Content/fonts/BebasFontType.txt">
+      <publishTime>01/10/2013 19:53:26</publishTime>
+    </File>
+    <File Include="Content/fonts/BebasNeue-webfont.eot">
+      <publishTime>01/10/2013 19:53:26</publishTime>
+    </File>
+    <File Include="Content/fonts/BebasNeue-webfont.svg">
+      <publishTime>01/10/2013 19:53:26</publishTime>
+    </File>
+    <File Include="Content/fonts/BebasNeue-webfont.ttf">
+      <publishTime>01/10/2013 19:53:26</publishTime>
+    </File>
+    <File Include="Content/fonts/BebasNeue-webfont.woff">
+      <publishTime>01/10/2013 19:53:26</publishTime>
+    </File>
+    <File Include="Content/fonts/BebasNeue.otf">
+      <publishTime>01/10/2013 19:53:26</publishTime>
+    </File>
+    <File Include="Content/fonts/calibri.ttf">
+      <publishTime>01/10/2013 19:53:26</publishTime>
+    </File>
+    <File Include="Content/fonts/calibrib.ttf">
+      <publishTime>01/10/2013 19:53:26</publishTime>
+    </File>
+    <File Include="Content/fonts/calibrii.ttf">
+      <publishTime>01/10/2013 19:53:26</publishTime>
+    </File>
+    <File Include="Content/fonts/calibriz.ttf">
+      <publishTime>01/10/2013 19:53:26</publishTime>
+    </File>
+    <File Include="Content/fonts/FRE3OF9X.TTF">
+      <publishTime>01/10/2013 19:53:26</publishTime>
+    </File>
+    <File Include="Content/fonts/FREE3OF9.TTF">
+      <publishTime>01/10/2013 19:53:26</publishTime>
+    </File>
+    <File Include="Content/fonts/helvetica.woff">
+      <publishTime>01/10/2013 19:53:26</publishTime>
+    </File>
+    <File Include="Content/images/AgioNetLogoGray.png">
+      <publishTime>01/11/2013 12:08:26</publishTime>
+    </File>
+    <File Include="Content/images/agionet_logo.png">
+      <publishTime>01/10/2013 18:56:06</publishTime>
+    </File>
+    <File Include="Content/images/bg_line.png">
+      <publishTime>01/10/2013 19:53:54</publishTime>
+    </File>
+    <File Include="Content/images/comments.jpg">
+      <publishTime>01/25/2013 08:49:09</publishTime>
+    </File>
+    <File Include="Content/images/logo-02.jpg">
+      <publishTime>01/25/2013 09:14:34</publishTime>
+    </File>
+    <File Include="Content/images/logoaqua.png">
+      <publishTime>01/14/2013 11:26:44</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>02/15/2013 08:48:37</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>02/15/2013 19:03:44</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.7.1.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.7.1.min.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.8.20.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.8.20.min.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/jquery.unobtrusive-ajax.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/jquery.unobtrusive-ajax.min.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/MicrosoftAjax.debug.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/MicrosoftAjax.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/MicrosoftMvcAjax.debug.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/MicrosoftMvcAjax.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/MicrosoftMvcValidation.debug.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/MicrosoftMvcValidation.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.5.3.js">
+      <publishTime>02/13/2013 16:01:01</publishTime>
+    </File>
+    <File Include="Views/Account/ChangePassword.vbhtml">
+      <publishTime>01/10/2013 18:34:38</publishTime>
+    </File>
+    <File Include="Views/Account/ChangePasswordSuccess.vbhtml">
+      <publishTime>01/10/2013 18:34:38</publishTime>
+    </File>
+    <File Include="Views/Account/LogOn.vbhtml">
+      <publishTime>01/10/2013 19:39:30</publishTime>
+    </File>
+    <File Include="Views/diagnostico/AddFailure.vbhtml">
+      <publishTime>01/21/2013 13:38:22</publishTime>
+    </File>
+    <File Include="Views/diagnostico/agregar_falla.vbhtml">
+      <publishTime>01/21/2013 18:30:06</publishTime>
+    </File>
+    <File Include="Views/diagnostico/asignarestacion.vbhtml">
+      <publishTime>02/11/2013 13:12:26</publishTime>
+    </File>
+    <File Include="Views/diagnostico/asignar_estacion.vbhtml">
+      <publishTime>02/08/2013 11:31:50</publishTime>
+    </File>
+    <File Include="Views/diagnostico/cancelar_prueba.vbhtml">
+      <publishTime>01/21/2013 13:44:58</publishTime>
+    </File>
+    <File Include="Views/diagnostico/CancelTest.vbhtml">
+      <publishTime>01/21/2013 13:45:46</publishTime>
+    </File>
+    <File Include="Views/diagnostico/DiagnosticMain.vbhtml">
+      <publishTime>01/30/2013 13:12:44</publishTime>
+    </File>
+    <File Include="Views/diagnostico/ExecuteTest.vbhtml">
+      <publishTime>01/21/2013 13:38:52</publishTime>
+    </File>
+    <File Include="Views/diagnostico/falla_reportada.vbhtml">
+      <publishTime>01/21/2013 18:51:02</publishTime>
+    </File>
+    <File Include="Views/diagnostico/Index.vbhtml">
+      <publishTime>01/30/2013 12:47:14</publishTime>
+    </File>
+    <File Include="Views/diagnostico/iniciar_diagnostico.vbhtml">
+      <publishTime>01/30/2013 12:36:48</publishTime>
+    </File>
+    <File Include="Views/diagnostico/pedir_aprobar.vbhtml">
+      <publishTime>01/22/2013 09:59:54</publishTime>
+    </File>
+    <File Include="Views/diagnostico/programar_prueba.vbhtml">
+      <publishTime>02/05/2013 13:19:28</publishTime>
+    </File>
+    <File Include="Views/diagnostico/realizar_pruebas.vbhtml">
+      <publishTime>01/21/2013 13:40:26</publishTime>
+    </File>
+    <File Include="Views/diagnostico/ver_falla.vbhtml">
+      <publishTime>01/21/2013 18:36:12</publishTime>
+    </File>
+    <File Include="Views/diagnostico/ver_prueba.vbhtml">
+      <publishTime>01/21/2013 15:48:54</publishTime>
+    </File>
+    <File Include="Views/diagnostico/ViewFailure.vbhtml">
+      <publishTime>01/21/2013 18:54:34</publishTime>
+    </File>
+    <File Include="Views/diagnostico/ViewTest.vbhtml">
+      <publishTime>01/21/2013 17:14:12</publishTime>
+    </File>
+    <File Include="Views/diagnostico/_OrderInfoPartial.vbhtml">
+      <publishTime>02/08/2013 14:13:38</publishTime>
+    </File>
+    <File Include="Views/diagnostico/_TestInfoPartial.vbhtml">
+      <publishTime>02/08/2013 13:54:32</publishTime>
+    </File>
+    <File Include="Views/diagnostico/_ValidateOrderPartial.vbhtml">
+      <publishTime>01/21/2013 09:23:20</publishTime>
+    </File>
+    <File Include="Views/diagnostico/_wnOrderInfoPartial.vbhtml">
+      <publishTime>01/21/2013 12:21:34</publishTime>
+    </File>
+    <File Include="Views/Home/About.vbhtml">
+      <publishTime>01/10/2013 18:34:38</publishTime>
+    </File>
+    <File Include="Views/Home/Index.vbhtml">
+      <publishTime>01/10/2013 18:34:38</publishTime>
+    </File>
+    <File Include="Views/ingenieria/agregar_material.vbhtml">
+      <publishTime>01/29/2013 10:49:18</publishTime>
+    </File>
+    <File Include="Views/ingenieria/editarmaterial.vbhtml">
+      <publishTime>01/29/2013 12:23:14</publishTime>
+    </File>
+    <File Include="Views/ingenieria/editar_material.vbhtml">
+      <publishTime>01/29/2013 12:21:12</publishTime>
+    </File>
+    <File Include="Views/ingenieria/estaciones.vbhtml">
+      <publishTime>02/07/2013 08:43:58</publishTime>
+    </File>
+    <File Include="Views/ingenieria/Index.vbhtml">
+      <publishTime>01/28/2013 17:08:06</publishTime>
+    </File>
+    <File Include="Views/ingenieria/material_master.vbhtml">
+      <publishTime>01/29/2013 11:22:50</publishTime>
+    </File>
+    <File Include="Views/ingenieria/quitar_material.vbhtml">
+      <publishTime>01/29/2013 11:49:24</publishTime>
+    </File>
+    <File Include="Views/ingenieria/_asignarestacionPartial.vbhtml">
+      <publishTime>02/06/2013 19:07:16</publishTime>
+    </File>
+    <File Include="Views/ingenieria/_asignarestacionPartialForm.vbhtml">
+      <publishTime>02/06/2013 19:21:58</publishTime>
+    </File>
+    <File Include="Views/ingenieria/_asignarusuarioPartial.vbhtml">
+      <publishTime>02/07/2013 08:53:20</publishTime>
+    </File>
+    <File Include="Views/ingenieria/_asignarusuarioPartialForm.vbhtml">
+      <publishTime>02/07/2013 09:13:46</publishTime>
+    </File>
+    <File Include="Views/ingenieria/_borrarestacionPartial.vbhtml">
+      <publishTime>02/06/2013 17:58:56</publishTime>
+    </File>
+    <File Include="Views/ingenieria/_borrarestacionPartialForm.vbhtml">
+      <publishTime>02/06/2013 18:04:54</publishTime>
+    </File>
+    <File Include="Views/ingenieria/_crearestacionPartial.vbhtml">
+      <publishTime>02/06/2013 16:28:48</publishTime>
+    </File>
+    <File Include="Views/ingenieria/_editarestacionPartial.vbhtml">
+      <publishTime>02/06/2013 12:27:08</publishTime>
+    </File>
+    <File Include="Views/ingenieria/_editarestacionPartialForm.vbhtml">
+      <publishTime>02/06/2013 17:03:52</publishTime>
+    </File>
+    <File Include="Views/ingenieria/_estacionesMainPartial.vbhtml">
+      <publishTime>02/06/2013 10:35:40</publishTime>
+    </File>
+    <File Include="Views/logistica/agregar_esp_trackno.vbhtml">
+      <publishTime>01/28/2013 09:57:32</publishTime>
+    </File>
+    <File Include="Views/logistica/agregar_trackno.vbhtml">
+      <publishTime>01/28/2013 09:02:32</publishTime>
+    </File>
+    <File Include="Views/logistica/GenerateExcel.vbhtml">
+      <publishTime>01/25/2013 12:17:52</publishTime>
+    </File>
+    <File Include="Views/logistica/hoja_individual.vbhtml">
+      <publishTime>01/24/2013 13:54:18</publishTime>
+    </File>
+    <File Include="Views/logistica/index.vbhtml">
+      <publishTime>01/16/2013 10:20:14</publishTime>
+    </File>
+    <File Include="Views/logistica/intransit.vbhtml">
+      <publishTime>01/28/2013 16:12:12</publishTime>
+    </File>
+    <File Include="Views/logistica/modificarguia.vbhtml">
+      <publishTime>01/28/2013 11:10:44</publishTime>
+    </File>
+    <File Include="Views/logistica/modificar_guia.vbhtml">
+      <publishTime>01/28/2013 11:18:40</publishTime>
+    </File>
+    <File Include="Views/logistica/ordenes_cflete.vbhtml">
+      <publishTime>01/16/2013 17:10:44</publishTime>
+    </File>
+    <File Include="Views/logistica/ordenes_sflete.vbhtml">
+      <publishTime>01/16/2013 17:14:36</publishTime>
+    </File>
+    <File Include="Views/logistica/pendiente_recoleccion.vbhtml">
+      <publishTime>01/25/2013 12:14:02</publishTime>
+    </File>
+    <File Include="Views/logistica/reimprimir_formato.vbhtml">
+      <publishTime>02/01/2013 11:39:10</publishTime>
+    </File>
+    <File Include="Views/recibo/formulario_recibo.vbhtml">
+      <publishTime>01/30/2013 09:56:52</publishTime>
+    </File>
+    <File Include="Views/recibo/imprimir_hoja.vbhtml">
+      <publishTime>01/17/2013 15:28:08</publishTime>
+    </File>
+    <File Include="Views/recibo/index.vbhtml">
+      <publishTime>01/16/2013 17:27:34</publishTime>
+    </File>
+    <File Include="Views/recibo/ingresar_orden.vbhtml">
+      <publishTime>01/17/2013 11:21:48</publishTime>
+    </File>
+    <File Include="Views/recibo/print_chkpage.vbhtml">
+      <publishTime>01/30/2013 10:41:30</publishTime>
+    </File>
+    <File Include="Views/recibo/recibo_almacen.vbhtml">
+      <publishTime>01/28/2013 16:29:10</publishTime>
+    </File>
+    <File Include="Views/recibo/scan_info.vbhtml">
+      <publishTime>01/30/2013 08:31:38</publishTime>
+    </File>
+    <File Include="Views/recibo/transfer_diagnostic.vbhtml">
+      <publishTime>01/30/2013 11:16:20</publishTime>
+    </File>
+    <File Include="Views/recibo/transfer_incoming.vbhtml">
+      <publishTime>01/28/2013 16:40:54</publishTime>
+    </File>
+    <File Include="Views/recibo/_OrderInfoPartial.vbhtml">
+      <publishTime>02/01/2013 12:59:02</publishTime>
+    </File>
+    <File Include="Views/sc/approvalRepair.vbhtml">
+      <publishTime>01/22/2013 18:37:20</publishTime>
+    </File>
+    <File Include="Views/sc/aprobar_reparar.vbhtml">
+      <publishTime>01/22/2013 16:30:14</publishTime>
+    </File>
+    <File Include="Views/sc/crear_orden.vbhtml">
+      <publishTime>01/24/2013 11:40:28</publishTime>
+    </File>
+    <File Include="Views/sc/index.vbhtml">
+      <publishTime>01/14/2013 09:26:58</publishTime>
+    </File>
+    <File Include="Views/sc/ver_orden.vbhtml">
+      <publishTime>02/15/2013 11:08:39</publishTime>
+    </File>
+    <File Include="Views/sc/ver_ordenes.vbhtml">
+      <publishTime>02/15/2013 11:08:53</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.vbhtml">
+      <publishTime>01/10/2013 18:34:38</publishTime>
+    </File>
+    <File Include="Views/Shared/_ErrorPartial.vbhtml">
+      <publishTime>01/10/2013 19:33:00</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.vbhtml">
+      <publishTime>02/05/2013 16:46:36</publishTime>
+    </File>
+    <File Include="Views/Shared/_LayoutLogOn.vbhtml">
+      <publishTime>01/10/2013 19:39:08</publishTime>
+    </File>
+    <File Include="Views/Shared/_LogOnPartial.vbhtml">
+      <publishTime>01/11/2013 11:44:48</publishTime>
+    </File>
+    <File Include="Views/Shared/_mainMenuPartial.vbhtml">
+      <publishTime>02/15/2013 10:07:48</publishTime>
+    </File>
+    <File Include="Views/Shared/_menuPartial.vbhtml">
+      <publishTime>01/21/2013 11:18:34</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>02/12/2013 14:09:52</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.vbhtml">
+      <publishTime>01/10/2013 18:34:38</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>02/15/2013 19:03:35</publishTime>
+    </File>
+  </ItemGroup>
 </Project>

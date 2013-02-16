@@ -47,7 +47,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Agionet_Backend">
-      <HintPath>..\..\Agionet_Backend\Agionet_Backend\bin\Debug\Agionet_Backend.dll</HintPath>
+      <HintPath>..\..\Agionet_Backend\Agionet_Backend\bin\Release\Agionet_Backend.dll</HintPath>
     </Reference>
     <Reference Include="Reports">
       <HintPath>..\..\..\..\..\Desktop\Report\Root\Reports\bin\Debug\Reports.dll</HintPath>
@@ -219,6 +219,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\PublishProfiles\AgioNet.pubxml" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
@@ -278,11 +279,6 @@
     <Content Include="Views\diagnostico\pedir_aprobar.vbhtml" />
     <Content Include="Views\sc\aprobar_reparar.vbhtml" />
     <Content Include="Views\sc\approvalRepair.vbhtml" />
-    <Content Include="Views\reparacion\Index.vbhtml" />
-    <Content Include="Views\reparacion\RepairMain.vbhtml" />
-    <Content Include="Views\reparacion\VIEW_FAILURE.vbhtml" />
-    <Content Include="Views\reparacion\_OrderInfoPartial.vbhtml" />
-    <Content Include="Views\reparacion\_wnOrderInfoPartial.vbhtml" />
     <Content Include="Views\logistica\pendiente_recoleccion.vbhtml" />
     <Content Include="Views\logistica\hoja_individual.vbhtml" />
     <Content Include="Views\logistica\GenerateExcel.vbhtml" />
@@ -346,7 +342,6 @@
     <Content Include="Views\Account\ChangePassword.vbhtml" />
     <Content Include="Views\Account\ChangePasswordSuccess.vbhtml" />
     <Content Include="Views\Account\LogOn.vbhtml" />
-    <Content Include="Views\Account\Register.vbhtml" />
     <Content Include="Views\Home\About.vbhtml" />
     <Content Include="Views\Home\Index.vbhtml" />
     <Content Include="Views\Shared\Error.vbhtml" />
@@ -356,7 +351,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\temp\" />
-    <Folder Include="My Project\PublishProfiles\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

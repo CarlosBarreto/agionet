@@ -35,7 +35,7 @@ Public Class agLogin
         Me._permissionList = New String(11 - 1) {}
         Me._PermissionSubList = New String(11 - 1) {}
 
-        If (Not Me.DR Is Nothing) Then
+        If (Not Me.DR Is Nothing And DR.HasRows) Then
             Do While Me.DR.Read
                 Me._permissionList(index) = DR(1)
                 Me._PermissionSubList(index) = DR(0)
@@ -48,6 +48,9 @@ Public Class agLogin
             If Not Me.DR.IsClosed Then
                 Me.DR.Close()
             End If
+        Else
+            _permissionList = Nothing
+            _PermissionSubList = Nothing
         End If
     End Sub
 

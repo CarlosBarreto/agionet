@@ -479,6 +479,23 @@ Public Class RegFailureModel
     Private _User As String
 End Class
 
+'2013.02.15
+Public Class ReportedFailureModel
+    ' Properties
+    Public Property OrderID As String
+        Get
+            Return Me._OrderID
+        End Get
+        Set(ByVal value As String)
+            Me._OrderID = value
+        End Set
+    End Property
+
+
+    ' Fields
+    Private _OrderID As String
+End Class
+
 ' 2013.02.13
 Public Class SheduleTestModel
     ' Properties

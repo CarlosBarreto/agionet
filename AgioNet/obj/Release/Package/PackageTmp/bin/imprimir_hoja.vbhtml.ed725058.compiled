@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/recibo/imprimir_hoja.vbhtml" hash="ffffffff97fc4287" filehash="ffffda39be1553d1" flags="110000" assembly="App_Web_hgc3sx25" type="ASP._Page_Views_recibo_imprimir_hoja_vbhtml">
+    <filedeps>
+        <filedep name="/Views/recibo/imprimir_hoja.vbhtml" />
+    </filedeps>
+</preserve>

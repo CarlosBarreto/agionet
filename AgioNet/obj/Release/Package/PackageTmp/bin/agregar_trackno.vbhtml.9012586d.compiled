@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/logistica/agregar_trackno.vbhtml" hash="ffffffff97fc4287" filehash="764ea62db46" flags="110000" assembly="App_Web_octfoiak" type="ASP._Page_Views_logistica_agregar_trackno_vbhtml">
+    <filedeps>
+        <filedep name="/Views/logistica/agregar_trackno.vbhtml" />
+    </filedeps>
+</preserve>
