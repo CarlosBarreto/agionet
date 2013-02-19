@@ -5,7 +5,6 @@
     Session("Section") = "diagnostico"
     
     Dim myModel() As AgioNet.TestIDListModel = TempData("Model")
-    
     Dim OptionList As List(Of SelectListItem) = New List(Of SelectListItem)
     
     Dim Count As Integer = 0
