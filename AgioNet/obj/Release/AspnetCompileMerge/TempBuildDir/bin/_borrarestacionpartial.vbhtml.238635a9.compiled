@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/ingenieria/_borrarestacionPartial.vbhtml" hash="ffffffff97fc4287" filehash="ffffc5a0bb8044fa" flags="110000" assembly="App_Web_0bbgxqad" type="ASP._Page_Views_ingenieria__borrarestacionPartial_vbhtml">
+<preserve resultType="2" virtualPath="/Views/ingenieria/_borrarestacionPartial.vbhtml" hash="34d7675d" filehash="ffffc5f11e88c91e" flags="110000" assembly="App_Web_uugnyswf" type="ASP._Page_Views_ingenieria__borrarestacionPartial_vbhtml">
     <filedeps>
         <filedep name="/Views/ingenieria/_borrarestacionPartial.vbhtml" />
     </filedeps>

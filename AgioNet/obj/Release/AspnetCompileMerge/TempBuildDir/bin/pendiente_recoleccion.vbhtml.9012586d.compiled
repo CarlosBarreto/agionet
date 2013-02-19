@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/logistica/pendiente_recoleccion.vbhtml" hash="ffffffff97fc4287" filehash="ffffdcacf4c9332e" flags="110000" assembly="App_Web_octfoiak" type="ASP._Page_Views_logistica_pendiente_recoleccion_vbhtml">
+<preserve resultType="2" virtualPath="/Views/logistica/pendiente_recoleccion.vbhtml" hash="34d7675d" filehash="4007980ba5c3" flags="110000" assembly="App_Web_rhagdeao" type="ASP._Page_Views_logistica_pendiente_recoleccion_vbhtml">
     <filedeps>
         <filedep name="/Views/logistica/pendiente_recoleccion.vbhtml" />
     </filedeps>

@@ -10,7 +10,9 @@ Public Class agEmail
     Protected smtp As SmtpClient
 
     'Methods
-    'public agEmail();
+    Public Sub New()
+        _mailContact = "system@agiotech.com"
+    End Sub
 
     Public Sub SendEmail(EmailAddress As String, txtSubject As String, txtMessage As String)
         mail = New MailMessage()

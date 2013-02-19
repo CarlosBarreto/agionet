@@ -1,4 +1,5 @@
 ﻿Imports Root.Reports
+Imports System.IO
 Imports System.Data.SqlClient
 
 Namespace AgioNet
@@ -231,27 +232,16 @@ Namespace AgioNet
                 Dim path As String = (Me.Server.MapPath("~/Content/temp/") & code & ".jpg")
                 System.IO.File.WriteAllBytes(path, GenerarCodigo(Me.Server, code, "", 350, 40, 60))
 
-                Dim report As New PDFInTransitPage With { _
-                    .RutaLogo = Me.Server.MapPath("~/Content/images/logo-01.jpg"), _
-                    .RutaBarCode = path, _
-                    .RutaComments = Me.Server.MapPath("~/Content/images/comments.jpg"), _
-                    .Orderid = code, _
-                    .Model = model2 _
-                }
+                Dim report As New PDFInTransitPage
+                report.RutaLogo = Me.Server.MapPath("~/Content/images/logo-01.jpg")
+                report.RutaBarCode = path
+                report.RutaComments = Me.Server.MapPath("~/Content/images/comments.jpg")
+                report.Orderid = code
+                report.Model = model2
 
-                RT.PrintPDF(report)
-
+                'RT.PrintPDF(report)
+                RT.ViewPDF(report, Me.Server.MapPath("~/Content/temp/") & code & ".pdf")
                 report = Nothing
-                Dim page2 As New PDFInTransitPage With { _
-                    .RutaLogo = Me.Server.MapPath("~/Content/images/logo-01.jpg"), _
-                    .RutaBarCode = path, _
-                    .RutaComments = Me.Server.MapPath("~/Content/images/comments.jpg"), _
-                    .Orderid = code, _
-                    .Model = model2, _
-                    .IsCopy = True _
-                }
-                RT.PrintPDF(page2)
-                page2 = Nothing
 
                 Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
                 Me.DR = Me.DA.ExecuteSP("sys_AddOrderStatus", model.OrderID, "STOCK", Me.User.Identity.Name, ("Auto: " & model.OrderID & ", formato de recolección"))
@@ -263,7 +253,10 @@ Namespace AgioNet
                 Me.TempData.Item("ErrMsg") = ex.Message
             End Try
 
-            Return Me.RedirectToAction("pendiente_recoleccion")
+            Dim filename As String = Me.Server.MapPath("~/Content/temp/") & code & ".pdf"
+            Return File(filename, "application/pdf", Server.HtmlEncode(filename))
+            'Return File()
+            'Return Me.RedirectToAction("index")
         End Function
 
         ' 2013.02.14

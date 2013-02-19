@@ -16,7 +16,7 @@
         Public Function ChangePassword(ByVal model As ChangePasswordModel) As ActionResult
             If ModelState.IsValid Then
                 Dim login As New agLogin
-                login.ChangePassword(model.OldPassword, model.NewPassword, model.ConfirmPassword)
+                login.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword, model.ConfirmPassword)
                 If login._LastErrorMessage = "" Then
                     login.Dispose()
                     Return RedirectToAction("ChangePasswordSuccess")

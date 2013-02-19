@@ -18,6 +18,7 @@ Module agGlobals
         If Size = 0 Then Size = 60
 
         If Not String.IsNullOrEmpty(Code) Then
+
             Using stream As New MemoryStream()
                 Dim bitmap As New Bitmap(Width, Height)
                 Dim grafic As Object = Graphics.FromImage(bitmap)
@@ -32,6 +33,8 @@ Module agGlobals
                 stream.Seek(0, SeekOrigin.Begin)
                 resultado = stream.ToArray()
             End Using
+        Else
+            resultado = Nothing
         End If
 
         Return resultado

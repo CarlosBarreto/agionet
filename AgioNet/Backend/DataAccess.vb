@@ -122,18 +122,22 @@ Public Class DataAccess
     ''' <param name="Password"></param>
     ''' <remarks></remarks>
     Protected Friend Sub New(Server As String, DataBase As String, UserID As String, Password As String)
-        'Inicializar las variables
-        _dbServer = Server
-        _dbDataBase = DataBase
-        _dbUser = UserID
-        _dbPassword = Password
+        Try
+            'Inicializar las variables
+            _dbServer = Server
+            _dbDataBase = DataBase
+            _dbUser = UserID
+            _dbPassword = Password
 
-        'Generar la cadena de conexion
-        sCon = CadenaConexion()
-        'Establecer la conexion
-        Connection = New SqlConnection(sCon)
-        Connection.Open()
-        _LastErrorMessage = ""
+            'Generar la cadena de conexion
+            sCon = CadenaConexion()
+            'Establecer la conexion
+            Connection = New SqlConnection(sCon)
+            Connection.Open()
+            _LastErrorMessage = ""
+        Catch ex As Exception
+            _LastErrorMessage = ex.Message
+        End Try
     End Sub
 
     ''' <summary>

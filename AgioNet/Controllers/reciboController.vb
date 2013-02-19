@@ -397,7 +397,7 @@ Namespace AgioNet
                         .Model = data _
                     }
 
-                    RT.PrintPDF(report)
+                    'RT.PrintPDF(report)
                     report = Nothing
                 Else
                     Me.TempData.Item("ErrMsg") = Me.DA.LastErrorMessage
@@ -417,6 +417,7 @@ Namespace AgioNet
             Me.TempData.Item("PrintData") = data
             Me.TempData.Keep("ErrMsg")
             Me.TempData.Item("OrderID") = code
+
             Return Me.RedirectToAction("imprimir_hoja")
         End Function
 
@@ -446,9 +447,9 @@ Namespace AgioNet
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
             Finally
-                If Not Me.DR.IsClosed Then
-                    Me.DR.Close()
-                End If
+                'If Not Me.DR.IsClosed Then
+                ' Me.DR.Close()
+                ' End If
                 Me.DA.Dispose()
             End Try
 
@@ -492,11 +493,17 @@ Namespace AgioNet
         ' GET: /recibo/scan_info
         <Authorize, HttpGet> _
         Public Function scan_info(ByVal model As ScanOrderModel) As ActionResult
-            If Me.TempData.Item("Opt") <> "" Then
-                Me.TempData.Keep("OrderID")
-            Else
+            Try
+                'If Me.TempData.Item("Opt") <> "" Then
+                'Me.TempData.Keep("OrderID")
+                'Else
                 Me.TempData.Item("OrderID") = model.OrderID
-            End If
+                'End If
+            Catch ex As Exception
+                TempData("ErrMsg") = ex.Message
+            End Try
+            
+
             Return Me.View
         End Function
 

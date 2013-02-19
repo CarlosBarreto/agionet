@@ -15,8 +15,8 @@ Public Class agLogin
         MyBase.New(__SERVER__, __DATABASE__, __USER__, __PASS__)
     End Sub
 
-    Public Sub ChangePassword(OldPassword As String, NewPassword As String, CNewPassword As String)
-        DR = ExecuteSP("euserChangePassword", TextEncoding(OldPassword), TextEncoding(NewPassword), TextEncoding(CNewPassword))
+    Public Sub ChangePassword(User As String, OldPassword As String, NewPassword As String, CNewPassword As String)
+        DR = ExecuteSP("euserChangePassword", User, TextEncoding(OldPassword), TextEncoding(NewPassword), TextEncoding(CNewPassword))
         If _LastErrorMessage = "" Then
             _logOnMessage = "Success"
             _errorFlag = False
@@ -30,28 +30,32 @@ Public Class agLogin
     End Sub
 
     Public Sub getPermissionList(Type As String, User As String, Optional _Module As String = "") '(string Type, string User, string _Module = "")
-        Dim index As Integer = 0
-        Me.DR = Me.ExecuteSP("epermissionGetPermission", Type, User, _Module)
-        Me._permissionList = New String(11 - 1) {}
-        Me._PermissionSubList = New String(11 - 1) {}
+        Try
+            Dim index As Integer = 0
+            Me.DR = Me.ExecuteSP("epermissionGetPermission", Type, User, _Module)
+            Me._permissionList = New String(11 - 1) {}
+            Me._PermissionSubList = New String(11 - 1) {}
 
-        If (Not Me.DR Is Nothing And DR.HasRows) Then
-            Do While Me.DR.Read
-                Me._permissionList(index) = DR(1)
-                Me._PermissionSubList(index) = DR(0)
-                index += 1
-            Loop
+            If (Not Me.DR Is Nothing And DR.HasRows) Then
+                Do While Me.DR.Read
+                    Me._permissionList(index) = DR(1)
+                    Me._PermissionSubList(index) = DR(0)
+                    index += 1
+                Loop
 
-            ReDim Preserve _permissionList(index - 1)
-            ReDim Preserve _PermissionSubList(index - 1)
+                ReDim Preserve _permissionList(index - 1)
+                ReDim Preserve _PermissionSubList(index - 1)
 
-            If Not Me.DR.IsClosed Then
-                Me.DR.Close()
+                If Not Me.DR.IsClosed Then
+                    Me.DR.Close()
+                End If
+            Else
+                _permissionList = Nothing
+                _PermissionSubList = Nothing
             End If
-        Else
-            _permissionList = Nothing
-            _PermissionSubList = Nothing
-        End If
+        Catch ex As Exception
+            Me._LastErrorMessage = ex.Message
+        End Try
     End Sub
 
     Public Function LogOn(_User As String, _Password As String) As String
