@@ -54,7 +54,8 @@
     </div>
 
     <div id="Contenedor">
-        <img src="../Content/images/logoaqua.png" class="ImagenFondo"  />
+        <img src='@Url.Content("~/Content/images/logoaqua.png")' class="ImagenFondo"  />
+        <!--<img src="../Content/images/logoaqua.png" class="ImagenFondo"  />-->
         
         <div id="ContMain">
             <section id="main">

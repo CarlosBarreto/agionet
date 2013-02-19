@@ -31,7 +31,6 @@ Namespace AgioNet
         ' POST: /recibo/formulario_recibo
         <Authorize, HttpPost> _
         Public Function formulario_recibo(ByVal model As ReceiveIndfoModel) As ActionResult
-            Dim result As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim str As String = String.Empty
             Dim model2 As ReceiveIndfoModel = model

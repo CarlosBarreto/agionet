@@ -461,7 +461,7 @@ Namespace AgioNet
         ''' <remarks></remarks>
         Public Function HasOrderID() As Boolean
             Dim flag2 As Boolean = True
-            If Session.Item("OrderID") Is Nothing Then
+            If Session("OrderID") Is Nothing Or Session("OrderID") = "" Then
                 flag2 = False
             End If
             If Not Me.Session.Item("OtherTitle") Is Nothing Then
@@ -530,21 +530,26 @@ Namespace AgioNet
                 Me.ClearErr()
                 Me.DR = Me.DA.ExecuteSP("dg_StartDiagnostic", model.OrderID, Me.User.Identity.Name, model.Comment)
 
+                ' -- Si no se ha detectado un error, se trata de un mensaje de status
                 If (Me.DA._LastErrorMessage = "") Then
                     Do While Me.DR.Read
-                        Me.TempData.Item("ErrMsg") = DR(0)
+                        Me.TempData.Item("StatusMsg") = DR(0)
                     Loop
-                    Me.DA.Dispose()
-                    Return Me.RedirectToAction("DiagnosticMain")
+                    Session.Add("OrderID", model.OrderID)
+                    result = Me.RedirectToAction("DiagnosticMain")
+                Else
+                    ' Mensaje de error desde la Base de datos
+                    Me.TempData.Item("ErrMsg") = Me.DA._LastErrorMessage
+                    result = Me.View
                 End If
-
-                Me.TempData.Item("ErrMsg") = Me.DA._LastErrorMessage
-                Me.DA.Dispose()
-                result = Me.View
             Catch exception1 As Exception
+                ' -- Mensaje de error probocado en el sistema
                 TempData("ErrMsg") = exception1.Message
                 result = Me.View
+            Finally
+                DA.Dispose()
             End Try
+
             Return result
         End Function
 

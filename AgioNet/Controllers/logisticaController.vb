@@ -11,7 +11,6 @@ Namespace AgioNet
         ' POST: /logistica/agregar_esp_trackno
         <HttpPost, Authorize> _
         Public Function agregar_esp_trackno(ByVal model As AgregarTrackNoModel) As ActionResult
-            Dim result As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim str As String = String.Empty
             Dim model2 As AgregarTrackNoModel = model
@@ -57,7 +56,6 @@ Namespace AgioNet
         ' POST: /logistica/agregar_trackno
         <HttpPost, Authorize> _
         Public Function agregar_trackno(ByVal model As AgregarTrackNoModel) As ActionResult
-            Dim result As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim str As String = String.Empty
             Dim model2 As AgregarTrackNoModel = model
@@ -372,7 +370,6 @@ Namespace AgioNet
         ' POST: /logistica/modificarguia
         <Authorize, HttpPost> _
         Public Function modificarguia(ByVal model As AgregarTrackNoModel) As ActionResult
-            Dim result As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim str As String = String.Empty
             Dim model2 As AgregarTrackNoModel = model

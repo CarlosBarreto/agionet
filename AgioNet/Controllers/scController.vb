@@ -202,7 +202,7 @@ Namespace AgioNet
                                         model2.Revision, model2.ServiceType, model2.FailureType, model2.Comment, Me.User.Identity.Name)
 
                 If (Me.DA.LastErrorMessage = "") Then
-                    Dim str5 As String
+                    Dim str5 As String = String.Empty
                     Do While Me.DR.Read
                         str3 = DR(0)
                         str5 = DR(1)

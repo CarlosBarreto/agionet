@@ -311,6 +311,7 @@
     <Content Include="Views\diagnostico\asignarestacion.vbhtml" />
     <Content Include="Views\diagnostico\_TestInfoPartial.vbhtml" />
     <Content Include="Views\sc\ver_ordenes.vbhtml" />
+    <Content Include="Views\Shared\_statusbarPartial.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

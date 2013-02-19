@@ -261,7 +261,6 @@ Module agGlobals
 
     End Function
 
-
     '// Nested Types
     Public Structure AllOrderInfo
         Public OrderID As String
