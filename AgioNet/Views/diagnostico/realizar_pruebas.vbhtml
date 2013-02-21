@@ -1,27 +1,57 @@
-﻿@ModelType AgioNet.ExecTestModel
+﻿@ModelType AgioNet.StationByUser
 
 @Code
     ViewData("Title") = "Diagnostico - Realizar pruebas"
     Session("Section") = "diagnostico"
+       
+    ' Actualizacion... No se va a mostrar listado de pruebas
+    Dim myModel() As AgioNet.StationByUser = TempData("Model")
+    Dim OptionList As List(Of SelectListItem) = New List(Of SelectListItem)
     
-    Dim Read() As AgioNet.TestListModel = TempData("Model")
-
-    Dim grid As WebGrid = New WebGrid(Read)
+    Dim Count As Integer = 0
+    Dim _Len As Integer
+    _Len = myModel.Length - 1
+    While Count <= _Len
+        Dim _opt As New SelectListItem()
+        _opt.Text = myModel(Count).stName & " -- " & myModel(Count).srDescription
+        _opt.Value = myModel(Count).stName
+        OptionList.Add(_opt)
+        
+        Count = Count + 1
+    End While
 End Code
+<!-- Agregar el CSS para recibo --> 
+<link href='@Url.Content("~/Content/css/diag.css")' rel="stylesheet" type="text/css" />
 
-<!-- Inicia diseño del formulario -->
-<h2 class="TituloFormulario">Listado de pruebas a ejecutar</h2>
+<!-- Ventana modal de error -->
+@If TempData("ErrMsg") <> "" Then
+    @Html.Partial("_ErrorPartial")
+End If
 
-@grid.GetHtml(columns:=grid.Columns( _
-                   grid.Column("TESTID", "TESTID", style:="TestID_"), _
-                   grid.Column("ORDERID", "ORDERID", style:="OrderID_"), _
-                   grid.Column("TESTNAME", "TESTNAME", style:="TestName_"), _
-                   grid.Column("TESTDESCRIPTION", "TESTDESCRIPTION", style:="TestDescription_"), _
-                   grid.Column("TESTRESULT", "TESTRESULT", style:="TestResult_"), _
-                   grid.Column("TESTSTART", "TESTSTART", style:="TestStart_"), _
-                   grid.Column("TESTEND", "TESTEND", style:="TestEnd_"), _
-                   grid.Column("CREATEBY", "CREATEBY", style:="CreateBy_"), _
-                   grid.Column(format:=Function(item) If(item.TESTRESULT = "", Html.ActionLink("Realizar Prueba", "ExecuteTest", "diagnostico", New With {.TESTID = item.TESTID}, vbNull),"")) _
-))
+<!-- Aquí se muestran los formularios -->
+<div id="main-ContIzquierda">
 
-@Html.Action("LoadWnOrderInfo")
+    <!-- Inicia diseño del formulario -->
+    <h2 class="TituloFormulario--dg">Realizar pruebas</h2>
+    <div class="form-Scann ">
+        @Using Html.BeginForm()
+            @<span class="row">
+                <span class="Span-b"><span class="input-labelScann">@Html.LabelFor(Function(m) m.stName) </span></span>
+                <span class="Span-e"><span class="input-textScann">@Html.DropDownListFor(Function(m) m.stName, OptionList)</span></span>
+             </span>
+            @<span class="row">&nbsp;</span>
+            @<span class="row">
+                <span class="Span-b"><span class="input-labelScann">@Html.LabelFor(Function(m) m.OrderID)</span></span>
+                <span class="Span-e"><span class="input-textScann">@Html.TextBoxFor(Function(m) m.OrderID)</span></span>
+            </span>
+            @<span class="row">&nbsp;</span>
+            @<span class="row">
+                <span class="Span-a"><span class="input-labelScann">&nbsp;</span></span>
+                <span class="Span-d"><span class="input-textScann">&nbsp;</span></span>
+                <span class="Span-a"> <input type="submit" value="SCAN" class="input-ButtonScann" /></span>
+             </span>
+            
+        End Using
+    </div>
+</div>
+

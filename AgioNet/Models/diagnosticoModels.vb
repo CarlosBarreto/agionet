@@ -653,6 +653,229 @@ Public Class StartDiagnosticModel
     Private _OrderID As String
 End Class
 
+' 2013.02.19
+Public Class StationByUser
+    Private _OrderID As String
+    Private _stDescription As String
+    Private _stName As String
+
+    Public Property OrderId As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property srDescription As String
+        Get
+            Return _stDescription
+        End Get
+        Set(value As String)
+            _stDescription = value
+        End Set
+    End Property
+
+    Public Property stName As String
+        Get
+            Return _stName
+        End Get
+        Set(value As String)
+            _stName = value
+        End Set
+    End Property
+
+End Class
+
+'2013.02.20
+Public Class TestOrderInfoModel
+    Private _OrderID As String
+    Private _OrderDate As String
+    Private _TestID As String
+    Private _ProductClass As String
+    Private _ProductType As String
+    Private _ProductTrademark As String
+    Private _ProductModel As String
+    Private _ProductDescription As String
+    Private _PartNumber As String
+    Private _SerialNumber As String
+    Private _FailureType As String
+    Private _Comment As String
+    Private _DateLog As String
+    Private _TextLog As String
+
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property OrderDate As String
+        Get
+            Return _OrderDate
+        End Get
+        Set(value As String)
+            _OrderDate = value
+        End Set
+    End Property
+
+    Public Property TestID As String
+        Get
+            Return _TestID
+        End Get
+        Set(value As String)
+            _TestID = value
+        End Set
+    End Property
+
+    Public Property ProductClass As String
+        Get
+            Return _ProductClass
+        End Get
+        Set(value As String)
+            _ProductClass = value
+        End Set
+    End Property
+
+    Public Property ProductType As String
+        Get
+            Return _ProductType
+        End Get
+        Set(value As String)
+            _ProductType = value
+        End Set
+    End Property
+
+    Public Property ProductTrademark As String
+        Get
+            Return _ProductTrademark
+        End Get
+        Set(value As String)
+            _ProductTrademark = value
+        End Set
+    End Property
+
+    Public Property ProductModel As String
+        Get
+            Return _ProductModel
+        End Get
+        Set(value As String)
+            _ProductModel = value
+        End Set
+    End Property
+
+    Public Property ProductDescription As String
+        Get
+            Return _ProductDescription
+        End Get
+        Set(value As String)
+            _ProductDescription = value
+        End Set
+    End Property
+
+    Public Property PartNumber As String
+        Get
+            Return _PartNumber
+        End Get
+        Set(value As String)
+            _PartNumber = value
+        End Set
+    End Property
+
+    Public Property SerialNumber As String
+        Get
+            Return _SerialNumber
+        End Get
+        Set(value As String)
+            _SerialNumber = value
+        End Set
+    End Property
+
+    Public Property FailureType As String
+        Get
+            Return _FailureType
+        End Get
+        Set(value As String)
+            _FailureType = value
+        End Set
+    End Property
+
+    Public Property Comment As String
+        Get
+            Return _Comment
+        End Get
+        Set(value As String)
+            _Comment = value
+        End Set
+    End Property
+
+    Public Property DateLog As String
+        Get
+            Return _DateLog
+        End Get
+        Set(value As String)
+            _DateLog = value
+        End Set
+    End Property
+
+    Public Property TextLog As String
+        Get
+            Return _TextLog
+        End Get
+        Set(value As String)
+            _TextLog = value
+        End Set
+    End Property
+End Class
+
+' 2013.02.20
+Public Class isTestedModel
+    Private _Response As String
+    Private _TestID As String
+    Private _Result As String
+    Private _TextLog As String
+
+    Public Property Response As String
+        Get
+            Return _Response
+        End Get
+        Set(value As String)
+            _Response = value
+        End Set
+    End Property
+
+    Public Property TestID As String
+        Get
+            Return _TestID
+        End Get
+        Set(value As String)
+            _TestID = value
+        End Set
+    End Property
+
+    Public Property Result As String
+        Get
+            Return _Result
+        End Get
+        Set(value As String)
+            _Result = value
+        End Set
+    End Property
+
+    Public Property TextLog As String
+        Get
+            Return _TextLog
+        End Get
+        Set(value As String)
+            _TextLog = value
+        End Set
+    End Property
+End Class
+
 '2013.02.13
 Public Class TestIDModel
     ' Properties

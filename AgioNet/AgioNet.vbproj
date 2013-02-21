@@ -142,6 +142,7 @@
     <Compile Include="Backend\DataAccess.vb" />
     <Compile Include="Backend\Module1.vb" />
     <Compile Include="Backend\Simple3Des.vb" />
+    <Compile Include="Content\temp\trash.vb" />
     <Compile Include="Controllers\AccountController.vb" />
     <Compile Include="Controllers\diagnosticoController.vb" />
     <Compile Include="Controllers\HomeController.vb" />
@@ -262,10 +263,7 @@
     <Content Include="Views\recibo\imprimir_hoja.vbhtml" />
     <Content Include="Views\diagnostico\AddFailure.vbhtml" />
     <Content Include="Views\diagnostico\agregar_falla.vbhtml" />
-    <Content Include="Views\diagnostico\CancelTest.vbhtml" />
-    <Content Include="Views\diagnostico\cancelar_prueba.vbhtml" />
     <Content Include="Views\diagnostico\DiagnosticMain.vbhtml" />
-    <Content Include="Views\diagnostico\ExecuteTest.vbhtml" />
     <Content Include="Views\diagnostico\realizar_pruebas.vbhtml" />
     <Content Include="Views\diagnostico\Index.vbhtml" />
     <Content Include="Views\diagnostico\falla_reportada.vbhtml" />
@@ -274,7 +272,6 @@
     <Content Include="Views\diagnostico\ViewFailure.vbhtml" />
     <Content Include="Views\diagnostico\ViewTest.vbhtml" />
     <Content Include="Views\diagnostico\ver_falla.vbhtml" />
-    <Content Include="Views\diagnostico\ver_prueba.vbhtml" />
     <Content Include="Views\diagnostico\_OrderInfoPartial.vbhtml" />
     <Content Include="Views\diagnostico\_ValidateOrderPartial.vbhtml" />
     <Content Include="Views\diagnostico\_wnOrderInfoPartial.vbhtml" />
@@ -312,6 +309,12 @@
     <Content Include="Views\diagnostico\_TestInfoPartial.vbhtml" />
     <Content Include="Views\sc\ver_ordenes.vbhtml" />
     <Content Include="Views\Shared\_statusbarPartial.vbhtml" />
+    <Content Include="Views\diagnostico\pruebasMaster.vbhtml" />
+    <Content Include="Views\diagnostico\_TestOrderInfoPartial.vbhtml" />
+    <Content Include="Views\diagnostico\_ExecuteTest.vbhtml" />
+    <Content Include="Views\diagnostico\_CancelTest.vbhtml" />
+    <Content Include="Views\diagnostico\_ViewTest.vbhtml" />
+    <Content Include="Views\diagnostico\_FallaReportada.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -355,7 +358,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\temp\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

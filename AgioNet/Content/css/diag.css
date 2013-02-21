@@ -39,6 +39,33 @@
     width:100%;
 }
 
+/* -- Para el manejo de Tabs --*/
+#tab-content {
+    background-color:transparent;
+    border: 1px solid #808080;
+    clear: both;
+    height: auto;
+    margin:auto;
+    padding: 2% 2% 2% 2%;
+    position:relative;
+    top:-10px;
+    width: auto;  
+}
+
+#tab-ContIzquierda {
+    display:block;
+    float:left;
+    position:relative;
+    width:58%;
+}
+
+#tab-ContDerecha {
+    display:block;
+    float:right;
+    margin-top:20px;
+    position:relative;
+    width:33%;
+}
 /***************************************************************************************************************************/
 /* -- MODULOS -- */
 .bg-fondoborder {
@@ -76,7 +103,7 @@
 /*Heredado de layout*/
 .form-row    { display:inline-block; font-size: 14px; height:18px; margin-bottom:2px; width: 100%; }
 .form-SpArea--dg { display:block; font-size: 14px; height:100px; margin-bottom:10px; width: 100%; }
-
+.form-SpArea--dgt { display:block; font-size: 14px; height:180px; margin-bottom:10px; width: 100%; }
 .form-Scann {
     font-family: BebasNeue, HelveticaBlackCondensed, sans-serif, Arial;
     font-size: 26px; /*23 px*/
@@ -100,6 +127,45 @@
     padding-bottom:3px;
     width: 100%;
 }
+
+.form-SpArea--dg { display:block; font-size: 14px; height:100px; margin-bottom:10px; width: 100%; }
+
+.ul-tab {
+    display: inline-block;
+    margin-top: 30px;
+    width:100%;
+}
+
+.li-tab {
+    background-color: #FFF;
+    border-color:#808080;
+    border-style:solid;
+    border-width: 1px 1px 0 1px;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    list-style: none;
+    margin-right:2px;
+    position: relative;
+    text-align: center;
+    width: 150px;
+}
+
+    .li-tab a {
+        color:#808080;
+        display:block;
+        height:100%;
+        text-decoration:none;
+        width:100%;
+    }
+
+        .li-tab a:hover {
+            background-color: #808080;
+            color: #FFF;
+            text-decoration: none;
+        }
+
+
 
 /***************************************************************************************************************************/
 /* -- ESTADO --*/
