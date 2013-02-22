@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/recibo/imprimir_hoja.vbhtml" hash="34d7675d" filehash="ffffd6c3a93e6526" flags="110000" assembly="App_Web_4r4xdcpn" type="ASP._Page_Views_recibo_imprimir_hoja_vbhtml">
+<preserve resultType="2" virtualPath="/Views/recibo/imprimir_hoja.vbhtml" hash="7a9782b5" filehash="e4f91c3bc31" flags="110000" assembly="App_Web_buc3b3hv" type="ASP._Page_Views_recibo_imprimir_hoja_vbhtml">
     <filedeps>
         <filedep name="/Views/recibo/imprimir_hoja.vbhtml" />
     </filedeps>

@@ -239,6 +239,7 @@ Namespace AgioNet
 
                 'RT.PrintPDF(report)
                 RT.ViewPDF(report, Me.Server.MapPath("~/Content/temp/") & code & ".pdf")
+
                 report = Nothing
 
                 Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
@@ -247,14 +248,16 @@ Namespace AgioNet
                     Me.TempData.Item("ErrMesage") = Me.DA._LastErrorMessage
                 End If
                 Me.DA.Dispose()
+
+                Dim filename As String = Me.Server.MapPath("~/Content/temp/") & code & ".pdf"
+                Return File(filename, "application/pdf", Server.HtmlEncode(filename))
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
+                Return Me.RedirectToAction("index")
             End Try
 
-            Dim filename As String = Me.Server.MapPath("~/Content/temp/") & code & ".pdf"
-            Return File(filename, "application/pdf", Server.HtmlEncode(filename))
-            'Return File()
-            'Return Me.RedirectToAction("index")
+
+            '
         End Function
 
         ' 2013.02.14

@@ -77,12 +77,22 @@ Public Class ExecTestModel
         End Set
     End Property
 
+    Public Property Failure As String
+        Get
+            Return _Failure
+        End Get
+        Set(value As String)
+            _Failure = value
+        End Set
+    End Property
 
     ' Fields
     Private _OrderID As String
     Private _Result As String
     Private _TestID As String
     Private _TextLog As String
+    '- 2013.02.22 - Upd Asignar Error   
+    Private _Failure As String
 End Class
 
 '2013.02.13
@@ -790,6 +800,7 @@ Public Class isTestedModel
     Private _TestID As String
     Private _Result As String
     Private _TextLog As String
+    Private _Failure As String
 
     Public Property Response As String
         Get
@@ -824,6 +835,15 @@ Public Class isTestedModel
         End Get
         Set(value As String)
             _TextLog = value
+        End Set
+    End Property
+
+    Public Property Failure As String
+        Get
+            Return _Failure
+        End Get
+        Set(value As String)
+            _Failure = value
         End Set
     End Property
 End Class

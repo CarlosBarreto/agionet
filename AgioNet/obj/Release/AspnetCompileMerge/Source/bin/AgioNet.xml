@@ -6,7 +6,31 @@ AgioNet
 </name>
 </assembly>
 <members>
-<member name="F:AgioNet.DataAccess._LastErrorMessage">
+<member name="M:AgioNet.AgioNet.diagnosticoController.ClearErr">
+	<summary>
+ Funcion que elimina de la memoria, el error registrado en ErrMsg
+ </summary>
+	<remarks></remarks>
+</member><member name="M:AgioNet.AgioNet.diagnosticoController.HasOrderID">
+	<summary>
+ Para determinar si hay registrada una Orden en la session
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:AgioNet.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:AgioNet.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:AgioNet.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="F:AgioNet.DataAccess._LastErrorMessage">
 	<summary>
  Almacena el ultimo error ocurrido en la clase
  </summary>
@@ -124,17 +148,6 @@ AgioNet
 	<param name="SPName">Nombre del Stored Procedure / Stored Procedure Name</param>
 	<returns>Retorna un dataReader / Returns SQLDataReader</returns>
 	<remarks></remarks>
-</member><member name="M:AgioNet.AgioNet.diagnosticoController.ClearErr">
-	<summary>
- Funcion que elimina de la memoria, el error registrado en ErrMsg
- </summary>
-	<remarks></remarks>
-</member><member name="M:AgioNet.AgioNet.diagnosticoController.HasOrderID">
-	<summary>
- Para determinar si hay registrada una Orden en la session
- </summary>
-	<returns></returns>
-	<remarks></remarks>
 </member><member name="M:AgioNet.AgioNet.reciboController.getReRepair(System.String,AgioNet.DataAccess@)">
 	<summary>
   Obtiene el valor de Rerepair de una Orden
@@ -151,19 +164,6 @@ AgioNet
 	<param name="_DA_"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="P:AgioNet.My.Resources.Resources.ResourceManager">
-	<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member><member name="P:AgioNet.My.Resources.Resources.Culture">
-	<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member><member name="T:AgioNet.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
 </member>
 </members>
 </doc>

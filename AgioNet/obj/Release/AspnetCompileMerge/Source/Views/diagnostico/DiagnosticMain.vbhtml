@@ -32,3 +32,8 @@ End If
 <div id="main-ContDerecha" class="bg-fondoborder">
     @Html.Action("LoadOrderInfo")
 </div>
+
+<!-- Mensaje en status bar-->
+@If TempData("StatusMsg") <> "" Then
+    @Html.Partial("_statusbarPartial")
+End If

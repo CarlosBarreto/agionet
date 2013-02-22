@@ -6,7 +6,7 @@
     Session("Section") = "ingenieria"
 
     Dim Read() As AgioNet.MaterialMasterListModel = TempData("Model")
-    Dim grid As WebGrid = New WebGrid(source:=Read)
+    Dim grid As WebGrid = New WebGrid(source:=Read, rowsPerPage:=27)
 End Code
 
 <!-- Ventana modal de error -->

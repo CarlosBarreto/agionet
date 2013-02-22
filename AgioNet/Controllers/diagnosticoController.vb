@@ -337,7 +337,7 @@ Namespace AgioNet
         Public Function ExecuteTest(ByVal model As ExecTestModel) As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Try
-                Me.DR = Me.DA.ExecuteSP("dg_ExecTest", model.TestID, model.Result, model.TextLog)
+                Me.DR = Me.DA.ExecuteSP("dg_ExecTest", model.TestID, model.Result, model.TextLog, model.Failure)
                 If DA._LastErrorMessage <> "" Then
                     'If (model.Result = "FAIL") Then
                     'Me.TempData.Item("TESTID") = model.TestID
@@ -351,7 +351,7 @@ Namespace AgioNet
                 Me.DA.Dispose()
             End Try
 
-            Return PartialView("_EjecuteTest") ' Me.RedirectToAction("realizar_pruebas")
+            Return RedirectToAction("ExecuteTest") ' PartialView("_EjecuteTest") ' Me.RedirectToAction("realizar_pruebas")
         End Function
 
         ' 2013.02.13
@@ -1022,7 +1022,7 @@ Namespace AgioNet
                     DR = DA.ExecuteSP("dg_isTested", model.OrderId)
                     If DR.HasRows Then
                         Do While DR.Read
-                            isTested = New isTestedModel With {.Response = DR(0), .TestID = DR(1), .Result = DR(2), .TextLog = DR(3)}
+                            isTested = New isTestedModel With {.Response = DR(0), .TestID = DR(1), .Result = DR(2), .TextLog = DR(3), .Failure = DR(4)}
                         Loop
                     Else
                         'Si no hay datos, mostrar error

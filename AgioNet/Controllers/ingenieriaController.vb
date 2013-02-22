@@ -612,52 +612,40 @@ Namespace AgioNet
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim modelArray(100) As MaterialMasterListModel
             Dim index As Integer = 0
-
+            Dim response As ActionResult = Me.View
+            
             Try
-                Me.DR = Me.DA.ExecuteSP("in_getMaterialList")
-                If (Me.DA._LastErrorMessage = "") Then
-                    Dim model As MaterialMasterListModel
-                    If Me.DR.HasRows Then
-                        Do While Me.DR.Read
-                            model = New MaterialMasterListModel With { _
-                                .SKUNo = DR(0), _
-                                .PartNo = DR(1), _
-                                .Description = DR(3), _
-                                .Alt = DR(4) _
-                            }
-                            modelArray(index) = model
-                            index += 1
-                        Loop
+                If Not DR Is Nothing Then If Not DR.IsClosed Then DR.Close()
 
+                DR = Me.DA.ExecuteSP("in_getMaterialList")
+                If DA._LastErrorMessage = "" Then
+                    If Me.DR.HasRows Then
+                        Do While DR.Read
+                            modelArray(index) = New MaterialMasterListModel With { _
+                                .SKUNo = DR(0), .PartNo = DR(1), .Description = DR(3), .Alt = DR(4)}
+                            index += 1
+                            If index >= modelArray.Length Then
+                                ReDim Preserve modelArray(index + 10)
+                            End If
+                        Loop
+                        TempData.Item("model") = modelArray
                         ' -- Actualizado por Carlos Barreto
                         ReDim Preserve modelArray(index - 1)
-                        Me.TempData.Item("model") = modelArray
+                        response = Me.View
                     Else
-                        model = New MaterialMasterListModel With { _
-                            .SKUNo = "no data", _
-                            .PartNo = "no data", _
-                            .Description = "no data", _
-                            .Alt = "no data" _
-                        }
-                        modelArray(index) = model
-                        Me.TempData.Item("Model") = modelArray
+                        Throw New Exception("Error: No se encontraron registros")
                     End If
                 Else
-                    modelArray(index) = New MaterialMasterListModel With { _
-                        .SKUNo = "no data", _
-                        .PartNo = "no data", _
-                        .Description = "no data", _
-                        .Alt = "no data" _
-                    }
-                    Me.TempData.Item("Model") = modelArray
+                    Throw New Exception(DA._LastErrorMessage)
                 End If
             Catch ex As Exception
-                Me.TempData.Item("ErrMsn") = ex.Message
+                Me.TempData.Item("ErrMsg") = ex.Message
+                response = Me.RedirectToAction("Index")
             Finally
                 Me.DA.Dispose()
             End Try
 
-            Return Me.View
+            Return response
         End Function
 
         ' 2013.02.14
@@ -755,7 +743,7 @@ Namespace AgioNet
             Dim modelArray As New MaterialMasterListModel
 
             Try
-                Me.DR = Me.DA.ExecuteSP("in_EditMaterial", model.SKUNo, model.PartNo, model.Lvl, model.Description, model.Alt)
+                Me.DR = Me.DA.ExecuteSP("in_EditMaterial", model.SKUNo, model.PartNo, model.Lvl, model.Description, model.Alt, model.OldSKUNo, model.OldPartNo)
                 If (Me.DA._LastErrorMessage <> "") Then
                     Me.TempData.Item("ErrMsg") = Me.DA._LastErrorMessage
                     Return Me.View

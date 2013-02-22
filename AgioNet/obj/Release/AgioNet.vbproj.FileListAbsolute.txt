@@ -3,7 +3,6 @@ C:\Users\Agiotech\Documents\Visual Studio 2012\Projects\AgioNet\AgioNet\obj\Rele
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\AgioNet.dll
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\AgioNet.pdb
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\AgioNet.xml
-C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\Agionet_Backend.dll
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\EntityFramework.dll
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\System.Web.Helpers.dll
@@ -13,7 +12,6 @@ C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\System.Web.Razor.dll
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\System.Web.WebPages.Deployment.dll
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\System.Web.WebPages.dll
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\System.Web.WebPages.Razor.dll
-C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\Agionet_Backend.pdb
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\EntityFramework.xml
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\System.Web.Helpers.xml
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\System.Web.Mvc.xml
@@ -78,3 +76,4 @@ C:\Users\Administrador\Desktop\AgioNet\AgioNet\obj\Release\AgioNet.vbproj.Genera
 C:\Users\Administrador\Desktop\AgioNet\AgioNet\obj\Release\AgioNet.dll
 C:\Users\Administrador\Desktop\AgioNet\AgioNet\obj\Release\AgioNet.xml
 C:\Users\Administrador\Desktop\AgioNet\AgioNet\obj\Release\AgioNet.pdb
+C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\obj\Release\AgioNet.vbprojResolveAssemblyReference.cache

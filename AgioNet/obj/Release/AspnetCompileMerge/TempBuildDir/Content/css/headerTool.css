@@ -39,7 +39,7 @@ HTML, BODY {
     border-color:#808080;
     color: #000000;
     display:block;
-    height:35px;
+    height:30px;
     margin:0;
     position:absolute;
     width:100%;
@@ -119,14 +119,14 @@ HTML, BODY {
             #Header #Separador #menuPrincipal UL {
                 display: inline;
                 color: #797979;
-                line-height: 30px;
+                line-height: 27px;
                 margin-left: 12px;
             }
 
                 #Header #Separador #menuPrincipal UL LI {
                     display: inline;
                     font-family: BebasNeue, HelveticaBlackCondensed, sans-serif, Arial;
-                    font-size: 26px; /*23 px*/
+                    font-size: 22px; /*23 px*/
                     font-weight: 400;
                     padding: 0 8px 4px;
                     text-shadow: 0 1px transparent, 0 1px white, 1px 0 transparent, 0 -1px transparent;
@@ -157,8 +157,8 @@ HTML, BODY {
 
     #SubMenu .menu {
         color: #000000;
-        font-family: BebasNeue, HelveticaBlackCondensed, sans-serif, Arial;
-        font-size: 16px; /*23 px*/
+        font-family:  Arial, Calibri, BebasNeue, HelveticaBlackCondensed, sans-serif,;
+        font-size: 14px; /*23 px*/
         padding-top: 3px;
     }
 
@@ -177,7 +177,7 @@ HTML, BODY {
 }
 
     .ul_menu_li A {
-        color: #797979;
+        color: #666;
         text-decoration: none;
     }
 

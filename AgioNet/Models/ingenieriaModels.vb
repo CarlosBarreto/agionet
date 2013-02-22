@@ -114,6 +114,23 @@ Public Class MaterialMasterModel
         End Set
     End Property
 
+    Public Property OldSKUNo As String
+        Get
+            Return _OldSKUNo
+        End Get
+        Set(value As String)
+            _OldSKUNo = value
+        End Set
+    End Property
+
+    Public Property OldPartNo As String
+        Get
+            Return _OldPartNo
+        End Get
+        Set(value As String)
+            _OldPartNo = value
+        End Set
+    End Property
 
     ' Fields
     Private _Alt As String
@@ -121,6 +138,11 @@ Public Class MaterialMasterModel
     Private _lvl As String
     Private _PartNo As String
     Private _SKUNo As String
+
+    ' -- 2013.02.22 -- Modificacion SKU
+    Private _OldSKUNo As String
+    Private _OldPartNo As String
+
 End Class
 
 '2013.02.13

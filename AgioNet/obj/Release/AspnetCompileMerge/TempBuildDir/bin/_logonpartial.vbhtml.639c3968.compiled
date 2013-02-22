@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Shared/_LogOnPartial.vbhtml" hash="34d7675d" filehash="ffffe50d9c11531a" flags="110000" assembly="App_Web_3bfbt5d2" type="ASP._Page_Views_Shared__LogOnPartial_vbhtml">
+<preserve resultType="2" virtualPath="/Views/Shared/_LogOnPartial.vbhtml" hash="7a9782b5" filehash="4445a05d5af5" flags="110000" assembly="App_Web_3tospe33" type="ASP._Page_Views_Shared__LogOnPartial_vbhtml">
     <filedeps>
         <filedep name="/Views/Shared/_LogOnPartial.vbhtml" />
     </filedeps>

@@ -3,7 +3,7 @@
     margin:auto;
     position:relative;
     width:98%;
-    top: 60px;
+    top: 55px;
 }
 
 
@@ -152,3 +152,44 @@ TD { border:1px solid #EAEAEA; padding-left:2px;}
     font-size: 14px;
     font-weight: bold;
 }
+
+
+/*  -- Creation date: 2013.02.19
+    -- Checked:      
+    -- Author:   Carlos Barreto, carlos.barreto@agiotech.com
+    -- Version 1.0.0
+
+-- Reglas de Componente -- 
+.component-name
+.component-name--modifier-name
+.component-name__sub-object
+.component-name__sub-object--modifier-name
+*/
+
+/* -- BASE -- */
+/* -- No se incluye por CSS heredados*/
+
+/* -- POSICIONAMIENTO -- */
+#StatusBar {
+    bottom: 0;
+    display:block;
+    float:right;
+    height: 20px;
+    position: fixed;
+    right:0;
+    width: 500px;
+    z-index: 10000;
+}
+
+/* -- MODULOS -- */
+.statusbar-design {
+    background-color:#9BA759;
+    color:#FFFFFF;
+    display:block;
+    font-family:Verdana, Arial;
+    font-size:13px;
+    height:100%;
+    text-align:center;
+    width:100%;
+}
+/* -- ESTADO --*/

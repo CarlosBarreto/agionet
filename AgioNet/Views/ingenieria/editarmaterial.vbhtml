@@ -21,12 +21,18 @@ End If
      @<div id="Formulario">       
         <div class="row">
             <span class="Span-b"><span class="pcenter">@Html.LabelFor(Function(m) m.SKUNo)</span></span>
-            <span class="Span-c"> @Html.TextBoxFor(Function(m) m.SKUNo, New With {.Value = SKUNo, .disabled = True})</span>
+            <span class="Span-c"> 
+                @Html.TextBoxFor(Function(m) m.SKUNo, New With {.Value = SKUNo})
+                @Html.TextBoxFor(Function(m) m.OldSKUNo, New With {.Value = SKUNo})
+            </span>
         </div>
 
         <div class="row">
             <span class="Span-b"><span class="pcenter">@Html.LabelFor(Function(m) m.PartNo)</span></span>
-            <span class="Span-c"> @Html.TextBoxFor(Function(m) m.PartNo, New With {.Value = PartNo, .disabled = True})</span>
+            <span class="Span-c"> 
+                @Html.TextBoxFor(Function(m) m.PartNo, New With {.Value = PartNo})
+                @Html.TextBoxFor(Function(m) m.OldPartNo, New With {.Value = PartNo})
+            </span>
         </div>
 
         <div class="row">
