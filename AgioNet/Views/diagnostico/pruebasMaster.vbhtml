@@ -31,7 +31,7 @@ End If
         <li class="li-tab">@Ajax.ActionLink("Detalle de prueba", "ViewTest", "diagnostico", New AjaxOptions With {.UpdateTargetId = "tab-ContIzquierda"})</li>
         <!-- <li class="li-tab">@Ajax.ActionLink("Registrar Falla Adicional", "asignar_responsable", "ingenieria", New AjaxOptions With {.UpdateTargetId = "tab-ContIzquierda"})</li> -->
         <li class="li-tab">@Ajax.ActionLink("Ver Falla Reportada", "falla_reportada", "diagnostico", New AjaxOptions With {.UpdateTargetId = "tab-ContIzquierda"}) </li>
-        <li class="li-tab">@Html.ActionLink("Nueva prueba", "realizar_pruebas", "diagnostico")</li>
+        <li class="li-tab">@Html.ActionLink("Realizar otra Prueba", "realizar_pruebas", "diagnostico")</li>
     </ul>
 </div>
 

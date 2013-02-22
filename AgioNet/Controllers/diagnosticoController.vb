@@ -835,57 +835,61 @@ Namespace AgioNet
 
         ' 2013.02.13
         ' GET: /diagnostico/programar_prueba
+        ' Upd 2013.02.19 -- Quitar campos upd
         <Authorize> _
         Public Function programar_prueba() As ActionResult
+            Dim response As ActionResult
             If Me.HasOrderID Then
+                Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+                Dim modelArray(100) As TestIDListModel
+                Dim index As Integer = 0
+
                 Try
-                    Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
-                    Dim modelArray(100) As TestIDListModel
-                    Me.DR = Me.DA.ExecuteSP("dg_GetTestList")
+                    ' Obtener el listado de pruebas
+                    DR = Me.DA.ExecuteSP("dg_GetTestList")
+                    index = 0
+                    If DA._LastErrorMessage = "" Then
+                        Do While Me.DR.Read
+                            modelArray(index) = New TestIDListModel With { _
+                                .TestID = DR(0), _
+                                .TestName = DR(1) _
+                            }
+                            index += 1
+                        Loop
+                        ' -- Actualizado por CarlosBarreto
+                        ReDim Preserve modelArray(index - 1)
 
-                    Dim index As Integer = 0
+                        Me.TempData.Item("Model") = modelArray
+                        response = Me.View
+                    Else
+                        Throw New Exception(DA._LastErrorMessage)
+                    End If
 
-                    Do While Me.DR.Read
-                        modelArray(index) = New TestIDListModel With { _
-                            .TestID = DR(0), _
-                            .TestName = DR(1) _
-                        }
-                        index += 1
-                    Loop
-
-                    ' -- Actualizado por CarlosBarreto
-                    ReDim Preserve modelArray(index - 1)
-                    Me.TempData.Item("Model") = modelArray
-                    Me.DA.Dispose()
-                Catch exception1 As Exception
-                    Me.TempData.Item("ErrMsg") = exception1.Message
-                    Me.DA.Dispose()
-                    Return Me.RedirectToAction("Index")
+                Catch ex As Exception
+                    Me.TempData.Item("ErrMsg") = ex.Message
+                    response = Me.RedirectToAction("DiagnosticMain")
+                Finally
+                    DA.Dispose()
                 End Try
-                Return Me.View
+            Else
+                response = Me.RedirectToAction("Index")
             End If
-            Return Me.RedirectToAction("Index")
+
+            Return response
         End Function
 
         ' 2013.02.13
         ' POST: /diagnostico/programar_prueba
+        ' Upd 2013.02.19 -- Quitar campos upd 
         <HttpPost, Authorize> _
         Public Function programar_prueba(ByVal md As SheduleTestModel) As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
-            Dim OrderID As String = Me.Session.Item("OrderID")
             Dim Retorno As ActionResult = Me.View
+            Dim index As Integer = 0
             Try
-                If md.TestID <> "" Then
-                    DR = DA.ExecuteSP("dg_AddTest", OrderID, md.TestID, md.TestComment, Me.User.Identity.Name, md.ProductClass, _
-                                    md.ProductType, md.Trademark, md.Model, md.Description, md.PartNo, md.SerialNo, md.Revision, md.Failure)
-
-                    If DA._LastErrorMessage <> "" Then
-                        Throw New Exception(DA._LastErrorMessage)
-                        'Me.TempData.Item("ErrMsg") = Me.
-                        'TempData.Keep("Model")
-                        Retorno = Me.View
-                    End If
-
+                DR = DA.ExecuteSP("dg_AddTest", md.OrderID, md.Prueba, User.Identity.Name, md.Marca, md.PartNo, _
+                                  md.SerialNo, md.Revision, md.Comentarios)
+                If DA._LastErrorMessage = "" Then
                     If DR.HasRows Then
                         While DR.Read
                             Me.TempData.Item("StatusMsg") = "Se ha registrado la prueba [" & DR(0) & "]"
@@ -893,27 +897,37 @@ Namespace AgioNet
                         End While
                     End If
                 Else
-                    Throw New Exception("Error, no hay una prueba seleccionada")
+                    Throw New Exception(DA._LastErrorMessage)
+                    Retorno = Me.View
                 End If
-
             Catch ex As Exception
                 Dim modelArray(100) As TestIDListModel
-                Me.DR = Me.DA.ExecuteSP("dg_GetTestList")
-
-                Dim index As Integer = 0
-
-                Do While Me.DR.Read
-                    modelArray(index) = New TestIDListModel With { _
-                        .TestID = DR(0), _
-                        .TestName = DR(1) _
-                    }
-                    index += 1
-                Loop
-
-                ' -- Actualizado por CarlosBarreto
-                ReDim Preserve modelArray(index - 1)
-                TempData("Model") = modelArray
                 TempData("ErrMsg") = ex.Message
+                DA.Dispose()
+                Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+                DR = Me.DA.ExecuteSP("dg_GetTestList")
+                index = 0
+
+                If DA._LastErrorMessage = "" Then
+                    Do While Me.DR.Read
+                        modelArray(Index) = New TestIDListModel With { _
+                            .TestID = DR(0), _
+                            .TestName = DR(1) _
+                        }
+                        Index += 1
+                    Loop
+                    ' -- Actualizado por CarlosBarreto
+                    ReDim Preserve modelArray(index - 1)
+
+                    Me.TempData.Item("Model") = modelArray
+                    Retorno = Me.View
+                Else
+                    TempData("ErrMsg") = DA._LastErrorMessage
+                    Retorno = RedirectToAction("DiagnosticMain")
+                End If
+
+                TempData("Model") = modelArray
+
                 Retorno = Me.View
                 If Not DR.IsClosed Then
                     DR.Close()
@@ -922,7 +936,7 @@ Namespace AgioNet
                 DA.Dispose()
             End Try
             
-            Session("OrderID") = OrderID
+            Session("OrderID") = md.OrderID
             Return Retorno
         End Function
 
@@ -1025,7 +1039,7 @@ Namespace AgioNet
                 Session.Clear() 'Limpiar toda la sesion (El login se guarda en cookie)
                 TempData("ErrMsg") = ex.Message
                 TempData.Keep("Model")
-                Retorno = Me.View
+                Retorno = Me.RedirectToAction("realizar_pruebas")
             Finally
                 DA.Dispose()
             End Try

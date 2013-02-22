@@ -3,13 +3,11 @@
 <!-- Inicia diseño del formulario -->
 <h2 class="TituloFormulario">Falla reportada para la orden [@Session("OrderID")]</h2>
 
-<div class="InfoCont">
-    <span class="ShowLabel">OrderID</span>
-    <span class="InfoLabel">@Html.Encode(TempData("OrderID")) </span>
+<div class="row">
+    <span class="Span-c"><strong>OrderID: </strong>@Html.Encode(TempData("OrderID"))</span>
 </div>
 
-<div class="InfoCont">
-    <span class="ShowLabel">Reported Failure</span>
-    <span class="InfoLabel">@Html.Encode(TempData("RFail"))</span>
+<div class="row">
+    <span class="Span-e"><strong>Falla Reportada: </strong> @Html.Encode(TempData("RFail"))</span>
 </div>
 

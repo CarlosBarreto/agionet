@@ -18,14 +18,7 @@
         
         Count = Count + 1
     End While
-    
-    'Opciones para tipo de producto
-    Dim opt_ProductType As List(Of String) = New List(Of String)
-    opt_ProductType.Add("MDB")
-    opt_ProductType.Add("MEM")
-    opt_ProductType.Add("HDD")
-    opt_ProductType.Add("ODD")
-    opt_ProductType.Add("LCD")
+
     
 End Code
 <!-- Agregar el CSS para recibo --> 
@@ -36,29 +29,6 @@ End Code
     @Html.Partial("_ErrorPartial")
 End If
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#NewTest').click(function () {
-            NewTestEnable();
-        });
-    });
-
-
-    function NewTestEnable() {
-        if ($("#NewTest").is(':checked')) {
-            document.getElementById('TestName').disabled = false;
-            document.getElementById('TestDescription').disabled = false;
-        }
-        else {
-            //alert("No está activado");
-            document.getElementById('TestName').disabled = true;
-            document.getElementById('TestDescription').disabled = true;
-            $("#TestName").val("");
-            $("#TestDescription").val("");
-        }
-    }
-</script>
-
 <!-- Aquí se muestran los formularios -->
 <div id="main-ContIzquierda">
         <!-- Inicia diseño del formulario -->
@@ -67,35 +37,25 @@ End If
             @<div id="form">
                 <span class="TestShedule_Title">Programar una prueba para la  Orden [ @Session("OrderID") ]</span>
                 <div class="row">
-                    <span class="Span-b"><span class="pcenter">Prueba</span></span>
-                    <span class="Span-d">@Html.DropDownListFor(Function(m) m.TestID, OptionList)</span>
-                </div>
-                <!-- Datos del componente -->
-
-                <div class="row">
-                    <span class="Span-b"><span class="pcenter">Clase del producto</span></span>
-                    <span class="Span-d">
-                        @Html.TextBox("txtProductClass","Component", New With {.Value = "Componente", .disabled = True})
-                        @Html.HiddenFor(Function(m) m.ProductClass, New With {.Value = "Componente"})
+                    <span class="Span-b"><span class="pcenter">OrderID: </span></span>
+                    <span class="Span-d"> @Html.TextBoxFor(Function(m) m.OrderID, New With {.Value = Session("OrderID")})
                     </span>
                 </div>
                 <div class="row">
-                    <span class="Span-b"><span class="pcenter">Tipo de producto</span></span>
-                    <span class="Span-d">@Html.DropDownListFor(Function(m) m.ProductType, New SelectList(opt_ProductType))</span>
+                    <span class="Span-b"><span class="pcenter">Prueba</span></span>
+                    <span class="Span-d">@Html.DropDownListFor(Function(m) m.Prueba, OptionList)</span>
                 </div>
+
+                <!-- Datos del componente -->  
                 <div class="row">
                     <span class="Span-b"><span class="pcenter">Marca</span></span>
-                    <span class="Span-d">@Html.TextBoxFor(Function(m) m.Trademark) </span>
+                    <span class="Span-d">@Html.TextBoxFor(Function(m) m.Marca) </span>
                 </div>
-                <div class="row">
-                    <span class="Span-b"><span class="pcenter">SKU Equipo</span></span>
-                    <span class="Span-d">@Html.TextBoxFor(Function(m) m.Model)</span>
-                </div>
-                <div class="row">
+                 <div class="row">
                     <span class="Span-b"><span class="pcenter">Part No</span></span>
                     <span class="Span-d">@Html.TextBoxFor(Function(m) m.PartNo)</span>
                 </div>
-                <div class="row">
+                 <div class="row">
                     <span class="Span-b"><span class="pcenter">Número de serie</span></span>
                     <span class="Span-d">@Html.TextBoxFor(Function(m) m.SerialNo)</span>
                 </div>
@@ -103,25 +63,23 @@ End If
                     <span class="Span-b"><span class="pcenter">Revisión</span></span>
                     <span class="Span-d">@Html.TextBoxFor(Function(m) m.Revision)</span>
                 </div>
-                <div class="row-SpArea--dg">
-                    <span class="Span-b"><span class="pcenter">Descripción de la falla</span></span>
-                    <span class="Span-c">@Html.TextAreaFor(Function(m) m.Failure, New With {.rows = 4, .cols = 32})</span>
-                </div>
-
-                <div class="row"> <span class="Span-c">&nbsp;</span> </div>
-                <div class="row"> <span class="Span-c">&nbsp;</span> </div>
-
                 <!-- Comentarios -->
-                <div class="row-SpArea--dg">
-                    <span class="Span-b"><span class="pcenter">Comentarios</span></span>
-                    <span class="Span-d">@Html.TextAreaFor(Function(m) m.TestComment, New With {.rows=4, .cols = 32})  </span>
-                    <span class="Span-a"><input type="submit" value="Guardar" class="Button" /></span>                    
-                    <span class="Span-b">&nbsp;</span>
+                <div class="form-SpArea--dgt">
+                    <span class="Span-b"><span class="pcenter">Comentarios:</span> </span>
+                    <span class="Span-e">
+                        @Html.TextAreaFor(Function(m) m.Comentarios, New With {.rows = 10, .cols = 60})
+                    </span>
                 </div>
+
+                <div class="row">
+                    <span class="Span-d">&nbsp;</span>
+                    <span class="Span-c">&nbsp;</span>
+                    <span class="Span-a"><input type="submit" value="Guardar" class="Button" /></span>                    
+                </div>
+                
             </div>
         End Using
-        
-        <div class="row">&nbsp;</div>
+  
         <div class="form-aclaracion">
             <span class="form-aclaracion_Title">Nota:</span>
             <span class="form-aclaracion_Text">

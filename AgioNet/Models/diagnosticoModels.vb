@@ -498,129 +498,81 @@ End Class
 
 ' 2013.02.13
 Public Class SheduleTestModel
-    ' Properties
-    Public Property Description As String
-        Get
-            Return Me._Description
-        End Get
-        Set(ByVal value As String)
-            Me._Description = value
-        End Set
-    End Property
+    Private _OrderID As String
+    Private _Prueba As String
 
-    Public Property Failure As String
-        Get
-            Return Me._Failure
-        End Get
-        Set(ByVal value As String)
-            Me._Failure = value
-        End Set
-    End Property
+    'Detalles del componente
+    Private _Marca As String
+    Private _PartNo As String
+    Private _SerialNo As String
+    Private _Revision As String
+    Private _Comentarios As String
 
-    Public Property Model As String
-        Get
-            Return Me._Model
-        End Get
-        Set(ByVal value As String)
-            Me._Model = value
-        End Set
-    End Property
-
+    ' -- Propiedades --
     Public Property OrderID As String
         Get
-            Return Me._OrderID
+            Return _OrderID
         End Get
-        Set(ByVal value As String)
-            Me._OrderID = value
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property Prueba As String
+        Get
+            Return _Prueba
+        End Get
+        Set(value As String)
+            _Prueba = value
+        End Set
+    End Property
+
+    'Detalles del componente
+    Public Property Marca As String
+        Get
+            Return _Marca
+        End Get
+        Set(value As String)
+            _Marca = value
         End Set
     End Property
 
     Public Property PartNo As String
         Get
-            Return Me._PartNo
+            Return _PartNo
         End Get
-        Set(ByVal value As String)
-            Me._PartNo = value
-        End Set
-    End Property
-
-    Public Property ProductClass As String
-        Get
-            Return Me._ProductClass
-        End Get
-        Set(ByVal value As String)
-            Me._ProductClass = value
-        End Set
-    End Property
-
-    Public Property ProductType As String
-        Get
-            Return Me._ProductType
-        End Get
-        Set(ByVal value As String)
-            Me._ProductType = value
-        End Set
-    End Property
-
-    Public Property Revision As String
-        Get
-            Return Me._Revision
-        End Get
-        Set(ByVal value As String)
-            Me._Revision = value
+        Set(value As String)
+            _PartNo = value
         End Set
     End Property
 
     Public Property SerialNo As String
         Get
-            Return Me._SerialNo
+            Return _SerialNo
         End Get
-        Set(ByVal value As String)
-            Me._SerialNo = value
+        Set(value As String)
+            _SerialNo = value
         End Set
     End Property
 
-    Public Property TestComment As String
+    Public Property Revision As String
         Get
-            Return Me._TestComment
+            Return _Revision
         End Get
-        Set(ByVal value As String)
-            Me._TestComment = value
+        Set(value As String)
+            _Revision = value
         End Set
     End Property
 
-    Public Property TestID As String
+    Public Property Comentarios As String
         Get
-            Return Me._TestID
+            Return _Comentarios
         End Get
-        Set(ByVal value As String)
-            Me._TestID = value
+        Set(value As String)
+            _Comentarios = value
         End Set
     End Property
 
-    Public Property Trademark As String
-        Get
-            Return Me._Trademark
-        End Get
-        Set(ByVal value As String)
-            Me._Trademark = value
-        End Set
-    End Property
-
-
-    ' Fields
-    Private _Description As String
-    Private _Failure As String
-    Private _Model As String
-    Private _OrderID As String
-    Private _PartNo As String
-    Private _ProductClass As String
-    Private _ProductType As String
-    Private _Revision As String
-    Private _SerialNo As String
-    Private _TestComment As String
-    Private _TestID As String
-    Private _Trademark As String
 End Class
 
 '2013.02.13
