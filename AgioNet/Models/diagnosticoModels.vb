@@ -1066,6 +1066,92 @@ Public Class TestListModel
     Private _TESTSTART As String
 End Class
 
+'2013.02.22
+Public Class TestReportModel
+    Private _OrderID As String
+    Private _TestName As String
+    Private _TestResult As String
+    Private _Failure As String
+    Private _TextLog As String
+    Private _TestStart As String
+    Private _TestEnd As String
+    Private _CreateBy As String
+
+    '-- Propiedades
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property TestName As String
+        Get
+            Return _TestName
+        End Get
+        Set(value As String)
+            _TestName = value
+        End Set
+    End Property
+
+    Public Property TestResult As String
+        Get
+            Return _TestResult
+        End Get
+        Set(value As String)
+            _TestResult = value
+        End Set
+    End Property
+
+    Public Property Failure As String
+        Get
+            Return _Failure
+        End Get
+        Set(value As String)
+            _Failure = value
+        End Set
+    End Property
+
+    Public Property TextLog As String
+        Get
+            Return _TextLog
+        End Get
+        Set(value As String)
+            _TextLog = value
+        End Set
+    End Property
+
+    Public Property TestStart As String
+        Get
+            Return _TestStart
+        End Get
+        Set(value As String)
+            _TestStart = value
+        End Set
+    End Property
+
+    Public Property TestEnd As String
+        Get
+            Return _TestEnd
+        End Get
+        Set(value As String)
+            _TestEnd = value
+        End Set
+    End Property
+
+    Public Property CreateBy As String
+        Get
+            Return _CreateBy
+        End Get
+        Set(value As String)
+            _CreateBy = value
+        End Set
+    End Property
+
+End Class
+
 '2013.02.13
 Public Class ViewFoundFailureModel
     ' Properties

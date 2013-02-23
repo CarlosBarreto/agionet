@@ -4,23 +4,27 @@
     ViewData("Title") = "Diagnostico - Solicitar aprobación"
     Session("Section") = "diagnostico"
     
-    Dim Read() As AgioNet.TestListModel = TempData("Model")
+    Dim Read() As AgioNet.TestReportModel = TempData("Model")
 
     Dim grid As WebGrid = New WebGrid(Read, canPage:=True, rowsPerPage:=20)
 End Code
+<!-- Ventana modal de error -->
+@If TempData("ErrMsg") <> "" Then
+    @Html.Partial("_ErrorPartial")
+End If
 
 <!-- Inicia diseño del formulario -->
 <h2 class="TituloFormulario">Solicitar Aprobación del diagnostico</h2>
 
 @grid.GetHtml(columns:=grid.Columns( _
-                   grid.Column("TESTID", "TESTID", style:="TestID_"), _
-                   grid.Column("ORDERID", "ORDERID", style:="OrderID_"), _
-                   grid.Column("TESTNAME", "TESTNAME", style:="TestName_"), _
-                   grid.Column("TESTDESCRIPTION", "TESTDESCRIPTION", style:="TestDescription_"), _
-                   grid.Column("TESTRESULT", "TESTRESULT", style:="TestResult_"), _
-                   grid.Column("TESTSTART", "TESTSTART", style:="TestStart_"), _
-                   grid.Column("TESTEND", "TESTEND", style:="TestEnd_"), _
-                   grid.Column("CREATEBY", "CREATEBY", style:="CreateBy_") _
+                   grid.Column("OrderID", "Orden", style:="TestID_"), _
+                   grid.Column("TestName", "Prueba", style:="OrderID_"), _
+                   grid.Column("TestResult", "Resultado", style:="TestName_"), _
+                   grid.Column("Failure", "Falla", style:="TestDescription_"), _
+                   grid.Column("TextLog", "TextLog", style:="TestResult_"), _
+                   grid.Column("TestStart", "Inicio", style:="TestStart_"), _
+                   grid.Column("TestEnd", "Fin", style:="TestEnd_"), _
+                   grid.Column("CreateBy", "Creada Por", style:="CreateBy_") _
 ))
 
 @Html.Action("LoadWnOrderInfo")

@@ -719,70 +719,52 @@ Namespace AgioNet
         <Authorize> _
         Public Function pedir_aprobar() As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
-            Dim modelArray(100) As TestListModel
+            Dim modelArray(100) As TestReportModel
             Dim index As Integer = 0
+            Dim response As ActionResult = Me.View
+            Dim strFailure As String
+            Dim strLog As String
 
             If Me.HasOrderID Then
                 Try
-                    Dim model As TestListModel
                     Dim reader As SqlDataReader = Me.DA.ExecuteSP("dg_GetTestListByOrder", Me.Session.Item("OrderID"), "")
                     If reader.HasRows Then
                         Do While reader.Read
-                            model = New TestListModel With { _
-                                .TESTID = reader(0), _
-                                .ORDERID = reader(1), _
-                                .TESTNAME = reader(2), _
-                                .TESTDESCRIPTION = reader(3), _
-                                .TESTRESULT = reader(4), _
-                                .TESTSTART = reader(5), _
-                                .TESTEND = reader(6), _
-                                .CREATEBY = reader(7) _
-                            }
-                            modelArray(index) = model
+                            If Len(reader(3)) >= 35 Then strFailure = reader(3) & "..." Else strFailure = reader(3)
+                            If Len(reader(4)) >= 35 Then strLog = reader(4) & "..." Else strLog = reader(4)
+
+                            modelArray(index) = New TestReportModel With {.OrderID = reader(0), .TestName = reader(1), _
+                                                .TestResult = reader(2), .Failure = strFailure, .TextLog = strLog, _
+                                                .TestStart = reader(5), .TestEnd = reader(6), .CreateBy = reader(7)}
                             index += 1
                         Loop
 
                         '-- Actualizado por Carlos Barreto
                         ReDim Preserve modelArray(index - 1)
                     Else
-                        model = New TestListModel With { _
-                            .TESTID = "NO DATA", _
-                            .ORDERID = "NO DATA", _
-                            .TESTNAME = "NO DATA", _
-                            .TESTDESCRIPTION = "NO DATA", _
-                            .TESTRESULT = "NO DATA", _
-                            .TESTSTART = "NO DATA", _
-                            .TESTEND = "NO DATA", _
-                            .CREATEBY = "NO DATA" _
-                        }
-                        modelArray(index) = model
-                        index += 1
-                        '-- Actualizado por Carlos Barreto
-                        ReDim Preserve modelArray(index - 1)
+                        Throw New Exception("Error: No se han encontrado Datos")
                     End If
                 Catch exception1 As Exception
                     index = 0
-                    modelArray(index) = New TestListModel With { _
-                        .TESTID = "NO DATA", _
-                        .ORDERID = "NO DATA", _
-                        .TESTNAME = "NO DATA", _
-                        .TESTDESCRIPTION = "NO DATA", _
-                        .TESTRESULT = "NO DATA", _
-                        .TESTSTART = "NO DATA", _
-                        .TESTEND = "NO DATA", _
-                        .CREATEBY = "NO DATA" _
-                    }
+                    modelArray(index) = New TestReportModel With {.OrderID = "No data", .TestName = "No data", .TestResult = "No data", _
+                                                                          .Failure = "No data", .TextLog = "No data", .TestStart = "No data", _
+                                                                          .TestEnd = "No data", .CreateBy = "No data"
+                                                                         }
                     index += 1
                     '-- Actualizado por Carlos Barreto
                     ReDim Preserve modelArray(index - 1)
-                    Me.DA.Dispose()
-                    Return Me.View
+                    TempData("ErrMsg") = exception1.Message
+                Finally
+                    DA.Dispose()
                 End Try
 
                 Me.TempData.Item("Model") = modelArray
                 Return Me.View
+            Else
+                response = Me.RedirectToAction("Index")
             End If
-            Return Me.RedirectToAction("Index")
+
+            Return response 'Me.RedirectToAction("Index")
         End Function
 
         ' 2013.02.13
