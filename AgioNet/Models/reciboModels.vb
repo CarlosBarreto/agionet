@@ -254,5 +254,95 @@ Public Class ScanInfoModel
     Private _Trackno As String
 End Class
 
+'2013.02.26
+Public Class CheckinReportOptModel
+    Private _OrderID As String
+    Private _StartDate As String
+    Private _EndDate As String
 
+    Public Property OrderID As String
+        Get
+            If IsNothing(_OrderID) Then _OrderID = ""
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property StartDate As String
+        Get
+            If _StartDate = "" Then _StartDate = Format(Now, "yyyy/MM/dd")
+            Return _StartDate
+        End Get
+        Set(value As String)
+            _StartDate = value
+        End Set
+    End Property
+
+    Public Property EndDate As String
+        Get
+            If _EndDate = "" Then _EndDate = Format(Now, "yyyy/MM/dd")
+            Return _EndDate
+        End Get
+        Set(value As String)
+            _EndDate = value
+        End Set
+    End Property
+End Class
+
+'2013.02.26
+Public Class CheckinReportModel
+    Private _OrderID As String
+    Private _OrderDate As String
+    Private _CreateDate As String
+    Private _Comment As String
+    Private _CreateBy As String
+
+    '--- properties
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property OrderDate As String
+        Get
+            Return _OrderDate
+        End Get
+        Set(value As String)
+            _OrderDate = value
+        End Set
+    End Property
+
+    Public Property CreateDate As String
+        Get
+            Return _CreateDate
+        End Get
+        Set(value As String)
+            _CreateDate = value
+        End Set
+    End Property
+
+    Public Property Comment As String
+        Get
+            Return _Comment
+        End Get
+        Set(value As String)
+            _Comment = value
+        End Set
+    End Property
+
+    Public Property CreateBy As String
+        Get
+            Return _CreateBy
+        End Get
+        Set(value As String)
+            _CreateBy = value
+        End Set
+    End Property
+End Class
 

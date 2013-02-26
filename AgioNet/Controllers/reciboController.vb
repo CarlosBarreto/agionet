@@ -6,6 +6,39 @@ Namespace AgioNet
         Inherits System.Web.Mvc.Controller
 
         ' Methods
+        '2013.02.26
+        ' GET: /recibo/checkin_report
+        <Authorize> _
+        Function checkin_report(ByVal model As CheckinReportOptModel) As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim mymodel(1000) As CheckinReportModel
+            Dim num As Integer = 0
+
+            Try
+                DR = Me.DA.ExecuteSP("rc_CheckingReport", model.StartDate, model.EndDate, model.OrderID)
+                If Me.DA._LastErrorMessage = "" Then
+                    num = 0
+                    Do While DR.Read
+                        mymodel(num) = New CheckinReportModel With {.OrderID = DR(0), .OrderDate = DR(1), .CreateDate = DR(2), _
+                                                               .Comment = DR(3), .CreateBy = DR(4)}
+                        num += 1
+                    Loop
+                    ReDim Preserve mymodel(num - 1)
+                Else
+                    Throw New Exception(DA._LastErrorMessage) '("Error! No se encontraron datos")
+                End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+            Finally
+                Me.DA.Dispose()
+            End Try
+
+            Me.TempData("Model") = mymodel
+            Me.TempData("optModel") = model
+            Return Me.View
+        End Function
+
+
         ' 2013.02.14
         ' GET: /recibo/formulario_recibo
         <HttpGet, Authorize> _
@@ -501,7 +534,7 @@ Namespace AgioNet
             Catch ex As Exception
                 TempData("ErrMsg") = ex.Message
             End Try
-            
+
 
             Return Me.View
         End Function
