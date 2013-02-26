@@ -262,38 +262,6 @@ Module agGlobals
     End Function
 
     '// Nested Types
-    Public Structure AllOrderInfo
-        Public OrderID As String
-        Public OrderDate As String
-        Public CustomerType As String
-        Public RFC As String
-        Public Email As String
-        Public Address As String
-        Public ExternalNumber As String
-        Public InternalNumber As String
-        Public Address2 As String
-        Public City As String
-        Public State As String
-        Public Country As String
-        Public ZipCode As String
-        Public Telephone As String
-        Public Telephone2 As String
-        Public Telephone3 As String
-        Public Delivery As String
-        Public DeliveryTime As String
-        Public ProductClass As String
-        Public ProductType As String
-        Public ProductTrademark As String
-        Public ProductModel As String
-        Public ProductDescription As String
-        Public PartNumber As String
-        Public SerialNumber As String
-        Public Revision As String
-        Public ServiceType As String
-        Public FailureType As String
-        Public Comment As String
-    End Structure
-
     Public Structure FailureView
         Public FAILUREID As String
         Public TESTID As String

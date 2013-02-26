@@ -433,60 +433,80 @@ Public Class OrderInfoModel
 End Class
 
 '2013.02.13
+'--- Upd By CarlosB on 2013.02.22
 Public Class RegFailureModel
     ' Properties
-    Public Property Failure As String
-        Get
-            Return Me._FailureDescription
-        End Get
-        Set(ByVal value As String)
-            Me._FailureDescription = value
-        End Set
-    End Property
-
     Public Property OrderID As String
         Get
-            Return Me._OrderID
+            Return _OrderID
         End Get
-        Set(ByVal value As String)
-            Me._OrderID = value
+        Set(value As String)
+            _OrderID = value
         End Set
     End Property
 
-    Public Property PSolution As String
+    Public Property Failure As String
         Get
-            Return Me._Psol
+            Return _Failure
         End Get
-        Set(ByVal value As String)
-            Me._Psol = value
+        Set(value As String)
+            _Failure = value
         End Set
     End Property
 
-    Public Property TestID As String
+    Public Property Solution As String
         Get
-            Return Me._TestID
+            Return _Solution
         End Get
-        Set(ByVal value As String)
-            Me._TestID = value
+        Set(value As String)
+            _Solution = value
+        End Set
+    End Property
+
+    Public Property Source As String
+        Get
+            Return _Source
+        End Get
+        Set(value As String)
+            _Source = value
+        End Set
+    End Property
+
+    Public Property Comment As String
+        Get
+            Return _Comment
+        End Get
+        Set(value As String)
+            _Comment = value
         End Set
     End Property
 
     Public Property User As String
         Get
-            Return Me._User
+            Return _User
         End Get
-        Set(ByVal value As String)
-            Me._User = value
+        Set(value As String)
+            _User = value
         End Set
     End Property
 
+    Public Property HasFailure As String
+        Get
+            Return _HasFailure
+        End Get
+        Set(value As String)
+            _HasFailure = value
+        End Set
+    End Property
 
     ' Fields
-    Private _FailureDescription As String
     Private _OrderID As String
-    Private _Psol As String
-    Private _TestID As String
+    Private _Failure As String
+    Private _Solution As String
+    Private _Source As String
+    Private _Comment As String
     Private _User As String
+    Private _HasFailure As String
 End Class
 
 '2013.02.15

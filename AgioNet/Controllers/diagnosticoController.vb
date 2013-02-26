@@ -8,15 +8,30 @@ Namespace AgioNet
         ' 2013.02.13
         ' GET: /diagnostico/AddFailure
         <Authorize> _
-        Public Function AddFailure(ByVal model As ExecTestModel) As ActionResult
-            Me.Session.Add("OtherTitle", "TestID")
-            Me.Session.Add("OtherContent", model.TestID)
-            If (model.TestID = "") Then
-                Me.TempData.Keep("TESTID")
-            Else
-                Me.TempData.Item("TESTID") = model.TestID
-            End If
-            Return Me.View
+        Public Function AddFailure() As PartialViewResult
+            DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim myModel As New RegFailureModel
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("dg_hasFailure", Session("OrderID"))
+                If DR.HasRows Then
+                    Do While DR.Read
+                        myModel = New RegFailureModel With {.HasFailure = DR(0), .OrderID = DR(1), .Failure = DR(2), .Solution = DR(3), _
+                                                            .Source = DR(4), .Comment = DR(5), .User = DR(6)}
+                    Loop
+                Else
+                    myModel = New RegFailureModel With {.HasFailure = "0", .OrderID = "No data", .Failure = "No data", .Solution = "No data", _
+                                                            .Source = "No data", .Comment = "No data", .User = "No data"}
+                End If
+            Catch ex As Exception
+                myModel = New RegFailureModel With {.HasFailure = "0", .OrderID = "No data", .Failure = "No data", .Solution = "No data", _
+                                                            .Source = "No data", .Comment = "No data", .User = "No data"}
+                TempData("ErrMsg") = ex.Message
+            Finally
+                Me.DA.Dispose()
+            End Try
+            TempData("model") = myModel
+            Return PartialView("_AddFailure")
         End Function
 
         ' 2013.02.13
@@ -24,83 +39,19 @@ Namespace AgioNet
         <Authorize, HttpPost> _
         Public Function AddFailure(ByVal model As RegFailureModel) As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim Result As ActionResult
             Try
-                Me.DR = Me.DA.ExecuteSP("dg_RegFailure", model.TestID, model.Failure, model.PSolution, model.User)
+                Me.DR = Me.DA.ExecuteSP("dg_RegFailure", model.OrderID, model.Failure, model.Solution, model.Source, model.Comment, model.User)
+                Result = RedirectToAction("ExecuteTest")
+                'Result = PartialView("realizar_pruebas")
+            Catch ex As Exception
+                TempData("ErrMsg") = ex.Message
+                Result = RedirectToAction("AddFailure") ' PartialView("_AddFailure")
+            Finally
                 Me.DA.Dispose()
-            Catch exception1 As Exception
-                Me.DA.Dispose()
-                Dim result As ActionResult = Me.View
-                Return result
             End Try
-            Return Me.RedirectToAction("DiagnosticMain")
-        End Function
 
-        ' 2013.02.13
-        ' GET: /diagnostico/agregar_falla
-        <Authorize> _
-        Public Function agregar_falla() As ActionResult
-            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
-            Dim modelArray As TestListModel() = New TestListModel(&H65 - 1) {}
-            Dim index As Integer = 0
-            If Me.HasOrderID Then
-                Try
-                    Dim model As TestListModel
-                    Dim reader As SqlDataReader = Me.DA.ExecuteSP("dg_GetTestListByOrder", Me.Session.Item("OrderID"), "")
-                    If reader.HasRows Then
-                        Do While reader.Read
-                            model = New TestListModel With { _
-                                .TESTID = reader(0), _
-                                .ORDERID = reader(1), _
-                                .TESTNAME = reader(2), _
-                                .TESTDESCRIPTION = reader(3), _
-                                .TESTRESULT = reader(4), _
-                                .TESTSTART = reader(5), _
-                                .TESTEND = reader(6), _
-                                .CREATEBY = reader(7) _
-                            }
-                            modelArray(index) = model
-                            index += 1
-                        Loop
-
-                        '-- Actualizado por CarlosB
-                        ReDim Preserve modelArray(index - 1)
-                    Else
-                        model = New TestListModel With { _
-                            .TESTID = "NO DATA", _
-                            .ORDERID = "NO DATA", _
-                            .TESTNAME = "NO DATA", _
-                            .TESTDESCRIPTION = "NO DATA", _
-                            .TESTRESULT = "NO DATA", _
-                            .TESTSTART = "NO DATA", _
-                            .TESTEND = "NO DATA", _
-                            .CREATEBY = "NO DATA" _
-                        }
-                        modelArray(index) = model
-                        index += 1
-                        '-- Actualizado por CarlosB
-                        ReDim Preserve modelArray(index - 1)
-                    End If
-                Catch exception1 As Exception
-                    modelArray(index) = New TestListModel With { _
-                        .TESTID = "NO DATA", _
-                        .ORDERID = "NO DATA", _
-                        .TESTNAME = "NO DATA", _
-                        .TESTDESCRIPTION = "NO DATA", _
-                        .TESTRESULT = "NO DATA", _
-                        .TESTSTART = "NO DATA", _
-                        .TESTEND = "NO DATA", _
-                        .CREATEBY = "NO DATA" _
-                    }
-                    index += 1
-                    'modelArray = DirectCast(Utils.CopyArray(DirectCast(modelArray, Array), New TestListModel(((index - 1) + 1) - 1) {}), TestListModel())
-                    '-- Actualizado por CarlosB
-                    ReDim Preserve modelArray(index - 1)
-                    Me.DA.Dispose()
-                End Try
-                Me.TempData.Item("Model") = modelArray
-                Return Me.View
-            End If
-            Return Me.RedirectToAction("Index")
+            Return Result
         End Function
 
         ' 2013.02.13
@@ -797,7 +748,7 @@ Namespace AgioNet
                         txtMessage = "<p style='font-family: Arial; font-size:12px; width:800px;'> " & _
                                      "Se ha registrado una solicitud de aprobacion de reparación para la orden: <b>" & _
                                      Session.Item("OrderID") & "</b>. Esta opción se encuentra disponible desde " & _
-                                     "Atención a Clientes / Aprovación de Reparación<p>"
+                                     "Servicio a Clientes / Aprovación de Reparación<p>"
 
                         email.SendEmail(emailAddress, txtSubject, txtMessage)
                     End If

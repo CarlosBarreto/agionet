@@ -6,7 +6,7 @@
     
     Dim Read() As AgioNet.TestReportModel = TempData("Model")
 
-    Dim grid As WebGrid = New WebGrid(Read, canPage:=True, rowsPerPage:=20)
+    Dim grid As WebGrid = New WebGrid(Read, canPage:=True, rowsPerPage:=18)
 End Code
 <!-- Ventana modal de error -->
 @If TempData("ErrMsg") <> "" Then
@@ -27,12 +27,26 @@ End If
                    grid.Column("CreateBy", "Creada Por", style:="CreateBy_") _
 ))
 
-@Html.Action("LoadWnOrderInfo")
+<div class="row">&nbsp;</div>
 
 @Using Html.BeginForm()
+    @<div class="form-SPArea--dgl">
+        <span class="Span-b">Comentarios</span>
+        <span class="Span-e">
+            @Html.HiddenFor(Function(m) m.OrderID, New With {.Value = Session("OrderID")}) 
+            @Html.TextAreaFor(Function(m) m.Comment, New With {.rows = 4, .cols = 55})
+        </span>
+    </div>
+   
+   @<div class="row">&nbsp;</div>
+   @<div class="row">&nbsp;</div>
+    
     @<span class="row">
-        <span class="Span-b">@Html.HiddenFor(Function(m) m.OrderID, New With {.Value = Session("OrderID")})</span>
-        <span class="Span-j">@Html.TextBoxFor(Function(m) m.Comment) </span>
-        <span class="Span-a"> <input type="submit" value="SCAN" class="Button" /></span>
+        <span class="Span-a">&nbsp;</span>
+        <span class="Span-c">&nbsp;</span>
+        <span class="Span-c">&nbsp;</span>
+        <span class="Span-a"> 
+            <input type="submit" value="SCAN" class="Button" />
+        </span>
     </span>
 End Using

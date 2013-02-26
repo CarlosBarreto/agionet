@@ -5,12 +5,30 @@ Imports System.Globalization
 '2013.02.14
 Public Class AppFailureInfoModel
     ' Properties
-    Public Property FailureDescription As String
+    Public Property OrderID As String
         Get
-            Return Me._FailureDescription
+            Return Me._OrderID
         End Get
         Set(ByVal value As String)
-            Me._FailureDescription = value
+            Me._OrderID = value
+        End Set
+    End Property
+
+    Public Property TestID As String
+        Get
+            Return Me._TestID
+        End Get
+        Set(ByVal value As String)
+            Me._TestID = value
+        End Set
+    End Property
+
+    Public Property TestDescription As String
+        Get
+            Return Me._TestDescription
+        End Get
+        Set(ByVal value As String)
+            Me._TestDescription = value
         End Set
     End Property
 
@@ -20,6 +38,24 @@ Public Class AppFailureInfoModel
         End Get
         Set(ByVal value As String)
             Me._FailureID = value
+        End Set
+    End Property
+
+    Public Property Solution As String
+        Get
+            Return _Solution
+        End Get
+        Set(value As String)
+            _Solution = value
+        End Set
+    End Property
+
+    Public Property Source As String
+        Get
+            Return _Source
+        End Get
+        Set(value As String)
+            _Source = value
         End Set
     End Property
 
@@ -41,72 +77,15 @@ Public Class AppFailureInfoModel
         End Set
     End Property
 
-    Public Property Log As String
-        Get
-            Return Me._Log
-        End Get
-        Set(ByVal value As String)
-            Me._Log = value
-        End Set
-    End Property
-
-    Public Property OrderID As String
-        Get
-            Return Me._OrderID
-        End Get
-        Set(ByVal value As String)
-            Me._OrderID = value
-        End Set
-    End Property
-
-    Public Property PossibleSolution As String
-        Get
-            Return Me._PossibleSolution
-        End Get
-        Set(ByVal value As String)
-            Me._PossibleSolution = value
-        End Set
-    End Property
-
-    Public Property TestDescription As String
-        Get
-            Return Me._TestDescription
-        End Get
-        Set(ByVal value As String)
-            Me._TestDescription = value
-        End Set
-    End Property
-
-    Public Property TestID As String
-        Get
-            Return Me._TestID
-        End Get
-        Set(ByVal value As String)
-            Me._TestID = value
-        End Set
-    End Property
-
-    Public Property TestResult As String
-        Get
-            Return Me._TestResult
-        End Get
-        Set(ByVal value As String)
-            Me._TestResult = value
-        End Set
-    End Property
-
-
     ' Fields
-    Private _FailureDescription As String
+    Private _OrderID As String
+    Private _TestID As String
+    Private _TestDescription As String
     Private _FailureID As String
+    Private _Solution As String
+    Private _Source As String
     Private _FoundBy As String
     Private _FoundDate As String
-    Private _Log As String
-    Private _OrderID As String
-    Private _PossibleSolution As String
-    Private _TestDescription As String
-    Private _TestID As String
-    Private _TestResult As String
 End Class
 
 ' 2013.02.14
@@ -489,4 +468,307 @@ Public Class ReqApprovalModel
     Private _OrderID As String
 End Class
 
+' 2013.02.26
+Public Class AllOrderInfoModel
+    Private _OrderID As String
+    Private _OrderDate As String
+    Private _CustomerType As String
+    Private _CustomerName As String
+    Private _RFC As String
+    Private _Email As String
+    Private _Address As String
+    Private _ExternalNumber As String
+    Private _InternalNumber As String
+    Private _Address2 As String
+    Private _City As String
+    Private _State As String
+    Private _Country As String
+    Private _ZipCode As String
+    Private _Telephone As String
+    Private _Telephone2 As String
+    Private _Telephone3 As String
+    Private _Delivery As String
+    Private _DeliveryTime As String
+    Private _ProductClass As String
+    Private _ProductType As String
+    Private _ProductTrademark As String
+    Private _ProductModel As String
+    Private _ProductDescription As String
+    Private _PartNumber As String
+    Private _SerialNumber As String
+    Private _Revision As String
+    Private _ServiceType As String
+    Private _FailureType As String
+    Private _Comment As String
+
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property OrderDate As String
+        Get
+            Return _OrderDate
+        End Get
+        Set(value As String)
+            _OrderDate = value
+        End Set
+    End Property
+
+    Public Property CustomerType As String
+        Get
+            Return _CustomerType
+        End Get
+        Set(value As String)
+            _CustomerType = value
+        End Set
+    End Property
+
+    Public Property CustomerName As String
+        Get
+            Return _CustomerName
+        End Get
+        Set(value As String)
+            _CustomerName = value
+        End Set
+    End Property
+    Public Property RFC As String
+        Get
+            Return _RFC
+        End Get
+        Set(value As String)
+            _RFC = value
+        End Set
+    End Property
+
+    Public Property Email As String
+        Get
+            Return _Email
+        End Get
+        Set(value As String)
+            _Email = value
+        End Set
+    End Property
+
+    Public Property Address As String
+        Get
+            Return _Address
+        End Get
+        Set(value As String)
+            _Address = value
+        End Set
+    End Property
+
+    Public Property ExternalNumber As String
+        Get
+            Return _ExternalNumber
+        End Get
+        Set(value As String)
+            _ExternalNumber = value
+        End Set
+    End Property
+
+    Public Property InternalNumber As String
+        Get
+            Return _InternalNumber
+        End Get
+        Set(value As String)
+            _InternalNumber = value
+        End Set
+    End Property
+
+    Public Property Address2 As String
+        Get
+            Return _Address2
+        End Get
+        Set(value As String)
+            _Address2 = value
+        End Set
+    End Property
+
+    Public Property City As String
+        Get
+            Return _City
+        End Get
+        Set(value As String)
+            _City = value
+        End Set
+    End Property
+
+    Public Property State As String
+        Get
+            Return _State
+        End Get
+        Set(value As String)
+            _State = value
+        End Set
+    End Property
+
+    Public Property Country As String
+        Get
+            Return _Country
+        End Get
+        Set(value As String)
+            _Country = value
+        End Set
+    End Property
+
+    Public Property ZipCode As String
+        Get
+            Return _ZipCode
+        End Get
+        Set(value As String)
+            _ZipCode = value
+        End Set
+    End Property
+
+    Public Property Telephone As String
+        Get
+            Return _Telephone
+        End Get
+        Set(value As String)
+            _Telephone = value
+        End Set
+    End Property
+
+    Public Property Telephone2 As String
+        Get
+            Return _Telephone2
+        End Get
+        Set(value As String)
+            _Telephone2 = value
+        End Set
+    End Property
+
+    Public Property Telephone3 As String
+        Get
+            Return _Telephone3
+        End Get
+        Set(value As String)
+            _Telephone3 = value
+        End Set
+    End Property
+
+    Public Property Delivery As String
+        Get
+            Return _Delivery
+        End Get
+        Set(value As String)
+            _Delivery = value
+        End Set
+    End Property
+
+    Public Property DeliveryTime As String
+        Get
+            Return _DeliveryTime
+        End Get
+        Set(value As String)
+            _DeliveryTime = value
+        End Set
+    End Property
+
+    Public Property ProductClass As String
+        Get
+            Return _ProductClass
+        End Get
+        Set(value As String)
+            _ProductClass = value
+        End Set
+    End Property
+
+    Public Property ProductType As String
+        Get
+            Return _ProductType
+        End Get
+        Set(value As String)
+            _ProductType = value
+        End Set
+    End Property
+
+    Public Property ProductTrademark As String
+        Get
+            Return _ProductTrademark
+        End Get
+        Set(value As String)
+            _ProductTrademark = value
+        End Set
+    End Property
+
+    Public Property ProductModel As String
+        Get
+            Return _ProductModel
+        End Get
+        Set(value As String)
+            _ProductModel = value
+        End Set
+    End Property
+
+    Public Property ProductDescription As String
+        Get
+            Return _ProductDescription
+        End Get
+        Set(value As String)
+            _ProductDescription = value
+        End Set
+    End Property
+
+    Public Property PartNumber As String
+        Get
+            Return _PartNumber
+        End Get
+        Set(value As String)
+            _PartNumber = value
+        End Set
+    End Property
+
+    Public Property SerialNumber As String
+        Get
+            Return _SerialNumber
+        End Get
+        Set(value As String)
+            _SerialNumber = value
+        End Set
+    End Property
+
+    Public Property Revision As String
+        Get
+            Return _Revision
+        End Get
+        Set(value As String)
+            _Revision = value
+        End Set
+    End Property
+
+    Public Property ServiceType As String
+        Get
+            Return _ServiceType
+        End Get
+        Set(value As String)
+            _ServiceType = value
+        End Set
+    End Property
+
+    Public Property FailureType As String
+        Get
+            Return _FailureType
+        End Get
+        Set(value As String)
+            _FailureType = value
+        End Set
+    End Property
+
+    Public Property Comment As String
+        Get
+            Return _Comment
+        End Get
+        Set(value As String)
+            _Comment = value
+        End Set
+    End Property
+
+End Class
 

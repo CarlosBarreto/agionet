@@ -187,6 +187,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\approvals.css" />
     <Content Include="Content\css\ing.css" />
     <Content Include="Content\css\diag.css" />
     <Content Include="Content\css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
@@ -261,8 +262,6 @@
     <Content Include="Views\recibo\formulario_recibo.vbhtml" />
     <Content Include="Views\recibo\print_chkpage.vbhtml" />
     <Content Include="Views\recibo\imprimir_hoja.vbhtml" />
-    <Content Include="Views\diagnostico\AddFailure.vbhtml" />
-    <Content Include="Views\diagnostico\agregar_falla.vbhtml" />
     <Content Include="Views\diagnostico\DiagnosticMain.vbhtml" />
     <Content Include="Views\diagnostico\realizar_pruebas.vbhtml" />
     <Content Include="Views\diagnostico\Index.vbhtml" />
@@ -315,6 +314,8 @@
     <Content Include="Views\diagnostico\_CancelTest.vbhtml" />
     <Content Include="Views\diagnostico\_ViewTest.vbhtml" />
     <Content Include="Views\diagnostico\_FallaReportada.vbhtml" />
+    <Content Include="Views\diagnostico\_AddFailure.vbhtml" />
+    <Content Include="Views\sc\_OrderInfoPartial.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
