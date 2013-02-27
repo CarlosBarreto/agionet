@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/logistica/ordenes_sflete.vbhtml" hash="7a9782b5" filehash="4599734b9111" flags="110000" assembly="App_Web_jwxwvwew" type="ASP._Page_Views_logistica_ordenes_sflete_vbhtml">
+<preserve resultType="2" virtualPath="/Views/logistica/ordenes_sflete.vbhtml" hash="7a9782b5" filehash="4521667d96ce" flags="110000" assembly="App_Web_d1pmutxy" type="ASP._Page_Views_logistica_ordenes_sflete_vbhtml">
     <filedeps>
         <filedep name="/Views/logistica/ordenes_sflete.vbhtml" />
     </filedeps>

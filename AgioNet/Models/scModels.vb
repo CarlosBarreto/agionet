@@ -772,3 +772,17 @@ Public Class AllOrderInfoModel
 
 End Class
 
+' 2013-02.26
+Public Class SearchOrderModel
+    Private _OrderID As String
+
+    Public Property OrderID As String
+        Get
+            If _OrderID = "" Or IsNothing(_OrderID) Then _OrderID = ""
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+End Class

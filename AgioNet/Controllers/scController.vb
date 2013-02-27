@@ -235,69 +235,43 @@ Namespace AgioNet
         ' 2013.02.14
         ' GET: /sc/ver_orden
         <Authorize> _
-        Public Function ver_orden() As ActionResult
+        Public Function ver_orden(ByVal md As SearchOrderModel) As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim modelArray(100) As OrderListModel
             Dim index As Integer = 0
             Try
-                Me.DR = Me.DA.ExecuteSP("sc_OrderMaster_getOrderList", "OrderList")
-                If (Me.DA._LastErrorMessage <> "") Then
-                    Me.TempData.Item("ErrMsg") = Me.DA.LastErrorMessage
-                    Me.DA.Dispose()
-                    Return Me.RedirectToAction("index")
-                End If
+                Me.DR = Me.DA.ExecuteSP("sc_OrderMaster_getOrderList", "OrderList", md.OrderID)
+                If DA._LastErrorMessage = "" Then
 
-                If Me.DR.HasRows Then
-                    Do While Me.DR.Read
-                        Dim model As New OrderListModel With { _
-                            .OrderID = DR(0), _
-                            .OrderDate = DR(1), _
-                            .CustomerName = DR(2), _
-                            .Email = DR(3), _
-                            .Delivery = DR(4), _
-                            .DeliveryTime = DR(5), _
-                            .ProductClass = DR(6), _
-                            .ProductType = DR(7), _
-                            .ProductModel = DR(8), _
-                            .PartNo = DR(9), _
-                            .SerialNo = DR(10), _
-                            .Status = DR(11) _
-                        }
-                        modelArray(index) = model
+                    If Me.DR.HasRows Then
+                        Do While Me.DR.Read
+                            If index >= modelArray.Length Then ReDim Preserve modelArray(index + 1)
+                            modelArray(index) = New OrderListModel With {.OrderID = DR(0), .OrderDate = DR(1), .CustomerName = DR(2), _
+                                .Email = DR(3), .Delivery = DR(4), .DeliveryTime = DR(5), .ProductClass = DR(6), .ProductType = DR(7), _
+                                .ProductModel = DR(8), .PartNo = DR(9), .SerialNo = DR(10), .Status = DR(11)}
+                            index += 1
+                        Loop
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+
+                    Else
+                        index = 0
+                        modelArray(index) = New OrderListModel With {.OrderID = "No Data", .OrderDate = "No Data", .CustomerName = "No Data", _
+                            .Email = "No Data", .Delivery = "No Data", .DeliveryTime = "No Data", .ProductClass = "No Data", .ProductType = "No Data", _
+                            .ProductModel = "No Data", .PartNo = "No Data", .SerialNo = "No Data", .Status = "No Data"}
                         index += 1
-                    Loop
-                    ' -- Actualizado por Carlos Barreto
-                    ReDim Preserve modelArray(index - 1)
-
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+                    End If
                 Else
-                    index = 0
-                    modelArray(index) = New OrderListModel With { _
-                        .OrderID = "No Data", _
-                        .OrderDate = "No Data", _
-                        .CustomerName = "No Data", _
-                        .Email = "No Data", _
-                        .Delivery = "No Data", _
-                        .DeliveryTime = "No Data", _
-                        .ProductClass = "No Data", _
-                        .ProductType = "No Data", _
-                        .ProductModel = "No Data", _
-                        .PartNo = "No Data", _
-                        .SerialNo = "No Data", _
-                        .Status = "No Data" _
-                    }
-                    index += 1
-                    ' -- Actualizado por Carlos Barreto
-                    ReDim Preserve modelArray(index - 1)
+                    Throw New Exception(DA._LastErrorMessage)
                 End If
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
                 Return Me.RedirectToAction("index")
+            Finally
+                DA.Dispose()
             End Try
-
-            If (Not Me.DR.IsClosed And Me.DR.HasRows) Then
-                Me.DR.Close()
-            End If
-            Me.DA.Dispose()
 
             Me.TempData.Item("Model") = modelArray
             Return Me.View
@@ -306,67 +280,44 @@ Namespace AgioNet
         '2013.02.14
         ' GET: /sc/ver_ordenes
         <Authorize> _
-        Public Function ver_ordenes() As ActionResult
+        Public Function ver_ordenes(ByVal md As SearchOrderModel) As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim modelArray(100) As OrderListModel
             Dim index As Integer = 0
 
-            Try
-                Me.DR = Me.DA.ExecuteSP("sc_OrderMaster_getOrderList", "OrderList")
-                If (Me.DA._LastErrorMessage <> "") Then
-                    Me.TempData.Item("ErrMsg") = Me.DA.LastErrorMessage
-                    Me.DA.Dispose()
-                    Return Me.RedirectToAction("index")
-                End If
+           Try
+                Me.DR = Me.DA.ExecuteSP("sc_OrderMaster_getOrderList", "OrderList", md.OrderID)
+                If DA._LastErrorMessage = "" Then
 
-                If Me.DR.HasRows Then
-                    Do While Me.DR.Read
-                        Dim model As New OrderListModel With { _
-                            .OrderID = DR(0), _
-                            .OrderDate = DR(1), _
-                            .CustomerName = DR(2), _
-                            .Email = DR(3), _
-                            .Delivery = DR(4), _
-                            .DeliveryTime = DR(5), _
-                            .ProductClass = DR(6), _
-                            .ProductType = DR(7), _
-                            .ProductModel = DR(8), _
-                            .PartNo = DR(9), _
-                            .SerialNo = DR(10) _
-                        }
-                        modelArray(index) = model
+                    If Me.DR.HasRows Then
+                        Do While Me.DR.Read
+                            If index >= modelArray.Length Then ReDim Preserve modelArray(index + 1)
+                            modelArray(index) = New OrderListModel With {.OrderID = DR(0), .OrderDate = DR(1), .CustomerName = DR(2), _
+                                .Email = DR(3), .Delivery = DR(4), .DeliveryTime = DR(5), .ProductClass = DR(6), .ProductType = DR(7), _
+                                .ProductModel = DR(8), .PartNo = DR(9), .SerialNo = DR(10), .Status = DR(11)}
+                            index += 1
+                        Loop
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+
+                    Else
+                        index = 0
+                        modelArray(index) = New OrderListModel With {.OrderID = "No Data", .OrderDate = "No Data", .CustomerName = "No Data", _
+                            .Email = "No Data", .Delivery = "No Data", .DeliveryTime = "No Data", .ProductClass = "No Data", .ProductType = "No Data", _
+                            .ProductModel = "No Data", .PartNo = "No Data", .SerialNo = "No Data", .Status = "No Data"}
                         index += 1
-                    Loop
-                    ' -- Actualizado por CarlosB
-                    ReDim Preserve modelArray(index - 1)
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+                    End If
                 Else
-                    index = 0
-                    modelArray(index) = New OrderListModel With { _
-                        .OrderID = "No Data", _
-                        .OrderDate = "No Data", _
-                        .CustomerName = "No Data", _
-                        .Email = "No Data", _
-                        .Delivery = "No Data", _
-                        .DeliveryTime = "No Data", _
-                        .ProductClass = "No Data", _
-                        .ProductType = "No Data", _
-                        .ProductModel = "No Data", _
-                        .PartNo = "No Data", _
-                        .SerialNo = "No Data" _
-                    }
-                    index += 1
-                    ' -- Actualizado por CarlosB
-                    ReDim Preserve modelArray(index - 1)
+                    Throw New Exception(DA._LastErrorMessage)
                 End If
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
                 Return Me.RedirectToAction("index")
+            Finally
+                DA.Dispose()
             End Try
-
-            If (Not Me.DR.IsClosed And Me.DR.HasRows) Then
-                Me.DR.Close()
-            End If
-            Me.DA.Dispose()
 
             Me.TempData.Item("Model") = modelArray
             Return Me.View

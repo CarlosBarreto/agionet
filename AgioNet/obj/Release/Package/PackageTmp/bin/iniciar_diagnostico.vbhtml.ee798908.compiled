@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/diagnostico/iniciar_diagnostico.vbhtml" hash="7a9782b5" filehash="ffffc3683ed9bc3a" flags="110000" assembly="App_Web_mcdo0yup" type="ASP._Page_Views_diagnostico_iniciar_diagnostico_vbhtml">
+<preserve resultType="2" virtualPath="/Views/diagnostico/iniciar_diagnostico.vbhtml" hash="7a9782b5" filehash="ffffc2f3ad82d09b" flags="110000" assembly="App_Web_xs3w1ph5" type="ASP._Page_Views_diagnostico_iniciar_diagnostico_vbhtml">
     <filedeps>
         <filedep name="/Views/diagnostico/iniciar_diagnostico.vbhtml" />
     </filedeps>
