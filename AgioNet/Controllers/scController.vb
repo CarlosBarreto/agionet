@@ -22,9 +22,13 @@ Namespace AgioNet
                                                                           .FailureID = DR(3), .Solution = DR(4), .Source = DR(5), _
                                                                           .FoundBy = DR(6), .FoundDate = DR(7)}
                     Loop
+                Else
+                    FailureInfo = New AppFailureInfoModel With {.OrderID = "No data", .TestID = "No data", .TestDescription = "No data", _
+                                                                          .FailureID = "No data", .Solution = "No data", .Source = "No data", _
+                                                                          .FoundBy = "No data", .FoundDate = "No data"}
                 End If
 
-                Me.TempData.Item("FailureInfo") = FailureInfo
+                TempData("FailureInfo") = FailureInfo
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
                 Return Me.RedirectToAction("Index")

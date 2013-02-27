@@ -6,7 +6,7 @@
     
     Dim Read() As AgioNet.OrderListModel = TempData("Model")
 
-    Dim grid As WebGrid = New WebGrid(Read, rowsPerPage:=22)
+    Dim grid As WebGrid = New WebGrid(Read, rowsPerPage:=30)
 End Code
 <!-- Ventana modal de error -->
 @If TempData("ErrMsg") <> "" Then
