@@ -2,6 +2,50 @@
 Imports System.ComponentModel.DataAnnotations
 Imports System.Globalization
 
+' 2013.02.28
+Public Class ApprovalRepairModel
+    Private _OrderID As String
+    Private _Approval As String
+    Private _Comments As String
+    Private _ApproBy As String
+
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property Approval As String
+        Get
+            Return _Approval
+        End Get
+        Set(value As String)
+            _Approval = value
+        End Set
+    End Property
+
+    Public Property Comments As String
+        Get
+            Return _Comments
+        End Get
+        Set(value As String)
+            _Comments = value
+        End Set
+    End Property
+
+    Public Property ApproBy As String
+        Get
+            Return _ApproBy
+        End Get
+        Set(value As String)
+            _ApproBy = value
+        End Set
+    End Property
+End Class
+
 '2013.02.14
 Public Class AppFailureInfoModel
     ' Properties

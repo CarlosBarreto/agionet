@@ -317,6 +317,7 @@
     <Content Include="Views\diagnostico\_AddFailure.vbhtml" />
     <Content Include="Views\sc\_OrderInfoPartial.vbhtml" />
     <Content Include="Views\recibo\checkin_report.vbhtml" />
+    <Content Include="Views\reparacion\Index.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

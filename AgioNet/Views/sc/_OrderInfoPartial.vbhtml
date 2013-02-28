@@ -37,6 +37,9 @@ End Code
   
 <div class="form-row">
     <span class="Span-c"><strong>Ciudad: </strong> @read.City</span>
+</div>
+
+<div class="form-row">
     <span class="Span-c"><strong>Estado: </strong> @read.State</span>
 </div>   
      
@@ -63,12 +66,15 @@ End Code
 
 <div class="form-row">
     <span class="Span-c"><strong>Clase de producto: </strong> @read.ProductClass</span>
+</div>
+
+<div class="form-row">
     <span class="Span-c"><strong>Tipo de producto: </strong> @read.ProductType</span>
 </div>
 
 <div class="form-row">
-    <span class="Span-c"><strong>Marca: </strong> @read.ProductTrademark</span>
-    <span class="Span-c"><strong>Modelo: </strong> @read.ProductModel</span>
+    <span class="Span-i"><strong>Marca: </strong> @read.ProductTrademark</span>
+    <span class="Span-i"><strong>Modelo: </strong> @read.ProductModel</span>
 </div>
 
 <div class="form-row">

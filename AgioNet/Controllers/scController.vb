@@ -39,6 +39,27 @@ Namespace AgioNet
             Return Me.View
         End Function
 
+        ' 2013.02.27
+        ' POST: /sc/approvalRepair
+        <Authorize, HttpPost> _
+        Public Function approvalRepair(ByVal model As ApprovalRepairModel) As ActionResult
+            DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+
+            Try
+                DR = DA.ExecuteSP("sc_ApprovalDiagnostic", model.OrderID, model.Approval, model.Comments, User.Identity.Name)
+                If DA._LastErrorMessage <> "" Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+            Finally
+                DA.Dispose()
+            End Try
+
+            Return RedirectToAction("aprobar_reparar")
+        End Function
+
         ' 2013.02.22
         ' GET: /sc/LoadOrderInfo
         Public Function LoadOrderInfo() As PartialViewResult
@@ -289,7 +310,7 @@ Namespace AgioNet
             Dim modelArray(100) As OrderListModel
             Dim index As Integer = 0
 
-           Try
+            Try
                 Me.DR = Me.DA.ExecuteSP("sc_OrderMaster_getOrderList", "OrderList", md.OrderID)
                 If DA._LastErrorMessage = "" Then
 
