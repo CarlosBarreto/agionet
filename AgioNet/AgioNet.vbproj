@@ -318,6 +318,8 @@
     <Content Include="Views\sc\_OrderInfoPartial.vbhtml" />
     <Content Include="Views\recibo\checkin_report.vbhtml" />
     <Content Include="Views\reparacion\Index.vbhtml" />
+    <Content Include="Views\sc\ordenes_diagnosticadas.vbhtml" />
+    <Content Include="Views\sc\costear_diagnostico.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

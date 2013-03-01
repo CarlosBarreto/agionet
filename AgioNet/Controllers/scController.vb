@@ -156,6 +156,58 @@ Namespace AgioNet
             Return Me.View
         End Function
 
+        ' 2013.03.01 
+        ' GET: /sc/costear_diagnostico
+        <Authorize> _
+        Public Function costear_diagnostico(ByVal model As SearchOrderModel) As ActionResult
+            Dim Cost As New AppCostModel
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Me.Session.Item("OrderID") = model.OrderID
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("sc_geDiagnosticCost ", model.OrderID)
+                If (Me.DR.HasRows And (Me.DA._LastErrorMessage = "")) Then
+                    Do While Me.DR.Read
+                        Cost = New AppCostModel With {.OrderID = DR(0), .Costo = DR(1), .LeadTime = DR(2), .Comentario = DR(3)}
+                    Loop
+                Else
+                    Cost = New AppCostModel With {.OrderID = "", .Costo = "", .LeadTime = "", .Comentario = ""}
+                End If
+
+                TempData("model") = Cost
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                Return Me.RedirectToAction("Index")
+            Finally
+                DA.Dispose()
+            End Try
+
+            Return Me.View
+        End Function
+
+        ' 2013.03.01 
+        ' POST: /sc/costear_diagnostico
+        <Authorize, HttpPost> _
+        Public Function costear_diagnostico(ByVal model As AppCostModel) As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("sc_CostearOrden ", model.OrderID, model.Costo, model.LeadTime, model.Comentario, model.CostBy)
+                If DA._LastErrorMessage <> "" Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                Return Me.RedirectToAction("Index")
+            Finally
+                DA.Dispose()
+            End Try
+
+            Return RedirectToAction("ordenes_diagnosticadas")
+
+        End Function
+
         ' 2013.02.14
         ' GET: /sc/crear_orden
         <Authorize> _
@@ -254,6 +306,46 @@ Namespace AgioNet
         ' GET: /sc/Index
         <Authorize> _
         Public Function Index() As ActionResult
+            Return Me.View
+        End Function
+
+        ' 2013.02.28
+        ' GET: /sc/ordenes_diagnosticadas
+        Public Function ordenes_diagnosticadas() As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray(100) As OrdenesDiagnosticadas
+            Dim index As Integer = 0
+            Try
+                Me.DR = Me.DA.ExecuteSP("sc_OrdenesDiagnosticadas")
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+
+                If Me.DR.HasRows Then
+                    Do While Me.DR.Read
+                        modelArray(index) = New OrdenesDiagnosticadas With {.OrderID = DR(0), .Incoming = DR(1), .FoundDate = DR(2), _
+                                    .ProductModel = DR(3), .ProductDescription = DR(4), .PartNumber = DR(5), .SerialNumber = DR(6)}
+                        If index >= modelArray.Length Then ReDim Preserve modelArray(index + 1)
+                        index += 1
+                    Loop
+                    ' -- Reparado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                Else
+                    index = 0
+                    modelArray(index) = New OrdenesDiagnosticadas With {.OrderID = "no data", .Incoming = "no data", .FoundDate = "no data", _
+                                    .ProductModel = "no data", .ProductDescription = "no data", .PartNumber = "no data", .SerialNumber = "no data"}
+                    index += 1
+                    ' -- Reparado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                Return Me.RedirectToAction("index")
+            Finally
+                DA.Dispose()
+            End Try
+
+            Me.TempData.Item("Model") = modelArray
             Return Me.View
         End Function
 
