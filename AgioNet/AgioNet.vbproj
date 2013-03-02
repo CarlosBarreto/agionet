@@ -320,6 +320,8 @@
     <Content Include="Views\reparacion\Index.vbhtml" />
     <Content Include="Views\sc\ordenes_diagnosticadas.vbhtml" />
     <Content Include="Views\sc\costear_diagnostico.vbhtml" />
+    <Content Include="Views\reparacion\ordenes_pendientes.vbhtml" />
+    <Content Include="Views\reparacion\reparar_orden.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
