@@ -317,6 +317,37 @@ Namespace AgioNet
             Return PartialView("_ReplaceCompHistory")
         End Function
 
+        ' -- Terminar reparacion
+        ' 2013.03.06
+        ' GET: /reparacion/cerrar_reparacion
+        <Authorize> _
+        Public Function cerrar_reparacion() As ActionResult
+            Return Me.View
+        End Function
+
+        ' 2013.03.06
+        ' POST: /reparacion/cerrar_reparacion
+        <Authorize, HttpPost> _
+        Public Function cerrar_reparacion(ByVal model As ScanOrderModel) As ActionResult
+            Dim result As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim str As String = ""
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("rp_CloseRepair", model.OrderID,  model.Comment, User.Identity.Name)
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+                result = RedirectToAction("Index")
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                result = Me.View
+            Finally
+                Me.DA.Dispose()
+            End Try
+
+            Return result
+        End Function
         ' Fields
         Protected Friend DA As DataAccess
         Protected Friend DR As SqlDataReader

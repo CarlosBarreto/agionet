@@ -328,6 +328,7 @@
     <Content Include="Views\reparacion\_NewPartForm.vbhtml" />
     <Content Include="Views\reparacion\_ReplaceComponentForm.vbhtml" />
     <Content Include="Views\reparacion\_ReplaceCompHistory.vbhtml" />
+    <Content Include="Views\reparacion\cerrar_reparacion.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
