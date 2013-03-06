@@ -17,7 +17,7 @@ End If
 <div id="main-ContIzquierda">
 
     <!-- Inicia diseño del formulario -->
-    <h2 class="TituloFormulario--dg">Proceso de Diagnostico</h2>
+    <h2 class="TituloFormulario--dg">Proceso de reparación</h2>
     <div class="form-Scann ">
         @Using Html.BeginForm()
             @<span class="row">

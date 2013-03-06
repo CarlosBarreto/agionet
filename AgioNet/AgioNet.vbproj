@@ -322,6 +322,12 @@
     <Content Include="Views\sc\costear_diagnostico.vbhtml" />
     <Content Include="Views\reparacion\ordenes_pendientes.vbhtml" />
     <Content Include="Views\reparacion\reparar_orden.vbhtml" />
+    <Content Include="Views\reparacion\_FailureInfoPartial.vbhtml" />
+    <Content Include="Views\reparacion\ReplaceHistory.vbhtml" />
+    <Content Include="Views\reparacion\_ReplacePartForm.vbhtml" />
+    <Content Include="Views\reparacion\_NewPartForm.vbhtml" />
+    <Content Include="Views\reparacion\_ReplaceComponentForm.vbhtml" />
+    <Content Include="Views\reparacion\_ReplaceCompHistory.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
