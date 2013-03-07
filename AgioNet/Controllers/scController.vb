@@ -440,7 +440,42 @@ Namespace AgioNet
             Return Me.View
         End Function
 
+        '------------------
+        ' 2013.03.06 
+        ' GET: /reparacion/cancel_orden
+        <Authorize> _
+        Public Function cancel_order() As ActionResult
+            Return Me.View
+        End Function
 
+        ' 2013.03.06
+        ' PUSH: /reparacion/cancel_orden
+        <Authorize, HttpPost> _
+        Public Function cancel_order(ByVal model As ScanOrderModel) As ActionResult
+           Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Try
+                Me.DR = Me.DA.ExecuteSP("sc_CancelOrder", model.OrderID, model.Comment, Me.User.Identity.Name)
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Me.TempData.Item("ErrMsg") = Me.DA.LastErrorMessage
+                    Return Me.View
+                End If
+
+                Do While Me.DR.Read
+                    Me.TempData.Item("ErrMsg") = DR(0)
+                Loop
+
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+            Finally
+                'If Not Me.DR.IsClosed Then
+                ' Me.DR.Close()
+                ' End If
+                Me.DA.Dispose()
+            End Try
+
+            Return Me.RedirectToAction("cancel_order")
+        End Function
+            
         ' Fields
         Protected Friend DA As DataAccess
         Protected Friend DR As SqlDataReader

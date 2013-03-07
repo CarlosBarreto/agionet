@@ -329,6 +329,7 @@
     <Content Include="Views\reparacion\_ReplaceComponentForm.vbhtml" />
     <Content Include="Views\reparacion\_ReplaceCompHistory.vbhtml" />
     <Content Include="Views\reparacion\cerrar_reparacion.vbhtml" />
+    <Content Include="Views\sc\cancel_order.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
