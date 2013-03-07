@@ -67,55 +67,41 @@ Namespace AgioNet
             Dim index As Integer = 0
             Try
                 Dim reader As SqlDataReader = Me.DA.ExecuteSP("dg_GetTestListByOrder", Session.Item("OrderID"), "")
+                If DA._LastErrorMessage <> "" Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+
                 If reader.HasRows Then
                     Do While reader.Read
-                        Dim model As New TestListModel With { _
-                            .TESTID = reader(0), _
-                            .ORDERID = reader(1), _
-                            .TESTNAME = reader(2), _
-                            .TESTDESCRIPTION = reader(3), _
-                            .TESTRESULT = reader(4), _
-                            .TESTSTART = reader(5), _
-                            .TESTEND = reader(6), _
-                            .CREATEBY = reader(7) _
-                        }
-                        modelArray(index) = model
+                        modelArray(index) = New TestListModel With {.TESTID = reader(0), .ORDERID = reader(1), .TESTNAME = reader(2), _
+                                            .TESTDESCRIPTION = reader(3), .TESTRESULT = reader(4), .TESTSTART = reader(5), _
+                                            .TESTEND = reader(6), .CREATEBY = reader(7)}
+
                         index += 1
                     Loop
                     '-- Actualizado por CarlosB
                     ReDim Preserve modelArray(index - 1)
                 Else
-                    modelArray(index) = New TestListModel With { _
-                        .TESTID = "NO DATA", _
-                        .ORDERID = "NO DATA", _
-                        .TESTNAME = "NO DATA", _
-                        .TESTDESCRIPTION = "NO DATA", _
-                        .TESTRESULT = "NO DATA", _
-                        .TESTSTART = "NO DATA", _
-                        .TESTEND = "NO DATA", _
-                        .CREATEBY = "NO DATA" _
-                    }
+                    modelArray(index) = New TestListModel With {.TESTID = "NO DATA", .ORDERID = "NO DATA", .TESTNAME = "NO DATA", _
+                                        .TESTDESCRIPTION = "NO DATA", .TESTRESULT = "NO DATA", .TESTSTART = "NO DATA", _
+                                        .TESTEND = "NO DATA", .CREATEBY = "NO DATA"}
                     index += 1
                     '-- Actualizado por CarlosB
                     ReDim Preserve modelArray(index - 1)
 
                 End If
             Catch exception1 As Exception
-                modelArray(index) = New TestListModel With { _
-                    .TESTID = "NO DATA", _
-                    .ORDERID = "NO DATA", _
-                    .TESTNAME = "NO DATA", _
-                    .TESTDESCRIPTION = "NO DATA", _
-                    .TESTRESULT = "NO DATA", _
-                    .TESTSTART = "NO DATA", _
-                    .TESTEND = "NO DATA", _
-                    .CREATEBY = "NO DATA" _
-                }
+                modelArray(index) = New TestListModel With {.TESTID = "NO DATA", .ORDERID = "NO DATA", .TESTNAME = "NO DATA", _
+                                        .TESTDESCRIPTION = "NO DATA", .TESTRESULT = "NO DATA", .TESTSTART = "NO DATA", _
+                                        .TESTEND = "NO DATA", .CREATEBY = "NO DATA"}
                 index += 1
                 '-- Actualizado por CarlosB
                 ReDim Preserve modelArray(index - 1)
-                Me.DA.Dispose()
+                TempData("ErrMsg") = exception1.Message
+            Finally
+                DA.Dispose()
             End Try
+
             Me.TempData.Item("Model") = modelArray
             Return Me.View
         End Function

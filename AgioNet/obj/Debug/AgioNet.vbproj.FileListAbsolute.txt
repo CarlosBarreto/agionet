@@ -67,9 +67,9 @@ C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\System.Web.Razor.xml
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\System.Web.WebPages.xml
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\bin\System.Web.WebPages.Razor.xml
+C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\obj\Debug\AgioNet.vbprojResolveAssemblyReference.cache
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\obj\Debug\AgioNet.Resources.resources
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\obj\Debug\AgioNet.vbproj.GenerateResource.Cache
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\obj\Debug\AgioNet.dll
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\obj\Debug\AgioNet.xml
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\obj\Debug\AgioNet.pdb
-C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\obj\Debug\AgioNet.vbprojResolveAssemblyReference.cache

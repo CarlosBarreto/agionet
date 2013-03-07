@@ -37,6 +37,9 @@ End Code
   
 <div class="form-row">
     <span class="Span-c"><strong>Ciudad: </strong> @read.City</span>
+</div>
+
+<div class="form-row">
     <span class="Span-c"><strong>Estado: </strong> @read.State</span>
 </div>   
      
@@ -55,51 +58,48 @@ End Code
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>SKUNo: </strong> @read.Delivery</span>
+    <span class="Span-b"><strong>Flete: </strong> @read.Delivery</span>
+    <span class="Span-c"><strong>Horario de recolección: </strong> @read.DeliveryTime</span>
+</div>
+
+<div class="form-row"> &nbsp; </div>
+
+<div class="form-row">
+    <span class="Span-c"><strong>Clase de producto: </strong> @read.ProductClass</span>
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>SKUNo: </strong> @read.DeliveryTime</span>
+    <span class="Span-c"><strong>Tipo de producto: </strong> @read.ProductType</span>
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>SKUNo: </strong> @read.ProductClass</span>
+    <span class="Span-i"><strong>Marca: </strong> @read.ProductTrademark</span>
+    <span class="Span-i"><strong>Modelo: </strong> @read.ProductModel</span>
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>SKUNo: </strong> @read.ProductType</span>
+    <span class="Span-e"><strong>Revision: </strong> @read.Revision</span>
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>SKUNo: </strong> @read.ProductTrademark</span>
+    <span class="Span-e"><strong>Descripción: </strong> @read.ProductDescription</span>
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>SKUNo: </strong> @read.ProductModel</span>
+    <span class="Span-e"> &nbsp; </span>
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>SKUNo: </strong> @read.ProductDescription</span>
+    <span class="Span-e"><strong>Tipo de Servicio: </strong> @read.ServiceType</span>
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>SKUNo: </strong> @read.Revision</span>
+    <span class="Span-e"><strong>Falla: </strong> @read.FailureType</span>
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>SKUNo: </strong> @read.Revision</span>
+    <span class="Span-e"><strong>Comentarios: </strong> @read.Comment</span>
 </div>
 
-<div class="form-row">
-    <span class="Span-e"><strong>SKUNo: </strong> @read.ServiceType</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-e"><strong>SKUNo: </strong> @read.FailureType</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-e"><strong>SKUNo: </strong> @read.Comment</span>
-</div>
 <div class="form-row">&nbsp;</div>
 <div class="form-row">&nbsp;</div>

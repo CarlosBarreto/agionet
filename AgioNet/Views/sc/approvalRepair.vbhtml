@@ -10,7 +10,7 @@
     'Dim grid As WebGrid = New WebGrid(Read)
     Dim OptionList As List(Of SelectListItem) = New List(Of SelectListItem)
     
-    Dim _opt As New SelectListItem With {.Text = "Aprovado", .Value = "AP"}
+    Dim _opt As New SelectListItem With {.Text = "Aprobado", .Value = "AP"}
     OptionList.Add(_opt)
     _opt = New SelectListItem With {.Text = "No Aprobado", .Value = "NAP"}
     OptionList.Add(_opt)

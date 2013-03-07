@@ -10,6 +10,8 @@ End Code
 <div class="form-row">
     <span class="Span-e"><strong>Comentario Aprobación: </strong> @read.Comments</span>
 </div>
+<span class="form-row">&nbsp;</span>
+<span class="form-row">&nbsp;</span>
 
 <div class="form-row">
     <span class="Span-e"><strong>Aprobado el: </strong> @read.ApprovalDate</span>
@@ -22,6 +24,8 @@ End Code
 <div class="form-row">
     <span class="Span-e"><strong>Descripción: </strong> @read.ProductDescription</span>
 </div>
+<span class="form-row">&nbsp;</span>
+<span class="form-row">&nbsp;</span>
 
 <div class="form-row">
     <span class="Span-e"><strong>Número de serie: </strong> @read.SerialNumber</span>
@@ -30,14 +34,20 @@ End Code
 <div class="form-row">
     <span class="Span-e"><strong>Falla: </strong> @read.Failure</span>
 </div>
+<span class="form-row">&nbsp;</span>
+<span class="form-row">&nbsp;</span>
 
 <div class="form-row">
     <span class="Span-e"><strong>Solución: </strong> @read.Solution</span>
 </div>
+<span class="form-row">&nbsp;</span>
+<span class="form-row">&nbsp;</span>
 
 <div class="form-row">
     <span class="Span-e"><strong>Fuente Suministro: </strong> @read.Source</span>
 </div>
+<span class="form-row">&nbsp;</span>
+<span class="form-row">&nbsp;</span>
     
 <div class="form-row">
     <span class="Span-e"><strong>Comentario: </strong>@read.Comment</span>
