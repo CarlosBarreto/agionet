@@ -144,6 +144,7 @@
     <Compile Include="Backend\Simple3Des.vb" />
     <Compile Include="Content\temp\trash.vb" />
     <Compile Include="Controllers\AccountController.vb" />
+    <Compile Include="Controllers\calidadController.vb" />
     <Compile Include="Controllers\diagnosticoController.vb" />
     <Compile Include="Controllers\HomeController.vb" />
     <Compile Include="Controllers\ingenieriaController.vb" />
@@ -154,6 +155,7 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\calidadModels.vb" />
     <Compile Include="Models\diagnosticoModels.vb" />
     <Compile Include="Models\ingenieriaModels.vb" />
     <Compile Include="Models\InTransitPage.vb" />
@@ -330,6 +332,8 @@
     <Content Include="Views\reparacion\_ReplaceCompHistory.vbhtml" />
     <Content Include="Views\reparacion\cerrar_reparacion.vbhtml" />
     <Content Include="Views\sc\cancel_order.vbhtml" />
+    <Content Include="Views\calidad\Index.vbhtml" />
+    <Content Include="Views\calidad\proceso_calidad.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
