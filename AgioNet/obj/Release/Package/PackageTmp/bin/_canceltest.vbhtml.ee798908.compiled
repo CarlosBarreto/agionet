@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/diagnostico/_CancelTest.vbhtml" hash="7a9782b5" filehash="6137e07d464" flags="110000" assembly="App_Web_upzg0onv" type="ASP._Page_Views_diagnostico__CancelTest_vbhtml">
+<preserve resultType="2" virtualPath="/Views/diagnostico/_CancelTest.vbhtml" hash="7a9782b5" filehash="453ed0c4cac" flags="110000" assembly="App_Web_iaclukzt" type="ASP._Page_Views_diagnostico__CancelTest_vbhtml">
     <filedeps>
         <filedep name="/Views/diagnostico/_CancelTest.vbhtml" />
     </filedeps>

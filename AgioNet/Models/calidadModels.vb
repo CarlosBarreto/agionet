@@ -56,3 +56,37 @@ Public Class ProcesoCalidadModels
     End Property
 
 End Class
+
+Public Class InspeccionCalidadModel
+    Private _OrderID As String
+    Private _Result As String
+    Private _Comment As String
+
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property Result As String
+        Get
+            Return _Result
+        End Get
+        Set(value As String)
+            _Result = value
+        End Set
+    End Property
+
+    Public Property Comment As String
+        Get
+            Return _Comment
+        End Get
+        Set(value As String)
+            _Comment = value
+        End Set
+    End Property
+
+End Class

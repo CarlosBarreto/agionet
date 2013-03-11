@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/recibo/recibo_almacen.vbhtml" hash="7a9782b5" filehash="fffff6d17b6fbfe2" flags="110000" assembly="App_Web_hdkzziqv" type="ASP._Page_Views_recibo_recibo_almacen_vbhtml">
+<preserve resultType="2" virtualPath="/Views/recibo/recibo_almacen.vbhtml" hash="7a9782b5" filehash="fffff66ad251bc8b" flags="110000" assembly="App_Web_z3fweoe4" type="ASP._Page_Views_recibo_recibo_almacen_vbhtml">
     <filedeps>
         <filedep name="/Views/recibo/recibo_almacen.vbhtml" />
     </filedeps>

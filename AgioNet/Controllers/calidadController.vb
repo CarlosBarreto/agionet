@@ -10,64 +10,7 @@ Namespace AgioNet
             Return View()
         End Function
 
-        ' 2013.03.08
-        ' POST: /calidad/Index
-        <HttpPost, Authorize> _
-        Public Function Index(ByVal model As ScanInfoModel) As ActionResult
-            Dim result As ActionResult
-            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
-            Dim str As String = ""
-
-            Try
-
-
-                Me.DR = Me.DA.ExecuteSP("rp_OrderValidation", model.OrderID)
-                If (Me.DA._LastErrorMessage <> "") Then
-                    Throw New Exception(DA._LastErrorMessage)
-                Else
-                    Do While DR.Read
-                        str = DR(0)
-                    Loop
-
-                    If str.ToString <> "OK" Then
-                        Throw New Exception(str.ToString)
-                    End If
-
-                    If Not DR.IsClosed Then
-                        DR.Close()
-                    End If
-
-                    Session.Add("OrderID", model.OrderID)
-                    result = Me.RedirectToAction("reparar_orden")
-
-                    Dim modelArray As New PendientesreparacionModel
-                    DR = DA.ExecuteSP("rp_getFailureInfo", Session("OrderID"))
-                    If (Me.DR.HasRows And (Me.DA._LastErrorMessage = "")) Then
-                        Do While Me.DR.Read
-                            modelArray = New PendientesreparacionModel With {.OrderID = DR(0), .Comments = DR(1), .ApprovalDate = DR(2), _
-                                                .PartNumber = DR(3), .ProductDescription = DR(4), .SerialNumber = DR(5), .Failure = DR(6), _
-                                                .Solution = DR(7), .Source = DR(8), .Comment = DR(9)}
-                        Loop
-                    Else
-                        Throw New Exception(DA._LastErrorMessage)
-                    End If
-
-                    '-----
-                    TempData("Model") = modelArray
-                End If
-
-
-            Catch ex As Exception
-                Me.TempData.Item("ErrMsg") = ex.Message
-                result = Me.View
-            Finally
-                Me.DA.Dispose()
-            End Try
-
-            TempData("VFlag") = "TRUE"
-            Return result
-        End Function
-
+    
         ' 2013.03.08
         ' GET: /calidad/proceso_calidad
         <Authorize> _
@@ -102,9 +45,39 @@ Namespace AgioNet
         End Function
 
 
-        ' Fields
-        Protected Friend DA As DataAccess
-        Protected Friend DR As SqlDataReader
+        ' 2013-03-10
+        ' GET: /calidad/inspeccion_calidad
+        <Authorize> _
+        Public Function inspeccion_calidad() As ActionResult
+            Return Me.View()
+        End Function
+
+        '2013.03.10
+        ' POST: /calidad/inspeccion_calidad
+        <Authorize, HttpPost> _
+        Public Function inspeccion_calidad(ByVal model As InspeccionCalidadModel) As ActionResult
+            Dim result As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Try
+                Me.DR = Me.DA.ExecuteSP("SaveInspeccionCalidad", model.OrderID, model.Result, model.Comment, User.Identity.Name)
+                If DA._LastErrorMessage <> "" Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+                result = RedirectToAction("inspeccion_calidad")
+            Catch ex As Exception
+                TempData("ErrMsg") = ex.Message
+                result = RedirectToAction("Index")
+            Finally
+                DA.Dispose()
+            End Try
+
+            Return result
+        End Function
+
+        
+            ' Fields
+            Protected Friend DA As DataAccess
+            Protected Friend DR As SqlDataReader
     End Class
 
 

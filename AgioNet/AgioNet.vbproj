@@ -146,6 +146,8 @@
     <Compile Include="Controllers\AccountController.vb" />
     <Compile Include="Controllers\calidadController.vb" />
     <Compile Include="Controllers\diagnosticoController.vb" />
+    <Compile Include="Controllers\empaqueController.vb" />
+    <Compile Include="Controllers\facturacionController.vb" />
     <Compile Include="Controllers\HomeController.vb" />
     <Compile Include="Controllers\ingenieriaController.vb" />
     <Compile Include="Controllers\logisticaController.vb" />
@@ -156,6 +158,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\calidadModels.vb" />
+    <Compile Include="Models\facturacionModels.vb" />
     <Compile Include="Models\diagnosticoModels.vb" />
     <Compile Include="Models\ingenieriaModels.vb" />
     <Compile Include="Models\InTransitPage.vb" />
@@ -334,6 +337,17 @@
     <Content Include="Views\sc\cancel_order.vbhtml" />
     <Content Include="Views\calidad\Index.vbhtml" />
     <Content Include="Views\calidad\proceso_calidad.vbhtml" />
+    <Content Include="Views\calidad\inspeccion_calidad.vbhtml" />
+    <Content Include="Views\empaque\Index.vbhtml" />
+    <Content Include="Views\empaque\recibo_empaque.vbhtml" />
+    <Content Include="Views\empaque\transfer_warehouse.vbhtml" />
+    <Content Include="Views\empaque\process_warehouse.vbhtml" />
+    <Content Include="Views\empaque\shipping.vbhtml" />
+    <Content Include="Views\empaque\delivery.vbhtml" />
+    <Content Include="Views\facturacion\Index.vbhtml" />
+    <Content Include="Views\facturacion\invoiced.vbhtml" />
+    <Content Include="Views\facturacion\paid.vbhtml" />
+    <Content Include="Views\facturacion\OnBilling.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
