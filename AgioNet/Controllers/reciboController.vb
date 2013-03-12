@@ -430,6 +430,8 @@ Namespace AgioNet
                     }
 
                     'RT.PrintPDF(report)
+                    RT.ViewPDF(report, Me.Server.MapPath("~/Content/temp/rec/") & code & ".pdf")
+
                     report = Nothing
                 Else
                     Me.TempData.Item("ErrMsg") = Me.DA.LastErrorMessage
@@ -450,7 +452,9 @@ Namespace AgioNet
             Me.TempData.Keep("ErrMsg")
             Me.TempData.Item("OrderID") = code
 
-            Return Me.RedirectToAction("imprimir_hoja")
+            'Return Me.RedirectToAction("imprimir_hoja")
+            Dim filename As String = Me.Server.MapPath("~/Content/temp/rec/") & code & ".pdf"
+            Return File(filename, "application/pdf", Server.HtmlEncode(filename))
         End Function
 
         '2013.02.14
@@ -463,10 +467,11 @@ Namespace AgioNet
         ' 2013.02.14
         ' POST: /recibo/recibo_almacen
         <Authorize, HttpPost> _
-        Public Function recibo_almacen(ByVal model As ScanOrderModel) As ActionResult
+        Public Function recibo_almacen(ByVal model As setCheckinModel) As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Try
-                Me.DR = Me.DA.ExecuteSP("rc_setCheckIn", model.OrderID, Me.User.Identity.Name, model.Comment)
+                Me.DR = Me.DA.ExecuteSP("rc_setCheckIn", model.OrderID, model.Comment, model.lenght, model.Width, model.Height, _
+                                        model.Weight, model.Dimweight, Me.User.Identity.Name)
                 If (Me.DA._LastErrorMessage <> "") Then
                     Me.TempData.Item("ErrMsg") = Me.DA.LastErrorMessage
                     Return Me.View

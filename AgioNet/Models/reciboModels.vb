@@ -346,3 +346,98 @@ Public Class CheckinReportModel
     End Property
 End Class
 
+' 2013.03.11
+Public Class setCheckinModel
+    Private _OrderID As String
+    Private _Comment As String
+    ' Private _CheckinDate As String
+    Private _lenght As String
+    Private _Width As String
+    Private _Height As String
+    Private _Weight As String
+    Private _Dimweight As String
+    Private _Shipweight As String
+
+    ' propiedades
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property Comment As String
+        Get
+            Return _Comment
+        End Get
+        Set(value As String)
+            _Comment = value
+        End Set
+    End Property
+
+    '-- NOT USED --    Public Property CheckinDate As String
+    '-- NOT USED --        Get
+    '-- NOT USED --            Return _CheckinDate
+    '-- NOT USED --        End Get
+    '-- NOT USED --        Set(value As String)
+    '-- NOT USED --            _CheckinDate = value
+    '-- NOT USED --        End Set
+    '-- NOT USED --    End Property
+
+    Public Property lenght As String
+        Get
+            Return _lenght
+        End Get
+        Set(value As String)
+            _lenght = value
+        End Set
+    End Property
+
+    Public Property Width As String
+        Get
+            Return _Width
+        End Get
+        Set(value As String)
+            _Width = value
+        End Set
+    End Property
+
+    Public Property Height As String
+        Get
+            Return _Height
+        End Get
+        Set(value As String)
+            _Height = value
+        End Set
+    End Property
+
+    Public Property Weight As String
+        Get
+            Return _Weight
+        End Get
+        Set(value As String)
+            _Weight = value
+        End Set
+    End Property
+
+    Public Property Dimweight As String
+        Get
+            Return _Dimweight
+        End Get
+        Set(value As String)
+            _Dimweight = value
+        End Set
+    End Property
+
+    Public Property Shipweight As String
+        Get
+            Return _Shipweight
+        End Get
+        Set(value As String)
+            _Shipweight = value
+        End Set
+    End Property
+
+End Class
