@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/diagnostico/_TestOrderInfoPartial.vbhtml" hash="7a9782b5" filehash="42c1e425bd6a" flags="110000" assembly="App_Web_bjhewcqc" type="ASP._Page_Views_diagnostico__TestOrderInfoPartial_vbhtml">
+<preserve resultType="2" virtualPath="/Views/diagnostico/_TestOrderInfoPartial.vbhtml" hash="7a9782b5" filehash="4277663641c6" flags="110000" assembly="App_Web_sw10affh" type="ASP._Page_Views_diagnostico__TestOrderInfoPartial_vbhtml">
     <filedeps>
         <filedep name="/Views/diagnostico/_TestOrderInfoPartial.vbhtml" />
     </filedeps>

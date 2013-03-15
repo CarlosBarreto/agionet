@@ -1,24 +1,12 @@
-﻿@ModelType AgioNet.StationByUser
-
-@Code
-    ViewData("Title") = "Diagnostico - Realizar pruebas"
-    Session("Section") = "diagnostico"
-       
-    ' Actualizacion... No se va a mostrar listado de pruebas
-    Dim myModel() As AgioNet.StationByUser = TempData("Model")
-    Dim OptionList As List(Of SelectListItem) = New List(Of SelectListItem)
+﻿@Modeltype AgioNet.ScanOrderModel
     
-    Dim Count As Integer = 0
-    Dim _Len As Integer
-    _Len = myModel.Length - 1
-    While Count <= _Len
-        Dim _opt As New SelectListItem()
-        _opt.Text = myModel(Count).stName & " -- " & myModel(Count).srDescription
-        _opt.Value = myModel(Count).stName
-        OptionList.Add(_opt)
+@Code
+    ViewData("Title") = "Diagnostico - Asignar a una estación"
+    Session("Section") = "diagnostico"
         
-        Count = Count + 1
-    End While
+    Dim Read() As AgioNet.TestByOrderIDModel = TempData("Model")
+
+    Dim grid As WebGrid = New WebGrid(Read, canPage:=True, rowsPerPage:=20)
 End Code
 <!-- Agregar el CSS para recibo --> 
 <link href='@Url.Content("~/Content/css/diag.css")' rel="stylesheet" type="text/css" />
@@ -30,28 +18,36 @@ End If
 
 <!-- Aquí se muestran los formularios -->
 <div id="main-ContIzquierda">
-
     <!-- Inicia diseño del formulario -->
-    <h2 class="TituloFormulario--dg">Realizar pruebas</h2>
-    <div class="form-Scann ">
-        @Using Html.BeginForm()
-            @<span class="row">
-                <span class="Span-b"><span class="input-labelScann">@Html.LabelFor(Function(m) m.stName) </span></span>
-                <span class="Span-e"><span class="input-textScann">@Html.DropDownListFor(Function(m) m.stName, OptionList)</span></span>
-             </span>
-            @<span class="row">&nbsp;</span>
-            @<span class="row">
-                <span class="Span-b"><span class="input-labelScann">@Html.LabelFor(Function(m) m.OrderID)</span></span>
-                <span class="Span-e"><span class="input-textScann">@Html.TextBoxFor(Function(m) m.OrderID)</span></span>
-            </span>
-            @<span class="row">&nbsp;</span>
-            @<span class="row">
-                <span class="Span-a"><span class="input-labelScann">&nbsp;</span></span>
-                <span class="Span-d"><span class="input-textScann">&nbsp;</span></span>
-                <span class="Span-a"> <input type="submit" value="SCAN" class="input-ButtonScann" /></span>
-             </span>
-            
-        End Using
+    <h2 class="TituloFormulario--dg">Diagnostico - Pruebas disponibles</h2>
+    @grid.GetHtml(columns:=grid.Columns( _
+        grid.Column("OrderID", "Orden", style:="TestID_"), _
+        grid.Column("TestName", "Prueba", style:="OrderID_"), _
+        grid.Column("TestResult", "Resultado", style:="TestName_"), _
+        grid.Column("Failure", "Falla", style:="TestDescription_"), _
+        grid.Column("TextLog", "Text Log", style:="CreateBy_"), _
+        grid.Column("TestStart", "Inicio", style:="CreateBy_"), _
+        grid.Column("TestEnd", "Final", style:="CreateBy_"), _
+        grid.Column("CreateBy", "Creada por", style:="CreateBy_"), _
+        grid.Column(format:=Function(item) Html.ActionLink("Realizar", "pruebasMaster", "diagnostico", New With {.OrderID = item.OrderID}, vbNull), style:="Link_") _
+    ))
+       
+
+        <div class="row">&nbsp;</div>
+        <div class="form-aclaracion">
+            <span class="form-aclaracion_Title">Nota:</span>
+            <span class="form-aclaracion_Text">
+                En caso de de que la <strong>Prueba</strong>, <strong>Modelo</strong>, el <strong>Número de parte</strong>, o la 
+                <strong>Marca</strong> del producto que necesitas no estén disponibles en este listado, Favor de contactar a ingeniería 
+                (Encargado, <a href="mailto:humberto.vega@agiotech.com">Humberto Vega</a> )
+         </span>
     </div>
 </div>
+
+<!-- Aquí va la información de la orden -->
+<div id="main-ContDerecha" class="bg-fondoborder">
+    @Html.Action("LoadOrderInfo")
+</div>
+
+
 

@@ -2,6 +2,7 @@
 Imports Root.Reports.FontDef
 Imports System.Drawing
 Imports System.IO
+Imports Root.Reports.FlowLayoutManager
 
 Public Class PDFInTransitPage
     Inherits Report
@@ -74,7 +75,7 @@ Public Class PDFInTransitPage
         page_Cur.AddLT_MM(20, 177, New RepString(prop2, "Falla presentada: "))
         page_Cur.AddLT_MM(55, 177, New RepString(prop, Me.Model.FailureType))
         page_Cur.AddRT_MM(200, 270, New RepString(prop, "Copia para el cliente"))
-        
+
         '-- Segunda página
 
         page_Cur = New Root.Reports.Page(Me)
@@ -271,6 +272,14 @@ End Class
 
 Public Class PDFHojaViajera
     Inherits Report
+
+    Private rPosLeft As Double = 20 ';  // millimeters
+    Private rPosRight As Double = 195 ';  // millimeters
+    Private rPosTop As Double = 24 ';  // millimeters
+    Private rPosBottom As Double = 278 ';  // millimeters
+
+
+
     ' Methods
     Protected Overrides Sub Create()
         Dim fontDef As New FontDef(Me, StandardFont.TimesRoman)
@@ -282,6 +291,7 @@ Public Class PDFHojaViajera
 
         Dim prop As New FontProp(def, 8, Color.Black)
         Dim page As New Page(Me)
+
         page.AddRT_MM(200, 20, New RepString(fontProp, "Hoja de ingreso"))
         Dim stream As Stream = New FileStream(Me._rutaLogo, FileMode.Open, FileAccess.Read)
         page.AddMM(20, 30, New RepImageMM(stream, 40, Double.NaN))
@@ -293,36 +303,81 @@ Public Class PDFHojaViajera
         page.AddLT_MM(150, 55, New RepString(prop, Model.Orderid))
         page.AddLT_MM(20, 65, New RepString(prop2, "Número de Serie:"))
         page.AddLT_MM(55, 65, New RepString(prop, Model.SerialNo))
-        page.AddLT_MM(20, 72, New RepString(prop2, "Número de Parte:"))
-        page.AddLT_MM(55, 72, New RepString(prop, Model.PartNo))
+        page.AddLT_MM(20, 72, New RepString(prop2, "Número de Parte / SKU:"))
+        page.AddLT_MM(65, 72, New RepString(prop, Model.PartNo))
         page.AddLT_MM(20, 79, New RepString(prop2, "Modelo:"))
         page.AddLT_MM(55, 79, New RepString(prop, Model.Model))
-        page.AddLT_MM(20, 86, New RepString(prop2, "Track No:"))
-        page.AddLT_MM(55, 86, New RepString(prop, Model.TrackNo))
-        page.AddLT_MM(20, 93, New RepString(prop2, "Fecha Ingreso: "))
-        page.AddLT_MM(55, 93, New RepString(prop, Model.ScanDate))
-        page.AddLT_MM(110, 93, New RepString(prop2, "Ingresado por: "))
-        page.AddLT_MM(145, 93, New RepString(prop, Model.ScanBy))
-        page.AddLT_MM(20, 100, New RepString(prop2, "Tipo Empaque: "))
-        page.AddLT_MM(55, 100, New RepString(prop, Model.PackType))
-        page.AddLT_MM(110, 100, New RepString(prop2, "Empaque Dañado: "))
-        page.AddLT_MM(145, 100, New RepString(prop, Model.PackDamage))
-        page.AddLT_MM(20, 107, New RepString(prop2, "Daño no documentado: "))
-        page.AddLT_MM(65, 107, New RepString(prop, Model.NonDoucumentDamage))
-        page.AddLT_MM(110, 107, New RepString(prop2, "Empacado Correctamente "))
-        page.AddLT_MM(165, 107, New RepString(prop, Model.CorrectPack))
-        page.AddLT_MM(20, 114, New RepString(prop2, "Accesorios: "))
-        page.AddLT_MM(55, 114, New RepString(prop, Model.Accesories))
-        page.AddLT_MM(20, 135, New RepString(prop2, "Cosmetico / Observaciones: "))
-        page.AddLT_MM(55, 142, New RepString(prop, Model.Cosmetic))
-        page.AddLT_MM(20, 156, New RepString(prop2, "Garantía: "))
-        page.AddLT_MM(55, 156, New RepString(prop, Model.Warranty))
-        page.AddLT_MM(110, 156, New RepString(prop2, "Re repair: "))
-        page.AddLT_MM(145, 156, New RepString(prop, Model.ReRepair))
-        page.AddLT_MM(20, 163, New RepString(prop2, "Comentarios: "))
-        page.AddLT_MM(55, 163, New RepString(prop, Model.Comment))
-        page.AddLT_MM(20, 177, New RepString(prop2, "Falla presentada: "))
-        page.AddLT_MM(55, 177, New RepString(prop, Model.ReportedFailure))
+        '-----------
+        page.AddLT_MM(20, 86, New RepString(prop2, "Descripción:"))
+        page.AddLT_MM(55, 86, New RepString(prop2, Model.Descripcion))
+        page.AddLT_MM(20, 93, New RepString(prop2, "Marca:"))
+        page.AddLT_MM(55, 93, New RepString(prop2, Model.Trademark))
+        '-- Descripcion
+        page.AddLT_MM(20, 100, New RepString(prop2, "Track No:"))
+        page.AddLT_MM(55, 100, New RepString(prop, Model.TrackNo))
+        '----
+        page.AddLT_MM(20, 107, New RepString(prop2, "Fecha arribo:"))
+        page.AddLT_MM(55, 107, New RepString(prop, Model.checkinDate))
+
+        page.AddLT_MM(20, 114, New RepString(prop2, "Fecha Ingreso: "))
+        page.AddLT_MM(55, 114, New RepString(prop, Model.ScanDate))
+        page.AddLT_MM(110, 114, New RepString(prop2, "Ingresado por: "))
+        page.AddLT_MM(145, 114, New RepString(prop, Model.ScanBy))
+
+        page.AddLT_MM(20, 121, New RepString(prop2, "Tipo Empaque: "))
+        page.AddLT_MM(55, 121, New RepString(prop, Model.PackType))
+        page.AddLT_MM(110, 121, New RepString(prop2, "Empaque Dañado: "))
+        page.AddLT_MM(145, 121, New RepString(prop, Model.PackDamage))
+
+        page.AddLT_MM(20, 128, New RepString(prop2, "Daño no documentado: "))
+        page.AddLT_MM(65, 128, New RepString(prop, Model.NonDoucumentDamage))
+        page.AddLT_MM(110, 128, New RepString(prop2, "Empacado Correctamente "))
+        page.AddLT_MM(165, 128, New RepString(prop, Model.CorrectPack))
+
+        page.AddLT_MM(20, 135, New RepString(prop2, "Accesorios: "))
+        page.AddLT_MM(55, 135, New RepString(prop, Model.Accesories))
+
+        page.AddLT_MM(20, 156, New RepString(prop2, "Cosmetico / Observaciones: "))
+        page.AddLT_MM(55, 163, New RepString(prop, Model.Cosmetic))
+
+        page.AddLT_MM(20, 184, New RepString(prop2, "Garantía: "))
+        page.AddLT_MM(55, 184, New RepString(prop, Model.Warranty))
+        page.AddLT_MM(110, 184, New RepString(prop2, "Re repair: "))
+        page.AddLT_MM(145, 184, New RepString(prop, Model.ReRepair))
+
+        page.AddLT_MM(20, 191, New RepString(prop2, "Comentarios: "))
+        page.AddLT_MM(55, 191, New RepString(prop, Model.Comment))
+        page.AddLT_MM(20, 212, New RepString(prop2, "Falla presentada: "))
+
+        'If Len(Model.ReportedFailure) > 55 Then
+        Dim stra As String
+        Dim line As Integer = 0
+        Dim posY As Integer = 212
+        Dim lt As String
+
+        While (line * 55) + 1 < Len(Model.ReportedFailure)
+            lt = Mid(Model.ReportedFailure, (line * 55) + 1, 1)
+            If lt <> " " Then lt = "_ "
+            stra = Mid(Model.ReportedFailure, (line * 55) + 1, 55) & lt
+            page.AddLT_MM(55, posY, New RepString(prop, stra))
+            line += 1
+            posY += 7
+        End While
+        'End If
+
+        'page.AddMM(AcceptVerbsAttribute
+        'page.AddLT_MM(55, 177, New RepString(prop, Model.ReportedFailure))
+
+        'Dim flm As New FlowLayoutManager
+        'flm.rContainerWidthMM = rPosRight - rPosLeft
+        'flm.rContainerHeightMM = 20
+        'flm.Add(New RepString(prop, Model.ReportedFailure))
+
+        'Dim ea As Object
+        'ea = flm.container_CreateMM(page, rPosRight - rPosLeft, 20)
+        'page.AddMM(55, 177, New RepString(prop, Model.ReportedFailure))
+        'flm.eNewContainer += New FlowLayoutManager.NewContainerEventHandler(flm_NewContainer)
+
     End Sub
 
 
@@ -373,7 +428,7 @@ Public Class PDFIntransit
 
 
         Dim def As New FontDef(Me, StandardFont.Helvetica)
-        Dim fontProp As New FontProp(fontDef, 16, Color.Gray)
+        Dim fontProp As New FontProp(FontDef, 16, Color.Gray)
         Dim prop2 As New FontProp(def, 8, Color.Black) With { _
             .bBold = True _
         }

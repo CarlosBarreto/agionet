@@ -42,6 +42,9 @@ Namespace AgioNet
             Dim Result As ActionResult
             Try
                 Me.DR = Me.DA.ExecuteSP("dg_RegFailure", model.OrderID, model.Failure, model.Solution, model.Source, model.Comment, model.User)
+                If DA._LastErrorMessage <> "" Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
                 Result = RedirectToAction("ExecuteTest")
                 'Result = PartialView("realizar_pruebas")
             Catch ex As Exception
@@ -864,46 +867,59 @@ Namespace AgioNet
         ' GET: /diagnostico/realizar_pruebas
         <Authorize> _
         Public Function realizar_pruebas() As ActionResult
-            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
-            Dim StationByUser(100) As StationByUser
-            Dim index As Integer = 0
-            Dim Retorno As ActionResult
-            Me.Session.Clear()
-            'Leer estaciones en las que el cliente puede operar 
-            Try
-                DR = DA.ExecuteSP("in_station_getByUser", User.Identity.Name)
-                If DA._LastErrorMessage = "" Then
-                    If DR.HasRows Then
-                        index = 0
-                        Do While DR.Read
-                            StationByUser(index) = New StationByUser With {.stName = DR(0), .srDescription = DR(1)}
-                            index += 1
-                        Loop
-                        ReDim Preserve StationByUser(index - 1)
-                        TempData("Model") = StationByUser
+            Dim response As ActionResult
+            If Me.HasOrderID Then
+                Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+                Dim modelArray(100) As TestByOrderIDModel
+                Dim index As Integer = 0
+
+                Try
+                    ' Obtener el listado de pruebas disponiblles
+                    DR = Me.DA.ExecuteSP("dg_GetTestListByOrder", Session("OrderID"))
+                    index = 0
+                    If DA._LastErrorMessage = "" Then
+                        If DR.HasRows Then
+                            Do While Me.DR.Read
+                                modelArray(index) = New TestByOrderIDModel With {.OrderID = DR(0), .TestName = DR(1), .TestResult = DR(2), _
+                                                    .Failure = DR(3), .TextLog = DR(4), .TestStart = DR(5), .TestEnd = DR(6), .CreateBy = DR(7)}
+                                index += 1
+                            Loop
+                            ' -- Actualizado por CarlosBarreto
+                            ReDim Preserve modelArray(index - 1)
+
+                            Me.TempData.Item("Model") = modelArray
+                            response = Me.View
+                        Else
+                            Throw New Exception("Error! No se han encontrado pruebas para esta orden")
+                        End If
+                    Else
+                        Throw New Exception(DA._LastErrorMessage)
                     End If
-                Else
-                    Throw New Exception(DA._LastErrorMessage)
-                End If
 
-                Retorno = Me.View
+                Catch ex As Exception
+                    Me.TempData.Item("ErrMsg") = ex.Message
+                    response = Me.RedirectToAction("DiagnosticMain")
+                Finally
+                    DA.Dispose()
+                End Try
+            Else
+                response = Me.RedirectToAction("Index")
+            End If
 
-            Catch ex As Exception
-                Retorno = Me.RedirectToAction("DiagnosticMain")
-                ReDim StationByUser(0)
-                TempData("ErrMsg") = ex.Message
-            Finally
-                DA.Dispose()
-            End Try
-
-            ' Generar la vista
-            Return Retorno
+            Return response
         End Function
 
-        '2013.02.19 
+        ' 2013.02.19 
+        ' 2013.03.13 Upd para mostrar listado de pruebas
         ' POST: /diagnostico/realizar_pruebas
         <Authorize, HttpPost> _
         Public Function realizar_pruebas(ByVal model As StationByUser) As ActionResult
+            Return RedirectToAction("Index") '  Me.View
+        End Function
+
+        ' 2013.02.19 
+        ' GET: /diagnostico/pruebasMaster
+        Public Function pruebasMaster(ByVal model As ScanOrderModel) As ActionResult
             DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim Retorno As ActionResult
             Dim myModel As New TestOrderInfoModel
@@ -911,7 +927,7 @@ Namespace AgioNet
             Try
                 ' al llegar aqui, borrar la sesion 
 
-                DR = DA.ExecuteSP("dbo.dg_getTestInfo", model.OrderId)
+                DR = DA.ExecuteSP("dbo.dg_getTestInfo", model.OrderID)
                 If DA._LastErrorMessage = "" Then
                     '-- Asignar los datos de la orden
                     If DR.HasRows Then
@@ -929,7 +945,7 @@ Namespace AgioNet
 
                     '-- La información de la suborder, se guarda en la sesion
                     Session.Add("OrderID", model.OrderId)
-                    Session.Add("Station", model.stName)
+                    'Session.Add("Station", model.stName)
                     Session.Add("OrderInfo", myModel)
 
                     '-- Si no hay errores, comprobar valores de is tested
@@ -949,7 +965,7 @@ Namespace AgioNet
                     End If
 
                     Session.Add("isTested", isTested)
-                    Retorno = Me.RedirectToAction("pruebasMaster")
+                    Retorno = Me.View 'Me.RedirectToAction("pruebasMaster")
                 Else
                     Throw New Exception(DA._LastErrorMessage)
                 End If
@@ -964,12 +980,6 @@ Namespace AgioNet
             End Try
 
             Return Retorno
-        End Function
-
-        ' 2013.02.19 
-        ' GET: /diagnostico/pruebasMaster
-        Public Function pruebasMaster() As ActionResult
-            Return Me.View
         End Function
 
 

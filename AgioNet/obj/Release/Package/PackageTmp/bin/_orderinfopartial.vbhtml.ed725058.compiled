@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/recibo/_OrderInfoPartial.vbhtml" hash="7a9782b5" filehash="ffffe894df9714cb" flags="110000" assembly="App_Web_wbrpgbnz" type="ASP._Page_Views_recibo__OrderInfoPartial_vbhtml">
+<preserve resultType="2" virtualPath="/Views/recibo/_OrderInfoPartial.vbhtml" hash="7a9782b5" filehash="ffffe7e3d03191dc" flags="110000" assembly="App_Web_l54tmdda" type="ASP._Page_Views_recibo__OrderInfoPartial_vbhtml">
     <filedeps>
         <filedep name="/Views/recibo/_OrderInfoPartial.vbhtml" />
     </filedeps>

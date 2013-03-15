@@ -20,7 +20,7 @@ Namespace AgioNet
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim modelArray As New MaterialMasterListModel
             Try
-                Me.DR = Me.DA.ExecuteSP("in_AddMaterial", model.SKUNo, model.PartNo, model.Lvl, model.Description, model.Alt)
+                Me.DR = Me.DA.ExecuteSP("in_AddMaterial", model.SKUNo, model.PartNo, model.Commodity, model.Description, model.Alt)
 
                 If (Me.DA._LastErrorMessage <> "") Then
                     Me.TempData.Item("ErrMsg") = Me.DA._LastErrorMessage
@@ -608,16 +608,16 @@ Namespace AgioNet
         ' 2013.02.14
         ' GET: /ingenieria/editar_material
         <Authorize> _
-        Public Function editar_material() As ActionResult
+        Public Function editar_material(ByVal m As MaterialMasterModel) As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim modelArray(100) As MaterialMasterListModel
             Dim index As Integer = 0
             Dim response As ActionResult = Me.View
-            
+
             Try
                 If Not DR Is Nothing Then If Not DR.IsClosed Then DR.Close()
 
-                DR = Me.DA.ExecuteSP("in_getMaterialList")
+                DR = Me.DA.ExecuteSP("in_getMaterialList", m.SKUNo, m.PartNo, m.Description, m.Alt)
                 If DA._LastErrorMessage = "" Then
                     If Me.DR.HasRows Then
                         Do While DR.Read
@@ -628,9 +628,9 @@ Namespace AgioNet
                                 ReDim Preserve modelArray(index + 10)
                             End If
                         Loop
-                        TempData.Item("model") = modelArray
                         ' -- Actualizado por Carlos Barreto
                         ReDim Preserve modelArray(index - 1)
+                        TempData.Item("model") = modelArray
                         response = Me.View
                     Else
                         Throw New Exception("Error: No se encontraron registros")
@@ -743,7 +743,7 @@ Namespace AgioNet
             Dim modelArray As New MaterialMasterListModel
 
             Try
-                Me.DR = Me.DA.ExecuteSP("in_EditMaterial", model.SKUNo, model.PartNo, model.Lvl, model.Description, model.Alt, model.OldSKUNo, model.OldPartNo)
+                Me.DR = Me.DA.ExecuteSP("in_EditMaterial", model.SKUNo, model.PartNo, model.Commodity, model.Description, model.Alt, model.OldSKUNo, model.OldPartNo)
                 If (Me.DA._LastErrorMessage <> "") Then
                     Me.TempData.Item("ErrMsg") = Me.DA._LastErrorMessage
                     Return Me.View
@@ -802,6 +802,7 @@ Namespace AgioNet
                             model = New MaterialMasterListModel With { _
                                 .SKUNo = DR(0), _
                                 .PartNo = DR(1), _
+                                .Commodity = DR(2), _
                                 .Description = DR(3), _
                                 .Alt = DR(4) _
                             }
@@ -814,6 +815,7 @@ Namespace AgioNet
                         model = New MaterialMasterListModel With { _
                             .SKUNo = "no data", _
                             .PartNo = "no data", _
+                            .Commodity = "no data", _
                             .Description = "no data", _
                             .Alt = "no data" _
                         }
@@ -826,6 +828,7 @@ Namespace AgioNet
                     modelArray(index) = New MaterialMasterListModel With { _
                         .SKUNo = "no data", _
                         .PartNo = "no data", _
+                        .Commodity = "no data", _
                         .Description = "no data", _
                         .Alt = "no data" _
                     }
@@ -865,6 +868,7 @@ Namespace AgioNet
                                 .Alt = DR(4) _
                             }
                             modelArray(index) = model
+                            If modelArray.Length <= index + 1 Then ReDim Preserve modelArray(index + 1)
                             index += 1
                         Loop
 

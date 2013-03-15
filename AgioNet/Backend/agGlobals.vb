@@ -7,7 +7,7 @@ Module agGlobals
     Public Const __DATABASE__ As String = "AgioNet v1.3"
     Public Const __ENPASSWD__ As String = "00Ag10t3ch00"
     Public Const __PASS__ As String = "Agiotech01"
-    Public Const __SERVER__ As String = "localhost"
+    Public Const __SERVER__ As String = "localhost" ' "192.168.1.6" '
     Public Const __USER__ As String = "aguser"
 
     '// Methods
@@ -278,8 +278,11 @@ Module agGlobals
         Public SerialNo As String
         Public PartNo As String
         Public Model As String
+        Public Descripcion As String
+        Public Trademark As String
         Public TrackNo As String
         Public ScanDate As String
+        Public checkinDate As String
         Public ScanBy As String
         Public PackType As String
         Public PackDamage As String
@@ -290,6 +293,9 @@ Module agGlobals
         Public Warranty As String
         Public ReRepair As String
         Public Comment As String
+
+
+
     End Structure
 
     Public Structure TestView

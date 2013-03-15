@@ -16,12 +16,20 @@
     OptionList.Add(_opt)
     
 End Code
+<script src='@Url.Content("~/Scripts/jquery.agiotech.js")' type="text/javascript"></script>
+
 <script type="text/javascript"> 
     $(document).ready(function () {
         var data = "@Read.Comentario";
         if (data != "") {
             $("#Comentario").html("@Replace(Read.Comentario, vbNewLine, "\n")");
         }
+
+        $("#LeadTime").datepicker({ dateFormat: "dd/mm/yy" });
+
+        $("#Costo").change(function () {
+            $("#Costo").numeric({ prefix: '$ ', cents: true });
+        });
     }); 
 </script>
 
@@ -51,6 +59,7 @@ End If
                 <div class="row">
                     <span class="Span-a"><span class="PCenter">LeadTime</span></span>
                     <span class="Span-c"> @Html.TextBoxFor(Function(m) m.LeadTime, New With {.Value = Read.LeadTime}) </span>
+                    <span class="Span-a">(dd/mm/aaaa)</span>
                 </div>
                 <div class="row">
                     <span class="Span-a"><span class="PCenter">Comentarios:</span></span>

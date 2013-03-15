@@ -44,6 +44,7 @@ End Using
     @grid.GetHtml(columns:=grid.Columns( _
                     grid.Column("SKUNo", "Equipo"), _
                     grid.Column("PartNo", "Número de Parte"), _
+                    grid.Column("Commodity", "Commodity"), _
                     grid.Column("Description", "Descripción"), _
                     grid.Column("Alt", "Alterno") _
     ))

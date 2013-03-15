@@ -330,6 +330,7 @@ Namespace AgioNet
                             .Reference = DR(12) _
                         }
                         modelArray(index) = model
+                        If modelArray.Length <= index + 1 Then ReDim Preserve modelArray(index + 1)
                         index += 1
                     Loop
                     ' -- Actualizado por Carlos Barreto
@@ -505,6 +506,7 @@ Namespace AgioNet
                             .SerialNo = DR(10) _
                         }
                         modelArray(index) = model
+                        If modelArray.Length <= index + 1 Then ReDim Preserve modelArray(index + 1)
                         index += 1
                     Loop
 
@@ -575,6 +577,7 @@ Namespace AgioNet
                             .SerialNo = DR(10) _
                         }
                         modelArray(index) = model
+                        If modelArray.Length <= index + 1 Then ReDim Preserve modelArray(index + 1)
                         index += 1
                     Loop
                     ' -- Actualizdo por Carlos Barreto
@@ -644,6 +647,7 @@ Namespace AgioNet
                         }
 
                         modelArray(index) = model
+                        If modelArray.Length <= index + 1 Then ReDim Preserve modelArray(index + 1)
                         index += 1
                     Loop
                     ' -- Actualizado por Carlos Barreto
@@ -712,6 +716,7 @@ Namespace AgioNet
                             .SerialNo = DR(10) _
                         }
                         modelArray(index) = model
+                        If modelArray.Length <= index + 1 Then ReDim Preserve modelArray(index + 1)
                         index += 1
                     Loop
                     ' -- Actualizado por Carlos Barreto

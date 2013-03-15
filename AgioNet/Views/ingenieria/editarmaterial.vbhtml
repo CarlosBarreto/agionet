@@ -36,8 +36,8 @@ End If
         </div>
 
         <div class="row">
-            <span class="Span-b"><span class="pcenter">@Html.LabelFor(Function(m) m.Lvl)</span></span>
-            <span class="Span-c"> @Html.TextBoxFor(Function(m) m.Lvl)</span>
+            <span class="Span-b"><span class="pcenter">@Html.LabelFor(Function(m) m.Commodity)</span></span>
+            <span class="Span-c"> @Html.TextBoxFor(Function(m) m.Commodity)</span>
         </div>
 
         <div class="row">

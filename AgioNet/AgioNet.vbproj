@@ -246,6 +246,7 @@
     <Content Include="Content\images\logo-02.jpg" />
     <Content Include="Content\images\logoaqua.png" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\jquery.agiotech.js" />
     <Content Include="Views\Shared\_LayoutLogOn.vbhtml" />
     <Content Include="Views\Shared\_ErrorPartial.vbhtml" />
     <Content Include="Views\Shared\_mainMenuPartial.vbhtml" />

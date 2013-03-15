@@ -66,7 +66,8 @@ Public Class EstacionesModel
     Private _Usuario As String
 End Class
 
-'2013.02.14
+'2013.03.13 
+' 2013.03.14 - Upd cambiar lvl por Commodity
 Public Class MaterialMasterModel
     ' Properties
     Public Property Alt As String
@@ -87,12 +88,12 @@ Public Class MaterialMasterModel
         End Set
     End Property
 
-    Public Property Lvl As String
+    Public Property Commodity As String
         Get
-            Return Me._lvl
+            Return Me._Commodity
         End Get
         Set(ByVal value As String)
-            Me._lvl = value
+            Me._Commodity = value
         End Set
     End Property
 
@@ -135,7 +136,7 @@ Public Class MaterialMasterModel
     ' Fields
     Private _Alt As String
     Private _Description As String
-    Private _lvl As String
+    'Private _lvl As String '-- Not Used 2013.03.14
     Private _PartNo As String
     Private _SKUNo As String
 
@@ -143,9 +144,13 @@ Public Class MaterialMasterModel
     Private _OldSKUNo As String
     Private _OldPartNo As String
 
+    '-- 2013.03.14 -- Modificacion para agregar Commodity
+    Private _Commodity As String
+
 End Class
 
 '2013.02.13
+'2013.03.14 - Upd Agregar Commodity
 Public Class MaterialMasterListModel
     ' Properties
     Public Property Alt As String
@@ -184,12 +189,22 @@ Public Class MaterialMasterListModel
         End Set
     End Property
 
+    Public Property Commodity As String
+        Get
+            Return _Commodity
+        End Get
+        Set(value As String)
+            _Commodity = value
+        End Set
+    End Property
 
     ' Fields
     Private _Alt As String
     Private _Description As String
     Private _PartNo As String
     Private _SKUNo As String
+    '-- 2013.03.14 -- Modificacion para agregar Commodity
+    Private _Commodity As String
 End Class
 
 ' 2014.02.13

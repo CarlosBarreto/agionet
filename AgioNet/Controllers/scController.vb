@@ -192,6 +192,7 @@ Namespace AgioNet
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
 
             Try
+                model.Costo.Replace("$", "")
                 Me.DR = Me.DA.ExecuteSP("sc_CostearOrden ", model.OrderID, model.Costo, model.LeadTime, model.Comentario, model.CostBy)
                 If DA._LastErrorMessage <> "" Then
                     Throw New Exception(DA._LastErrorMessage)

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/diagnostico/asignar_estacion.vbhtml" hash="7a9782b5" filehash="ffffd9bcf34f1433" flags="110000" assembly="App_Web_bjhewcqc" type="ASP._Page_Views_diagnostico_asignar_estacion_vbhtml">
+<preserve resultType="2" virtualPath="/Views/diagnostico/asignar_estacion.vbhtml" hash="7a9782b5" filehash="ffffda71795fe1d2" flags="110000" assembly="App_Web_sw10affh" type="ASP._Page_Views_diagnostico_asignar_estacion_vbhtml">
     <filedeps>
         <filedep name="/Views/diagnostico/asignar_estacion.vbhtml" />
     </filedeps>

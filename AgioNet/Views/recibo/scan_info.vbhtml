@@ -28,7 +28,7 @@ End If
         </div>
         
         @<div class="row">
-            <span class="Span-b"><span class="pcenter">Número de Parte</span></span>
+            <span class="Span-b"><span class="pcenter">Número de Parte / SKU</span></span>
             <span class="Span-l"> @Html.TextBoxFor(Function(m) m.PartNo) </span>
 
             <span class="Span-a"><span class="pcenter">Modelo</span></span>

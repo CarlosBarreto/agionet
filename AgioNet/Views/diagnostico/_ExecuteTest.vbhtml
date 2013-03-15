@@ -21,6 +21,7 @@
     End If
     
 End Code
+
 <script type="text/javascript"> 
     $(document).ready(function () {
         var data = "@isTested.Response";
@@ -29,7 +30,8 @@ End Code
             $(".TituloFormulario--dg").html("La prueba [@isTested.TestID] ya ha sido realizada.");
             $(".Button").css("visibility", "hidden");
         }
-    }); 
+    });
+
 </script>
 <!-- Inicia diseño del formulario -->
 <h2 class="TituloFormulario--dg"> Realizar una prueba</h2>
