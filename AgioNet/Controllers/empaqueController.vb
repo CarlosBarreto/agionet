@@ -15,6 +15,35 @@ Namespace AgioNet
         ' GET: /empaque/recibo_empaque
         <Authorize> _
         Public Function recibo_empaque() As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim myModel(100) As reciboEmpaqueModel
+            Dim index As Integer = 0
+            Try
+                Me.DR = Me.DA.ExecuteSP("pk_PendientesEmpaque")
+                If DA._LastErrorMessage <> "" Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+                If DR.HasRows Then
+                    While DR.Read
+                        myModel(index) = New reciboEmpaqueModel With {.OrderID = DR(0), .Customer = DR(1), .ProductType = DR(2), .SerialNo = DR(3), .Model = DR(4), .Description = DR(5)}
+                        If index >= myModel.Length Then ReDim Preserve myModel(index + 1)
+                        index += 1
+                    End While
+                    ReDim Preserve myModel(index - 1)
+                Else
+                    myModel(index) = New reciboEmpaqueModel With {.OrderID = "No data", .Customer = "No data", .ProductType = "No data", .SerialNo = "No data", .Model = "No data", .Description = "No data"}
+                    index += 1
+                    ReDim Preserve myModel(index - 1)
+                End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                myModel(index) = New reciboEmpaqueModel With {.OrderID = "No data", .Customer = "No data", .ProductType = "No data", .SerialNo = "No data", .Model = "No data", .Description = "No data"}
+                index += 1
+                ReDim Preserve myModel(index - 1)
+            Finally
+                Me.DA.Dispose()
+            End Try
+            TempData("model") = myModel
             Return Me.View
         End Function
 
@@ -28,6 +57,9 @@ Namespace AgioNet
                 If DA._LastErrorMessage <> "" Then
                     Throw New Exception(DA._LastErrorMessage)
                 End If
+                While DR.Read
+                    TempData.Item("ErrMsg") = DR(0)
+                End While
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
             Finally
@@ -54,6 +86,9 @@ Namespace AgioNet
                 If DA._LastErrorMessage <> "" Then
                     Throw New Exception(DA._LastErrorMessage)
                 End If
+                While DR.Read
+                    TempData.Item("ErrMsg") = DR(0)
+                End While
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
             Finally
@@ -80,6 +115,9 @@ Namespace AgioNet
                 If DA._LastErrorMessage <> "" Then
                     Throw New Exception(DA._LastErrorMessage)
                 End If
+                While DR.Read
+                    TempData.Item("ErrMsg") = DR(0)
+                End While
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
             Finally
@@ -106,6 +144,9 @@ Namespace AgioNet
                 If DA._LastErrorMessage <> "" Then
                     Throw New Exception(DA._LastErrorMessage)
                 End If
+                While DR.Read
+                    TempData.Item("ErrMsg") = DR(0)
+                End While
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
             Finally
@@ -127,10 +168,13 @@ Namespace AgioNet
         Public Function delivery(ByVal model As ScanOrderModel) As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Try
-                Me.DR = Me.DA.ExecuteSP("dbo.pk_delivery", model.OrderID, model.Comment, Me.User.Identity.Name)
+                Me.DR = Me.DA.ExecuteSP("pk_delivery", model.OrderID, model.Comment, Me.User.Identity.Name)
                 If DA._LastErrorMessage <> "" Then
                     Throw New Exception(DA._LastErrorMessage)
                 End If
+                While DR.Read
+                    TempData.Item("ErrMsg") = DR(0)
+                End While
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
             Finally

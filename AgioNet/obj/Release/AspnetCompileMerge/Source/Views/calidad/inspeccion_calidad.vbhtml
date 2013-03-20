@@ -2,6 +2,7 @@
     
 @Code
    
+    Dim OrderID As String = TempData("OrderID")
     
     Dim OptionList As List(Of SelectListItem) = New List(Of SelectListItem)
     Dim _opt As SelectListItem
@@ -14,13 +15,18 @@
     
     
 End Code
+<!-- Ventana modal de error -->
+@If TempData("ErrMsg") <> "" Then
+    @Html.Partial("_ErrorPartial")
+End If
+
 <!-- Inicia diseño del formulario -->
 <h2 class="TituloFormulario--dg"> Realizar una prueba</h2>
 @Using Html.BeginForm()
     @<div id="ContenedorOrderIDForm">
         <span class="row">
             <span class="Span-b">Orden: </span>
-            <span class="Span-j">@Html.TextBoxFor(Function(m) m.OrderID, New With {.class = "text"})</span>        
+            <span class="Span-j">@Html.TextBoxFor(Function(m) m.OrderID, New With {.Value = OrderID, .class = "text"})</span>        
         </span>
     
         <span class="row">&nbsp;</span>

@@ -58,11 +58,9 @@ End Code
 </div>
 
 <div class="form-row">
-    <span class="Span-b"><strong>Flete: </strong> @read.Delivery</span>
+    <span class="Span-i"><strong>Flete: </strong> @read.Delivery</span>
     <span class="Span-c"><strong>Horario de recolección: </strong> @read.DeliveryTime</span>
 </div>
-
-<div class="form-row"> &nbsp; </div>
 
 <div class="form-row">
     <span class="Span-c"><strong>Clase de producto: </strong> @read.ProductClass</span>
@@ -78,27 +76,29 @@ End Code
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>Revision: </strong> @read.Revision</span>
+    <span class="Span-i"><strong>Revision: </strong> @read.Revision</span>
+    <span class="Span-i"><strong>No Parte:</strong> @read.PartNumber</span>
 </div>
 
 <div class="form-row">
     <span class="Span-e"><strong>Descripción: </strong> @read.ProductDescription</span>
 </div>
+<div class="form-row"> <span class="Span-e"> &nbsp; </span> </div>
 
 <div class="form-row">
-    <span class="Span-e"> &nbsp; </span>
+    <span class="Span-e"><strong>Falla Detectada: </strong> @read.ServiceType</span>
 </div>
 
-<div class="form-row">
-    <span class="Span-e"><strong>Tipo de Servicio: </strong> @read.ServiceType</span>
-</div>
+<div class="form-row"> <span class="Span-e"> &nbsp; </span> </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>Falla: </strong> @read.FailureType</span>
+    <span class="Span-e"><strong>Solución: </strong> @read.FailureType</span>
 </div>
 
+<div class="form-row"> <span class="Span-e"> &nbsp; </span> </div>
+
 <div class="form-row">
-    <span class="Span-e"><strong>Comentarios: </strong> @read.Comment</span>
+    <span class="Span-e"><strong>Fuente Suministro: </strong> @read.Comment</span>
 </div>
 
 <div class="form-row">&nbsp;</div>

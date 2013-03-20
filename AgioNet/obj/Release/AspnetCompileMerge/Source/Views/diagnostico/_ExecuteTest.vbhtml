@@ -1,7 +1,8 @@
 ﻿@ModelType Agionet.ExecTestModel
     
 @Code
-    Dim isTested As AgioNet.isTestedModel = Session("isTested")
+    Dim isTested As New AgioNet.isTestedModel
+    isTested.IsTested(Session("OrderID")) ' = Session("isTested")
     
     Dim OptionList As List(Of SelectListItem) = New List(Of SelectListItem)
     Dim _opt As SelectListItem
@@ -33,6 +34,10 @@ End Code
     });
 
 </script>
+<!-- Ventana modal de error -->
+@If TempData("ErrMsg") <> "" Then
+    @Html.Partial("_ErrorPartial")
+End If
 <!-- Inicia diseño del formulario -->
 <h2 class="TituloFormulario--dg"> Realizar una prueba</h2>
 

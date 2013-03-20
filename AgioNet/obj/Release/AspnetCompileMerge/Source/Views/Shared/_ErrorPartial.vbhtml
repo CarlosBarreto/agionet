@@ -1,5 +1,7 @@
 ﻿@Code
     Dim ErrorMessage As String = TempData("ErrMsg")
+    '-- Limpiar tempdata
+    TempData.Remove("ErrMsg")
 End Code
 <script type="text/javascript">
     $(function () {

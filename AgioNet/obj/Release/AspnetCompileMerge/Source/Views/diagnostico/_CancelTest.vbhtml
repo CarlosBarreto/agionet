@@ -4,7 +4,9 @@
     'ViewData("Title") = "Cancel Test"
     'Session("Section") = "diagnostico"
     'Dim TestID As String = Html.Encode(TempData("TESTID"))
-    Dim isTested As AgioNet.isTestedModel = Session("isTested")
+    Dim isTested As New AgioNet.isTestedModel '= Session("isTested")
+    isTested.IsTested(Session("OrderID")) ' = Session("isTested")
+    
 End Code
 <script type="text/javascript"> 
     $(document).ready(function () {
@@ -16,6 +18,10 @@ End Code
         }
     }); 
 </script>
+<!-- Ventana modal de error -->
+@If TempData("ErrMsg") <> "" Then
+    @Html.Partial("_ErrorPartial")
+End If
 <!-- Inicia diseño del formulario -->
 <h2 class="TituloFormulario--dg">DIAGNOSTIC - Cancelar una prueba</h2>
 

@@ -2,6 +2,10 @@
     Dim read As AgioNet.OrderInfoModel = TempData("Model")
     
 End Code
+<!-- Ventana modal de error -->
+@If TempData("ErrMsg") <> "" Then
+    @Html.Partial("_ErrorPartial")
+End If
 
 <div class="form-row">
     <span class="Span-c"><strong>Orden: </strong> @read.OrderID</span>

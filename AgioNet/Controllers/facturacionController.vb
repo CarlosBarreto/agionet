@@ -61,6 +61,9 @@ Namespace AgioNet
                 If DA._LastErrorMessage <> "" Then
                     Throw New Exception(DA._LastErrorMessage)
                 End If
+                While DR.Read
+                    TempData("ErrMsg") = DR(0)
+                End While
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
             Finally
@@ -87,6 +90,9 @@ Namespace AgioNet
                 If DA._LastErrorMessage <> "" Then
                     Throw New Exception(DA._LastErrorMessage)
                 End If
+                While DR.Read
+                    TempData("ErrMsg") = DR(0)
+                End While
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
             Finally

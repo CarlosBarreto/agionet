@@ -193,3 +193,14 @@ TD { border:1px solid #EAEAEA; padding-left:2px;}
     width:100%;
 }
 /* -- ESTADO --*/
+
+#OtroContenedor {
+    display: block;
+    float: left;
+    margin-top:100px;
+    width: 100%;
+}
+
+#ContenedorOrderIDForm {
+    height:180px;
+}

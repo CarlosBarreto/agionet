@@ -48,7 +48,8 @@ Namespace AgioNet
         ' 2013-03-10
         ' GET: /calidad/inspeccion_calidad
         <Authorize> _
-        Public Function inspeccion_calidad() As ActionResult
+        Public Function inspeccion_calidad(ByVal model As ScanOrderModel) As ActionResult
+            TempData("OrderID") = model.OrderID
             Return Me.View()
         End Function
 
@@ -62,7 +63,12 @@ Namespace AgioNet
                 Me.DR = Me.DA.ExecuteSP("SaveInspeccionCalidad", model.OrderID, model.Result, model.Comment, User.Identity.Name)
                 If DA._LastErrorMessage <> "" Then
                     Throw New Exception(DA._LastErrorMessage)
+                Else
+                    While DR.Read
+                        TempData("ErrMsg") = DR(0)
+                    End While
                 End If
+
                 result = RedirectToAction("inspeccion_calidad")
             Catch ex As Exception
                 TempData("ErrMsg") = ex.Message

@@ -58,7 +58,7 @@ End Code
 </div>
 
 <div class="form-row">
-    <span class="Span-b"><strong>Flete: </strong> @read.Delivery</span>
+    <span class="Span-i"><strong>Flete: </strong> @read.Delivery</span>
     <span class="Span-c"><strong>Horario de recolección: </strong> @read.DeliveryTime</span>
 </div>
 

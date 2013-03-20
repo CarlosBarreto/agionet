@@ -274,7 +274,7 @@ Namespace AgioNet
         '2013.02.13
         ' POST: /diagnostico/ExecuteTest
         <Authorize, HttpPost> _
-        Public Function ExecuteTest(ByVal model As ExecTestModel) As ActionResult
+        Public Function ExecuteTest(ByVal model As ExecTestModel) As PartialViewResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Try
                 Me.DR = Me.DA.ExecuteSP("dg_ExecTest", model.TestID, model.Result, model.TextLog, model.Failure)
@@ -291,7 +291,7 @@ Namespace AgioNet
                 Me.DA.Dispose()
             End Try
 
-            Return RedirectToAction("ExecuteTest") ' PartialView("_EjecuteTest") ' Me.RedirectToAction("realizar_pruebas")
+            Return PartialView("_ExecuteTest") ' PartialView("_EjecuteTest") ' Me.RedirectToAction("realizar_pruebas")
         End Function
 
         ' 2013.02.13
@@ -949,22 +949,6 @@ Namespace AgioNet
                     Session.Add("OrderInfo", myModel)
 
                     '-- Si no hay errores, comprobar valores de is tested
-                    Dim isTested As New isTestedModel
-                    If Not DR.IsClosed Then
-                        DR.Close()
-                    End If
-
-                    DR = DA.ExecuteSP("dg_isTested", model.OrderId)
-                    If DR.HasRows Then
-                        Do While DR.Read
-                            isTested = New isTestedModel With {.Response = DR(0), .TestID = DR(1), .Result = DR(2), .TextLog = DR(3), .Failure = DR(4)}
-                        Loop
-                    Else
-                        'Si no hay datos, mostrar error
-                        Throw New Exception("Error, no se han encontrado datos")
-                    End If
-
-                    Session.Add("isTested", isTested)
                     Retorno = Me.View 'Me.RedirectToAction("pruebasMaster")
                 Else
                     Throw New Exception(DA._LastErrorMessage)
@@ -1096,7 +1080,8 @@ Namespace AgioNet
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim Retorno As New PartialViewResult
             Try
-                Dim isTested As isTestedModel = Me.Session("isTested")
+                Dim isTested As New isTestedModel '= Me.Session("isTested")
+                isTested.IsTested(Session("OrderID"))
 
                 Dim view As New TestView
                 Me.DR = Me.DA.ExecuteSP("dg_ViewTest", isTested.TestID)

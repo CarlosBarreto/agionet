@@ -3,6 +3,9 @@
 @Code
     ViewData("Title") = "Empaque - Recibo de empaqu(PACKING)"
     Session("Section") = "empaque"
+    Dim Read() As AgioNet.reciboEmpaqueModel = TempData("Model")
+
+    Dim grid As WebGrid = New WebGrid(Read)
 End Code
 <script type="text/javascript">
     $(document).ready(function () {
@@ -41,3 +44,14 @@ End If
      </span>
 End Using
 </div>
+<br /><br />
+<h2 class="TituloFormulario">Listado de Ordenes Pendientes de empacar</h2>
+@grid.GetHtml(columns:=grid.Columns( _
+    grid.Column("OrderID", "Orden"), _
+    grid.Column("Customer", "Cliente"), _
+    grid.Column("ProductType", "Tipo de producto"), _
+    grid.Column("SerialNo", "Numero de serie"), _
+    grid.Column("Model", "Modelo"), _
+    grid.Column("Description", "Descripcion") _
+))
+

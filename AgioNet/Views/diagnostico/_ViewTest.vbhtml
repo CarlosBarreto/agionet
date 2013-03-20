@@ -1,7 +1,9 @@
 ﻿@ModelType AgioNet.TestIDListModel
     
 @Code
-    Dim isTested As AgioNet.isTestedModel = Session("isTested")
+    Dim isTested As New AgioNet.isTestedModel '= Session("isTested")
+    isTested.IsTested(Session("OrderID")) ' = Session("isTested")
+    
     Dim test As Object
     test = TempData("TestDetail")
 End Code
@@ -11,6 +13,10 @@ End Code
     }); 
 </script>
 
+<!-- Ventana modal de error -->
+@If TempData("ErrMsg") <> "" Then
+    @Html.Partial("_ErrorPartial")
+End If
 
 <!-- Inicia diseño del formulario -->
 <h2 class="TituloFormulario">Detalles de prueba para la orden [@Session("OrderID")]</h2>

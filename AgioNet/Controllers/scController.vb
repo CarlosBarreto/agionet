@@ -168,10 +168,12 @@ Namespace AgioNet
                 Me.DR = Me.DA.ExecuteSP("sc_geDiagnosticCost ", model.OrderID)
                 If (Me.DR.HasRows And (Me.DA._LastErrorMessage = "")) Then
                     Do While Me.DR.Read
-                        Cost = New AppCostModel With {.OrderID = DR(0), .Costo = DR(1), .LeadTime = DR(2), .Comentario = DR(3)}
+                        Cost = New AppCostModel With {.OrderID = DR(0), .Costo = DR(1), .Flete = DR(2), .GastosImportacion = DR(3), _
+                                                      .LeadTime = DR(4), .Proveedor = DR(5), .Comentario = DR(6)}
                     Loop
                 Else
-                    Cost = New AppCostModel With {.OrderID = "", .Costo = "", .LeadTime = "", .Comentario = ""}
+                    Cost = New AppCostModel With {.OrderID = "", .Costo = "", .Flete = "", .GastosImportacion = "", _
+                                                  .LeadTime = "", .Proveedor = "", .Comentario = ""}
                 End If
 
                 TempData("model") = Cost
@@ -192,8 +194,13 @@ Namespace AgioNet
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
 
             Try
-                model.Costo.Replace("$", "")
-                Me.DR = Me.DA.ExecuteSP("sc_CostearOrden ", model.OrderID, model.Costo, model.LeadTime, model.Comentario, model.CostBy)
+                model.Costo = Trim(model.Costo.Replace("$", ""))
+                model.Flete = Trim(model.Flete.Replace("$", ""))
+                model.GastosImportacion = Trim(model.GastosImportacion.Replace("$", ""))
+                model.Comentario = HttpUtility.HtmlEncode(model.Comentario)
+
+                Me.DR = Me.DA.ExecuteSP("sc_CostearOrden ", model.OrderID, model.Costo, model.Flete, model.GastosImportacion, _
+                                        model.LeadTime, model.Proveedor, model.Comentario, model.CostBy)
                 If DA._LastErrorMessage <> "" Then
                     Throw New Exception(DA._LastErrorMessage)
                 End If
@@ -206,6 +213,130 @@ Namespace AgioNet
             End Try
 
             Return RedirectToAction("ordenes_diagnosticadas")
+
+        End Function
+
+        ' 2013.03.15 
+        ' GET: /sc/cotizar_cliente
+        <Authorize> _
+        Public Function cotizar_cliente() As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray(100) As OrdenesCosteadasModel
+            Dim index As Integer = 0
+            Try
+                Me.DR = Me.DA.ExecuteSP("sc_OrdenesCosteadas")
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+
+                If Me.DR.HasRows Then
+                    Do While Me.DR.Read
+                        modelArray(index) = New OrdenesCosteadasModel With {.OrderID = DR(0), .Incoming = DR(1), .ProductModel = DR(2), _
+                                                                .ProductDescription = DR(3), .PartNumber = DR(4), .SerialNumber = DR(5)}
+                        If index >= modelArray.Length Then ReDim Preserve modelArray(index + 1)
+                        index += 1
+                    Loop
+                    ' -- Reparado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                Else
+                    index = 0
+                    modelArray(index) = New OrdenesCosteadasModel With {.OrderID = "no data", .Incoming = "no data", .ProductModel = "no data", _
+                                                    .ProductDescription = "no data", .PartNumber = "no data", .SerialNumber = "no data"}
+                    index += 1
+                    ' -- Reparado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                Return Me.RedirectToAction("index")
+            Finally
+                DA.Dispose()
+            End Try
+
+            Me.TempData.Item("Model") = modelArray
+            Return Me.View
+        End Function
+
+        ' 2013.03.15
+        ' GET: /sc/cotizarcliente
+        Public Function cotizarcliente(ByVal model As ScanOrderModel) As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim Sumatoria As Integer = 0
+
+            Dim modelArray(100) As SubOrderListModel
+            Dim index As Integer = 0
+            Try
+                Me.DR = Me.DA.ExecuteSP("sc_getSubOrderList", model.OrderID)
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+
+                If Me.DR.HasRows Then
+                    Do While Me.DR.Read
+                        modelArray(index) = New SubOrderListModel With {.OrderID = DR(0), .PartNumber = DR(1), .Description = DR(2), _
+                                            .Commodity = DR(3), .SerialNumber = DR(4), .Costo = DR(5), .LeadTime = DR(6), _
+                                            .Failure = DR(7), .Solution = DR(8)}
+                        If index >= modelArray.Length Then ReDim Preserve modelArray(index + 1)
+                        index += 1
+                    Loop
+                    ' -- Reparado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                Else
+                    index = 0
+                    modelArray(index) = New SubOrderListModel With {.OrderID = "no data", .PartNumber = "no data", .Description = "no data", _
+                                            .Commodity = "no data", .SerialNumber = "no data", .Costo = "no data", .LeadTime = "no data", _
+                                            .Failure = "no data", .Solution = "no data"}
+                    index += 1
+                    ' -- Reparado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                Return Me.RedirectToAction("index")
+            Finally
+                DA.Dispose()
+            End Try
+
+            Me.TempData.Item("Model") = modelArray
+            Return Me.View
+        End Function
+
+        ' 2013.03.19
+        ' POST: /Cotizarcliente
+        <Authorize, HttpPost> _
+        Public Function cotizarcliente(ByVal model As CotizarClienteModel) As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+
+            Try
+                model.ManoObra = Trim(model.ManoObra.Replace("$", ""))
+                model.ManoObra = Trim(model.ManoObra.Replace(",", ""))
+                model.Viaje = Trim(model.Viaje.Replace("$", ""))
+                model.Viaje = Trim(model.Viaje.Replace(",", ""))
+                model.SubTotal = Trim(model.SubTotal.Replace("$", ""))
+                model.SubTotal = Trim(model.SubTotal.Replace(",", ""))
+                model.IVA = Trim(model.IVA.Replace("$", ""))
+                model.IVA = Trim(model.IVA.Replace(",", ""))
+                model.Total = Trim(model.Total.Replace("$", ""))
+                model.Total = Trim(model.Total.Replace(",", ""))
+
+                If model.Total = "0.00" Then
+                    Throw New Exception("Error! Antes de guardar, debe calcular los valores")
+                End If
+
+                Me.DR = Me.DA.ExecuteSP("sc_saveCotizarCliente ", model.OrderID, model.ManoObra, model.Viaje, model.SubTotal, _
+                                        model.IVA, model.Total, model.LeadTime, User.Identity.Name)
+
+                If DA._LastErrorMessage <> "" Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+            Finally
+                DA.Dispose()
+            End Try
+
+            Return RedirectToAction("cotizar_cliente")
 
         End Function
 
@@ -453,7 +584,7 @@ Namespace AgioNet
         ' PUSH: /reparacion/cancel_orden
         <Authorize, HttpPost> _
         Public Function cancel_order(ByVal model As ScanOrderModel) As ActionResult
-           Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Try
                 Me.DR = Me.DA.ExecuteSP("sc_CancelOrder", model.OrderID, model.Comment, Me.User.Identity.Name)
                 If (Me.DA._LastErrorMessage <> "") Then
@@ -476,7 +607,7 @@ Namespace AgioNet
 
             Return Me.RedirectToAction("cancel_order")
         End Function
-            
+
         ' Fields
         Protected Friend DA As DataAccess
         Protected Friend DR As SqlDataReader

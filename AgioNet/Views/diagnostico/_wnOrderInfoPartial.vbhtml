@@ -20,6 +20,10 @@ End Code
         $("#OrderInfo").css("visibility", "hidden");
     }
 </script>
+<!-- Ventana modal de error -->
+@If TempData("ErrMsg") <> "" Then
+    @Html.Partial("_ErrorPartial")
+End If
 
 <div id="OrderInfo">
     <span class="OrderInfo_Title">Información de la orden <a href="javascript:close(); return false" class="OrderInfo_Closebt">X</a></span>

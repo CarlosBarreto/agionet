@@ -1,7 +1,9 @@
 ﻿@ModelType Agionet.RegFailureModel
     
 @Code
-    Dim isTested As AgioNet.isTestedModel = Session("isTested")
+    Dim isTested As New AgioNet.isTestedModel '= Session("isTested")
+    isTested.IsTested(Session("OrderID")) ' = Session("isTested")
+    
     Dim read As AgioNet.RegFailureModel = TempData("model")
     
 End Code
@@ -17,7 +19,10 @@ End Code
         }
     }); 
 </script>
-
+<!-- Ventana modal de error -->
+@If TempData("ErrMsg") <> "" Then
+    @Html.Partial("_ErrorPartial")
+End If
 <!-- Inicia diseño del formulario -->
 <h2 class="TituloFormulario--dg">Registrar Una falla</h2>
 @Using Ajax.BeginForm("AddFailure", "diagnostico", New AjaxOptions With {.UpdateTargetId = "tab-ContIzquierda"}, New With {.Method = "POST"})

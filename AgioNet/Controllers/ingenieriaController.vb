@@ -916,7 +916,7 @@ Namespace AgioNet
                 Me.DR = Me.DA.ExecuteSP("in_DelMaterial", model.SKUNo, model.PartNo)
                 If (Me.DA._LastErrorMessage <> "") Then
                     Me.TempData.Item("ErrMsg") = Me.DA._LastErrorMessage
-                    Return Me.View
+                    Return Me.RedirectToAction("quitar_material")
                 End If
 
                 Do While Me.DR.Read

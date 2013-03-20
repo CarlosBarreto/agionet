@@ -16,12 +16,29 @@
     OptionList.Add(_opt)
     
 End Code
+<script src='@Url.Content("~/Scripts/jquery.agiotech.js")' type="text/javascript"></script>
+
 <script type="text/javascript"> 
     $(document).ready(function () {
         var data = "@Read.Comentario";
         if (data != "") {
             $("#Comentario").html("@Replace(Read.Comentario, vbNewLine, "\n")");
         }
+
+        $("#LeadTime").datepicker({ dateFormat: "dd/mm/yy" });
+
+        $("#Costo").change(function () { 
+            $("#Costo").numeric({ prefix: '$ ', cents: true });
+        });
+
+        $("#Flete").change(function () {
+            $("#Flete").numeric({ prefix: '$ ', cents: true });
+        });
+
+        $("#GastosImportacion").change(function () {
+            $("#GastosImportacion").numeric({ prefix: '$ ', cents: true });
+        });
+
     }); 
 </script>
 
@@ -48,10 +65,28 @@ End If
                     <span class="Span-a"><span class="PCenter">Costo</span></span>
                     <span class="Span-c"> @Html.TextBoxFor(Function(m) m.Costo, New With { .Value = Read.Costo })  </span>
                 </div>
+
+                <div class="row">
+                    <span class="Span-a"><span class="PCenter">Flete</span></span>
+                    <span class="Span-c"> @Html.TextBoxFor(Function(m) m.Flete, New With {.Value = Read.Flete})  </span>
+                </div>
+
+                <div class="row">
+                    <span class="Span-a"><span class="PCenter">Gastos de Importación</span></span>
+                    <span class="Span-c"> @Html.TextBoxFor(Function(m) m.GastosImportacion, New With {.Value = Read.GastosImportacion})  </span>
+                </div>
+
                 <div class="row">
                     <span class="Span-a"><span class="PCenter">LeadTime</span></span>
                     <span class="Span-c"> @Html.TextBoxFor(Function(m) m.LeadTime, New With {.Value = Read.LeadTime}) </span>
+                    <span class="Span-a">(dd/mm/aaaa)</span>
                 </div>
+                
+                <div class="row">
+                    <span class="Span-a"><span class="PCenter">Proveedor</span></span>
+                    <span class="Span-c"> @Html.TextBoxFor(Function(m) m.Proveedor, New With {.Value = Read.Proveedor})  </span>
+                </div>
+
                 <div class="row">
                     <span class="Span-a"><span class="PCenter">Comentarios:</span></span>
                     <span class="Span-e">@Html.TextAreaFor(Function(m) m.Comentario, New With {.cols = 45, .rows = 3})</span>

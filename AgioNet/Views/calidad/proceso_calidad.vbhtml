@@ -1,4 +1,4 @@
-﻿@ModelType AgioNet.ProcesoCalidadModels
+﻿@ModelType AgioNet.ScanOrderModel
 
 @Code
     ViewData("Title") = "Calidad - En proceso de Calidad"
@@ -20,5 +20,6 @@ End If
     grid.Column("PartNumber", "Número de Parte"), _
     grid.Column("SerialNumber", "Número de Serie"), _
     grid.Column("FailureType", "Falla"), _
-    grid.Column("Comment", "Comentarios") _
+    grid.Column("Comment", "Comentarios"), _
+    grid.Column("Reparar", "Reparar", format:=Function(item) Html.ActionLink("Inspección", "inspeccion_calidad", "calidad", New With {.OrderID = item.OrderID}, vbNull)) _
 ))

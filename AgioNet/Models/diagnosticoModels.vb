@@ -1,6 +1,8 @@
 ﻿Imports System.ComponentModel
 Imports System.ComponentModel.DataAnnotations
 Imports System.Globalization
+Imports System.Data.SqlClient
+
 '2013.02.13
 Public Class AsignarEstacionModel
     ' Properties
@@ -822,6 +824,7 @@ Public Class isTestedModel
     Private _Result As String
     Private _TextLog As String
     Private _Failure As String
+    Private _ErrorMsg As String
 
     Public Property Response As String
         Get
@@ -867,6 +870,42 @@ Public Class isTestedModel
             _Failure = value
         End Set
     End Property
+
+    Public Property ErrorMsg As String
+        Get
+            Return _ErrorMsg
+        End Get
+        Set(value As String)
+            _ErrorMsg = value
+        End Set
+    End Property
+
+    ' metodos
+    Public Sub IsTested(ByVal _OrderID_ As String)
+        Dim DA As New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+        Dim DR As SqlDataReader
+        Try
+            DR = DA.ExecuteSP("dg_isTested", _OrderID_)
+            If DR.HasRows Then
+                Do While DR.Read
+                    _Response = DR(0)
+                    _TestID = DR(1)
+                    _Result = DR(2)
+                    _TextLog = DR(3)
+                    _Failure = DR(4)
+                Loop
+            Else
+                'Si no hay datos, mostrar error
+                Throw New Exception("Error, no se han encontrado datos")
+            End If
+            _ErrorMsg = ""
+        Catch ex As Exception
+            _ErrorMsg = ex.Message
+        Finally
+            DA.Dispose()
+        End Try
+    End Sub
+
 End Class
 
 '2013.02.13
