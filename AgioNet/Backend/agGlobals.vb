@@ -7,7 +7,7 @@ Module agGlobals
     Public Const __DATABASE__ As String = "AgioNet v1.3"
     Public Const __ENPASSWD__ As String = "00Ag10t3ch00"
     Public Const __PASS__ As String = "Agiotech01"
-    Public Const __SERVER__ As String = "localhost" ' "192.168.1.6" '
+    Public Const __SERVER__ As String = "localhost" '"192.168.1.6" '
     Public Const __USER__ As String = "aguser"
 
     '// Methods

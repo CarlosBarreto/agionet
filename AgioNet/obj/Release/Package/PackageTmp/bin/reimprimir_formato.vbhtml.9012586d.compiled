@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/logistica/reimprimir_formato.vbhtml" hash="7a9782b5" filehash="ffffcad63818fc7f" flags="110000" assembly="App_Web_rsep5jgm" type="ASP._Page_Views_logistica_reimprimir_formato_vbhtml">
+<preserve resultType="2" virtualPath="/Views/logistica/reimprimir_formato.vbhtml" hash="7a9782b5" filehash="ffffcc376a480387" flags="110000" assembly="App_Web_isgvnj40" type="ASP._Page_Views_logistica_reimprimir_formato_vbhtml">
     <filedeps>
         <filedep name="/Views/logistica/reimprimir_formato.vbhtml" />
     </filedeps>

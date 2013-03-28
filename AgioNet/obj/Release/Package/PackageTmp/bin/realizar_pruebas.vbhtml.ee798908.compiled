@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/diagnostico/realizar_pruebas.vbhtml" hash="7a9782b5" filehash="ffffe16b0669bf62" flags="110000" assembly="App_Web_g3nfpvq4" type="ASP._Page_Views_diagnostico_realizar_pruebas_vbhtml">
+<preserve resultType="2" virtualPath="/Views/diagnostico/realizar_pruebas.vbhtml" hash="7a9782b5" filehash="ffffe07007d43506" flags="110000" assembly="App_Web_bj5wsnph" type="ASP._Page_Views_diagnostico_realizar_pruebas_vbhtml">
     <filedeps>
         <filedep name="/Views/diagnostico/realizar_pruebas.vbhtml" />
     </filedeps>

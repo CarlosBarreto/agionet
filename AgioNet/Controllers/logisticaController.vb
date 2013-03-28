@@ -228,9 +228,11 @@ Namespace AgioNet
             Try
                 'Crear la imagen del código de barra
                 Dim path As String = (Me.Server.MapPath("~/Content/temp/") & code & ".jpg")
-                System.IO.File.WriteAllBytes(path, GenerarCodigo(Me.Server, code, "", 350, 40, 60))
+                If Not System.IO.File.Exists(path) Then
+                    System.IO.File.WriteAllBytes(path, GenerarCodigo(Me.Server, code, "", 350, 40, 60))
+                End If
 
-                Dim report As New PDFInTransitPage
+                Dim report As New PDFIntransit
                 report.RutaLogo = Me.Server.MapPath("~/Content/images/logo-01.jpg")
                 report.RutaBarCode = path
                 report.RutaComments = Me.Server.MapPath("~/Content/images/comments.jpg")

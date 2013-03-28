@@ -181,6 +181,9 @@ Namespace AgioNet
             Dim modelArray(100) As PendingOrdersModel
             Dim index As Integer = 0
 
+            ' -- Limpiar el TempData
+            TempData.Clear()
+
             Try
                 Me.DR = Me.DA.ExecuteSP("rc_getPendingOrders")
                 If (Me.DA._LastErrorMessage <> "") Then
@@ -236,9 +239,7 @@ Namespace AgioNet
         ' POST: /recibo/ingresar_orden
         <HttpPost, Authorize> _
         Public Function ingresar_orden(ByVal model As ScanOrderModel) As Object
-            Me.TempData.Item("Opt") = True
-            Me.TempData.Item("OrderID") = model.OrderID
-            Return Me.RedirectToAction("scan_info")
+            Return Me.RedirectToAction("scan_info", New With {.OrderID = model.OrderID})
         End Function
 
         ' 2013.02.14
@@ -424,7 +425,9 @@ Namespace AgioNet
                     Loop
 
                     Dim path As String = (Me.Server.MapPath("~/Content/temp/") & code & ".jpg")
-                    System.IO.File.WriteAllBytes(path, GenerarCodigo(Me.Server, code, "", 350, 40, 60))
+                    If Not System.IO.File.Exists(path) Then
+                        System.IO.File.WriteAllBytes(path, GenerarCodigo(Me.Server, code, "", 350, 40, 60))
+                    End If
 
                     Dim report As New PDFHojaViajera With { _
                         .RutaLogo = Me.Server.MapPath("~/Content/images/logo-01.jpg"), _
@@ -534,11 +537,7 @@ Namespace AgioNet
         <Authorize, HttpGet> _
         Public Function scan_info(ByVal model As ScanOrderModel) As ActionResult
             Try
-                'If Me.TempData.Item("Opt") <> "" Then
-                'Me.TempData.Keep("OrderID")
-                'Else
                 Me.TempData.Item("OrderID") = model.OrderID
-                'End If
             Catch ex As Exception
                 TempData("ErrMsg") = ex.Message
             End Try

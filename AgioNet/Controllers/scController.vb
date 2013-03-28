@@ -353,6 +353,7 @@ Namespace AgioNet
         Public Function crear_orden(ByVal model As CreateOrderModel) As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim str3 As String = String.Empty
+            Dim str5 As String = String.Empty
             Dim email As New agEmail
             Dim emailAddress As String = String.Empty
             Dim txtSubject As String = String.Empty
@@ -387,38 +388,16 @@ Namespace AgioNet
                                         model2.ProductModel, model2.productDescription, model2.PartNumber, model2.SerialNumber, _
                                         model2.Revision, model2.ServiceType, model2.FailureType, model2.Comment, Me.User.Identity.Name)
 
-                If (Me.DA.LastErrorMessage = "") Then
-                    Dim str5 As String = String.Empty
-                    Do While Me.DR.Read
-                        str3 = DR(0)
-                        str5 = DR(1)
-                    Loop
-
-                    If Not Me.DR.IsClosed Then
-                        Me.DR.Close()
-                    End If
-
-                    Me.DR = Me.DA.ExecuteSP("sys_getDistibutionList", "CREATEORDER")
-
-                    If Me.DR.HasRows Then
-                        Do While Me.DR.Read
-                            emailAddress = DR(0)
-                        Loop
-
-                        email.HTMLBody = True
-                        txtSubject = ("Creada nueva orden de reparación : " & str5)
-                        txtMessage = agGlobals.getCreateOrderEmailFormat(str5, model)
-
-                        If (model.CustomerType = "EndUser") Then
-                            email.SendEmail(model.Email, txtSubject, txtMessage)
-                        End If
-
-                        email.SendEmail(emailAddress, txtSubject, txtMessage)
-                    End If
-                Else
+                If (Me.DA.LastErrorMessage <> "") Then
                     Me.TempData.Item("ErrMsg") = Me.DA.LastErrorMessage
                     Return Me.View
                 End If
+
+
+                Do While Me.DR.Read
+                    str3 = DR(0)
+                    str5 = DR(1)
+                Loop
 
                 If Not Me.DR.IsClosed Then
                     Me.DR.Close()
@@ -426,6 +405,29 @@ Namespace AgioNet
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
                 Return View()
+            End Try
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("sys_getDistibutionList", "CREATEORDER")
+
+                If Me.DR.HasRows Then
+                    Do While Me.DR.Read
+                        emailAddress = DR(0)
+                    Loop
+
+                    email.HTMLBody = True
+                    txtSubject = ("Creada nueva orden de reparación : " & str5)
+                    txtMessage = agGlobals.getCreateOrderEmailFormat(str5, model)
+
+                    If (model.CustomerType = "EndUser") Then
+                        email.SendEmail(model.Email, txtSubject, txtMessage)
+                    End If
+
+                    email.SendEmail(emailAddress, txtSubject, txtMessage)
+                End If
+
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
             Finally
                 Me.DA.Dispose()
             End Try

@@ -352,6 +352,7 @@
     <Content Include="Views\facturacion\OnBilling.vbhtml" />
     <Content Include="Views\sc\cotizar_cliente.vbhtml" />
     <Content Include="Views\sc\cotizarcliente.vbhtml" />
+    <Content Include="Views\empaque\pagina_entrega.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
