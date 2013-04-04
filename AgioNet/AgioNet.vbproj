@@ -353,6 +353,7 @@
     <Content Include="Views\sc\cotizar_cliente.vbhtml" />
     <Content Include="Views\sc\cotizarcliente.vbhtml" />
     <Content Include="Views\empaque\pagina_entrega.vbhtml" />
+    <Content Include="Views\recibo\_ftpFilePartial.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

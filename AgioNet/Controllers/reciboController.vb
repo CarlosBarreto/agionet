@@ -458,9 +458,7 @@ Namespace AgioNet
             Me.TempData.Keep("ErrMsg")
             Me.TempData.Item("OrderID") = code
 
-            'Return Me.RedirectToAction("imprimir_hoja")
-            Dim filename As String = Me.Server.MapPath("~/Content/temp/rec/") & code & ".pdf"
-            Return File(filename, "application/pdf", Server.HtmlEncode(filename))
+            Return Me.View
         End Function
 
         '2013.02.14

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/sc/cancel_order.vbhtml" hash="7a9782b5" filehash="25ab6cc2350b" flags="110000" assembly="App_Web_n34d0bhv" type="ASP._Page_Views_sc_cancel_order_vbhtml">
+<preserve resultType="2" virtualPath="/Views/sc/cancel_order.vbhtml" hash="7a9782b5" filehash="25539dbd6f21" flags="110000" assembly="App_Web_dzznbjvh" type="ASP._Page_Views_sc_cancel_order_vbhtml">
     <filedeps>
         <filedep name="/Views/sc/cancel_order.vbhtml" />
     </filedeps>

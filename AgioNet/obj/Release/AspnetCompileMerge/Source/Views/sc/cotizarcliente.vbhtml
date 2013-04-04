@@ -47,11 +47,13 @@ End Code
                 cont++;
             });
 
+            //Calcular utilidad neta
             cont = 0;
             $(".cUtil").each(function () {
                 costo = Costs[cont];
-                putilidad = (Percs[cont] / 100);
-                Util = parseFloat(costo) * parseFloat(putilidad);
+                //putilidad = (Percs[cont] / 100);
+                //Util = parseFloat(costo) * parseFloat(putilidad);
+                Util = Math.ceil((costo * 100 / (100 -Percs[cont]) ) - costo);
                 sumatoria = sumatoria + (parseFloat(costo) + Util);
                 $(this).val(Util.toFixed(2))
                 cont++;
@@ -60,8 +62,9 @@ End Code
             cont = 0;
             $(".precio").each(function () {
                 costo = Costs[cont];
-                putilidad = (Percs[cont] / 100);
-                Util = parseFloat(costo) * parseFloat(putilidad);
+                //putilidad = (Percs[cont] / 100);
+                //Util = parseFloat(costo) * parseFloat(putilidad);
+                Util = Math.ceil((costo * 100 / (100 - Percs[cont])) - costo);
                 precio = parseFloat(costo) + Util;
                 $(this).val(precio)
                 cont++;

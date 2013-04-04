@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Shared/_menuPartial.vbhtml" hash="7a9782b5" filehash="ffffd462ec67f1aa" flags="110000" assembly="App_Web_koyaiazx" type="ASP._Page_Views_Shared__menuPartial_vbhtml">
+<preserve resultType="2" virtualPath="/Views/Shared/_menuPartial.vbhtml" hash="7a9782b5" filehash="ffffd4cb9f211cf2" flags="110000" assembly="App_Web_2nwwizgi" type="ASP._Page_Views_Shared__menuPartial_vbhtml">
     <filedeps>
         <filedep name="/Views/Shared/_menuPartial.vbhtml" />
     </filedeps>

@@ -597,6 +597,7 @@ Public Class SheduleTestModel
         End Set
     End Property
 
+    <AllowHtml> _
     Public Property Comentarios As String
         Get
             Return _Comentarios
