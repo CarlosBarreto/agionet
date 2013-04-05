@@ -1,4 +1,4 @@
-﻿@ModelType AgioNet.SubOrderListModel
+﻿@ModelType AgioNet.CotizarClienteModel
 
 @Code
     ViewData("Title") = "Servicio a clientes - Costeo"
@@ -10,6 +10,8 @@
 End Code
 <script src='@Url.Content("~/Scripts/jquery.agiotech.js")' type="text/javascript"></script>
 <script type="text/javascript"> 
+    var Counter = 0;
+
     $(document).ready(function () {
         $(".Costo").numeric({ prefix: '$ ', cents: true });
         $(".cUtil").numeric({ prefix: '$ ', cents: true });
@@ -34,6 +36,7 @@ End Code
                 //alert(costo);
                 Costs[cont] = costo;
                 cont++;
+                Counter++;
             });
 
             costo = 0.0;
@@ -80,10 +83,10 @@ End Code
             $("#SubTotal").val(subtotal);
 
             iva = subtotal * 0.16;
-            $("#iva").val(iva);
+            $("#IVA").val(iva);
             
             total = subtotal + iva;
-            $("#total").val(total);
+            $("#Total").val(total);
 
             //Aplicar formato moneda
             $(".Costo").numeric({ prefix: '$ ', cents: true });
@@ -92,9 +95,28 @@ End Code
             $("#ManoObra").numeric({ prefix: '$ ', cents: true });
             $("#Viaje").numeric({ prefix: '$ ', cents: true });
             $("#SubTotal").numeric({ prefix: '$ ', cents: true });
-            $("#iva").numeric({ prefix: '$ ', cents: true });
-            $("#total").numeric({ prefix: '$ ', cents: true });
+            $("#IVA").numeric({ prefix: '$ ', cents: true });
+            $("#Total").numeric({ prefix: '$ ', cents: true });
         });
+
+        /*
+        $("#Formularioo").submit(function (e) {
+           // return e.preventDefault();
+            alert("Pasa por aqui");
+            for (i = 0; i < Counter; i++) {
+                Util = Math.ceil((Costs[i] * 100 / (100 -Percs[i]) ) - Costs[i]);
+                $.ajax({
+                    url: 'sc/saveCostPart',
+                    type: 'POST',
+                    data: "costo=" + Costs[i] + "&pUtilidad=" + Percs[i] + "&Utilidad=" + Util,
+                    datatype: "text",
+                    success: function (obj) {
+                        alert("Funciona");
+                    }
+                });
+            }
+        });*/
+       
     });
 </script>
 
@@ -105,9 +127,11 @@ End If
 
 <!-- Inicia diseño del formulario -->
 <h2 class="TituloFormulario">Ordenes listas para cotizar a cliente</h2>
-
+<div id="Formulario">
+@Using Html.BeginForm("cotizarcliente", "sc", FormMethod.Post, New With {.id = "Formularioo"})
+    
 @grid.GetHtml(columns:=grid.Columns( _
-    grid.Column("OrderID", "Orden"), _
+    grid.Column("OrderID", "Orden", format:=Function(item) Html.TextBoxFor(Function(m) m.SubOrder, New With {.Value = item.OrderID})), _
     grid.Column("PartNumber", "Numero de parte"), _
     grid.Column("Description", "Descripción"), _
     grid.Column("Commodity", "Comodity"), _
@@ -116,39 +140,43 @@ End If
     grid.Column("LeadTime", "Lead Time"), _
     grid.Column("Failure", "Falla"), _
     grid.Column("Solution", "Solución"), _
-    grid.Column("PUtilidad", "%Utilidad", format:=Function(item) Html.TextBox("Utilidad", 0, New With {.class = "cpUtil", .size = 5})), _
+    grid.Column("PUtilidad", "%Utilidad", format:=Function(item) Html.TextBoxFor(Function(m) m.SubUtilidad, New With {.class = "cpUtil", .size = 5})), _
     grid.Column("UtilidadN", "Utilidad Neta", format:=Function(item) Html.TextBox("UtilidadNeta", 0, New With {.class = "cUtil", .size = 5})), _
-    grid.Column("Precio", "Precio", format:=Function(item) Html.TextBox("precio", 0, New With {.class = "precio", .size = 5})) _
+    grid.Column("Precio", "Precio", format:=Function(item) Html.TextBox("precio", 0, New With {.class = "precio", .size = 5})), _
+    grid.Column("", "", format:=Function(item) Html.HiddenFor(Function(m) m.SubCosto, New With {.Value = item.Costo})) _
 ))
 
-<div id="Formulario">
-        @Using Html.BeginForm()
+
+        
             @<div id="Formulario2">
                 <div class="row">
                   <span class="Span-a"> <span class="PCenter">Mano de Obra: </span> </span>
-                  <span class="Span-c"> @Html.TextBox("ManoObra", 500) </span>
+                  <span class="Span-c"> 
+                      @Html.TextBoxfor(Function(m) m.ManoObra, New With { .Value = "358"})
+                      @Html.TextBoxFor(Function(m) m.OrderID, New With {.Value = tempdata("OrderID") })
+                  </span>
                 </div>
 
                 <div class="row">
                     <span class="Span-a"><span class="PCenter">Viaje</span></span>
-                    <span class="Span-c"> @Html.TextBox("Viaje", 500) </span>
+                    <span class="Span-c"> @Html.TextBoxFor(Function(m) m.Viaje, New With {.Value = "500" }) </span>
                 </div>
                 <div class="row">
                     <span class="Span-a"><span class="PCenter">Sub Total</span></span>
-                    <span class="Span-c"> @Html.TextBox("SubTotal") </span>
+                    <span class="Span-c"> @Html.TextBoxFor(Function(m) m.SubTotal) </span>
                 </div>
                 <div class="row">
                     <span class="Span-a"><span class="PCenter">IVA</span></span>
-                    <span class="Span-e">@Html.TextBox("iva")</span>
+                    <span class="Span-e">@Html.TextBoxFor(Function(m) m.IVA)</span>
                 </div>
                 <div class="row">
                     <span class="Span-a"><span class="PCenter">Total</span></span>
-                    <span class="Span-e">@Html.TextBox("total")</span>
+                    <span class="Span-e">@Html.TextBoxfor(Function(m) m.Total)</span>
                 </div>
                 <!-- Upd 2013.03.19 CarlosB Agregar LeadTime-->
                 <div class="row">
                     <span class="Span-a"><span class="PCenter">Lead Time</span></span>
-                    <span class="Span-e">@Html.TextBox("LeadTime")</span>
+                    <span class="Span-e">@Html.TextBoxfor(Function(m) m.LeadTime)</span>
                 </div>
                 <div class="row">
                     <span class="Span-c">&nbsp;</span>

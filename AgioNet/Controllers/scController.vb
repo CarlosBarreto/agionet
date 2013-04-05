@@ -298,6 +298,7 @@ Namespace AgioNet
             End Try
 
             Me.TempData.Item("Model") = modelArray
+            Me.TempData.Item("OrderID") = model.OrderID
             Return Me.View
         End Function
 
@@ -306,6 +307,7 @@ Namespace AgioNet
         <Authorize, HttpPost> _
         Public Function cotizarcliente(ByVal model As CotizarClienteModel) As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim response As ActionResult
 
             Try
                 model.ManoObra = Trim(model.ManoObra.Replace("$", ""))
@@ -323,6 +325,20 @@ Namespace AgioNet
                     Throw New Exception("Error! Antes de guardar, debe calcular los valores")
                 End If
 
+                '-- Guardar los registros por separado 
+                Dim cont As Integer = 0
+                While model.SubOrder.Length
+                    DR = DA.ExecuteSP("sc_saveCosteoParte", model.SubOrder(cont), model.SubCosto(cont), model.SubUtilidad(cont))
+                    If DA._LastErrorMessage <> "" Then
+                        Throw New Exception(DA._LastErrorMessage)
+                    End If
+                    If Not DR.IsClosed Then
+                        DR.Close()
+                    End If
+                    cont += 1
+                End While
+
+                '-- Guardar el resultado de la cotización
                 Me.DR = Me.DA.ExecuteSP("sc_saveCotizarCliente ", model.OrderID, model.ManoObra, model.Viaje, model.SubTotal, _
                                         model.IVA, model.Total, model.LeadTime, User.Identity.Name)
 
@@ -330,14 +346,15 @@ Namespace AgioNet
                     Throw New Exception(DA._LastErrorMessage)
                 End If
 
+                response = RedirectToAction("cotizar_cliente")
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
+                response = Me.View
             Finally
                 DA.Dispose()
             End Try
 
-            Return RedirectToAction("cotizar_cliente")
-
+            Return response
         End Function
 
         ' 2013.02.14
@@ -576,14 +593,14 @@ Namespace AgioNet
 
         '------------------
         ' 2013.03.06 
-        ' GET: /reparacion/cancel_orden
+        ' GET: /sc/cancel_orden
         <Authorize> _
         Public Function cancel_order() As ActionResult
             Return Me.View
         End Function
 
         ' 2013.03.06
-        ' PUSH: /reparacion/cancel_orden
+        ' POST: /sc/cancel_orden
         <Authorize, HttpPost> _
         Public Function cancel_order(ByVal model As ScanOrderModel) As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
@@ -608,6 +625,19 @@ Namespace AgioNet
             End Try
 
             Return Me.RedirectToAction("cancel_order")
+        End Function
+
+        '-------------------
+        ' 2013.04.04 
+        ' GET: /sc/envio_cotizacion
+        Public Function envio_cotizacion() As ActionResult
+            Return Me.View
+        End Function
+
+        ' 2013.04.04 
+        ' POST: /sc/saveCostPart
+        Public Function saveCostPart(ByVal costo As String, pUtilidad As String, Utilidad As String) As ActionResult
+            Return Json(New With {.success = "true"})
         End Function
 
         ' Fields

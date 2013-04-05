@@ -3,12 +3,18 @@
 @Code
     ViewData("Title") = "Recibo - Mover a Incoming (Transfer)"
     Session("Section") = "recibo"
+    
+    Dim Read() As AgioNet.PendingOrdersModel = TempData("Model")
+
+    Dim grid As WebGrid = New WebGrid(Read)
+    
 End Code
 <script type="text/javascript">
     $(document).ready(function () {
         $("#Comment").html("@User.Identity.Name : En proceso de recolección... ");
     });
 </script>
+
 <!-- Ventana modal de error -->
 @If TempData("ErrMsg") <> "" Then
     @Html.Partial("_ErrorPartial")
@@ -16,7 +22,7 @@ End If
 
 
 <!-- Inicia diseño del formulario -->
-<h2 class="TituloFormulario">Mover a Incoming (Transfer)</h2>
+<h2 class="TituloFormulario">Pendientes de Mover a Incoming (Transfer)</h2>
 
 <div id="ContenedorOrderIDForm">
 @Using Html.BeginForm()
@@ -41,3 +47,15 @@ End If
      </span>
 End Using
 </div>
+
+<h2 class="TituloFormulario">Listado de Ordenes Pendientes de recibir</h2>
+
+@grid.GetHtml(columns:=grid.Columns( _
+                   grid.Column("OrderID", "Orden"), _
+                   grid.Column("Customer", "Cliente"), _
+                   grid.Column("ProductType", "Tipo de producto"), _
+                   grid.Column("SerialNo", "Numero de serie"), _
+                   grid.Column("Model", "Modelo"), _
+                   grid.Column("Description", "Descripcion") _
+))
+

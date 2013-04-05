@@ -457,8 +457,10 @@ Namespace AgioNet
             Me.TempData.Item("PrintData") = data
             Me.TempData.Keep("ErrMsg")
             Me.TempData.Item("OrderID") = code
-
-            Return Me.View
+            '-- 
+            Dim filename As String = Me.Server.MapPath("~/Content/temp/rec/") & code & ".pdf"
+            Return File(filename, "application/pdf", Server.HtmlEncode(filename))
+            'Return Me.View
         End Function
 
         '2013.02.14
@@ -578,7 +580,46 @@ Namespace AgioNet
         ' GET: /recibo/trasnfer_incoming
         <Authorize> _
         Public Function transfer_incoming() As ActionResult
-            Return Me.View
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray(100) As PendingOrdersModel
+            Dim index As Integer = 0
+            Dim response As ActionResult
+
+            ' -- Limpiar el TempData
+            TempData.Clear()
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("rc_getTransferIncoming")
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+
+                If Me.DR.HasRows Then
+                    Do While Me.DR.Read
+                        modelArray(index) = New PendingOrdersModel With {.OrderID = DR(0), .Customer = DR(1), .ProductType = DR(2), _
+                                            .SerialNo = DR(3), .Model = DR(4), .Description = DR(5)}
+                        index += 1
+                    Loop
+                    ' -- Actualizado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                Else
+                    index = 0
+                    modelArray(index) = New PendingOrdersModel With { .OrderID = "No Data", .Customer = "No Data", .ProductType = "No Data", _
+                        .SerialNo = "No Data", .Model = "No Data", .Description = "No Data" }
+                    index += 1
+                    ' -- Actualizado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                End If
+                response = Me.View
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                response = Me.RedirectToAction("index")
+            Finally
+                DA.Dispose()
+            End Try
+
+            Me.TempData.Item("Model") = modelArray
+            Return response
         End Function
 
         ' 2013.02.14
@@ -603,7 +644,7 @@ Namespace AgioNet
                 Me.DA.Dispose()
             End Try
 
-            Return Me.RedirectToAction("recibo_almacen")
+            Return Me.RedirectToAction("transfer_incoming") ' Me.RedirectToAction("recibo_almacen")
         End Function
 
 

@@ -2,8 +2,8 @@
 
 @Code
 
-    ViewData("Title") = "ingenieria - Material Master"
-    Session("Section") = "ingenieria"
+    ViewData("Title") = "Recibo - Equipos recibidos en almacén"
+    Session("Section") = "recibo"
 
     Dim Read() As AgioNet.CheckinReportModel = TempData("Model")
     Dim opt As AgioNet.CheckinReportOptModel = TempData("OptModel")
@@ -15,7 +15,7 @@ End Code
     @Html.Partial("_ErrorPartial")
 End If
 <!-- Inicia diseño del formulario -->
-<h2 class="TituloFormulario">Equipos recibidos en Almacén</h2>
+<h2 class="TituloFormulario">Reporte de Recibo Almacén</h2>
 @Using Html.BeginForm() '"material_master", "ingenieria", FormMethod.Get, new AjaxOptions { .InsertionMode=InsertionMode.Replace, .UpdateTargetId="resultados" } )
     @<div id="Formulario">       
         <div class="row">

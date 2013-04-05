@@ -1069,6 +1069,7 @@ Public Class SubOrderListModel
     Private _Failure As String
     Private _Solution As String
 
+
     '--- Propiedades
     Public Property OrderID As String
         Get
@@ -1151,6 +1152,8 @@ Public Class SubOrderListModel
         End Set
     End Property
 
+
+
 End Class
 
 '2013.03.19
@@ -1162,6 +1165,11 @@ Public Class CotizarClienteModel
     Private _IVA As String
     Private _Total As String
     Private _Leadtime As String
+    '--------- procesamiento de suborder 
+    Private _SubOrder() As String
+    Private _SubCosto() As String
+    Private _SubUtilidad() As String
+
 
     Public Property OrderID As String
         Get
@@ -1226,4 +1234,31 @@ Public Class CotizarClienteModel
         End Set
     End Property
 
+    '------------- Procesamiento de suborder
+    Public Property SubOrder As String()
+        Get
+            Return _SubOrder
+        End Get
+        Set(value As String())
+            _SubOrder = value
+        End Set
+    End Property
+
+    Public Property SubCosto As String()
+        Get
+            Return _SubCosto
+        End Get
+        Set(value As String())
+            _SubCosto = value
+        End Set
+    End Property
+
+    Public Property SubUtilidad As String()
+        Get
+            Return _SubUtilidad
+        End Get
+        Set(value As String())
+            _SubUtilidad = value
+        End Set
+    End Property
 End Class
