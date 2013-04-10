@@ -1,7 +1,7 @@
 ﻿@ModelType Agionet.ScanOrderModel
     
 @Code
-    ViewData("Title") = "Empaque - Recibo de empaqu(PACKING)"
+    ViewData("Title") = "Empaque - Recibo de Empaque Producto Terminado"
     Session("Section") = "empaque"
     Dim Read() As AgioNet.reciboEmpaqueModel = TempData("Model")
 
@@ -19,7 +19,7 @@ End If
 
 
 <!-- Inicia diseño del formulario -->
-<h2 class="TituloFormulario">Proceso Recibo de empaque (PACKING)</h2>
+<h2 class="TituloFormulario">Proceso Recibo de Empaque Producto Terminado</h2>
 
 <div id="ContenedorOrderIDForm">
 @Using Html.BeginForm()
@@ -45,7 +45,7 @@ End If
 End Using
 </div>
 <br /><br />
-<h2 class="TituloFormulario">Listado de Ordenes Pendientes de empacar</h2>
+<h2 class="TituloFormulario">Listado de Ordenes Pendientes de Empacar</h2>
 @grid.GetHtml(columns:=grid.Columns( _
     grid.Column("OrderID", "Orden"), _
     grid.Column("Customer", "Cliente"), _

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/almacen/transfer_incoming.vbhtml" hash="7a9782b5" filehash="15db510b957f" flags="110000" assembly="App_Web_srvuwjeo" type="ASP._Page_Views_almacen_transfer_incoming_vbhtml">
+    <filedeps>
+        <filedep name="/Views/almacen/transfer_incoming.vbhtml" />
+    </filedeps>
+</preserve>

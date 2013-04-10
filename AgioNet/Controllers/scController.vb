@@ -195,8 +195,13 @@ Namespace AgioNet
 
             Try
                 model.Costo = Trim(model.Costo.Replace("$", ""))
+                model.Costo = Trim(model.Costo.Replace(",", ""))
+
                 model.Flete = Trim(model.Flete.Replace("$", ""))
+                model.Flete = Trim(model.Flete.Replace(",", ""))
+
                 model.GastosImportacion = Trim(model.GastosImportacion.Replace("$", ""))
+                model.GastosImportacion = Trim(model.GastosImportacion.Replace(",", ""))
                 model.Comentario = HttpUtility.HtmlEncode(model.Comentario)
 
                 Me.DR = Me.DA.ExecuteSP("sc_CostearOrden ", model.OrderID, model.Costo, model.Flete, model.GastosImportacion, _
@@ -327,7 +332,7 @@ Namespace AgioNet
 
                 '-- Guardar los registros por separado 
                 Dim cont As Integer = 0
-                While model.SubOrder.Length
+                While model.SubOrder.Length < cont
                     DR = DA.ExecuteSP("sc_saveCosteoParte", model.SubOrder(cont), model.SubCosto(cont), model.SubUtilidad(cont))
                     If DA._LastErrorMessage <> "" Then
                         Throw New Exception(DA._LastErrorMessage)
@@ -349,7 +354,7 @@ Namespace AgioNet
                 response = RedirectToAction("cotizar_cliente")
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
-                response = Me.View
+                response = RedirectToAction("cotizarcliente")
             Finally
                 DA.Dispose()
             End Try
@@ -638,6 +643,55 @@ Namespace AgioNet
         ' POST: /sc/saveCostPart
         Public Function saveCostPart(ByVal costo As String, pUtilidad As String, Utilidad As String) As ActionResult
             Return Json(New With {.success = "true"})
+        End Function
+
+        ' 2013.04.09
+        ' GET: /sc/detalle_orden
+        Public Function detalle_orden(ByVal model As ScanOrderModel) As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim CreateOrder As New CreateOrderModel
+            Dim OrderID As String
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("sc_OrderMaster_GetOrderInfo", model.OrderID)
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+
+                If Me.DR.HasRows Then
+                    Do While Me.DR.Read
+                        OrderID = DR(0)
+                        CreateOrder = New CreateOrderModel With {.CustomerName = DR(2), .RazonSocial = DR(3), .CustomerReference = DR(4), _
+                                     .RFC = DR(5), .Email = DR(6), .Address = DR(7), .ExternalNumber = DR(8), .InternalNumber = DR(9), _
+                                     .Address2 = DR(10), .City = DR(11), .State = DR(12), .Country = DR(13), .ZipCode = DR(14), _
+                                     .Telephone = DR(15), .Telephone2 = DR(16), .Telephone3 = DR(17), .Delivery = DR(18), .DeliveryTime = DR(19), _
+                                     .ProductClass = DR(21), .ProductType = DR(22), .ProductTrademark = DR(23), .ProductModel = DR(24), _
+                                     .productDescription = DR(25), .PartNumber = DR(26), .SerialNumber = DR(27), .Revision = DR(28), _
+                                     .ServiceType = DR(29), .FailureType = DR(30), .Comment = DR(31) _
+                        }
+                    Loop
+                    If (Not Me.DR.IsClosed And Me.DR.HasRows) Then
+                        Me.DR.Close()
+                    End If
+                End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                Return Me.RedirectToAction("index")
+            Finally
+                DA.Dispose()
+            End Try
+
+            TempData("Model") = CreateOrder
+            TempData("OrderID") = OrderID
+
+            Return Me.View
+        End Function
+
+        ' 2013.04.09 
+        ' POST: /sc/detalle_orden
+        <HttpPost> _
+        Public Function detalle_orden(ByVal model As CreateOrderModel) As ActionResult
+            Return RedirectToAction("ver_orden")
         End Function
 
         ' Fields

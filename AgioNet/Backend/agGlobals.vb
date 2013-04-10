@@ -298,6 +298,7 @@ Module agGlobals
 
     End Structure
 
+    'Upd by CarlosB 2013.04.09 -- 
     Public Structure TestView
         Public TESTID As String
         Public ORDERID As String
@@ -306,6 +307,7 @@ Module agGlobals
         Public TESTRESULT As String
         Public TESTSTART As String
         Public TESTEND As String
+        Public FAILURE As String
         Public TEXTLOG As String
         Public CREATEBY As String
     End Structure

@@ -11,7 +11,7 @@ Public Class agEmail
 
     'Methods
     Public Sub New()
-        _mailContact = "system@agiotech.com"
+        _mailContact = "atencionaclientes@agiotech.com"
     End Sub
 
     Public Sub SendEmail(EmailAddress As String, txtSubject As String, txtMessage As String)
@@ -23,7 +23,7 @@ Public Class agEmail
         mail.IsBodyHtml = _HTMLBody
         smtp = New SmtpClient()
         smtp.Host = "mail.agiotech.com"
-        smtp.Port = 26
+        smtp.Port = 587
         smtp.Credentials = New NetworkCredential("carlos.barreto@agiotech.com", "Agiotech01")
         smtp.Send(mail)
     End Sub

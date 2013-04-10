@@ -19,12 +19,13 @@ End If
 <!-- Aquí se muestran los formularios -->
 <div id="main-ContIzquierda">
     <!-- Inicia diseño del formulario -->
-    <h2 class="TituloFormulario--dg">Diagnostico - Pruebas disponibles</h2>
+    <h2 class="TituloFormulario--dg">Diagnostico - Pruebas Disponibles</h2>
     @grid.GetHtml(columns:=grid.Columns( _
         grid.Column("OrderID", "Orden", style:="TestID_"), _
         grid.Column("TestName", "Prueba", style:="OrderID_"), _
         grid.Column("TestResult", "Resultado", style:="TestName_"), _
-        grid.Column("Failure", "Falla", style:="TestDescription_"), _
+        grid.Column("Failure", "Comentario/Falla", style:="TestDescription_"), _
+        grid.Column("CapFailure", "Falla Capturada"), _
         grid.Column("TextLog", "Text Log", style:="CreateBy_"), _
         grid.Column("TestStart", "Inicio", style:="CreateBy_"), _
         grid.Column("TestEnd", "Final", style:="CreateBy_"), _
@@ -33,14 +34,7 @@ End If
     ))
        
 
-        <div class="row">&nbsp;</div>
-        <div class="form-aclaracion">
-            <span class="form-aclaracion_Title">Nota:</span>
-            <span class="form-aclaracion_Text">
-                En caso de de que la <strong>Prueba</strong>, <strong>Modelo</strong>, el <strong>Número de parte</strong>, o la 
-                <strong>Marca</strong> del producto que necesitas no estén disponibles en este listado, Favor de contactar a ingeniería 
-                (Encargado, <a href="mailto:humberto.vega@agiotech.com">Humberto Vega</a> )
-         </span>
+        
     </div>
 </div>
 

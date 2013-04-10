@@ -39,6 +39,10 @@ End If
         <span class="Span-c"><strong>Inicio: </strong>@test.TESTSTART </span>
         <span class="Span-c"><strong>Finalizada: </strong> @test.TESTEND</span>
     </div>
+    
+    <div class="row">
+        <span class="Span-k"><strong>Falla: </strong>@test.FAILURE</span>
+    </div>
 
      <div class="form-SpArea--dgt">
         <span class="Span-b"><strong>Test Log: </strong></span>

@@ -32,7 +32,7 @@ End If
 <!-- Aquí se muestran los formularios -->
 <div id="main-ContIzquierda">
         <!-- Inicia diseño del formulario -->
-        <h2 class="TituloFormulario--dg">Diagnostico - Programar una prueba </h2>
+        <h2 class="TituloFormulario--dg">Diagnostico - Programar Prueba </h2>
         @Using Html.BeginForm()'"programar_prueba", "diagnostico", FormMethod.Post)
             @<div id="form">
                 <span class="TestShedule_Title">Programar una prueba para la  Orden [ @Session("OrderID") ]</span>
@@ -65,7 +65,7 @@ End If
                 </div>
                 <!-- Comentarios -->
                 <div class="form-SpArea--dgt">
-                    <span class="Span-b"><span class="pcenter">Comentarios:</span> </span>
+                    <span class="Span-b"><span class="pcenter">Comentario:</span> </span>
                     <span class="Span-e">
                         @Html.TextAreaFor(Function(m) m.Comentarios, New With {.rows = 10, .cols = 60})
                     </span>

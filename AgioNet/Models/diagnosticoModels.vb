@@ -437,6 +437,7 @@ End Class
 
 '2013.02.13
 '--- Upd By CarlosB on 2013.02.22
+'--- Upd By CarlosB on 2013.04.05
 Public Class RegFailureModel
     ' Properties
     Public Property OrderID As String
@@ -445,6 +446,15 @@ Public Class RegFailureModel
         End Get
         Set(value As String)
             _OrderID = value
+        End Set
+    End Property
+
+    Public Property TipoReparacion As String
+        Get
+            Return _TipoReparacion
+        End Get
+        Set(value As String)
+            _TipoReparacion = value
         End Set
     End Property
 
@@ -504,6 +514,7 @@ Public Class RegFailureModel
 
     ' Fields
     Private _OrderID As String
+    Private _TipoReparacion As String
     Private _Failure As String
     Private _Solution As String
     Private _Source As String
@@ -1296,6 +1307,7 @@ Public Class TestByOrderIDModel
     Private _TestName As String
     Private _TestResult As String
     Private _Failure As String
+    Private _CapFailure As String
     Private _TextLog As String
     Private _TestStart As String
     Private _TestEnd As String
@@ -1335,6 +1347,15 @@ Public Class TestByOrderIDModel
         End Get
         Set(value As String)
             _Failure = value
+        End Set
+    End Property
+
+    Public Property CapFailure As String
+        Get
+            Return _CapFailure
+        End Get
+        Set(value As String)
+            _CapFailure = value
         End Set
     End Property
 

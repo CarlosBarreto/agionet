@@ -30,8 +30,19 @@ End If
 <div class="row">&nbsp;</div>
 
 @Using Html.BeginForm()
+    @<div class="row">
+        <span class="Span-b">Falla Reportada</span>
+        <span class="Span-k">@Html.Encode(TempData("FallaReportada"))</span>
+     </div>
+    @<div class="row"></div>
+    @<div class="row">
+        <span class="Span-b">Retro-alimentación</span>
+        <span class="Span-e">@Html.TextBoxFor(Function(m) m.Retro)</span>
+     </div>
+    
+    @<div class="row"></div>
     @<div class="form-SPArea--dgl">
-        <span class="Span-b">Comentarios</span>
+        <span class="Span-b">Resumen</span>
         <span class="Span-e">
             @Html.HiddenFor(Function(m) m.OrderID, New With {.Value = Session("OrderID")}) 
             @Html.TextAreaFor(Function(m) m.Comment, New With {.rows = 4, .cols = 55})

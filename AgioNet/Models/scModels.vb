@@ -493,6 +493,7 @@ Public Class AppCostModel
         End Set
     End Property
 
+    <AllowHtml> _
     Public Property Proveedor As String
         Get
             Return _Proveedor
@@ -1036,10 +1037,19 @@ Public Class ReqApprovalModel
         End Set
     End Property
 
+    Public Property Retro As String
+        Get
+            Return _retro
+        End Get
+        Set(value As String)
+            _retro = value
+        End Set
+    End Property
 
     ' Fields
     Private _Comment As String
     Private _OrderID As String
+    Private _Retro As String
 End Class
 
 ' 2013-02.26

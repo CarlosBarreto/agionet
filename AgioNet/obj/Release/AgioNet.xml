@@ -6,7 +6,23 @@ AgioNet
 </name>
 </assembly>
 <members>
-<member name="M:AgioNet.AgioNet.diagnosticoController.ClearErr">
+<member name="M:AgioNet.AgioNet.empaqueController.getReRepair(System.String,AgioNet.DataAccess@)">
+	<summary>
+  Obtiene el valor de Rerepair de una Orden
+ </summary>
+	<param name="OrderID"></param>
+	<param name="_DA_"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:AgioNet.AgioNet.empaqueController.getWarranty(System.String,AgioNet.DataAccess@)">
+	<summary>
+ Obtiene la cantidad de dias desde el ultimo ingreso para saber si está en garantía
+ </summary>
+	<param name="OrderID"></param>
+	<param name="_DA_"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:AgioNet.AgioNet.diagnosticoController.ClearErr">
 	<summary>
  Funcion que elimina de la memoria, el error registrado en ErrMsg
  </summary>
@@ -147,22 +163,6 @@ AgioNet
  </summary>
 	<param name="SPName">Nombre del Stored Procedure / Stored Procedure Name</param>
 	<returns>Retorna un dataReader / Returns SQLDataReader</returns>
-	<remarks></remarks>
-</member><member name="M:AgioNet.AgioNet.reciboController.getReRepair(System.String,AgioNet.DataAccess@)">
-	<summary>
-  Obtiene el valor de Rerepair de una Orden
- </summary>
-	<param name="OrderID"></param>
-	<param name="_DA_"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:AgioNet.AgioNet.reciboController.getWarranty(System.String,AgioNet.DataAccess@)">
-	<summary>
- Obtiene la cantidad de dias desde el ultimo ingreso para saber si está en garantía
- </summary>
-	<param name="OrderID"></param>
-	<param name="_DA_"></param>
-	<returns></returns>
 	<remarks></remarks>
 </member>
 </members>

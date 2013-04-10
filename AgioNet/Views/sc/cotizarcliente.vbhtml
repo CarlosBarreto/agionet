@@ -8,6 +8,11 @@
 
     Dim grid As WebGrid = New WebGrid(Read)
 End Code
+<!-- Ventana modal de error -->
+@If TempData("ErrMsg") <> "" Then
+    @Html.Partial("_ErrorPartial")
+End If
+
 <script src='@Url.Content("~/Scripts/jquery.agiotech.js")' type="text/javascript"></script>
 <script type="text/javascript"> 
     var Counter = 0;
@@ -120,11 +125,6 @@ End Code
     });
 </script>
 
-<!-- Ventana modal de error -->
-@If TempData("ErrMsg") <> "" Then
-    @Html.Partial("_ErrorPartial")
-End If
-
 <!-- Inicia diseño del formulario -->
 <h2 class="TituloFormulario">Ordenes listas para cotizar a cliente</h2>
 <div id="Formulario">
@@ -140,7 +140,7 @@ End If
     grid.Column("LeadTime", "Lead Time"), _
     grid.Column("Failure", "Falla"), _
     grid.Column("Solution", "Solución"), _
-    grid.Column("PUtilidad", "%Utilidad", format:=Function(item) Html.TextBoxFor(Function(m) m.SubUtilidad, New With {.class = "cpUtil", .size = 5})), _
+    grid.Column("PUtilidad", "%Utilidad", format:=Function(item) Html.TextBoxFor(Function(m) m.SubUtilidad, New With {.class = "cpUtil", .size = 5, .Value = 30})), _
     grid.Column("UtilidadN", "Utilidad Neta", format:=Function(item) Html.TextBox("UtilidadNeta", 0, New With {.class = "cUtil", .size = 5})), _
     grid.Column("Precio", "Precio", format:=Function(item) Html.TextBox("precio", 0, New With {.class = "precio", .size = 5})), _
     grid.Column("", "", format:=Function(item) Html.HiddenFor(Function(m) m.SubCosto, New With {.Value = item.Costo})) _

@@ -41,5 +41,5 @@ End Using
     grid.Column("PartNo", "Numero de Parte"), _
     grid.Column("SerialNo", "Numero de Serie"), _
     grid.Column("Status", "Estatus"), _
-    grid.Column(format:=Function(item) Html.ActionLink("Detalle", "detalle_", "sc", New With {.OrderID = item.OrderID}, vbNull), style:="Link_") _
+    grid.Column(format:=Function(item) Html.ActionLink("Detalle", "detalle_orden", "sc", New With {.OrderID = item.OrderID}, vbNull), style:="Link_") _
 ))

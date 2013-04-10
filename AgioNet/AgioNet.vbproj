@@ -151,7 +151,7 @@
     <Compile Include="Controllers\HomeController.vb" />
     <Compile Include="Controllers\ingenieriaController.vb" />
     <Compile Include="Controllers\logisticaController.vb" />
-    <Compile Include="Controllers\reciboController.vb" />
+    <Compile Include="Controllers\almacenController.vb" />
     <Compile Include="Controllers\reparacionController.vb" />
     <Compile Include="Controllers\scController.vb" />
     <Compile Include="Global.asax.vb">
@@ -164,7 +164,7 @@
     <Compile Include="Models\ingenieriaModels.vb" />
     <Compile Include="Models\InTransitPage.vb" />
     <Compile Include="Models\logisticaModels.vb" />
-    <Compile Include="Models\reciboModels.vb" />
+    <Compile Include="Models\almacenModels.vb" />
     <Compile Include="Models\reparacionModels.vb" />
     <Compile Include="Models\scModels.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -277,12 +277,12 @@
     <Content Include="Views\logistica\modificarguia.vbhtml" />
     <Content Include="Views\logistica\ordenes_sflete.vbhtml" />
     <Content Include="Views\logistica\agregar_esp_trackno.vbhtml" />
-    <Content Include="Views\recibo\index.vbhtml" />
-    <Content Include="Views\recibo\ingresar_orden.vbhtml" />
-    <Content Include="Views\recibo\scan_info.vbhtml" />
-    <Content Include="Views\recibo\formulario_recibo.vbhtml" />
-    <Content Include="Views\recibo\print_chkpage.vbhtml" />
-    <Content Include="Views\recibo\imprimir_hoja.vbhtml" />
+    <Content Include="Views\almacen\index.vbhtml" />
+    <Content Include="Views\empaque\ingresar_orden.vbhtml" />
+    <Content Include="Views\empaque\scan_info.vbhtml" />
+    <Content Include="Views\empaque\formulario_recibo.vbhtml" />
+    <Content Include="Views\logistica\print_chkpage.vbhtml" />
+    <Content Include="Views\empaque\imprimir_hoja.vbhtml" />
     <Content Include="Views\diagnostico\DiagnosticMain.vbhtml" />
     <Content Include="Views\diagnostico\realizar_pruebas.vbhtml" />
     <Content Include="Views\diagnostico\Index.vbhtml" />
@@ -303,16 +303,16 @@
     <Content Include="Views\logistica\GenerateExcel.vbhtml" />
     <Content Include="Views\logistica\reimprimir_formato.vbhtml" />
     <Content Include="Views\logistica\intransit.vbhtml" />
-    <Content Include="Views\recibo\recibo_almacen.vbhtml" />
-    <Content Include="Views\recibo\transfer_incoming.vbhtml" />
+    <Content Include="Views\almacen\recibo_almacen.vbhtml" />
+    <Content Include="Views\almacen\transfer_incoming.vbhtml" />
     <Content Include="Views\ingenieria\Index.vbhtml" />
     <Content Include="Views\ingenieria\material_master.vbhtml" />
     <Content Include="Views\ingenieria\agregar_material.vbhtml" />
     <Content Include="Views\ingenieria\quitar_material.vbhtml" />
     <Content Include="Views\ingenieria\editar_material.vbhtml" />
     <Content Include="Views\ingenieria\editarmaterial.vbhtml" />
-    <Content Include="Views\recibo\_OrderInfoPartial.vbhtml" />
-    <Content Include="Views\recibo\transfer_diagnostic.vbhtml" />
+    <Content Include="Views\almacen\_OrderInfoPartial.vbhtml" />
+    <Content Include="Views\empaque\transfer_diagnostic.vbhtml" />
     <Content Include="Views\ingenieria\estaciones.vbhtml" />
     <Content Include="Views\ingenieria\_crearestacionPartial.vbhtml" />
     <Content Include="Views\ingenieria\_estacionesMainPartial.vbhtml" />
@@ -337,7 +337,7 @@
     <Content Include="Views\diagnostico\_FallaReportada.vbhtml" />
     <Content Include="Views\diagnostico\_AddFailure.vbhtml" />
     <Content Include="Views\sc\_OrderInfoPartial.vbhtml" />
-    <Content Include="Views\recibo\checkin_report.vbhtml" />
+    <Content Include="Views\almacen\checkin_report.vbhtml" />
     <Content Include="Views\reparacion\Index.vbhtml" />
     <Content Include="Views\sc\ordenes_diagnosticadas.vbhtml" />
     <Content Include="Views\sc\costear_diagnostico.vbhtml" />
@@ -357,17 +357,18 @@
     <Content Include="Views\empaque\Index.vbhtml" />
     <Content Include="Views\empaque\recibo_empaque.vbhtml" />
     <Content Include="Views\empaque\transfer_warehouse.vbhtml" />
-    <Content Include="Views\empaque\process_warehouse.vbhtml" />
-    <Content Include="Views\empaque\shipping.vbhtml" />
-    <Content Include="Views\empaque\delivery.vbhtml" />
+    <Content Include="Views\almacen\process_warehouse.vbhtml" />
+    <Content Include="Views\almacen\shipping.vbhtml" />
+    <Content Include="Views\logistica\delivery.vbhtml" />
     <Content Include="Views\facturacion\Index.vbhtml" />
     <Content Include="Views\facturacion\invoiced.vbhtml" />
     <Content Include="Views\facturacion\paid.vbhtml" />
     <Content Include="Views\facturacion\OnBilling.vbhtml" />
     <Content Include="Views\sc\cotizar_cliente.vbhtml" />
     <Content Include="Views\sc\cotizarcliente.vbhtml" />
-    <Content Include="Views\empaque\pagina_entrega.vbhtml" />
-    <Content Include="Views\recibo\_ftpFilePartial.vbhtml" />
+    <Content Include="Views\logistica\pagina_entrega.vbhtml" />
+    <Content Include="Views\empaque\_OrderInfoPartial.vbhtml" />
+    <Content Include="Views\sc\detalle_orden.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -412,6 +413,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\temp\rec\" />
+    <Folder Include="Views\_temp\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

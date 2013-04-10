@@ -16,7 +16,7 @@ End If
 
 
 <!-- Inicia diseño del formulario -->
-<h2 class="TituloFormulario">Mover al almacén (Transfer)</h2>
+<h2 class="TituloFormulario">Proceso Mover al Almacén</h2>
 
 <div id="ContenedorOrderIDForm">
 @Using Html.BeginForm()
