@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/logistica/pagina_entrega.vbhtml" hash="7a9782b5" filehash="117fa6d095f5" flags="110000" assembly="App_Web_1twulifm" type="ASP._Page_Views_logistica_pagina_entrega_vbhtml">
+<preserve resultType="2" virtualPath="/Views/logistica/pagina_entrega.vbhtml" hash="7a9782b5" filehash="11feb658df2a" flags="110000" assembly="App_Web_mcdfawof" type="ASP._Page_Views_logistica_pagina_entrega_vbhtml">
     <filedeps>
         <filedep name="/Views/logistica/pagina_entrega.vbhtml" />
     </filedeps>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/sc/cotizar_cliente.vbhtml" hash="7a9782b5" filehash="ffffc1b65d224b8e" flags="110000" assembly="App_Web_nlxgaops" type="ASP._Page_Views_sc_cotizar_cliente_vbhtml">
+<preserve resultType="2" virtualPath="/Views/sc/cotizar_cliente.vbhtml" hash="7a9782b5" filehash="ffffc24895c46d37" flags="110000" assembly="App_Web_arnuhsy0" type="ASP._Page_Views_sc_cotizar_cliente_vbhtml">
     <filedeps>
         <filedep name="/Views/sc/cotizar_cliente.vbhtml" />
     </filedeps>

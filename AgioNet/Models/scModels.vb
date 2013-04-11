@@ -1037,6 +1037,15 @@ Public Class ReqApprovalModel
         End Set
     End Property
 
+    Public Property TComment As String
+        Get
+            Return _TComment
+        End Get
+        Set(value As String)
+            _TComment = value
+        End Set
+    End Property
+
     Public Property Retro As String
         Get
             Return _retro
@@ -1048,6 +1057,7 @@ Public Class ReqApprovalModel
 
     ' Fields
     Private _Comment As String
+    Private _TComment As String
     Private _OrderID As String
     Private _Retro As String
 End Class

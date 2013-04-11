@@ -41,6 +41,14 @@ End If
      </div>
     
     @<div class="row"></div>
+    @<div class="form-SPArea--dlg">
+        <span class="Span-b">Comentario del Técnico</span>
+        <span class="Span-e">
+            @Html.TextAreaFor(Function(m) m.TComment, New With {.rows = 4, .cols = 55})
+        </span>
+     </div>
+    
+    @<div class="row"></div>
     @<div class="form-SPArea--dgl">
         <span class="Span-b">Resumen</span>
         <span class="Span-e">

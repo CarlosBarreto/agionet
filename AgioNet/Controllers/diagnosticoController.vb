@@ -776,10 +776,12 @@ Namespace AgioNet
             Dim txtSubject As String = String.Empty
             Dim txtMessage As String = String.Empty
             Try
-                Me.DR = Me.DA.ExecuteSP("dg_ReqApproval", Session.Item("OrderID"), model.Retro, model.Comment, Me.User.Identity.Name)
+                Me.DR = Me.DA.ExecuteSP("dg_ReqApproval", Session.Item("OrderID"), model.Retro, model.TComment, _
+                                        model.Comment, Me.User.Identity.Name)
 
                 If (Me.DA._LastErrorMessage = "") Then
-                    Me.TempData.Item("ErrMsg") = "Se ha mandado la solicitud de aprobación para la orden :" & Session.Item("OrderID")
+                    Me.TempData.Item("ErrMsg") = "Se ha mandado la solicitud de aprobación para la orden :" _
+                        & Session.Item("OrderID")
 
                     If Not Me.DR.IsClosed Then
                         Me.DR.Close()
@@ -792,11 +794,11 @@ Namespace AgioNet
                         Loop
 
                         email.HTMLBody = True
-                        txtSubject = "Solicitud de aprobación para la orden : " & Me.Session.Item("OrderID")
+                        txtSubject = "Solicitud de cotización para la orden : " & Me.Session.Item("OrderID")
                         txtMessage = "<p style='font-family: Arial; font-size:12px; width:800px;'> " & _
-                                     "Se ha registrado una solicitud de aprobacion de reparación para la orden: <b>" & _
+                                     "Se ha registrado una solicitud de cotización de parte para la orden: <b>" & _
                                      Session.Item("OrderID") & "</b>. Esta opción se encuentra disponible desde " & _
-                                     "Servicio a Clientes / Aprovación de Reparación<p>"
+                                     "Servicio a Clientes / 4.- Cotización de Partes<p>"
 
                         email.SendEmail(emailAddress, txtSubject, txtMessage)
                     End If
