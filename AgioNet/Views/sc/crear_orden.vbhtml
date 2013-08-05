@@ -7,8 +7,9 @@
     'Opciones para el tipo de usuario
     Dim opt_UserType As New List(Of String)
     opt_UserType.Add("Seleccionar")
-    opt_UserType.Add("EndUser")
+    opt_UserType.Add("Agiofix")
     opt_UserType.Add("TWG")
+    'opt_UserType.Add("ASS")
     
     'Opciones para el tipo de servicio
     Dim opt_servicetype As List(Of String) = New List(Of String)
@@ -27,37 +28,21 @@
     'Opciones clase de producto
     Dim opt_CaseType As List(Of String) = New List(Of String)
     opt_CaseType.Add("Seleccionar")
-    opt_CaseType.Add("Completo")
-    opt_CaseType.Add("Solo Envío")
-    opt_CaseType.Add("Solo Recolección")
-    opt_CaseType.Add("NA")
+    'opt_CaseType.Add("UPS TWG")
+    'opt_CaseType.Add("Completo")
+    'opt_CaseType.Add("Solo Envío")
+    'opt_CaseType.Add("Solo Recolección")
+    'opt_CaseType.Add("NA")
     
 End Code
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("input[type=text]").focus(function () {
-            this.select();
-        });
 
-        $("#CustomerType").change(function () {
-            var MyVal = $("#CustomerType option:selected").text();
-
-            if (MyVal != "EndUser" && MyVal != "Seleccionar") {
-                $("#CustOrderNo").css("display", "block");
-            }
-            else {
-                $("#CustOrderNo").css("display", "none");
-            }
-        });
-    });
-</script>
 
 <!-- Ventana modal de error -->
 @If TempData("ErrMsg") <> "" Then
     @Html.Partial("_ErrorPartial")
 End If
 <!-- Inicia diseño del formulario -->
-<h2 class="TituloFormulario">Crear una nueva orden</h2>
+<h2 class="TituloFormulario">Crear una nueva orden Assurant</h2>
 
 
 @Using Html.BeginForm()
@@ -214,19 +199,16 @@ End If
             </span>
         </span>
 
-        <span class="row">
-            <span class="Span-c"><span class="pcenter">Tipo de falla presentada: </span></span>
-            <span class="Span-j">
-                @Html.TextBoxFor(Function(m) m.FailureType)
-            </span>
+        <span class="SpArea">
+            <span class="Span-b"><span class="pcenter">Falla Presentada: </span></span>
+            <span class="Span-j"> @Html.TextAreaFor(Function(m) m.FailureType, New With {.rows = "4", .cols = "100"}) </span>
         </span>
 
-        <span class="row">
-            <span class="Span-c"><span class="pcenter">Comentarios: </span></span>
-            <span class="Span-j">
-                @Html.TextBoxFor(Function(m) m.Comment)
-            </span>
+        <span class="SpArea">
+            <span class="Span-b"><span class="pcenter">Comentarios: </span></span>
+            <span class="Span-j"> @Html.TextAreaFor(Function(m) m.Comment, New With {.rows = "4", .cols = "100"}) </span>
         </span>
+
         <span class="row">
             <span class="Span-b"><span class="pcenter">Incluir Flete</span></span>
             <span class="Span-b">
@@ -236,6 +218,73 @@ End If
                 <input type="submit" value="Registrar Orden" class="Button" />
             </span>
         </span>   
-
      </div>
 End Using
+
+<script type="text/javascript">
+
+
+    $().ready(function() {    
+        $("#CustomerType").change(function () {
+            
+
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    var AgioOptions = ['Seleccionar', 'Agiotruck (360)', 'Mostrador', 'Paquetería'];
+    var TWGOptions = ['Seleccionar', 'Mostrador', 'UPS - 360', 'UPS - Entrega', 'UPS - TWG', 'Agiotruck (360)'];
+    var Option = $("#CustomerType").val();
+    var $select = $("#Delivery")
+
+
+    $(document).ready(function () {
+        $("input[type=text]").focus(function () {
+            this.select();
+        });
+
+        $("#CustomerType").change(function () {
+            var MyVal = $("#CustomerType option:selected").text();
+
+            if (MyVal != "EndUser" && MyVal != "Seleccionar") {
+                $("#CustOrderNo").css("display", "block");
+            }
+            else {
+                $("#CustOrderNo").css("display", "none");
+            }
+
+            
+            //Cambiar flete
+            if (MyVal == 'Seleccionar') {
+                $select = $("#Delivery").empty();
+                var OptEmpry = $('<option/>', { value: "Seleccionar" })
+                    .text("Seleccionar")
+                    .prop('selected', i == 0);
+
+                OptEmpry.appendTo($select);
+
+            }
+            else if (MyVal == 'Agiofix') {
+                $select = $("#Delivery").empty();
+                for (var i = 0; i < AgioOptions.length; i++) {
+                    var OptEmpry = $('<option/>', { value: AgioOptions[i] })
+                   .text(AgioOptions[i])
+                   .prop('selected', i == 0);
+
+                    OptEmpry.appendTo($select);
+                }
+            }
+            else  {
+                $select = $("#Delivery").empty();
+                for (var i = 0; i < TWGOptions.length; i++) {
+                    var OptEmpry = $('<option/>', { value: TWGOptions[i] })
+                   .text(TWGOptions[i])
+                   .prop('selected', i == 0);
+
+                    OptEmpry.appendTo($select);
+                }
+            } 
+        });
+    });
+</script>

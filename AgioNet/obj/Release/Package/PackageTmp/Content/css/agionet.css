@@ -1,0 +1,115 @@
+@charset "utf-8";
+@font-face{font-family:'Calibri';font-weight:normal;src:url("../../Content/fonts/calibri.ttf")}
+@font-face{font-family:'HelveticaBlackCondensed';src:url("../../Content/fonts/helvetica.woff") format('woff')}
+@font-face{font-family:"BebasNeue";src:url("../../Content/fonts/BebasNeue-webfont.eot");src:url("../../Content/fonts/BebasNeue-webfont.eot?#iefix") format("embedded-opentype"),url("../../Content/fonts/BebasNeue-webfont.woff") format("woff"),url("../../Content/fonts/BebasNeue-webfont.ttf") format("truetype"),url("../../Content/fonts/BebasNeue-webfont.svg#BebasNeue") format("svg");font-weight:normal;font-style:normal}
+html,body{background-color:#eee;font-family:Arial,Verdana;font-size:12px;height:100%;margin:0;padding:0;width:100%}
+Header{background-color:#d9d9d9;color:#000;margin:0;position:fixed;width:100%;z-index:50;}
+Header #Header-contenedor{border:0;border-bottom:1px solid #808080;border-color:#808080;display:block;height:30px}
+Header #logo{display:inline-block;float:left;margin-left:20px;width:100px}
+Header #Separador{float:right;height:30px;position:relative;top:5px;overflow:hidden;}
+Header #Separador A{color:#797979;text-decoration:none}
+Header #Separador A:hover{color:#797979;text-decoration:underline}
+Header #Separador #menuPrincipal{display:inline-block;float:left;margin:0;padding:0;width:-moz-calc(100% - 190px)-;width:-webkit-calc(100% - 190px)-;width:-o-calc(100% - 190px)-;width:-ms-calc(100% - 190px)-;width:-official-calc(100% - 190px)-;width:calc(100% - 190px);}
+Header #Separador #menuPrincipal UL{color:#797979;display:inline;line-height:2.2em;margin-left:-1em;}
+Header #Separador #menuPrincipal UL LI{display:inline-block;font-family:BebasNeue,HelveticaBlackCondensed,sans-serif,Arial;font-size:1.8em;font-weight:400;padding:0 .3em;text-shadow:0 1px transparent,0 1px #fff,1px 0 transparent,0 -1px transparent;vertical-align:center}
+Header #Separador .Logoff{color:#808080;display:inline-block;float:right;font-family:Calibri,Arial;font-size:1.25em;height:2.8em;margin-right:1em;text-align:center;top:3px;vertical-align:center;width:180px;}
+Header #Separador .Logoff .menuser a{color:#808080;display:block;height:20px;margin-top:2px;padding-left:3px;text-decoration:none;width:97%}
+Header #Separador .Logoff .menuser ul{height:100%;list-style:none;padding:0;position:relative;margin-top:5px}
+Header #Separador .Logoff .menuser ul:hover{background-color:#d0d0d0;color:#808080;}
+Header #Separador .Logoff .menuser ul:hover ul{background-color:#d9d9d9;border:1px solid #797979;height:45px;margin-top:-3px;padding:0;width:180px;}
+Header #Separador .Logoff .menuser ul:hover ul a:hover{background-color:#d0d0d0;color:#808080}
+#SubMenu{float:left;height:20px;margin:-.5em;padding:0;position:fixed;vertical-align:center;width:100%;}
+#SubMenu .menu{color:#000;font-family:Arial;font-size:1em}
+#SubMenu .ul_menu{display:inline-block;height:100%;list-style:none;position:relative}
+#SubMenu .ul_menu_li{display:inline-block;float:left;padding:0;text-shadow:0 1px transparent,0 1px #fff,1px 0 transparent,0 -1px transparent;margin-right:.5em;}
+#SubMenu .ul_menu_li A{color:#666;text-decoration:none}
+#SubMenu .ul_menu_li A:hover{color:#797979;text-decoration:underline}
+#Contenedor{background-color:#fff;margin:auto;overflow:auto;position:relative;width:98%;top:55px}
+#ContMain{display:block;left:0;position:absolute;top:-10px;width:100%}
+#main{margin:auto;position:relative;width:90%}
+.TituloFormulario{border-bottom:2px dashed #808080;color:#808080;display:block;font-family:Calibri,Arial;font-size:2em;height:25px;padding-left:5px;padding-bottom:3px;width:100%}
+.row{display:inline-block;height:25px;margin-bottom:2px;width:100%}
+.form-row{display:inline-block;font-size:1em;height:18px;margin-bottom:2px;width:100%}
+.SpArea{display:inline-block;height:100px;margin-bottom:5px;width:100%;border:1px solid #fff}
+[class*="Span"]{display:inline-block;float:left;height:30px;margin-bottom:5px;margin-top:2px;text-align:left}
+.Span-a{width:75px;margin-left:5px;vertical-align:central}
+.Span-b{width:120px;margin-left:5px;vertical-align:central}
+.Span-c{width:200px;margin-left:5px;vertical-align:central}
+.Span-d{width:300px;margin-left:5px;vertical-align:central}
+.Span-e{width:350px;margin-left:5px;vertical-align:central}
+.Span-f{width:50px;margin-left:5px;vertical-align:central}
+.Span-g{width:100px;margin-left:5px;vertical-align:central}
+.Span-h{width:175px;margin-left:5px;vertical-align:central}
+.Span-i{width:150px;margin-left:5px;vertical-align:central}
+.Span-j{width:500px;margin-left:5px;vertical-align:central}
+.Span-k{width:600px;margin-left:5px;vertical-align:central}
+.Span-l{width:250px;margin-left:5px;vertical-align:central}
+.FRaight{width:120px;display:inline-block;float:right;height:30px}
+.pcenter{display:block;float:right;font-size:14px;margin-right:5px;margin-top:5px;position:relative}
+INPUT[type=text],INPUT[type=password]{border-bottom:1px outset #fff;border-left:1px outset #ccc;border-right:1px outset #fff;border-top:1px outset #ccc;color:#666;font-size:14px;margin-left:3px;padding:3px;text-align:left;width:90%}
+.Button{background-color:#a0a0a0;color:#fff;display:block;font-size:14px;float:right;height:95%}
+TABLE{border:0;border-collapse:collapse;font-size:11px;margin:0;padding:0;width:100%}
+TH{background-color:#bababa;border:1px solid #eaeaea;color:#bdbdbd;font-size:13px;font-weight:bold;text-align:center}
+TH A{color:#333}
+TH A:hover{color:#fff;text-decoration:none}
+TD{border:1px solid #eaeaea;padding-left:2px}
+#ContenedorOrderIDForm{font-family:BebasNeue,HelveticaBlackCondensed,sans-serif,Arial;font-size:26px;font-weight:400;border:1px solid #808080;display:block;height:55px;margin-left:10%;position:relative}
+#ContenedorOrderIDForm INPUT[type=text],INPUT[type=password]{font-size:36px}
+#ContenedorOrderIDForm .Button{font-family:BebasNeue,HelveticaBlackCondensed,sans-serif,Arial;font-size:30px;height:45px}
+#ContenedorOrderIDForm LABEL{font-size:36px;height:45px}
+#ContFormulario{display:block;float:left;position:relative;width:100%}
+#OrderInfo{border:1px solid #ccc;position:absolute;right:-20px;top:20px;width:200px}
+.OrderInfo_Title{color:#808080;font-family:Verdana;font-size:13px;margin-left:5px;margin-top:2px}
+.OrderInfo_Closebt{background-color:#ccc;border:1px solid #808080;display:inline-block;font-size:8px;height:7px;padding:3px;position:absolute;right:1px;top:1px;width:7px}
+.OrderInfo_bold{color:#808080;font-weight:bold;margin-left:8px;margin-top:3px}
+#TestShedule{display:block;margin:10px;padding:5px;position:relative}
+#NewTestShedule{display:block;padding:5px;position:relative}
+.TestShedule_Title{color:#808080;font-size:14px;font-weight:bold}
+.NewTestShedule_Title{color:#808080;font-size:14px;font-weight:bold}
+#StatusBar{bottom:0;display:block;float:right;height:20px;position:fixed;right:0;width:500px;z-index:10000}
+.statusbar-design{background-color:#9ba759;color:#fff;display:block;font-family:Verdana,Arial;font-size:13px;height:100%;text-align:center;width:100%}
+#OtroContenedor{display:block;float:left;margin-top:100px;width:100%}
+#ContenedorOrderIDForm{height:180px;}
+#ContenedorOrderIDForm TEXTAREA{font-family:Arial;font-size:12px}
+.calidad-contenedor-form{border:1px solid #bbb;display:inline-block;height:auto;width:60%;}
+.calidad-contenedor-form .row,.calidad-contenedor-form .row-textarea{display:inline-block;height:35px;margin:0 10px 10px 0}
+.calidad-contenedor-form .row-textarea{height:70px;vertical-align:center}
+.calidad-contenedor-form INPUT[type=text],.calidad-contenedor-form SELECT{font-family:Arial;font-size:2em}
+.calidad-contenedor-form LABEL{font-family:BebasNeue,HelveticaBlackCondensed,sans-serif,Arial;font-size:2.5em;height:45px}
+.calidad-contenedor-datos{border:1px solid #bbb;display:inline-block;float:right;height:100%;padding:5px;width:38%}
+#Formulario2{display:inline-block;float:right;width:35%}
+#Formulario3{display:block;float:left;width:60%;}
+#Formulario3 .label{display:inline-block;font-size:.9em;font-weight:bold;padding-left:1em;width:20%}
+#Formulario3 .data{display:inline-block;font-size:.9em;margin-left:2%;text-align:left;width:75%}
+#Formulario4{border:1px solid #999;display:inline-block;float:right;margin-top:1em;padding:3px;width:35%;}
+#Formulario4 .label{display:inline-block;font-size:.9em;font-weight:bold;padding-left:1em;width:30%}
+#Formulario4 .data{display:inline-block;font-size:.9em;margin-left:2%;text-align:left;width:60%}
+.row-facturar{display:inline-block;height:35px;text-align:right;width:100%;}
+.row-facturar .label{display:inline-block;font-size:1.2em;font-weight:bold;width:35%}
+.row-facturar .data{display:inline-block;padding-left:1.2em;text-align:left;width:35%}
+.row-btOnly{display:inline-block;padding-right:2.2em;text-align:right;width:100%}
+@media screen and (min-width:768px){html,body{font-size:10px}
+Header #Separador #menuPrincipal{width:-moz-calc(100% - 160px)-;width:-webkit-calc(100% - 160px)-;width:-o-calc(100% - 160px)-;width:-ms-calc(100% - 160px)-;width:-official-calc(100% - 160px)-;width:calc(100% - 160px)}
+Header #Separador .Logoff{width:135px}
+}@media screen and (min-width:1200px){html,body{font-size:12px}
+Header #Separador #menuPrincipal{width:-moz-calc(100% - 190px)-;width:-webkit-calc(100% - 190px)-;width:-o-calc(100% - 190px)-;width:-ms-calc(100% - 190px)-;width:-official-calc(100% - 190px)-;width:calc(100% - 190px)}
+Header #Separador .Logoff{width:180px}
+}#rp_main{display:block;font-size:1.2em;height:100%;position:relative;width:100%;}
+#rp_main #rp_main-nav{display:inline-block;height:22px;margin-bottom:10px;margin-top:10px;padding:2px;width:100%;}
+#rp_main #rp_main-nav ul{list-style-type:none;text-align:center}
+#rp_main #rp_main-nav li{display:inline-block;float:left;margin:0 10px 0 0;text-align:center;text-shadow:0 1px transparent,0 1px #fff,1px 0 transparent,0 -1px transparent}
+#rp_main #rp_main-nav li a{background-color:#eee;border:1px solid #ccc;color:#666;padding:2px 7px 2px 7px;text-decoration:none}
+#rp_main #rp_main-nav li a:hover{background-color:#333;color:#fff}
+#rp_main #rp_left{display:inline-block;float:left;height:100%;margin-top:10px;width:75%}
+#rp_main .title{border-bottom:1px dashed #ccc;color:#333;display:block;font-size:1.3em;font-weight:bold;width:100%}
+#rp_main .separador{border-bottom:2px dashed #ccc;color:#333;display:block;font-size:1.3em;font-weight:bold;width:100%}
+#rp_main .rp_left-contenedor{border:1px solid #ccc;font-size:.9em;padding:3px 7px 3px 7px;width:100%;}
+#rp_main .rp_left-contenedor .title{border-bottom:1px dashed #ccc;color:#333;display:block;font-size:1.1em;font-weight:bold;width:100%}
+#rp_main .rp_left-contenedor .row,#rp_main .rp_left-contenedor .row-textarea{display:inline-block;height:35px}
+#rp_main .rp_left-contenedor .row-textarea{height:70px;vertical-align:center}
+#rp_main .rp_left-contenedor INPUT[type=text],#rp_main .rp_left-contenedor SELECT{font-family:Arial;font-size:2em}
+#rp_main .rp_left-contenedor .Label{font-family:BebasNeue,HelveticaBlackCondensed,sans-serif,Arial;font-size:2.5em;height:45px}
+#rp_main .rp_left-contenedor .error{color:#f00;font-family:sans-serif,Arial;font-size:1em;font-weight:bold;margin-left:5px}
+#rp_main #rp_right{display:block;float:right;font-size:1em;height:100%;margin-top:10px;width:23%}
+#rp_main .rp_right-contenedor{border:1px solid #ccc;font-size:.8em;padding:3px 7px 3px 7px;width:100%;}
+#rp_main .rp_right-contenedor .title{border-bottom:1px dashed #ccc;color:#333;display:block;font-size:1.1em;font-weight:bold;width:100%}

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/ingenieria/agregar_material_bom.vbhtml" hash="7a9782b5" filehash="ffffda9e145c8e1d" flags="110000" assembly="App_Web_luypz5wc" type="ASP._Page_Views_ingenieria_agregar_material_bom_vbhtml">
+    <filedeps>
+        <filedep name="/Views/ingenieria/agregar_material_bom.vbhtml" />
+    </filedeps>
+</preserve>

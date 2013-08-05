@@ -30,9 +30,9 @@ End If
         
         @<div class="row">
             <span class="Span-b"><span class="pcenter">SKU</span></span>
-            <span class="Span-c">@Html.TextBoxfor(Function(m) m.SKU) </span>
+            <!--<span class="Span-c">@Html.TextBoxfor(Function(m) m.SKU) </span> -->
 
-            <span class="Span-b"><span class="pcenter">Número de Parte</span></span>
+            <!--<span class="Span-b"><span class="pcenter">Número de Parte</span></span>-->
             <span class="Span-c"> @Html.TextBoxFor(Function(m) m.PartNo) </span>
          </div>
         
@@ -44,10 +44,10 @@ End If
             <span class="Span-c"> @Html.TextBoxFor(Function(m) m.SerialNo) </span>
          </div>
         
-        @<!-- <div class="row">
-            <span class="Span-b"><span class="pcenter">TrackNo</span></span>
-            <span class="Span-c"> TextBoxFor(Function(m) m.TrackNo)</span>
-         </div-->
+        @<div class="row">
+            <span class="Span-b"><span class="pcenter">Marca</span></span>
+            <span class="Span-c">@Html.TextBoxFor(Function(m) m.Marca)</span>
+         </div>
         
         @<div class="row">
             <span class="Span-b"><span class="pcenter">ScanDate</span></span>

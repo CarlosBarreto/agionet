@@ -837,7 +837,7 @@ Namespace AgioNet
                     ReDim Preserve modelArray(index - 1)
                 End If
             Catch ex As Exception
-                Me.TempData.Item("ErrMsn") = ex.Message
+                Me.TempData.Item("ErrMsg") = ex.Message
             Finally
                 Me.DA.Dispose()
             End Try
@@ -849,7 +849,7 @@ Namespace AgioNet
         ' 2013.02.14
         ' GET: /ingenieria/quitar_material
         <Authorize> _
-        Public Function quitar_material() As ActionResult
+        Public Function _quitar_material() As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Dim modelArray(100) As MaterialMasterListModel
             Dim index As Integer = 0
@@ -895,7 +895,7 @@ Namespace AgioNet
                     Me.TempData.Item("Model") = modelArray
                 End If
             Catch ex As Exception
-                Me.TempData.Item("ErrMsn") = ex.Message
+                Me.TempData.Item("ErrMsg") = ex.Message
             Finally
                 Me.DA.Dispose()
             End Try
@@ -906,7 +906,7 @@ Namespace AgioNet
         ' 2013.02.14
         ' POST: /ingenieria/quitar_material
         <Authorize, HttpPost> _
-        Public Function quitar_material(ByVal model As MaterialMasterModel) As ActionResult
+        Public Function _quitar_material(ByVal model As MaterialMasterModel) As ActionResult
             Dim result As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
 
@@ -933,6 +933,621 @@ Namespace AgioNet
             Return result
         End Function
 
+
+        '------------------------
+        ' 2013.02.14
+        ' GET: /ingenieria/desplegar_bom
+        <Authorize> _
+        Public Function desplegar_bom(ByVal m As MaterialMasterModel) As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray(100) As MaterialMasterListModel
+            Dim index As Integer = 0
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("in_getMaterialList", m.SKUNo, m.PartNo, m.Description, m.Alt)
+                If (Me.DA._LastErrorMessage = "") Then
+                    Dim model As MaterialMasterListModel
+
+                    If Me.DR.HasRows Then
+                        Do While Me.DR.Read
+                            model = New MaterialMasterListModel With { _
+                                .SKUNo = DR(0), _
+                                .PartNo = DR(1), _
+                                .Commodity = DR(2), _
+                                .Description = DR(3), _
+                                .Alt = DR(4) _
+                            }
+                            modelArray(index) = model
+                            If index + 1 >= modelArray.Length Then ReDim Preserve modelArray(index + 10)
+                            index += 1
+                        Loop
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+                    Else
+                        model = New MaterialMasterListModel With { _
+                            .SKUNo = "no data", _
+                            .PartNo = "no data", _
+                            .Commodity = "no data", _
+                            .Description = "no data", _
+                            .Alt = "no data" _
+                        }
+                        modelArray(index) = model
+                        index += 1
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+                    End If
+                Else
+                    modelArray(index) = New MaterialMasterListModel With { _
+                        .SKUNo = "no data", _
+                        .PartNo = "no data", _
+                        .Commodity = "no data", _
+                        .Description = "no data", _
+                        .Alt = "no data" _
+                    }
+                    index += 1
+                    ' -- Actualizado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+            Finally
+                Me.DA.Dispose()
+            End Try
+
+            Me.TempData.Item("Model") = modelArray
+            Return Me.View
+        End Function
+
+        ' 2013.05.13
+        ' GET: /ingeniaria/agregar_material_bom
+        <Authorize, HttpGet> _
+        Public Function agregar_material_bom() As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray(300) As MaterialMasterListModel
+            Dim index As Integer = 0
+            Dim OldErr As String
+
+            TempData.Keep("ErrMsg")
+            OldErr = TempData("ErrMsg")
+            Try
+                Me.DR = Me.DA.ExecuteSP("in_getMaterialList")
+                If (Me.DA._LastErrorMessage = "") Then
+                    Dim model As MaterialMasterListModel
+
+                    If Me.DR.HasRows Then
+                        Do While Me.DR.Read
+                            model = New MaterialMasterListModel With { _
+                                .SKUNo = DR(0), _
+                                .PartNo = DR(1), _
+                                .Commodity = DR(2), _
+                                .Description = DR(3), _
+                                .Alt = DR(4) _
+                            }
+                            modelArray(index) = model
+                            If index + 1 >= modelArray.Length Then ReDim Preserve modelArray(index + 5)
+                            index += 1
+                        Loop
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+
+                    Else
+                        model = New MaterialMasterListModel With { _
+                            .SKUNo = "no data", _
+                            .PartNo = "no data", _
+                            .Commodity = "no data", _
+                            .Description = "no data", _
+                            .Alt = "no data" _
+                        }
+                        modelArray(index) = model
+                        index += 1
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+                    End If
+                Else
+                    modelArray(index) = New MaterialMasterListModel With { _
+                        .SKUNo = "no data", _
+                        .PartNo = "no data", _
+                        .Commodity = "no data", _
+                        .Description = "no data", _
+                        .Alt = "no data" _
+                    }
+                    index += 1
+                    ' -- Actualizado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                OldErr = ""
+            Finally
+                Me.DA.Dispose()
+            End Try
+
+            If OldErr <> "" Then
+                TempData("ErrMsg") = OldErr
+            End If
+
+            Me.TempData.Item("SKUNo") = ""
+            Me.TempData.Item("Model") = modelArray
+            Return Me.View
+        End Function
+
+        '2013.05.13
+        ' POST: /ingeniaria/agregar_material_bom : Buscqueda
+        <Authorize, HttpPost> _
+        <MultiButton(MatchFormKey:="action", MatchFormValue:="Buscar")> _
+        Public Function agregar_material_bom(ByVal m As MaterialMasterModel) As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray(300) As MaterialMasterListModel
+            Dim index As Integer = 0
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("in_getMaterialList", m.SKUNo)
+                If (Me.DA._LastErrorMessage = "") Then
+                    Dim model As MaterialMasterListModel
+
+                    If Me.DR.HasRows Then
+                        Do While Me.DR.Read
+                            model = New MaterialMasterListModel With { _
+                                .SKUNo = DR(0), _
+                                .PartNo = DR(1), _
+                                .Commodity = DR(2), _
+                                .Description = DR(3), _
+                                .Alt = DR(4) _
+                            }
+                            modelArray(index) = model
+                            If index + 1 >= modelArray.Length Then ReDim Preserve modelArray(index + 5)
+                            index += 1
+                        Loop
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+
+                    Else
+                        model = New MaterialMasterListModel With { _
+                            .SKUNo = "no data", _
+                            .PartNo = "no data", _
+                            .Commodity = "no data", _
+                            .Description = "no data", _
+                            .Alt = "no data" _
+                        }
+                        modelArray(index) = model
+                        index += 1
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+                    End If
+                Else
+                    modelArray(index) = New MaterialMasterListModel With { _
+                        .SKUNo = "no data", _
+                        .PartNo = "no data", _
+                        .Commodity = "no data", _
+                        .Description = "no data", _
+                        .Alt = "no data" _
+                    }
+                    index += 1
+                    ' -- Actualizado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+            Finally
+                Me.DA.Dispose()
+            End Try
+
+            Me.TempData.Item("SKUNo") = m.SKUNo
+            Me.TempData.Item("Model") = modelArray
+            Return Me.View
+        End Function
+
+        ' 2013.03.13
+        ' POST: /ingeniaria/agregar_material_bom : Agregar
+        <Authorize, HttpPost> _
+        <MultiButton(MatchFormKey:="action", MatchFormValue:="Agregar")> _
+        Public Function agregar_material_nom(ByVal model As MaterialMasterModel) As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Try
+                Me.DR = Me.DA.ExecuteSP("in_agregarMaterialBOM", model.SKUNo, model.PartNo)
+                If DA.LastErrorMessage <> "" Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+                While DR.Read
+                    TempData("ErrMsg") = DR(0)
+                End While
+
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+            Finally
+                Me.DA.Dispose()
+            End Try
+
+            Return Me.RedirectToAction("agregar_material_bom")
+        End Function
+
+        ' 2013.05.13
+        ' GET: /ingenieria/crear_material
+        Public Function crear_material() As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray(300) As CommodityListModel
+            Dim i As Integer = 0
+            
+            Try
+                Me.DR = Me.DA.ExecuteSP("in_getCommodityList")
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+
+                While DR.Read
+                    modelArray(i) = New CommodityListModel With {.CommodityName = DR(0), .CommodityDescription = DR(1)}
+                    i += 1
+                End While
+
+                ReDim Preserve modelArray(i - 1)
+            Catch ex As Exception
+                TempData("ErrMsg") = DA._LastErrorMessage
+            Finally
+                DA.Dispose()
+            End Try
+
+            TempData("Model") = modelArray
+            Return Me.View
+        End Function
+
+        ' 2013.05.13
+        ' POST: /ingenieria/crear_material
+        <Authorize, HttpPost> _
+        Public Function crear_material(ByVal model As MaterialMasterListModel) As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray(300) As CommodityListModel
+            Dim i As Integer = 0
+            Dim result As ActionResult
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("in_CreateMaterial", model.PartNo, model.Commodity, model.Description, model.Alt)
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+                While DR.Read
+                    TempData("ErrMsg") = DR(0)
+                End While
+                result = Me.RedirectToAction("crear_material")
+            Catch ex As Exception
+                TempData("ErrMsg") = DA._LastErrorMessage
+                result = Me.View
+            Finally
+                DA.Dispose()
+            End Try
+
+            Return result
+        End Function
+
+
+        '2013.05.20
+        ' GET: /ingenieria/desplegar_MM
+        <Authorize, HttpGet> _
+        Public Function desplegar_MM(ByVal m As MaterialMasterModel) As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray(100) As MaterialMasterListModel
+            Dim index As Integer = 0
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("in_getMMList", m.PartNo, m.Commodity, m.Description, m.Alt)
+                If (Me.DA._LastErrorMessage = "") Then
+                    Dim model As MaterialMasterListModel
+
+                    If Me.DR.HasRows Then
+                        Do While Me.DR.Read
+                            model = New MaterialMasterListModel With { _
+                                .PartNo = DR(0), _
+                                .Commodity = DR(1), _
+                                .Description = DR(2), _
+                                .Alt = DR(3) _
+                            }
+                            modelArray(index) = model
+                            If index + 1 >= modelArray.Length Then ReDim Preserve modelArray(index + 10)
+                            index += 1
+                        Loop
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+                    Else
+                        model = New MaterialMasterListModel With { _
+                            .PartNo = "no data", _
+                            .Commodity = "no data", _
+                            .Description = "no data", _
+                            .Alt = "no data" _
+                        }
+                        modelArray(index) = model
+                        index += 1
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+                    End If
+                Else
+                    modelArray(index) = New MaterialMasterListModel With { _
+                        .PartNo = "no data", _
+                        .Commodity = "no data", _
+                        .Description = "no data", _
+                        .Alt = "no data" _
+                    }
+                    index += 1
+                    ' -- Actualizado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+            Finally
+                Me.DA.Dispose()
+            End Try
+
+            Me.TempData.Item("Model") = modelArray
+            Return Me.View
+        End Function
+
+        '2013.05.20
+        ' GET: /Ingenieria/modificar_material
+        Public Function modificar_material(ByVal m As MaterialMasterModel) As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray(100) As MaterialMasterListModel
+            Dim index As Integer = 0
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("in_getMMList", m.PartNo, m.Commodity, m.Description, m.Alt)
+                If (Me.DA._LastErrorMessage = "") Then
+                    Dim model As MaterialMasterListModel
+
+                    If Me.DR.HasRows Then
+                        Do While Me.DR.Read
+                            model = New MaterialMasterListModel With { _
+                                .PartNo = DR(0), _
+                                .Commodity = DR(1), _
+                                .Description = DR(2), _
+                                .Alt = DR(3) _
+                            }
+                            modelArray(index) = model
+                            If index + 1 >= modelArray.Length Then ReDim Preserve modelArray(index + 10)
+                            index += 1
+                        Loop
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+                    Else
+                        model = New MaterialMasterListModel With { _
+                            .PartNo = "no data", _
+                            .Commodity = "no data", _
+                            .Description = "no data", _
+                            .Alt = "no data" _
+                        }
+                        modelArray(index) = model
+                        index += 1
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+                    End If
+                Else
+                    modelArray(index) = New MaterialMasterListModel With { _
+                        .PartNo = "no data", _
+                        .Commodity = "no data", _
+                        .Description = "no data", _
+                        .Alt = "no data" _
+                    }
+                    index += 1
+                    ' -- Actualizado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+            Finally
+                Me.DA.Dispose()
+            End Try
+
+            Me.TempData.Item("Model") = modelArray
+            Return Me.View
+        End Function
+
+        '2013.05.27
+        ' GET: /ingenieria/modificarmaterial
+        <Authorize> _
+        Public Function modificarmaterial(ByVal model As MaterialMasterListModel) As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray(300) As CommodityListModel
+            Dim i As Integer = 0
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("in_getCommodityList")
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+
+                While DR.Read
+                    modelArray(i) = New CommodityListModel With {.CommodityName = DR(0), .CommodityDescription = DR(1)}
+                    i += 1
+                End While
+
+                ReDim Preserve modelArray(i - 1)
+            Catch ex As Exception
+                TempData("ErrMsg") = DA._LastErrorMessage
+            Finally
+                DA.Dispose()
+            End Try
+
+            TempData("Model") = modelArray
+            TempData("datos") = model
+            Return Me.View
+        End Function
+
+        ' 2013.05.27 
+        ' POST: /ingenieria/modificarmaterial
+        <Authorize, HttpPost> _
+        Public Function modificarmaterial(ByVal model As UPDMaterialMasterModel) As ActionResult
+            Dim result As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray As New MaterialMasterListModel
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("in_EditMaterial", model.Commodity, model.PartNo, model.Description, model.Alt, model.OldPartNo)
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Me.TempData.Item("ErrMsg") = Me.DA._LastErrorMessage
+                    Return Me.View
+                End If
+
+                Do While Me.DR.Read
+                    Me.TempData.Item("ErrMsg") = DR(0)
+                Loop
+                result = Me.RedirectToAction("modificar_material")
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                Return Me.View
+            Finally
+                Me.DA.Dispose()
+            End Try
+
+            Return result
+        End Function
+
+        ' 2013.05.27
+        ' GET: /ingenieria/quitar_material
+        <Authorize> _
+        Public Function quitar_material(ByVal m As MaterialMasterModel) As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray(100) As MaterialMasterListModel
+            Dim index As Integer = 0
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("in_getMaterialList", m.SKUNo, m.PartNo, m.Description, m.Alt)
+                If (Me.DA._LastErrorMessage = "") Then
+                    Dim model As MaterialMasterListModel
+
+                    If Me.DR.HasRows Then
+                        Do While Me.DR.Read
+                            model = New MaterialMasterListModel With { _
+                                .SKUNo = DR(0), _
+                                .PartNo = DR(1), _
+                                .Commodity = DR(2), _
+                                .Description = DR(3), _
+                                .Alt = DR(4) _
+                            }
+                            modelArray(index) = model
+                            If index + 1 >= modelArray.Length Then ReDim Preserve modelArray(index + 10)
+                            index += 1
+                        Loop
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+                    Else
+                        model = New MaterialMasterListModel With { _
+                            .SKUNo = "no data", _
+                            .PartNo = "no data", _
+                            .Commodity = "no data", _
+                            .Description = "no data", _
+                            .Alt = "no data" _
+                        }
+                        modelArray(index) = model
+                        index += 1
+                        ' -- Actualizado por Carlos Barreto
+                        ReDim Preserve modelArray(index - 1)
+                    End If
+                Else
+                    modelArray(index) = New MaterialMasterListModel With { _
+                        .SKUNo = "no data", _
+                        .PartNo = "no data", _
+                        .Commodity = "no data", _
+                        .Description = "no data", _
+                        .Alt = "no data" _
+                    }
+                    index += 1
+                    ' -- Actualizado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+            Finally
+                Me.DA.Dispose()
+            End Try
+
+            Me.TempData.Item("Model") = modelArray
+            Return Me.View
+        End Function
+
+        '2013.05.27 
+        ' GET: /ingenieria/quitar_material
+        <Authorize> _
+        Public Function quitarmaterial(ByVal m As MaterialMasterModel) As ActionResult
+            Me.TempData("Model") = m
+            Return Me.View
+        End Function
+
+        ' 2013.05.27
+        ' POST: /ingenieria/quitar_material
+        <Authorize, HttpPost> _
+        Public Function quitarmaterial(ByVal model As UPDMaterialMasterModel) As ActionResult
+            Dim result As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+
+            Dim modelArray As New MaterialMasterListModel
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("in_DelMaterial", model.SKUNo, model.PartNo)
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Me.TempData.Item("ErrMsg") = Me.DA._LastErrorMessage
+                    Return Me.RedirectToAction("quitar_material")
+                End If
+
+                Do While Me.DR.Read
+                    Me.TempData.Item("ErrMsg") = DR(0)
+                Loop
+                result = Me.RedirectToAction("quitar_material")
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                Return View()
+            Finally
+                Me.DA.Dispose()
+            End Try
+
+            Return result
+        End Function
+
+        ' 2013.05.27
+        ' GET: /ingenieria/add_commodity
+        Public Function add_commodity() As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray(300) As AddCommodityModel
+            Dim i As Integer = 0
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("in_getCommodityList")
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+
+                While DR.Read
+                    modelArray(i) = New AddCommodityModel With {.CommodityName = DR(0), .CommodityDescription = DR(1), .CommodityID = DR(2)}
+                    i += 1
+                End While
+
+                ReDim Preserve modelArray(i - 1)
+            Catch ex As Exception
+                TempData("ErrMsg") = DA._LastErrorMessage
+            Finally
+                DA.Dispose()
+            End Try
+
+            TempData("Model") = modelArray
+            Return Me.View
+        End Function
+
+        ' 2013.05.28
+        ' POST: /ingenieria/add_commodity
+        <Authorize, HttpPost> _
+        Public Function add_commodity(ByVal model As AddCommodityModel) As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("in_addCommodity", model.CommodityName, model.CommodityDescription)
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Me.TempData.Item("ErrMsg") = Me.DA._LastErrorMessage
+
+                End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+            Finally
+                Me.DA.Dispose()
+            End Try
+
+            Return Me.RedirectToAction("add_commodity")
+        End Function
 
         ' Fields
         Protected Friend DA As DataAccess

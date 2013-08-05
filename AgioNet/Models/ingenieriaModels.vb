@@ -207,6 +207,18 @@ Public Class MaterialMasterListModel
     Private _Commodity As String
 End Class
 
+Public Class UPDMaterialMasterModel
+    Inherits MaterialMasterListModel
+    Private _OldPartNo As String
+    Public Property OldPartNo As String
+        Get
+            Return _OldPartNo
+        End Get
+        Set(value As String)
+            _OldPartNo = value
+        End Set
+    End Property
+End Class
 ' 2014.02.13
 Public Class UserListModel
     ' Properties
@@ -232,4 +244,76 @@ Public Class UserListModel
     ' Fields
     Private _Nombre As String
     Private _Usuario As String
+End Class
+
+' 2013.05.13
+<System.AttributeUsage(AttributeTargets.Method, AllowMultiple:=False, Inherited:=True)>
+Public Class MultiButtonAttribute
+    Inherits ActionNameSelectorAttribute
+
+    Private _MatchFormKey As String
+    Private _MatchFormValue As String
+
+    Public Property MatchFormKey As String
+        Get
+            Return _MatchFormKey
+        End Get
+        Set(value As String)
+            _MatchFormKey = value
+        End Set
+    End Property
+
+    Public Property MatchFormValue As String
+        Get
+            Return _MatchFormValue
+        End Get
+        Set(value As String)
+            _MatchFormValue = value
+        End Set
+    End Property
+
+
+    Public Overrides Function IsValidName(controllerContext As ControllerContext, actionName As String, methodInfo As Reflection.MethodInfo) As Boolean
+        Dim Response As Boolean
+        Response = Not controllerContext.HttpContext.Request(MatchFormKey) Is Nothing And _
+                   controllerContext.HttpContext.Request(MatchFormKey) = MatchFormValue
+        Return Response
+    End Function
+End Class
+
+Public Class CommodityListModel
+    Private _CommodityName As String
+    Private _CommodityDescription As String
+
+    Public Property CommodityName As String
+        Get
+            Return _CommodityName
+        End Get
+        Set(value As String)
+            _CommodityName = value
+        End Set
+    End Property
+
+    Public Property CommodityDescription As String
+        Get
+            Return _CommodityDescription
+        End Get
+        Set(value As String)
+            _CommodityDescription = value
+        End Set
+    End Property
+End Class
+
+'2013.05.27
+Public Class AddCommodityModel
+    Inherits CommodityListModel
+    Private _CommodityID As String
+    Public Property CommodityID As String
+        Get
+            Return _CommodityID
+        End Get
+        Set(value As String)
+            _CommodityID = value
+        End Set
+    End Property
 End Class

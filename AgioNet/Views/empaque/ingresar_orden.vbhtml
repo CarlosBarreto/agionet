@@ -30,7 +30,6 @@ End Using
 
 @grid.GetHtml(columns:=grid.Columns( _
                    grid.Column("OrderID", "Orden"), _
-                   grid.Column("Customer", "Cliente"), _
                    grid.Column("ProductType", "Tipo de producto"), _
                    grid.Column("SerialNo", "Numero de serie"), _
                    grid.Column("Model", "Modelo"), _

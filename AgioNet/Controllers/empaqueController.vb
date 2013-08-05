@@ -95,7 +95,7 @@ Namespace AgioNet
             Dim model As ScanInfoModel = mdl
 
             Try
-                Me.DR = Me.DA.ExecuteSP("rc_regScanInfo", model.OrderID, model.SerialNo, model.SKU, model.PartNo, model.Model, Me.User.Identity.Name)
+                Me.DR = Me.DA.ExecuteSP("rc_regScanInfo", model.OrderID, model.SerialNo, "", model.PartNo, model.Model, model.Marca, Me.User.Identity.Name)
                 If (Me.DA.LastErrorMessage = "") Then
                     Do While Me.DR.Read
                         str = DR(0)
@@ -154,7 +154,7 @@ Namespace AgioNet
         End Function
 
         ' 2013.02.14
-        ' POST: /empaque/formulario_empaque
+        ' POST: /empaque/formulario_recibo
         <Authorize, HttpPost> _
         Public Function formulario_recibo(ByVal model As ReceiveIndfoModel) As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
@@ -276,6 +276,8 @@ Namespace AgioNet
                         data.Warranty = DR(17)
                         data.ReRepair = DR(18)
                         data.Comment = DR(19)
+                        data.Customer = DR(20)
+                        data.ProductClass = DR(21)
                     Loop
 
                     Dim path As String = (Me.Server.MapPath("~/Content/temp/") & code & ".jpg")
@@ -420,11 +422,12 @@ Namespace AgioNet
                             .Model = DR(25), _
                             .Description = DR(26), _
                             .PartNo = DR(27), _
-                            .SerialNo = DR(28), _
-                            .Revision = DR(29), _
-                            .ServiceType = DR(30), _
-                            .FailureType = DR(31), _
-                            .Comment = DR(32) _
+                            .Commodity = DR(28), _
+                            .SerialNo = DR(29), _
+                            .Revision = DR(30), _
+                            .ServiceType = DR(31), _
+                            .FailureType = DR(32), _
+                            .Comment = DR(33) _
                         }
                         model = model2
                     Loop
@@ -483,7 +486,7 @@ Namespace AgioNet
         End Function
 
         ' 2013.03.10
-        ' GET: /empaque/empaque_empaque
+        ' GET: /empaque/recibo_empaque
         <Authorize> _
         Public Function recibo_empaque() As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
@@ -496,19 +499,19 @@ Namespace AgioNet
                 End If
                 If DR.HasRows Then
                     While DR.Read
-                        myModel(index) = New reciboEmpaqueModel With {.OrderID = DR(0), .Customer = DR(1), .ProductType = DR(2), .SerialNo = DR(3), .Model = DR(4), .Description = DR(5)}
+                        myModel(index) = New reciboEmpaqueModel With {.OrderID = DR(0), .ProductType = DR(1), .SerialNo = DR(2), .Model = DR(3), .Description = DR(4), .Entrega = DR(6)}
                         If index >= myModel.Length Then ReDim Preserve myModel(index + 1)
                         index += 1
                     End While
                     ReDim Preserve myModel(index - 1)
                 Else
-                    myModel(index) = New reciboEmpaqueModel With {.OrderID = "No data", .Customer = "No data", .ProductType = "No data", .SerialNo = "No data", .Model = "No data", .Description = "No data"}
+                    myModel(index) = New reciboEmpaqueModel With {.OrderID = "No data", .Entrega = "No data", .ProductType = "No data", .SerialNo = "No data", .Model = "No data", .Description = "No data"}
                     index += 1
                     ReDim Preserve myModel(index - 1)
                 End If
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
-                myModel(index) = New reciboEmpaqueModel With {.OrderID = "No data", .Customer = "No data", .ProductType = "No data", .SerialNo = "No data", .Model = "No data", .Description = "No data"}
+                myModel(index) = New reciboEmpaqueModel With {.OrderID = "No data", .Entrega = "No data", .ProductType = "No data", .SerialNo = "No data", .Model = "No data", .Description = "No data"}
                 index += 1
                 ReDim Preserve myModel(index - 1)
             Finally
@@ -522,6 +525,56 @@ Namespace AgioNet
         ' POST: /empaque/recibo_empaque
         <Authorize, HttpPost> _
         Public Function recibo_empaque(ByVal model As ScanOrderModel) As ActionResult
+            Return RedirectToAction("reciboempaque", model)
+        End Function
+
+
+        ' 2013.05.24
+        ' GET: /empaque/reciboempaque
+        <Authorize> _
+        Public Function reciboempaque(ByVal model As ScanOrderModel) As ActionResult
+            Dim data As New PrintData
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("rc_getPrintData", model.OrderID)
+                If (Me.DA.LastErrorMessage <> "") Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+                If DR.HasRows Then
+                    Do While Me.DR.Read
+                        data.ReportedFailure = DR(0) : data.OrderId = DR(1) : data.SerialNo = DR(2)
+                        data.PartNo = DR(3) : data.Model = DR(4) : data.Descripcion = DR(5)
+                        data.Trademark = DR(6) : data.TrackNo = DR(7) : data.ScanDate = DR(8)
+                        data.checkinDate = DR(9) : data.ScanBy = DR(10) : data.PackType = DR(11)
+                        data.PackDamage = DR(12) : data.NonDoucumentDamage = DR(13) : data.CorrectPack = DR(14)
+                        data.Accesories = DR(15) : data.Cosmetic = DR(16) : data.Warranty = DR(17)
+                        data.ReRepair = DR(18) : data.Comment = DR(19)
+                    Loop
+                Else
+                    Throw New Exception("Error! No se han encontrado datos para esta orden")
+                End If
+            Catch ex As Exception
+                TempData("ErrMsg") = ex.Message
+                data.ReportedFailure = "No data" : data.OrderId = "No data" : data.SerialNo = "No data"
+                data.PartNo = "No data" : data.Model = "No data" : data.Descripcion = "No data"
+                data.Trademark = "No data" : data.TrackNo = "No data" : data.ScanDate = "No data"
+                data.checkinDate = "No data" : data.ScanBy = "No data" : data.PackType = "No data"
+                data.PackDamage = "No data" : data.NonDoucumentDamage = "No data" : data.CorrectPack = "No data"
+                data.Accesories = "No data" : data.Cosmetic = "No data" : data.Warranty = "No data"
+                data.ReRepair = "No data" : data.Comment = "No data"
+            Finally
+                DA.Dispose()
+            End Try
+
+            TempData("Model") = data
+            Return Me.View
+        End Function
+
+        ' 2013.05.24
+        ' POST: /empaque/reciboempaque
+        <Authorize, HttpPost> _
+        Public Function reciboempaque(ByVal model As ScannedOrderModel) As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
             Try
                 Me.DR = Me.DA.ExecuteSP("pk_recibo", model.OrderID, model.Comment, Me.User.Identity.Name)
@@ -561,7 +614,7 @@ Namespace AgioNet
                 If Me.DR.HasRows Then
                     Do While Me.DR.Read
                         modelArray(index) = New PendingOrdersModel With {.OrderID = DR(0), .Customer = DR(1), .ProductType = DR(2), _
-                                            .SerialNo = DR(3), .Model = DR(4), .Description = DR(5)}
+                                            .SerialNo = DR(3), .Model = DR(4), .Description = DR(5), .DateR = DR(9)}
                         index += 1
                     Loop
                     ' -- Actualizado por Carlos Barreto
@@ -569,7 +622,7 @@ Namespace AgioNet
                 Else
                     index = 0
                     modelArray(index) = New PendingOrdersModel With {.OrderID = "No Data", .Customer = "No Data", .ProductType = "No Data", _
-                        .SerialNo = "No Data", .Model = "No Data", .Description = "No Data"}
+                        .SerialNo = "No Data", .Model = "No Data", .Description = "No Data", .DateR = "No data"}
                     index += 1
                     ' -- Actualizado por Carlos Barreto
                     ReDim Preserve modelArray(index - 1)
@@ -582,6 +635,7 @@ Namespace AgioNet
                 DA.Dispose()
             End Try
 
+            Me.TempData.Keep("ErrMsg")
             Me.TempData.Item("Model") = modelArray
             Return response
         End Function
@@ -614,6 +668,35 @@ Namespace AgioNet
         ' GET: /empaque/transfer_warehouse
         <Authorize> _
         Public Function transfer_warehouse() As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim myModel(100) As reciboEmpaqueModel
+            Dim index As Integer = 0
+            Try
+                Me.DR = Me.DA.ExecuteSP("pk_PendientesWarehouse")
+                If DA._LastErrorMessage <> "" Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+                If DR.HasRows Then
+                    While DR.Read
+                        myModel(index) = New reciboEmpaqueModel With {.OrderID = DR(0), .ProductType = DR(1), .SerialNo = DR(2), .Model = DR(3), .Description = DR(4), .Entrega = DR(6)}
+                        If index >= myModel.Length Then ReDim Preserve myModel(index + 1)
+                        index += 1
+                    End While
+                    ReDim Preserve myModel(index - 1)
+                Else
+                    myModel(index) = New reciboEmpaqueModel With {.OrderID = "No data", .Entrega = "No data", .ProductType = "No data", .SerialNo = "No data", .Model = "No data", .Description = "No data"}
+                    index += 1
+                    ReDim Preserve myModel(index - 1)
+                End If
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                myModel(index) = New reciboEmpaqueModel With {.OrderID = "No data", .Entrega = "No data", .ProductType = "No data", .SerialNo = "No data", .Model = "No data", .Description = "No data"}
+                index += 1
+                ReDim Preserve myModel(index - 1)
+            Finally
+                Me.DA.Dispose()
+            End Try
+            TempData("model") = myModel
             Return Me.View
         End Function
 
@@ -638,6 +721,7 @@ Namespace AgioNet
 
             Return Me.RedirectToAction("transfer_warehouse")
         End Function
+
 
         ' Fields
         Protected Friend DA As DataAccess

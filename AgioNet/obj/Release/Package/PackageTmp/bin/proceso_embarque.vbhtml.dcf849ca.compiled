@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/almacen/proceso_embarque.vbhtml" hash="7a9782b5" filehash="ffffc6e4a3f926f4" flags="110000" assembly="App_Web_l0nacwli" type="ASP._Page_Views_almacen_proceso_embarque_vbhtml">
+    <filedeps>
+        <filedep name="/Views/almacen/proceso_embarque.vbhtml" />
+    </filedeps>
+</preserve>

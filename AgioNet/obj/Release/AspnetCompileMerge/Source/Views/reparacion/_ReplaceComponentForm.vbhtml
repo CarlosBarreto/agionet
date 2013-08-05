@@ -64,10 +64,11 @@
     
         <div class="row">
             <span class="Span-c">&nbsp;</span>
-            <span class="Span-c">&nbsp;</span>
-            <span class="Span-b">&nbsp;</span>
-            <span class="Span-a">
-                <input type="submit" value="SCAN" class="Button" />             
+            <span class="Span-a">&nbsp;</span>
+            <span class="Span-c">
+                <input name="Command" type="submit" value="Terminar" class="Button" />
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <input name="Command" type="submit" value="Reemplazar" class="Button" />             
             </span>
         </div>
     </div>

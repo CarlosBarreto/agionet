@@ -136,13 +136,14 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\RequiredTrue.vb" />
     <Compile Include="Backend\agEmail.vb" />
     <Compile Include="Backend\agGlobals.vb" />
     <Compile Include="Backend\agLogin.vb" />
     <Compile Include="Backend\DataAccess.vb" />
+    <Compile Include="Backend\mailing.vb" />
     <Compile Include="Backend\Module1.vb" />
     <Compile Include="Backend\Simple3Des.vb" />
-    <Compile Include="Content\temp\trash.vb" />
     <Compile Include="Controllers\AccountController.vb" />
     <Compile Include="Controllers\calidadController.vb" />
     <Compile Include="Controllers\diagnosticoController.vb" />
@@ -153,6 +154,7 @@
     <Compile Include="Controllers\logisticaController.vb" />
     <Compile Include="Controllers\almacenController.vb" />
     <Compile Include="Controllers\reparacionController.vb" />
+    <Compile Include="Controllers\rpController.vb" />
     <Compile Include="Controllers\scController.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
@@ -166,6 +168,7 @@
     <Compile Include="Models\logisticaModels.vb" />
     <Compile Include="Models\almacenModels.vb" />
     <Compile Include="Models\reparacionModels.vb" />
+    <Compile Include="Models\reportesModel.vb" />
     <Compile Include="Models\scModels.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -193,6 +196,25 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\agionet.css" />
+    <Content Include="Content\css\agioTheme\images\animated-overlay.gif" />
+    <Content Include="Content\css\agioTheme\images\calendar.gif" />
+    <Content Include="Content\css\agioTheme\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Content\css\agioTheme\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\css\agioTheme\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Content\css\agioTheme\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\css\agioTheme\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Content\css\agioTheme\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\css\agioTheme\images\ui-bg_gloss-wave_35_CCC_500x100.png" />
+    <Content Include="Content\css\agioTheme\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\css\agioTheme\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Content\css\agioTheme\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\css\agioTheme\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Content\css\agioTheme\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Content\css\agioTheme\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Content\css\agioTheme\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\css\agioTheme\jquery-ui-1.10.3.custom.css" />
+    <Content Include="Content\css\agioTheme\jquery-ui-1.10.3.custom.min.css" />
     <Content Include="Content\css\approvals.css" />
     <Content Include="Content\css\ing.css" />
     <Content Include="Content\css\diag.css" />
@@ -211,6 +233,7 @@
     <Content Include="Content\css\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="Content\css\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\css\layout.css" />
+    <Content Include="Content\css\normalize.min.css" />
     <Content Include="Content\css\printing.css" />
     <Content Include="Content\css\reccss.css" />
     <Content Include="Content\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
@@ -249,19 +272,62 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <Content Include="Content\css\headerTool.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\fonts\BebasFontType.txt" />
     <Content Include="Content\fonts\BebasNeue-webfont.svg" />
     <Content Include="Content\images\AgioNetLogoGray.png" />
     <Content Include="Content\images\agionet_logo.png" />
+    <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\bg_line.png" />
     <EmbeddedResource Include="Content\images\logo-01.png" />
+    <Content Include="Content\images\ckl_celular.jpg" />
+    <Content Include="Content\images\ckl_consola.jpg" />
+    <Content Include="Content\images\ckl_desktop.jpg" />
+    <Content Include="Content\images\ckl_impresora.jpg" />
+    <Content Include="Content\images\ckl_laptop.jpg" />
+    <Content Include="Content\images\ckl_tablet.jpg" />
+    <Content Include="Content\images\ckl_tv.jpg" />
     <Content Include="Content\images\comments.jpg" />
+    <Content Include="Content\images\dg_celular.jpg" />
+    <Content Include="Content\images\dg_clean.jpg" />
+    <Content Include="Content\images\dg_console.jpg" />
+    <Content Include="Content\images\dg_desktop.jpg" />
+    <Content Include="Content\images\dg_head.jpg" />
+    <Content Include="Content\images\dg_impresora.jpg" />
+    <Content Include="Content\images\dg_laptop.jpg" />
+    <Content Include="Content\images\dg_tablet.jpg" />
+    <Content Include="Content\images\dg_tv.jpg" />
+    <Content Include="Content\images\formato_twg.JPG" />
+    <Content Include="Content\images\IMG_15072013_121342.png" />
+    <Content Include="Content\images\img_AIO.jpg" />
+    <Content Include="Content\images\img_desktop.jpg" />
+    <Content Include="Content\images\img_laptop.jpg" />
+    <Content Include="Content\images\img_line.jpg" />
+    <Content Include="Content\images\img_otro.jpg" />
+    <Content Include="Content\images\img_rec1.jpg" />
+    <Content Include="Content\images\img_rec3.jpg" />
+    <Content Include="Content\images\img_tablet.jpg" />
+    <Content Include="Content\images\img_vline.jpg" />
+    <Content Include="Content\images\logo-01.jpg" />
     <Content Include="Content\images\logo-02.jpg" />
     <Content Include="Content\images\logoaqua.png" />
+    <Content Include="Content\images\logo_agiotech.jpg" />
+    <Content Include="Content\images\logo_assurant.jpg" />
+    <Content Include="Content\images\logo_twg.jpg" />
     <Content Include="packages.config" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-migrate-1.1.1.js" />
+    <Content Include="Scripts\jquery-migrate-1.1.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.custom.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.custom.min.js" />
     <Content Include="Scripts\jquery.agiotech.js" />
+    <Content Include="Scripts\jquery.mCustomScrollbar.min.js" />
+    <Content Include="Scripts\jquery.mousewheel.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\messages_es.js" />
     <Content Include="Views\Shared\_LayoutLogOn.vbhtml" />
     <Content Include="Views\Shared\_ErrorPartial.vbhtml" />
     <Content Include="Views\Shared\_mainMenuPartial.vbhtml" />
@@ -308,7 +374,7 @@
     <Content Include="Views\ingenieria\Index.vbhtml" />
     <Content Include="Views\ingenieria\material_master.vbhtml" />
     <Content Include="Views\ingenieria\agregar_material.vbhtml" />
-    <Content Include="Views\ingenieria\quitar_material.vbhtml" />
+    <Content Include="Views\ingenieria\_quitar_material.vbhtml" />
     <Content Include="Views\ingenieria\editar_material.vbhtml" />
     <Content Include="Views\ingenieria\editarmaterial.vbhtml" />
     <Content Include="Views\almacen\_OrderInfoPartial.vbhtml" />
@@ -369,12 +435,51 @@
     <Content Include="Views\logistica\pagina_entrega.vbhtml" />
     <Content Include="Views\empaque\_OrderInfoPartial.vbhtml" />
     <Content Include="Views\sc\detalle_orden.vbhtml" />
+    <Content Include="Views\diagnostico\Ordenes_En_Diagnostico.vbhtml" />
+    <Content Include="Views\sc\enviarcotizacion.vbhtml" />
+    <Content Include="Views\sc\enviar_cotizacion.vbhtml" />
+    <Content Include="Views\sc\aprobar_reparar_list.vbhtml" />
+    <Content Include="Views\sc\comprar_parte.vbhtml" />
+    <Content Include="Views\sc\comprarparte.vbhtml" />
+    <Content Include="Views\sc\cargar_guia.vbhtml" />
+    <Content Include="Views\sc\cargarguia.vbhtml" />
+    <Content Include="Scripts\modernizr-2.6.2-respond-1.1.o.min.js" />
+    <Content Include="Views\ingenieria\desplegar_bom.vbhtml" />
+    <Content Include="Views\ingenieria\agregar_material_bom.vbhtml" />
+    <Content Include="Views\ingenieria\crear_material.vbhtml" />
+    <Content Include="Views\facturacion\to_invoice.vbhtml" />
+    <Content Include="Views\facturacion\invoice.vbhtml" />
+    <Content Include="Views\facturacion\send_invoice.vbhtml" />
+    <Content Include="Views\facturacion\sendinvoice.vbhtml" />
+    <Content Include="Views\reparacion\iniciar_reparacion.vbhtml" />
+    <Content Include="Views\ingenieria\desplegar_MM.vbhtml" />
+    <Content Include="Views\empaque\reciboempaque.vbhtml" />
+    <Content Include="Views\almacen\partes_compradas.vbhtml" />
+    <Content Include="Views\almacen\partescompradas.vbhtml" />
+    <Content Include="Views\reparacion\ordenes_en_reparacion.vbhtml" />
+    <Content Include="Views\ingenieria\modificar_material.vbhtml" />
+    <Content Include="Views\ingenieria\modificarmaterial.vbhtml" />
+    <Content Include="Views\ingenieria\quitar_material.vbhtml" />
+    <Content Include="Views\ingenieria\quitarmaterial.vbhtml" />
+    <Content Include="Views\ingenieria\add_commodity.vbhtml" />
+    <Content Include="Views\facturacion\to_invoice_alt.vbhtml" />
+    <Content Include="Views\facturacion\invoice_alt.vbhtml" />
+    <Content Include="Views\almacen\proceso_embarque.vbhtml" />
+    <Content Include="Views\almacen\ordenes_embarcadas.vbhtml" />
+    <Content Include="Views\rp\min_info.vbhtml" />
+    <Content Include="Views\rp\rp_recibo.vbhtml" />
+    <Content Include="Views\rp\rp_ingreso.vbhtml" />
+    <Content Include="Views\rp\rp_diagnostic.vbhtml" />
+    <Content Include="Views\rp\rp_costpart.vbhtml" />
+    <Content Include="Views\facturacion\pagadas.vbhtml" />
+    <Content Include="Views\rp\rp_compras.vbhtml" />
+    <Content Include="Views\sc\crear_orden_assurant.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.agiotech.popup.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
@@ -390,8 +495,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\MicrosoftAjax.js" />

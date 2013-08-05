@@ -1,5 +1,5 @@
 ﻿@code
-    Dim read As AgioNet.AllOrderInfoModel = TempData("OrderInfo")
+    Dim read As AgioNet.OrderPartInfoModel = TempData("OrderInfo")
     
 End Code
 
@@ -12,57 +12,6 @@ End Code
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>Tipo de cliente: </strong> @read.CustomerType</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-e"><strong>Nombre del cliente: </strong> @read.CustomerName</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-e"><strong>RFC: </strong> @read.RFC</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-e"><strong>Email: </strong> @read.Email</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-e"><strong>Dirección: </strong> @(read.Address & " No. " & read.ExternalNumber & " Int. " & read.InternalNumber)  </span>
-</div>
-
-<div class="form-row">
-    <span class="Span-e"><strong>Colonia: </strong> @read.Address2</span>
-</div>
-  
-<div class="form-row">
-    <span class="Span-c"><strong>Ciudad: </strong> @read.City</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-c"><strong>Estado: </strong> @read.State</span>
-</div>   
-     
-<div class="form-row">
-    <span class="Span-b"><strong>País: </strong> @read.Country</span>
-    <span class="Span-b"><strong>C.P.: </strong> @read.ZipCode</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-b"><strong>Tel: </strong> @read.Telephone</span>
-    <span class="Span-b"><strong>Tel2: </strong> @read.Telephone2</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-e"><strong>Celular: </strong> @read.Telephone3</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-i"><strong>Flete: </strong> @read.Delivery</span>
-    <span class="Span-c"><strong>Horario de recolección: </strong> @read.DeliveryTime</span>
-</div>
-
-<div class="form-row">
     <span class="Span-c"><strong>Clase de producto: </strong> @read.ProductClass</span>
 </div>
 
@@ -71,35 +20,93 @@ End Code
 </div>
 
 <div class="form-row">
-    <span class="Span-i"><strong>Marca: </strong> @read.ProductTrademark</span>
-    <span class="Span-i"><strong>Modelo: </strong> @read.ProductModel</span>
+    <span class="Span-i"><strong>Marca: </strong> @read.Trademark</span>
+    <span class="Span-c"><strong>Modelo: </strong> @read.Model</span>
 </div>
 
 <div class="form-row">
-    <span class="Span-i"><strong>Revision: </strong> @read.Revision</span>
-    <span class="Span-i"><strong>No Parte:</strong> @read.PartNumber</span>
+    <span class="Span-i"><strong>Commodity:</strong> @read.ProductType</span>
+    <span class="Span-i"><strong>SKU No:</strong> @read.PartNo</span>
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>Descripción: </strong> @read.ProductDescription</span>
+    <span class="Span-e"><strong>Descripción: </strong> @read.Description</span>
 </div>
 <div class="form-row"> <span class="Span-e"> &nbsp; </span> </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>Falla Detectada: </strong> @read.ServiceType</span>
+    <span class="Span-h"><strong>SerialNo: </strong> @read.SerialNumber</span>
+    <span class="Span-c"><strong>Revision: </strong> @read.Revision</span>
 </div>
 
+<div class="form-row">
+    <span class="Span-e"><strong>Tipo de Servicio: </strong> @read.ServiceType</span>
+</div>
+
+<div class="form-row">
+    <span class="Span-e"><strong>Falla Reportada: </strong> @read.Failure</span>
+</div>
 <div class="form-row"> <span class="Span-e"> &nbsp; </span> </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>Solución: </strong> @read.FailureType</span>
+    <span class="Span-e"><strong>Comentario Cliente: </strong> @read.Comentario</span>
+</div>
+<div class="form-row"> <span class="Span-e"> &nbsp; </span> </div>
+
+<!-- Datos de la parte -->
+<div class="form-row"> <span class="Span-e"> &nbsp; </span> </div>
+<div class="form-row">
+    <span class="Span-c"><strong>Clase de producto: </strong> @read.sProductClass</span>
 </div>
 
+<div class="form-row">
+    <span class="Span-c"><strong>Tipo de producto: </strong> @read.sProductType</span>
+</div>
+
+<div class="form-row">
+    <span class="Span-i"><strong>Marca: </strong> @read.sTrademark</span>
+    <!--<span class="Span-i"><strong>Modelo: </strong> @read.sModel</span> -->
+</div>
+
+<div class="form-row">
+    <span class="Span-e"><strong>No Parte:</strong> @read.sPartNumber</span>
+</div>
+
+<div class="form-row">
+    <span class="Span-e"><strong>Alt:</strong> @read.sALT</span>
+</div>
+
+<div class="form-row">
+    <span class="Span-e"><strong>Descripción: </strong> @read.sDescription</span>
+</div>
 <div class="form-row"> <span class="Span-e"> &nbsp; </span> </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>Fuente Suministro: </strong> @read.Comment</span>
+    <span class="Span-e"><strong>SerialNo: </strong> @read.sSerialNumber</span>
 </div>
 
-<div class="form-row">&nbsp;</div>
+<div class="form-row">
+    <span class="Span-e"><strong>Revision: </strong> @read.sRevision</span>
+</div>
+
+<div class="form-row">
+    <span class="Span-e"><strong>Falla Detectada: </strong> @read.sFailure</span>
+</div>
+<div class="form-row"> <span class="Span-e"> &nbsp; </span> </div>
+
+<div class="form-row">
+    <span class="Span-e"><strong>Solución: </strong> @read.sSolution</span>
+</div>
+<div class="form-row"> <span class="Span-e"> &nbsp; </span> </div>
+
+<div class="form-row">
+    <span class="Span-e"><strong>Registro de Falla: </strong> @read.sComment</span>
+</div>
+<div class="form-row"> <span class="Span-e"> &nbsp; </span> </div>
+<div class="form-row"> <span class="Span-e"> &nbsp; </span> </div>
+
+<div class="form-row">
+    <span class="Span-e"><strong>Fuente de Suministro: </strong> @read.sSource</span>
+</div>
+<div class="form-row"> <span class="Span-e"> &nbsp; </span> </div>
 <div class="form-row">&nbsp;</div>

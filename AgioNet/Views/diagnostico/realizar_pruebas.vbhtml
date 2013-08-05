@@ -27,17 +27,12 @@ End If
         grid.Column("Failure", "Comentario/Falla", style:="TestDescription_"), _
         grid.Column("CapFailure", "Falla Capturada"), _
         grid.Column("TextLog", "Text Log", style:="CreateBy_"), _
-        grid.Column("TestStart", "Inicio", style:="CreateBy_"), _
         grid.Column("TestEnd", "Final", style:="CreateBy_"), _
         grid.Column("CreateBy", "Creada por", style:="CreateBy_"), _
         grid.Column(format:=Function(item) Html.ActionLink("Realizar", "pruebasMaster", "diagnostico", New With {.OrderID = item.OrderID}, vbNull), style:="Link_") _
     ))
-       
-
-        
-    </div>
 </div>
-
+<!--  grid.Column("TestStart", "Inicio", style:="CreateBy_"), _ -->
 <!-- Aquí va la información de la orden -->
 <div id="main-ContDerecha" class="bg-fondoborder">
     @Html.Action("LoadOrderInfo")

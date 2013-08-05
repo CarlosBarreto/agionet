@@ -2,7 +2,7 @@
 Imports System.ComponentModel.DataAnnotations
 Imports System.Globalization
 
-' 2013.02.14 
+'2013.02.14 Upd 2013.05.09 -  
 Public Class PendingOrdersModel
     ' Properties
     Public Property Customer As String
@@ -11,6 +11,15 @@ Public Class PendingOrdersModel
         End Get
         Set(ByVal value As String)
             Me._Customer = value
+        End Set
+    End Property
+
+    Public Property PartNo As String
+        Get
+            Return _PartNo
+        End Get
+        Set(value As String)
+            _PartNo = value
         End Set
     End Property
 
@@ -68,14 +77,67 @@ Public Class PendingOrdersModel
         End Set
     End Property
 
+    Public Property DateD As String
+        Get
+            Return _DateD
+        End Get
+        Set(value As String)
+            _DateD = value
+        End Set
+    End Property
+
+    Public Property CreateBy As String
+        Get
+            Return _CreateBy
+        End Get
+        Set(value As String)
+            _CreateBy = value
+        End Set
+    End Property
+
+    '--- Campos adicionales
+    Public Property DateI As String
+        Get
+            Return _DateI
+        End Get
+        Set(value As String)
+            _DateI = value
+        End Set
+    End Property
+
+    Public Property DateComp As String
+        Get
+            Return _DateComp
+        End Get
+        Set(value As String)
+            _DateComp = value
+        End Set
+    End Property
+
+    Public Property DiasTranscurridos As Integer
+        Get
+            Return _DiasTRanscurridos
+        End Get
+        Set(value As Integer)
+            _DiasTRanscurridos = value
+        End Set
+    End Property
+
     ' Fields
     Private _Customer As String
+    Private _PartNo As String
     Private _Description As String
     Private _Model As String
     Private _OrderID As String
     Private _ProductType As String
     Private _SerialNo As String
     Private _DateR As String
+    Private _DateI As String
+    Private _DateD As String
+    Private _CreateBy As String
+
+    Private _DateComp As String '-- Fecha compromiso
+    Private _DiasTRanscurridos As String
 End Class
 
 ' 2013.02.14
@@ -252,14 +314,14 @@ Public Class ScanInfoModel
         End Set
     End Property
 
-    'Not Used -    Public Property TrackNo As String
-    'Not Used -        Get
-    'Not Used -            Return Me._Trackno
-    'Not Used -        End Get
-    'Not Used -        Set(ByVal value As String)
-    'Not Used -            Me._Trackno = value
-    'Not Used -        End Set
-    'Not Used -    End Property
+    Public Property Marca As String
+        Get
+            Return _Marca
+        End Get
+        Set(value As String)
+            _Marca = value
+        End Set
+    End Property
 
     ' Fields
     Private _Model As String
@@ -269,7 +331,7 @@ Public Class ScanInfoModel
     Private _ScanBy As String
     Private _ScanDate As String
     Private _SerialNo As String
-    'Private _Trackno As String
+    Private _Marca As String
 End Class
 
 '2013.02.26
@@ -290,7 +352,7 @@ Public Class CheckinReportOptModel
 
     Public Property StartDate As String
         Get
-            If _StartDate = "" Then _StartDate = Format(Now, "yyyy/MM/dd")
+            If _StartDate = "" Then _StartDate = Format(Now, "dd/MM/yyyy")
             Return _StartDate
         End Get
         Set(value As String)
@@ -300,7 +362,7 @@ Public Class CheckinReportOptModel
 
     Public Property EndDate As String
         Get
-            If _EndDate = "" Then _EndDate = Format(Now, "yyyy/MM/dd")
+            If _EndDate = "" Then _EndDate = Format(Now, "dd/MM/yyyy")
             Return _EndDate
         End Get
         Set(value As String)
@@ -522,86 +584,167 @@ Public Class setCheckinModel
 
 End Class
 
-' 2013.04.10
-Public Class PendingProcessWarehouseModel
-    Private _OrderID As String
-    Private _CustomerName As String
-    Private _ProductType As String
-    Private _SerialNumber As String
-    Private _ProductModel As String
-    Private _ProductDescription As String
-    Private _Ingresado As String
-    Private _Procesado As String
+'2013.05.24 - UPD 2013.05-27
+Public Class ReciboPartesCompradasModel
+    Inherits SavePartesCompradasModel
 
-    Public Property OrderID As String
+    Private _Action As String
+    Private _Description As String
+    Private _Proveedor As String
+    Private _LeadTime As String
+    Private _CostDate As String
+
+    Public Property Action As String
         Get
-            Return _OrderID
+            Return _Action
         End Get
         Set(value As String)
-            _OrderID = value
+            _Action = value
         End Set
     End Property
 
-    Public Property CustomerName As String
+    Public Property Description As String
         Get
-            Return _CustomerName
+            Return _Description
         End Get
         Set(value As String)
-            _CustomerName = value
+            _Description = value
         End Set
     End Property
 
-    Public Property ProductType As String
+    Public Property Proveedor As String
         Get
-            Return _ProductType
+            Return _Proveedor
         End Get
         Set(value As String)
-            _ProductType = value
+            _Proveedor = value
         End Set
     End Property
 
-    Public Property SerialNumber As String
+    Public Property LeadTime As String
         Get
-            Return _SerialNumber
+            Return _LeadTime
         End Get
         Set(value As String)
-            _SerialNumber = value
+            _LeadTime = value
         End Set
     End Property
 
-    Public Property ProductModel As String
+    Public Property CostDate As String
         Get
-            Return _ProductModel
+            Return _CostDate
         End Get
         Set(value As String)
-            _ProductModel = value
+            _CostDate = value
         End Set
     End Property
 
-    Public Property ProductDescription As String
+End Class
+
+Public Class SavePartesCompradasModel
+    Inherits ScanOrderModel
+
+    Private _PartNo As String
+    Private _Comentario As String
+    Private _TrackNo As String
+
+    Public Property TrackNo As String
         Get
-            Return _ProductDescription
+            Return _TrackNo
         End Get
         Set(value As String)
-            _ProductDescription = value
+            _TrackNo = value
         End Set
     End Property
 
-    Public Property Ingresado As String
+    Public Property Comentario As String
         Get
-            Return _Ingresado
+            Return _Comentario
         End Get
         Set(value As String)
-            _Ingresado = value
+            _Comentario = value
         End Set
     End Property
 
-    Public Property Procesado As String
+    Public Property PartNo As String
         Get
-            Return _Procesado
+            Return _PartNo
         End Get
         Set(value As String)
-            _Procesado = value
+            _PartNo = value
+        End Set
+    End Property
+End Class
+
+' 2013.06.06 
+Public Class ShippingModel
+    Inherits ScanOrderModel
+
+    Private _TrackNo As String
+
+    Public Property TrackNo As String
+        Get
+            Return _TrackNo
+        End Get
+        Set(value As String)
+            _TrackNo = value
+        End Set
+    End Property
+End Class
+
+'2013.06.10
+Public Class OrdenesEmbarcadasModel
+    Inherits ScanOrderModel
+
+    Private _TrackNo As String
+    Private _ShipDate As String
+    Private _ShipBy As String
+
+    Private _dateStart As String
+    Private _dateEnd As String
+
+    Public Property TrackNo As String
+        Get
+            Return _TrackNo
+        End Get
+        Set(value As String)
+            _TrackNo = value
+        End Set
+    End Property
+
+    Public Property ShipDate As String
+        Get
+            Return _ShipDate
+        End Get
+        Set(value As String)
+            _ShipDate = value
+        End Set
+    End Property
+
+    Public Property ShipBy As String
+        Get
+            Return _ShipBy
+        End Get
+        Set(value As String)
+            _ShipBy = value
+        End Set
+    End Property
+
+    Public Property dateStart As String
+        Get
+            Return _dateStart
+        End Get
+        Set(value As String)
+            _dateStart = value
+        End Set
+    End Property
+
+    Public Property dateEnd As String
+        Get
+            Return _dateEnd
+        End Get
+        Set(value As String)
+            _dateEnd = value
         End Set
     End Property
 

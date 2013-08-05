@@ -26,18 +26,31 @@ End If
 
 <div id="MenuTab-Estaciones">
     <ul class="ul-tab">
-        <li class="li-tab">@Ajax.ActionLink("Remplazo", "remplazo_parte", "reparacion", New AjaxOptions With {.UpdateTargetId = "tab-ContIzquierda"}) </li>
-        <li class="li-tab">@Ajax.ActionLink("Nueva Parte", "nueva_parte", "reparacion", New AjaxOptions With {.UpdateTargetId = "tab-ContIzquierda"})</li>
-        <li class="li-tab">@Ajax.ActionLink("Reparación", "reparacion", "reparacion", New AjaxOptions With {.UpdateTargetId = "tab-ContIzquierda"})</li>
+        @If TempData("TipoReparacion") = "Reemplazo" Then
+            @<li class="li-tab">@Ajax.ActionLink("Remplazo", "remplazo_parte", "reparacion", New AjaxOptions With {.UpdateTargetId = "tab-ContIzquierda"}) </li>
+        ElseIf TempData("TipoReparacion") = "Reparación" Then
+            @<li class="li-tab">@Ajax.ActionLink("Reparación", "reparacion", "reparacion", New AjaxOptions With {.UpdateTargetId = "tab-ContIzquierda"})</li>
+        Else
+            @<li class="li-tab">@Ajax.ActionLink("Nueva Parte", "nueva_parte", "reparacion", New AjaxOptions With {.UpdateTargetId = "tab-ContIzquierda"})</li>
+        End If
+            
         <!-- <li class="li-tab">@Ajax.ActionLink("Solicitar Parte", "AddFailure", "diagnostico", New AjaxOptions With {.UpdateTargetId = "tab-ContIzquierda"})</li> -->
-        <li class="li-tab">@Html.ActionLink("Reparar otra orden", "index", "reparacion")</li>
+        <li class="li-tab">@Html.ActionLink("Reparar otra orden", "ordenes_pendientes", "reparacion")</li>
     </ul>
 </div>
 
 <div id="tab-content">
   <!-- Aquí se muestran los formularios -->
   <div id="tab-ContIzquierda">
-      @Html.Partial("_ReplacePartForm")
+    @Code
+        If TempData("TipoReparacion") = "Reemplazo" Then
+            @Html.Partial("_ReplacePartForm")
+        ElseIf TempData("TipoReparacion") = "Reparación" Then
+            @Html.Partial("_ReplaceComponentForm")
+        Else
+            @Html.Partial("_NewPartForm")
+        End If
+    End Code
   </div>
 
   <!-- Aquí va la información de la orden -->

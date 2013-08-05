@@ -5,7 +5,7 @@ Imports System.Data.SqlClient
 Imports System.Globalization
 
 ' 2013.03.01
-Public Class PendientesreparacionModel
+Public Class PendientesReparacionModel
     Private _OrderID As String
     Private _Comments As String
     Private _ApprovalDate As String
@@ -16,6 +16,8 @@ Public Class PendientesreparacionModel
     Private _Solution As String
     Private _Source As String
     Private _Comment As String
+    Private _RepairStatus As String
+    Private _Comentario As String
 
     '--- 
     Public Property OrderID As String
@@ -108,6 +110,23 @@ Public Class PendientesreparacionModel
         End Set
     End Property
 
+    Public Property RepairStatus As String
+        Get
+            Return _RepairStatus
+        End Get
+        Set(value As String)
+            _RepairStatus = value
+        End Set
+    End Property
+
+    Public Property Comentario As String
+        Get
+            Return _Comentario
+        End Get
+        Set(value As String)
+            _Comentario = value
+        End Set
+    End Property
 End Class
 
 ' 2013.03.04
@@ -432,6 +451,8 @@ Public Class RemplazoComponenteModel
     Private _Process As String
     Private _Comment As String
 
+    Private _Command As String
+
     Public Property OrderID As String
         Get
             Return _OrderID
@@ -494,6 +515,15 @@ Public Class RemplazoComponenteModel
             _Comment = value
         End Set
     End Property
+
+    Public Property Command As String
+        Get
+            Return _Command
+        End Get
+        Set(value As String)
+            _Command = value
+        End Set
+    End Property
 End Class
 
 ' 2013.03.06
@@ -538,4 +568,20 @@ Public Class ReplaceCompHistoryModel
             _Process = value
         End Set
     End Property
+End Class
+
+' 2013.05.20
+Public Class IniciarReparacionModel
+    Inherits ScanOrderModel
+
+    Private _User As String
+    Public Property User As String
+        Get
+            Return _User
+        End Get
+        Set(value As String)
+            _User = value
+        End Set
+    End Property
+
 End Class

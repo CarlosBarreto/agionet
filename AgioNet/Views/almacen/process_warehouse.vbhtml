@@ -1,7 +1,7 @@
 ﻿@ModelType Agionet.ScanOrderModel
     
 @Code
-    ViewData("Title") = "Almacen - Recibo Empaque"
+    ViewData("Title") = "Almacen - Proceso de Recibo de Producto Terminado"
     Session("Section") = "almacen"
     
     Dim Read() As AgioNet.PendingProcessWarehouseModel = TempData("Model")
@@ -20,7 +20,7 @@ End If
 
 
 <!-- Inicia diseño del formulario -->
-<h2 class="TituloFormulario">Proceso de Recibo Empaque</h2>
+<h2 class="TituloFormulario">Proceso de Recibo de Producto Terminado</h2>
 
 <div id="ContenedorOrderIDForm">
 @Using Html.BeginForm()
@@ -46,16 +46,18 @@ End If
 End Using
 </div>
 
-<div id="xx" style="display:block; height: 80%; width:100%; overflow-y:scroll;">
-    <h2 class="TituloFormulario">Listado de Ordenes Pendientes de Recibo Empaque </h2>
+<div id="xx" style="display:block; height: 80%; width:100%; overflow-y:auto; overflow-x:hidden;">
+    <h2 class="TituloFormulario">Listado de Ordenes Pendientes de Recibo</h2>
 
     @grid.GetHtml(columns:=grid.Columns( _
             grid.Column("OrderID", "Orden"), _
-            grid.Column("Customer", "Cliente"), _
             grid.Column("ProductType", "Tipo de producto"), _
-            grid.Column("SerialNo", "Numero de serie"), _
-            grid.Column("Model", "Modelo"), _
-            grid.Column("Description", "Descripcion") _
+            grid.Column("SerialNumber", "Numero de serie"), _
+            grid.Column("ProductModel", "Modelo"), _
+            grid.Column("ProductDescription", "Descripcion"), _
+            grid.Column("Ingresado", "Ingresado"), _
+            grid.Column("Procesado", "Empacado"), _
+            grid.Column("DateComp", "Fecha Compromiso") _
     ))
 
 </div>

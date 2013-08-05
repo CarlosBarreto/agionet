@@ -428,5 +428,132 @@ Public Class TrackNoCostListModel
     Private _TrackNoType As String
 End Class
 
+' 2013.04.10  Upd 2013.05.09
+Public Class PendingProcessWarehouseModel
+    Private _OrderID As String
+    Private _ProductType As String
+    Private _ProductModel As String
+    Private _ProductDescription As String
+    Private _FechaEmbarque As String
+    Private _TrackNo As String
+
+    Private _CustomerName As String
+    Private _SerialNumber As String
+    Private _Ingresado As String
+    Private _Procesado As String
+
+    Private _DateComp As String
+
+    Private _FechaIngreso As String
+
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property ProductType As String
+        Get
+            Return _ProductType
+        End Get
+        Set(value As String)
+            _ProductType = value
+        End Set
+    End Property
+
+    Public Property ProductModel As String
+        Get
+            Return _ProductModel
+        End Get
+        Set(value As String)
+            _ProductModel = value
+        End Set
+    End Property
+
+    Public Property ProductDescription As String
+        Get
+            Return _ProductDescription
+        End Get
+        Set(value As String)
+            _ProductDescription = value
+        End Set
+    End Property
+
+    Public Property FechaEmbarque As String
+        Get
+            Return _FechaEmbarque
+        End Get
+        Set(value As String)
+            _FechaEmbarque = value
+        End Set
+    End Property
+
+    Public Property TrackNo As String
+        Get
+            Return _TrackNo
+        End Get
+        Set(value As String)
+            _TrackNo = value
+        End Set
+    End Property
+
+
+    Public Property CustomerName As String
+        Get
+            Return _CustomerName
+        End Get
+        Set(value As String)
+            _CustomerName = value
+        End Set
+    End Property
+
+    Public Property SerialNumber As String
+        Get
+            Return _SerialNumber
+        End Get
+        Set(value As String)
+            _SerialNumber = value
+        End Set
+    End Property
+
+    Public Property Ingresado As String
+        Get
+            Return _Ingresado
+        End Get
+        Set(value As String)
+            _Ingresado = value
+        End Set
+    End Property
+
+    Public Property Procesado As String
+        Get
+            Return _Procesado
+        End Get
+        Set(value As String)
+            _Procesado = value
+        End Set
+    End Property
+
+    Public Property DateComp As String
+        Get
+            Return _DateComp
+        End Get
+        Set(value As String)
+            _DateComp = value
+        End Set
+    End Property
+
+    Public Property FechaIngreso As String
+        Get
+            Return _FechaIngreso
+        End Get
+        Set(value As String)
+            _FechaIngreso = value
+        End Set
+    End Property
+End Class
 
 

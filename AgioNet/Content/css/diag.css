@@ -1,4 +1,4 @@
-﻿/*  -- Creation date: 2013.01.29
+/*  -- Creation date: 2013.01.29
     -- Checked:      
     -- Author:   Carlos Barreto, carlos.barreto@agiotech.com
     -- Version 1.0.0
@@ -101,10 +101,9 @@
 }
 
 /*Heredado de layout*/
-.form-row    { display:inline-block; font-size: 14px; height:18px; margin-bottom:2px; width: 100%; }
-.form-SpArea--dg { display:block; font-size: 14px; height:100px; margin-bottom:10px; width: 100%; }
-.form-SpArea--dgt { display:block; font-size: 14px; height:180px; margin-bottom:10px; width: 100%; }
-.form-SPArea--dgl { display:block; font-size: 14px; height:80px; margin-bottom:10px; width: 100%; }
+.form-SpArea--dg { display:block; font-size: 1em; height:100px; margin-bottom:10px; width: 100%; }
+.form-SpArea--dgt { display:block; font-size: 1em; height:180px; margin-bottom:10px; width: 100%; }
+.form-SPArea--dgl { display:block; font-size: 1em; height:80px; margin-bottom:10px; width: 100%; }
 .form-Scann {
     font-family: BebasNeue, HelveticaBlackCondensed, sans-serif, Arial;
     font-size: 26px; /*23 px*/

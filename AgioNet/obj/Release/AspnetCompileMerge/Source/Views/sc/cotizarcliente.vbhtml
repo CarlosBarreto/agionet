@@ -5,7 +5,8 @@
     Session("Section") = "sc"
     
     Dim Read() As AgioNet.SubOrderListModel = TempData("Model")
-
+    Dim eModel As AgioNet.extDatosCotizacion = TempData("eModel")
+    
     Dim grid As WebGrid = New WebGrid(Read)
 End Code
 <!-- Ventana modal de error -->
@@ -13,6 +14,8 @@ End Code
     @Html.Partial("_ErrorPartial")
 End If
 
+<!-- Agregar el CSS para recibo --> 
+<link href='@Url.Content("~/Content/css/diag.css")' rel="stylesheet" type="text/css" />
 <script src='@Url.Content("~/Scripts/jquery.agiotech.js")' type="text/javascript"></script>
 <script type="text/javascript"> 
     var Counter = 0;
@@ -27,7 +30,13 @@ End If
         $("#iva").numeric({ prefix: '$ ', cents: true });
         $("#total").numeric({ prefix: '$ ', cents: true });
 
-        $("#LeadTime").datepicker({ dateFormat: "dd/mm/yy" });
+        $("#LeadTime").datepicker({
+            changeMonth:true,
+            changeYear:true,
+            dateFormat: "dd/mm/yy",
+            firstDay:1
+        });
+        $("#LeadTime").datepicker($.datepicker.regional['es']);
 
         $("#btCalcular").click(function () {
             var Costs = []; var Percs = []; var Uti = [];
@@ -61,8 +70,7 @@ End If
                 costo = Costs[cont];
                 //putilidad = (Percs[cont] / 100);
                 //Util = parseFloat(costo) * parseFloat(putilidad);
-                Util = Math.ceil((costo * 100 / (100 -Percs[cont]) ) - costo);
-                sumatoria = sumatoria + (parseFloat(costo) + Util);
+                Util = (costo * 100 / (100 -Percs[cont]) ) - costo;
                 $(this).val(Util.toFixed(2))
                 cont++;
             });
@@ -72,8 +80,9 @@ End If
                 costo = Costs[cont];
                 //putilidad = (Percs[cont] / 100);
                 //Util = parseFloat(costo) * parseFloat(putilidad);
-                Util = Math.ceil((costo * 100 / (100 - Percs[cont])) - costo);
-                precio = parseFloat(costo) + Util;
+                Util = (costo * 100 / (100 - Percs[cont])) - costo;
+                precio = Math.ceil(parseFloat(costo) + Util);
+                sumatoria = sumatoria + precio;
                 $(this).val(precio)
                 cont++;
             });
@@ -84,7 +93,7 @@ End If
             Viaje = $("#Viaje").val().replace('$', '');
             Viaje = Viaje.replace(',', '');
 
-            subtotal = Math.ceil(parseFloat(ManoObra) + parseFloat(Viaje) + parseFloat(sumatoria));
+            subtotal = parseFloat(ManoObra) + parseFloat(Viaje) + parseFloat(sumatoria);
             $("#SubTotal").val(subtotal);
 
             iva = subtotal * 0.16;
@@ -140,52 +149,104 @@ End If
     grid.Column("LeadTime", "Lead Time"), _
     grid.Column("Failure", "Falla"), _
     grid.Column("Solution", "Solución"), _
-    grid.Column("PUtilidad", "%Utilidad", format:=Function(item) Html.TextBoxFor(Function(m) m.SubUtilidad, New With {.class = "cpUtil", .size = 5, .Value = 30})), _
+    grid.Column("Comentario", "Comentario Compras"), _
+    grid.Column("TipoReparacion", "Tipo Reparación"), _
+    grid.Column("PUtilidad", "%Utilidad", format:=Function(item) Html.TextBoxFor(Function(m) m.SubUtilidad, New With {.class = "cpUtil", .size = 5, .Value = 0})), _
     grid.Column("UtilidadN", "Utilidad Neta", format:=Function(item) Html.TextBox("UtilidadNeta", 0, New With {.class = "cUtil", .size = 5})), _
     grid.Column("Precio", "Precio", format:=Function(item) Html.TextBox("precio", 0, New With {.class = "precio", .size = 5})), _
     grid.Column("", "", format:=Function(item) Html.HiddenFor(Function(m) m.SubCosto, New With {.Value = item.Costo})) _
 ))
 
+@<div id="main-ContIzquierda">    
+    <div id="Formulario6">
+        <div class="row">
+            <span class="Span-a"><span class="PCenter">Caso: </span></span>
+            <span class="Span-c">
+                @Html.TextBoxFor(Function(m) m.OrderID, New With {.Value = tempdata("OrderID") })
+            </span>
+        </div>
+        <div class="row">
+            <span class="Span-a"> <span class="PCenter">Mano de Obra: </span> </span>
+            <span class="Span-c"> 
+                @Html.TextBoxfor(Function(m) m.ManoObra, New With { .Value = "358"})
+            </span>
+        </div>
 
-        
-            @<div id="Formulario2">
-                <div class="row">
-                  <span class="Span-a"> <span class="PCenter">Mano de Obra: </span> </span>
-                  <span class="Span-c"> 
-                      @Html.TextBoxfor(Function(m) m.ManoObra, New With { .Value = "358"})
-                      @Html.TextBoxFor(Function(m) m.OrderID, New With {.Value = tempdata("OrderID") })
-                  </span>
-                </div>
-
-                <div class="row">
-                    <span class="Span-a"><span class="PCenter">Viaje</span></span>
-                    <span class="Span-c"> @Html.TextBoxFor(Function(m) m.Viaje, New With {.Value = "500" }) </span>
-                </div>
-                <div class="row">
-                    <span class="Span-a"><span class="PCenter">Sub Total</span></span>
-                    <span class="Span-c"> @Html.TextBoxFor(Function(m) m.SubTotal) </span>
-                </div>
-                <div class="row">
-                    <span class="Span-a"><span class="PCenter">IVA</span></span>
-                    <span class="Span-e">@Html.TextBoxFor(Function(m) m.IVA)</span>
-                </div>
-                <div class="row">
-                    <span class="Span-a"><span class="PCenter">Total</span></span>
-                    <span class="Span-e">@Html.TextBoxfor(Function(m) m.Total)</span>
-                </div>
-                <!-- Upd 2013.03.19 CarlosB Agregar LeadTime-->
-                <div class="row">
-                    <span class="Span-a"><span class="PCenter">Lead Time</span></span>
-                    <span class="Span-e">@Html.TextBoxfor(Function(m) m.LeadTime)</span>
-                </div>
-                <div class="row">
-                    <span class="Span-c">&nbsp;</span>
-                    <span class="Span-b">&nbsp;</span>
-                    <span class="Span-a"><input type="button" value="Calcular" class="Button" id="btCalcular" /></span>
-                    <span class="Span-a"><input type="submit" value="Guardar" class="Button" /></span>
-                </div>
-                <div class ="row">&nbsp;</div>
-            </div>
-        End Using
-
+                
+        <div class="row">
+            <span class="Span-a"><span class="PCenter">Flete</span></span>
+            <span class="Span-c"> @Html.TextBoxFor(Function(m) m.Viaje, New With {.Value = "500" }) </span>
+            <span class="Span-a"><span class="Pcenter">Tipo Flete</span></span>
+            <span class="Span-c">@Html.TextBox("Delivery", eModel.Delivery)</span>
+        </div>
+        <div class="row">
+            <span class="Span-a"><span class="PCenter">Sub Total</span></span>
+            <span class="Span-c"> @Html.TextBoxFor(Function(m) m.SubTotal) </span>
+        </div>
+        <div class="row">
+            <span class="Span-a"><span class="PCenter">IVA</span></span>
+            <span class="Span-c">@Html.TextBoxFor(Function(m) m.IVA)</span>
+        </div>
+        <div class="row">
+            <span class="Span-a"><span class="PCenter">Total</span></span>
+            <span class="Span-c">@Html.TextBoxfor(Function(m) m.Total)</span>
+        </div>
+        <!-- Upd 2013.03.19 CarlosB Agregar LeadTime-->
+        <div class="row">
+            <span class="Span-a"><span class="PCenter">Lead Time</span></span>
+            <span class="Span-c">@Html.TextBoxfor(Function(m) m.LeadTime)  </span>
+            <span class="Span-a">(DD/MM/AAAA)</span>
+        </div>
+        <!-- Upd 2013.04.16 CarlosB Agregar a)Falla reportada, b) Retroalimentación, c) Resumen de la falla				
+            d) Despues de lead time, pero antes del tiem 2. agregar la fecha original de ingreso del equipo				
+        -->
+                
+        <div class="row">
+            <span class="Span-b">&nbsp;</span>
+            <span class="Span-a"><input type="button" value="Calcular" class="Button" id="btCalcular" /></span>
+            <span class="Span-a"><input type="submit" value="Guardar" class="Button" /></span>
+        </div>
+        <div class ="row">&nbsp;</div>
     </div>
+</div>    
+End Using
+</div>
+
+
+<!-- Aquí va la información de la orden -->
+<div id="main-ContDerecha" class="bg-fondoborder">
+    <div class="form-row">
+        <span class="Span-e"><strong>Recibida El:</strong> @eModel.FechaIngreso </span>
+    </div>
+
+    <div class="form-row">
+        <span class="Span-e"><strong>Tipo de producto: </strong> @eModel.ProductType </span>
+    </div>
+
+    <div class="form-row">
+        <span class="Span-e"><strong>Falla Reportada: </strong> @eModel.Failure </span>
+    </div>
+    <div class="form-row"> &nbsp; </div>
+    <div class="form-row"> &nbsp; </div>
+    <div class="form-row"> &nbsp; </div>
+
+    <div class="form-row">
+        <span class="Span-e"><strong>Retro-Alimentación</strong> @eModel.Retro </span>
+    </div>
+    <div class="form-row"> &nbsp; </div>
+
+    <div class="form-row">
+        <span class="Span-e"><strong>Comentarios del Técnico:</strong> @eModel.Resumen </span>
+    </div>
+    <div class="form-row"> &nbsp; </div>
+        <div class="form-row"> &nbsp; </div>
+
+    <div class="form-row">
+        <span class="Span-e"><strong>Comentarios Cliente:</strong> @eModel.ComentarioCliente </span>
+    </div>
+    <div class="form-row"> &nbsp; </div>
+    <div class="form-row"> &nbsp; </div>
+    <div class="form-row"> 
+        <span class="Span-e"><strong>Número de reingresos: </strong> @eModel.Rerepair</span>
+    </div>
+</div>

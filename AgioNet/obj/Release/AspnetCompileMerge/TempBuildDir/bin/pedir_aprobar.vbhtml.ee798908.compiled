@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/diagnostico/pedir_aprobar.vbhtml" hash="7a9782b5" filehash="ffffbd47996d8abf" flags="110000" assembly="App_Web_eaiiitgi" type="ASP._Page_Views_diagnostico_pedir_aprobar_vbhtml">
+<preserve resultType="2" virtualPath="/Views/diagnostico/pedir_aprobar.vbhtml" hash="7a9782b5" filehash="4362b9139fc4" flags="110000" assembly="App_Web_gxujy3m5" type="ASP._Page_Views_diagnostico_pedir_aprobar_vbhtml">
     <filedeps>
         <filedep name="/Views/diagnostico/pedir_aprobar.vbhtml" />
     </filedeps>

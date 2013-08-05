@@ -1,0 +1,29 @@
+calc()
+    if current-property
+        for prefix in vendors
+            arguments = unquote(arguments)
+            add-property(current-property[0], s('-%s-calc(%s)-', prefix, arguments))
+        s('calc(%s)', arguments)
+    else
+        error('calc() must be used within a property')
+
+
+@media screen and (min-width:768px)
+	html, body
+		font-size: 10px
+	Header
+   		#Separador
+    		#menuPrincipal 
+      			width: calc('100% - 160px')
+      	.Logoff
+     		width: 135px
+
+@media screen and (min-width:1200px)
+	html, body
+		font-size: 12px
+	Header
+   		#Separador
+    		#menuPrincipal 
+      			width: calc('100% - 190px')
+      	.Logoff
+     		width: 180px

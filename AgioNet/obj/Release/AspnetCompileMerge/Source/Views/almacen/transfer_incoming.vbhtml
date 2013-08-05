@@ -11,7 +11,7 @@
 End Code
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#Comment").html("@User.Identity.Name : En proceso de recolección... ");
+        $("#Comment").html("@User.Identity.Name : En proceso de Ingreso de Orden... ");
     });
 </script>
 
@@ -22,7 +22,7 @@ End If
 
 
 <!-- Inicia diseño del formulario -->
-<h2 class="TituloFormulario">Mover a Ingreso</h2>
+<h2 class="TituloFormulario">Proceso de Mover a Ingreso</h2>
 
 <div id="ContenedorOrderIDForm">
 @Using Html.BeginForm()
@@ -52,7 +52,6 @@ End Using
 
 @grid.GetHtml(columns:=grid.Columns( _
                    grid.Column("OrderID", "Orden"), _
-                   grid.Column("Customer", "Cliente"), _
                    grid.Column("ProductType", "Tipo de producto"), _
                    grid.Column("SerialNo", "Numero de serie"), _
                    grid.Column("Model", "Modelo"), _

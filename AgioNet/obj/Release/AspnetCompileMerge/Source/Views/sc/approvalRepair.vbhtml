@@ -4,17 +4,24 @@
     ViewData("Title") = "Servicio a clientes - Autorización de Reparación"
     Session("Section") = "sc"
     
-    Dim Read As AgioNet.AppFailureInfoModel = TempData("FailureInfo")
+    Dim Read As AgioNet.CotizacionInfoModel = TempData("FailureInfo")
     'Dim Order As Object = TempData("OrderInfo")
     
     'Dim grid As WebGrid = New WebGrid(Read)
     Dim OptionList As List(Of SelectListItem) = New List(Of SelectListItem)
+    Dim OptionList2 As List(Of SelectListItem) = New List(Of SelectListItem)
     
     Dim _opt As New SelectListItem With {.Text = "Aprobado", .Value = "AP"}
     OptionList.Add(_opt)
     _opt = New SelectListItem With {.Text = "No Aprobado", .Value = "NAP"}
     OptionList.Add(_opt)
     
+    _opt = New SelectListItem With {.Text = "Cliente", .Value = "Cliente"}
+    OptionList2.Add(_opt)
+    _opt = New SelectListItem With {.Text = "Tercero", .Value = "Tercero"}
+    OptionList2.Add(_opt)
+    
+    Dim OrderID As String = TempData("OrderID")
 End Code
 <!-- Agregar el CSS para recibo --> 
 <link href='@Url.Content("~/Content/css/diag.css")' rel="stylesheet" type="text/css" />
@@ -27,19 +34,24 @@ End If
 <!-- Aquí se muestran los formularios -->
 <div id="main-ContIzquierda">
     <!-- Inicia diseño del formulario -->
-    <h2 class="TituloFormulario">Información de la falla</h2>
+    <h2 class="TituloFormulario">Autorización del Item [OrderID]</h2>
     <div id="Formulario">
         @Using Html.BeginForm()
-            @<div id="Formulario2">
+            @<div id="Formulario6">
                 <div class="row">
-                  <span class="Span-a"> <span class="PCenter">Aprobación: </span> </span>
+                  <span class="Span-b"> <span class="PCenter">Aprobación: </span> </span>
                   <span class="Span-c"> @Html.DropDownListFor(Function(m) m.Approval, OptionList) </span>
                 </div>
                 <div class="row">
-                    <span class="Span-a">Comentarios:</span>
+                    <span class="Span-b"><span class="PCenter">Gasto Absorvido Por</span></span>
+                    <span class="Span-c">  @Html.DropDownListFor(Function(m) m.Absorvido, OptionList2) </span>
+                </div>
+                <div class="row">
+                    <span class="Span-b">Comentarios:</span>
                     <span class="Span-e">@Html.TextAreaFor(Function(m) m.Comments, New With {.cols = 45, .rows = 3})</span>
                 </div>
                 <div class ="row">&nbsp;</div>
+                
                 <div class ="row">&nbsp;</div>
                 <div class="row">
                     <span class="Span-c">&nbsp;</span>
@@ -57,41 +69,25 @@ End If
             <span class="Span-b"><strong>OrderID: </strong></span>
             <span class="Span-e">@Read.OrderID</span>
         </div>
+        
+        <div class="form-row">
+            <span class="Span-b"><strong>Lead Time: </strong></span>
+            <span class="Span-e">@Read.LeadTime</span>
+        </div>
+        <div class="form-row">&nbsp;</div>
 
         <div class="form-row">
-            <span class="Span-b"><strong>TestID: </strong></span>
-            <span class="Span-e">@Read.TestID</span>
+            <span class="Span-b"><strong>Proveedor: </strong></span>
+            <span class="Span-e">@Read.Proveedor</span>
         </div>
+        <div class="form-row">&nbsp;</div>
 
         <div class="form-row">
-            <span class="Span-b"><strong>TestDescription: </strong></span>
-            <span class="Span-e">@Read.TestDescription</span>
+            <span class="Span-b"><strong>Comentario</strong> </span>
+            <span class="Span-e">@Read.Comentario</span>
         </div>
-
-        <div class="form-row">
-            <span class="Span-b"><strong>FailureID</strong> </span>
-            <span class="Span-e">@Read.FailureID</span>
-        </div>
-
-        <div class="form-row">
-            <span class="Span-b"><strong>Solution: </strong> </span>
-            <span class="Span-e">@Read.Solution</span>
-        </div>
-
-        <div class="form-row">
-            <span class="Span-b"><strong>Source: </strong></span>
-            <span class="Span-e">@Read.Source</span>
-        </div>
-
-        <div class="form-row">
-            <span class="Span-b"><strong>FoundBy: </strong></span>
-            <span class="Span-e">@Read.FoundBy</span>
-        </div>
-
-        <div class="form-row">
-            <span class="Span-b"><strong>FoundDate: </strong></span>
-            <span class="Span-e">@Read.FoundDate</span>
-        </div>
+        <div class="form-row">&nbsp;</div>
+        <div class="form-row">&nbsp;</div>
     </div>
 </div>
 

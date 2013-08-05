@@ -86,8 +86,8 @@ End If
                 En caso de de que la <strong>Prueba</strong>, <strong>Modelo</strong>, el <strong>Número de parte</strong>, o la 
                 <strong>Marca</strong> del producto que necesitas no estén disponibles en este listado, Favor de contactar a ingeniería 
                 (Encargado, <a href="mailto:humberto.vega@agiotech.com">Humberto Vega</a> )
-         </span>
-    </div>
+            </span>
+        </div>
 </div>
 
 <!-- Aquí va la información de la orden -->

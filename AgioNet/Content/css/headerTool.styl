@@ -1,0 +1,159 @@
+calc()
+    if current-property
+        for prefix in vendors
+            arguments = unquote(arguments)
+            add-property(current-property[0], s('-%s-calc(%s)-', prefix, arguments))
+        s('calc(%s)', arguments)
+    else
+        error('calc() must be used within a property')
+
+
+html, body
+  background-color: #eee
+  font-family: Arial, Verdana
+  font-size: 12px
+  height: 100%
+  margin: 0px
+  padding: 0px
+  width: 100%
+
+
+Header
+  background-color: #D9D9D9
+  color: #000000
+  margin: 0
+  position: fixed
+  width: 100%
+  z-index: 50
+
+
+  #Header-contenedor
+    border: 0
+    border-bottom: 1px solid #808080
+    border-color: #808080
+    display: block
+    height: 30px
+  
+  #logo
+    display: inline-block
+    float: left
+    margin-left: 20px
+    width: 100px
+
+  #Separador
+    float: right
+    height: 30px
+    position: relative
+    top: 5px
+    overflow: hidden
+
+    A
+      color: #797979
+      text-decoration: none
+
+    A:hover
+      color: #797979
+      text-decoration: underline
+
+    #menuPrincipal 
+      display:inline-block
+      float:left
+      margin: 0
+      padding:0
+      width: calc('100% - 190px')
+
+      UL
+        color: #797979
+        display: inline
+        line-height: 2.2em
+        margin-left: -1em
+
+        LI
+          display: inline-block
+          font-family: BebasNeue, HelveticaBlackCondensed, sans-serif, Arial
+          font-size: 1.8em
+          font-weight: 400
+          padding: 0 0.3em
+          text-shadow: 0 1px transparent, 0 1px white, 1px 0 transparent, 0 -1px transparent
+          vertical-align: center
+
+    .Logoff
+      color: #808080
+      display:inline-block
+      float: right
+      font-family: Calibri, Arial
+      font-size: 1.25em
+      height: 2.8em
+      margin-right: 1em
+      text-align: center
+      top: 3px
+      vertical-align: center
+      width: 180px
+
+      .menuser
+        a
+          color: #808080
+          display: block
+          height: 20px
+          margin-top: 2px
+          padding-left: 3px
+          text-decoration: none
+          width: 97%
+
+        ul
+          height: 100%
+          list-style: none
+          padding: 0
+          position: relative
+          margin-top: 5px
+
+        ul:hover
+          background-color: #D0D0D0
+          color: #808080
+
+          ul
+            background-color: #D9D9D9
+            border: 1px solid #797979
+            height: 45px
+            margin-top: -3px
+            padding: 0
+            width: 180px
+
+            a:hover
+              background-color: #D0D0D0
+              color: #808080
+
+#SubMenu
+  float: left
+  height: 20px
+  margin: -0.5em
+  padding: 0
+  position: fixed
+  vertical-align: center
+  width: 100%
+  
+  .menu
+    color: #000000
+    font-family: Arial
+    font-size: 1em
+
+  .ul_menu
+    display: inline-block
+    height: 100%
+    list-style: none
+    position: relative
+
+  .ul_menu_li
+    display: inline-block
+    float: left
+    padding: 0
+    text-shadow: 0 1px transparent, 0 1px white, 1px 0 transparent, 0 -1px transparent
+    margin-right: .5em
+
+    A
+      color: #666
+      text-decoration: none
+
+    A:hover
+      color: #797979
+      text-decoration: underline

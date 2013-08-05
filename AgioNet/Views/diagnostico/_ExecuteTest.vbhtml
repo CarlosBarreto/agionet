@@ -7,13 +7,13 @@
     Dim OptionList As List(Of SelectListItem) = New List(Of SelectListItem)
     Dim _opt As SelectListItem
     
-    _opt = New SelectListItem With {.Text = "PASS", .Value = "PASS"}
+    _opt = New SelectListItem With {.Text = "PASO", .Value = "PASS"}
     OptionList.Add(_opt)
     
     If isTested.Result = "FAIL" Then
-        _opt = New SelectListItem With {.Text = "FAIL", .Value = "FAIL", .Selected = True}
+        _opt = New SelectListItem With {.Text = "FALLO", .Value = "FAIL", .Selected = True}
     Else
-        _opt = New SelectListItem With {.Text = "FAIL", .Value = "FAIL"}
+        _opt = New SelectListItem With {.Text = "FALLO", .Value = "FAIL"}
     End If
     OptionList.Add(_opt)   
     

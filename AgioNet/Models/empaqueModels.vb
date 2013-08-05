@@ -9,6 +9,7 @@ Public Class reciboEmpaqueModel
     Private _SerialNo As String
     Private _Model As String
     Private _Description As String
+    Private _Entrega As String
 
     Public Property OrderID As String
         Get
@@ -61,6 +62,15 @@ Public Class reciboEmpaqueModel
         End Get
         Set(value As String)
             _Description = value
+        End Set
+    End Property
+
+    Public Property Entrega As String
+        Get
+            Return _Entrega
+        End Get
+        Set(value As String)
+            _Entrega = value
         End Set
     End Property
 End Class
@@ -469,4 +479,8 @@ Public Class ScanPackModel
             _Comentario = value
         End Set
     End Property
+End Class
+
+Public Class ScannedOrderModel
+    Inherits ScanOrderModel
 End Class

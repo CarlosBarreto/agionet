@@ -52,6 +52,7 @@ Public Class DataAccess
             Return _LastErrorMessage
         End Get
     End Property
+
     ''' <summary>
     ''' Contiene el nombre del servidor de Base de Datos
     ''' </summary>
@@ -64,6 +65,7 @@ Public Class DataAccess
             Return _dbServer
         End Get
     End Property
+
     ''' <summary>
     ''' Contiene el nombre de la Base de Datos Accesada
     ''' </summary>
@@ -76,6 +78,7 @@ Public Class DataAccess
             Return _dbDataBase
         End Get
     End Property
+
     ''' <summary>
     ''' Contiene el ID de usuario de acceso a la Base de Datos
     ''' </summary>
@@ -88,6 +91,7 @@ Public Class DataAccess
             Return _dbUser
         End Get
     End Property
+
     ''' <summary>
     ''' Contiene el ID password de acceso a la Base de Datos
     ''' </summary>

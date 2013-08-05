@@ -31,20 +31,25 @@ End If
             @<span class="row"></span>
         End Using
     </div>
-    <div id="xx" style="display:block; height: 80%; width:100%; overflow-y:scroll;">
-        <h2 class="TituloFormulario--dg">Listado de Ordenes pendientes de iniciar diagnostico </h2>
-
-        @grid.GetHtml(columns:=grid.Columns( _
-                grid.Column("OrderID", "Orden"), _
-                grid.Column("Customer", "Cliente"), _
-                grid.Column("ProductType", "Tipo de producto"), _
-                grid.Column("SerialNo", "Numero de serie"), _
-                grid.Column("Model", "Modelo"), _
-                grid.Column("Description", "Descripcion") _
-        ))
-
-        </div>
 </div>
+
+<div id="xx" style="display:block; height: 80%; width:100%; overflow-y:auto; overflow-x:hidden;">
+    <h2 class="TituloFormulario--dg">Listado de Ordenes pendientes de iniciar diagnostico </h2>
+
+    @grid.GetHtml(columns:=grid.Columns( _
+            grid.Column("Item", format:=Function(item) item.WebGrid.Rows.IndexOf(item) + 1), _
+            grid.Column("OrderID", "Orden"), _
+            grid.Column("ProductType", "Tipo de producto"), _
+            grid.Column("SerialNo", "Numero de serie"), _
+            grid.Column("Model", "Modelo"), _
+            grid.Column("Description", "Descripcion"), _
+            grid.Column("DateI", "Ingreso a Planta"), _
+            grid.Column("DateR", "Ingreso a Empaque"), _
+            grid.Column("DateI", "Ingreso a Diagnóstico") _
+    ))
+
+</div>
+
 
 
 

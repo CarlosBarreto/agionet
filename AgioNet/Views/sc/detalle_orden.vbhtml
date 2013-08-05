@@ -1,196 +1,317 @@
-﻿@ModelType AgioNet.CreateOrderModel 
+﻿@ModelType AgioNet.CreateAssurantOrderModel 
     
 @Code
     ViewData("Title") = "Servicio a Clientes"
     Session("Section") = "sc"
     
     Dim OrderID As String = TempData("OrderID")
-    Dim Model As AgioNet.CreateOrderModel = TempData("Model")
+    Dim Model As AgioNet.CreateAssurantOrderModel = TempData("Model")
 End Code
 
 <!-- Ventana modal de error -->
 @If TempData("ErrMsg") <> "" Then
     @Html.Partial("_ErrorPartial")
 End If
-<!-- Inicia diseño del formulario -->
-<h2 class="TituloFormulario">Crear una nueva orden</h2>
 
- 
-@Using Html.BeginForm()
-    @<div id="Formulario">
-        <h3>Información del Cliente</h3>
-        <div class="row">
-            <span class="Span-b"><span class="pcenter">OrderID</span></span>
-            <span class="Span-c">@Html.TextBox("OrderID", New With {.Value = OrderID, .Disabled = True})</span>
-            
-            <span class="Span-b"><span class="pcenter">Tipo de cliente</span></span>
-            <span class="Span-c">
-                 @Html.TextBoxFor(Function(m) m.CustomerType, New With {.Value = Model.CustomerType, .Disabled = True})
-            </span>
-            
+<!-- UPD 2013.06.17 - CarlosB - Inicia maquetado Reporte Global - Begin -->
+<div id="rp_main">
+    <nav id="rp_main-nav">
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#Cliente">Cliente</a></li>
+            <li><a href="#Recibo">Recibo</a></li>
+            <li><a href="#Ingreso">Ingreso</a></li>
+            <li><a href="#Diagnostico">Diagnostico</a></li>
+            <li><a href="#Costeo">Costeo Partes</a></li>
+            <li><a href="#">Compras</a></li>
+            <li><a href="#">Reparación</a></li>
+            <li><a href="#">Calidad</a></li>
+            <li><a href="#">Embarque</a></li>
+            <li><a href="#">Facturación</a></li>
+        </ul>
+    </nav>
+
+    <!-- Cuerpo principal del reporte -->
+    <div id="rp_left">
+        <h2 class="title">Detalle de la orden [ @OrderID ]</h2>
+        <!-- Información del cliente -->
+        <section id="Cliente">    
+            <div class="rp_left-contenedor">
+                <span class="title">Información del Cliente</span>
+                <span class="form-row">&nbsp;</span>
+                <div class="form-row">
+                    <span class="Span-b"><strong>Orden</strong></span>
+                    <span class="Span-b">@OrderID</span>
+                    <span class="Span-b"><strong>Tipo de Cliente</strong></span>
+                    <span class="Span-b">@Model.CustomerType</span>
+                    <span class="Span-c"><strong>Notificación de Servicio</strong></span>
+                    <span class="Span-b">@Model.NotificacionServicio</span>
+                </div>
+
+                <div class="form-row">
+                    <span class="Span-b"><strong>Nombre</strong></span>
+                    <span class="Span-e">@Model.CustomerName</span>
+                </div>
+                
+                <div class="form-row">
+                    <span class="Span-b"><strong>Razón Social</strong> </span>
+                    <span class="Span-d">@Model.RazonSocial</span>
+                    <span class="Span-a"><strong>RFC</strong></span>
+                    <span class="Span-c">@Model.RFC</span>
+
+                </div>
+                 
+                <div class="form-row">
+                    <span class="Span-b"><strong>Email</strong></span>
+                    <span class="Span-e">@Model.Email</span>
+                </div>
+
+                <div class="form-row">
+                    <span class="Span-b"><strong>Dirección</strong></span>
+                    <span class="Span-j">
+                        @code
+                            Dim strResp As String
+                            strResp = Model.Address & " No " & Model.ExternalNumber
+                            If Model.InternalNumber <> "" And Model.InternalNumber <> "-" And Model.InternalNumber <> "--" Then strResp = strResp & " Int " & Model.InternalNumber
+                        End Code
+                            @strResp
+                    </span>
+                </div>
+
+                <div class="form-row">
+                    <span class="Span-a"><strong>Colonia</strong>   </span>
+                    <span class="Span-h">@Model.Address2</span>
+                    <span class="Span-g"><strong>Ciudad</strong></span>
+                    <span class="Span-h">@Model.City</span>
+                    <span class="Span-a"><strong>Estado</strong></span>
+                    <span class="Span-h">@Model.State </span>
+                </div>
+       
+                <div class="form-row">
+                    <span class="Span-a"><strong>país</strong></span>
+                    <span class="Span-h">@Model.Country</span>
+                    <span class="Span-g"><strong>Código Postal</strong></span>
+                    <span class="Span-h">@Model.ZipCode</span>
+                    <span class="Span-a"><strong>Horario</strong></span>
+                    <span class="Span-h">@Model.DeliveryTime</span>
+                </div>
+
+                <div class="form-row">
+                    <span class="Span-a"><strong>Tel Casa</strong></span>
+                    <span class="Span-h">@Model.Telephone</span>
+                    <span class="Span-g"><strong>Tel Trabajo</strong></span>
+                    <span class="Span-h">@Model.Telephone2</span>
+                    <span class="Span-a"><strong>Celular</strong></span>
+                    <span class="Span-h">@Model.Telephone3</span>
+                </div>
         </div>
+
+            <div class="form-row">&nbsp;</div>
+            <div class="rp_left-contenedor">
+                <span class="title">Información del Producto</span>
+                <span class="form-row">&nbsp;</span>
+
+                <div class="form-row">
+                    <span class="Span-b"><strong>Clase Producto</strong></span>
+                    <span class="Span-c">@Model.ProductClass</span>
+                    <span class="Span-b"><strong>Tipo Producto</strong></span>
+                    <span class="Span-c">@Model.ProductType</span>
+                </div>
+
+                <div class="form-row">
+                    <span class="Span-b"><strong>Marca</strong></span>
+                    <span class="Span-c">@Model.ProductTrademark</span>
+                    <span class="Span-b"><strong>Modelo</strong></span>
+                    <span class="Span-c">@Model.ProductModel</span>
+                </div>
+
+                <div class="form-row">
+                    <span class="Span-b"><strong>Descripción</strong></span>
+                    <span class="Span-j">@Model.productDescription</span>
+                </div>
+
+                <div class="form-row">
+                    <span class="Span-b"><strong>Número de Parte</strong></span>
+                    <span class="Span-c">@Model.PartNumber</span>
+                    <span class="Span-b"><strong>Número de Serie</strong></span>
+                    <span class="Span-c">@Model.SerialNumber</span>
+                </div>
+            </div>
+
+            <div class="form-row">&nbsp;</div>
+            <div class="rp_left-contenedor">
+                <span class="title">Información de la Falla</span>
+                <span class="form-row">&nbsp;</span>
+
+                <div class="form-row">
+                    <span class="Span-b"><strong>Clase de Servicio</strong></span>
+                    <span class="Span-c">@Model.ServiceType</span>
+                    <span class="Span-b"><strong>Otra Clase</strong></span>
+                    <span class="Span-c"></span>
+                </div>
+
+                <div class="form-row">&nbsp; </div>
+                <strong>Falla Presentada</strong> @Model.FailureType <br /><br />
+                <strong>Comentario</strong> @Model.Comment <br /><br />
         
-        <div class="row">
-            <span class="Span-b"><span class="pcenter">Nombre</span></span>
-            <span class="Span-k">
-                @Html.TextBoxFor(Function(m) m.CustomerName, New With {.Value = Model.CustomerName, .Disabled = True})
-            </span>
-        </div>
-         <div class="row">
-            <span class="Span-b"><span class="pcenter">Razón Social</span></span>
-            <span class="Span-k">
-                @Html.TextBoxFor(Function(m) m.RazonSocial, New With {.Value = Model.RazonSocial, .Disabled = True})
-            </span>
-        </div>
-        <span class="row">
-            <span class="Span-b"><span class="pcenter">RFC</span></span>
-            <span class="Span-c"> 
-                @Html.TextBoxFor(Function(m) m.RFC, New With {.Value = Model.RFC, .Disabled = True})
-            </span>
+                <div class="form-row">
+                    <span class="Span-b"><strong>Incluir Flete</strong></span>
+                    <span class="Span-c">@Model.Delivery</span>
+                </div>
+            </div>
+        </section>
 
-            <span class="Span-b"><span class="pcenter">Email</span></span>
-            <span class="Span-c"> 
-                @Html.TextBoxFor(Function(m) m.Email, New With {.Value = Model.Email, .Disabled = True})
-            </span>
-        </span>
+        <span class="form-row"><span class="separador">&nbsp;</span></span>
+        <span class="form-row">&nbsp;</span>
 
-        <span class="row">
-            <span class="Span-b"><span class="pcenter">Calle</span></span>
-            <span class="Span-c"> 
-                @Html.TextBoxFor(Function(m) m.Address, New With {.Value = Model.Address, .Disabled = True})
-            </span>
-            <span class="Span-a"><span class="pcenter">No. Exterior</span></span>
-            <span class="Span-a"> 
-                @Html.TextBoxFor(Function(m) m.ExternalNumber, New With {.Value = Model.ExternalNumber, .Disabled = True})
-            </span>
-            <span class="Span-a"><span class="pcenter">No. Interior</span></span>
-            <span class="Span-a"> 
-                @Html.TextBoxFor(Function(m) m.InternalNumber, New With {.Value = Model.InternalNumber, .Disabled = True})
-            </span>
-        </span>
+        <section id="Recibo">
+             <div class="rp_left-contenedor" id="rp_recibo">
+                <img src="../../Content/images/ajax-loader.gif" />
+            </div>
+        </section>
 
-        <span class="row">
-            <span class="Span-b"><span class="pcenter">Colonia</span></span>
-            <span class="Span-c"> 
-                @Html.TextBoxFor(Function(m) m.Address2, New With {.Value = Model.Address2, .Disabled = True})
-            </span>
-            <span class="Span-a"><span class="pcenter">Ciudad</span></span>
-            <span class="Span-b"> 
-                @Html.TextBoxFor(Function(m) m.City, New With {.Value = Model.City, .Disabled = True})
-            </span>
-            <span class ="Span-a"><span class="pcenter">Estado</span></span>
-            <span class="Span-b"> 
-                @Html.TextBoxFor(Function(m) m.State, New With {.Value = Model.State, .Disabled = True})
-            </span>
-        </span>
+        <span class="form-row"><span class="separador">&nbsp;</span></span>
+        <span class="form-row">&nbsp;</span>
+        <section id="Ingreso">
+            <div id="rp_ingreso">
+                <img src="../../Content/images/ajax-loader.gif" />
+            </div>
+        </section>
 
-        <span class="row">
-            <span class="Span-b"><span class="pcenter">País</span></span>
-            <span class="Span-b"> 
-                @Html.TextBoxFor(Function(m) m.Country, New With {.Value = Model.Country, .Disabled = True})
-            </span>
-            <span class="Span-b"><span class="pcenter">Código Postal</span></span>
-            <span class="Span-b"> 
-                @Html.TextBoxFor(Function(m) m.ZipCode, New With {.Value = Model.ZipCode, .Disabled = True})
-            </span>
-            <span class="Span-b"><span class="pcenter">Horario Rec.</span></span>
-            <span class="Span-b">
-                @Html.TextBoxFor(Function(m) m.DeliveryTime, New With {.Value = Model.DeliveryTime, .Disabled = True})
-            </span>
-        </span>
+        <span class="form-row"><span class="separador">&nbsp;</span></span>
+        <span class="form-row">&nbsp;</span>
+        <section id="Diagnostico">
+            <div id="rp_diagnostic">
+                <img src="../../Content/images/ajax-loader.gif" />
+            </div>
+        </section>
 
-        <span class="row">
-            <span class="Span-b"><span class="pcenter">Tel Casa</span></span>
-            <span class="Span-b"> 
-                @Html.TextBoxFor(Function(m) m.Telephone, New With {.Value = Model.Telephone, .Disabled = True})
-            </span>
-            <span class="Span-b"><span class="pcenter">Tel Trabajo</span></span>
-            <span class="Span-b"> 
-                @Html.TextBoxFor(Function(m) m.Telephone2, New With {.Value = Model.Telephone2, .Disabled = True})
-            </span>
-            <span class="Span-b"><span class="pcenter">Celular</span></span>
-            <span class="Span-b"> 
-                @Html.TextBoxFor(Function(m) m.Telephone3, New With {.Value = Model.Telephone3, .Disabled = True})
-            </span>
-        </span>
+        <span class="form-row"><span class="separador">&nbsp;</span></span>
+        <span class="form-row">&nbsp;</span>
+        <section id="Costeo">
+            <div id="rp_costpart">
+                <img src="../../Content/images/ajax-loader.gif" />
+            </div>
+        </section>
 
-        <!-- INFORMACION DEL PRODUCTO -->  
-        <h3>Información del Producto</h3>
+        <!-- 2013.07.11 -- CarlosB -->
+        <!-- Compras -->
+        <span class="form-row"><span class="separador">&nbsp;</span></span>
+        <span class="form-row">&nbsp;</span>
 
-        <span class="row">
-            <span class="Span-b"><span class="pcenter">Clase de Producto</span></span>
-            <span class="Span-b"> 
-                @Html.TextBoxFor(Function(m) m.ProductClass, New With {.Value = Model.ProductClass, .Disabled = True})
-            </span>
-            <span class="Span-b"><span class="pcenter">Tipo de Producto</span></span>
-            <span class="Span-b"> 
-                @Html.TextBoxFor(Function(m) m.ProductType, New With {.Value = Model.ProductType, .Disabled = True})
-            </span>
-            <span class="Span-b"><span class="pcenter">Marca Producto</span></span>
-            <span class="Span-b"> 
-                @Html.TextBoxFor(Function(m) m.ProductTrademark, New With {.Value = Model.ProductTrademark, .Disabled = True})
-            </span>
-        </span>
+        <section id="Compras">
+             <div id="rp_compras">
+                <img src="../../Content/images/ajax-loader.gif" />
+            </div>
+        </section>
+    </div>
 
-         <span class="row">
-            <span class="Span-b"><span class="pcenter">Modelo</span></span>
-            <span class="Span-b"> 
-                @Html.TextBoxFor(Function(m) m.ProductModel, New With {.Value = Model.ProductModel, .Disabled = True})
-            </span>
-            <span class="Span-b"><span class="pcenter">Descripción</span></span>
-            <span class="Span-d"> 
-                @Html.TextBoxFor(Function(m) m.productDescription, New With {.Value = Model.productDescription, .Disabled = True})
-            </span>
-        </span>
+    <!-- Resumen del reporte -->
+    <div id="rp_right">
+        <img src="../../Content/images/ajax-loader.gif" />
+    </div>
 
-        <span class="row">
-            <span class="Span-b"><span class="pcenter">Número de Parte</span></span>
-            <span class="Span-b"> 
-                @Html.TextBoxFor(Function(m) m.PartNumber, New With {.Value = Model.PartNumber, .Disabled = True})
-            </span>
-            <span class="Span-b"><span class="pcenter">No. Serie</span></span>
-            <span class="Span-b"> 
-                @Html.TextBoxFor(Function(m) m.SerialNumber, New With {.Value = Model.SerialNumber, .Disabled = True})
-            </span>
-        </span>
+</div>
 
-        <!-- INFORMACION SOBRE LA FALLA -->
-        <h3>Información de la Falla</h3>
+<!--- scripts -->
+<script src='@Url.Content("~/Scripts/jquery.agiotech.js")' type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            data: "{'OrderID':" + "'@OrderID'}",
+            dataType: 'html',
+            url: '@Url.Action("min_info", "rp", New With {.OrderID = OrderID })',
+            success: function (result) {
+                //(alert('Success');
+                $("#rp_right").html(result);
+            },
+            error: function (error) {
+                alert('fail');
+            }
+        });
 
-        <span class="row">
-            <span class="Span-b"><span class="pcenter">Clase de Servicio</span></span>
-            <span class="Span-c"> 
-                 @Html.TextBoxFor(Function(m) m.ServiceType, New With {.Value = Model.ServiceType, .Disabled = True})
-            </span>
+        // recibo
+        $.ajax({
+            type: 'GET',
+            data: "{'OrderID':" + "'@OrderID'}",
+            dataType: 'html',
+            url: '@Url.Action("rp_recibo", "rp", New With {.OrderID = OrderID})',
+            success: function (result) {
+                //(alert('Success');
+                $("#rp_recibo").html(result);
+            },
+            error: function (error) {
+                alert('fail');
+            }
+        });
 
-            <span class="Span-b"><span class="pcenter">Otra clase</span></span>
-            <span class="Span-c"> 
-                @Html.TextBox("OtherServiceType")
-            </span>
-        </span>
+        // ingreso
+        $.ajax({
+            type: 'GET',
+            data: "{'OrderID':" + "'@OrderID'}",
+            dataType: 'html',
+            url: '@Url.Action("rp_ingreso", "rp", New With {.OrderID = OrderID})',
+            success: function (result) {
+                //(alert('Success');
+                $("#rp_ingreso").html(result);
+            },
+            error: function (error) {
+                alert('fail');
+            }
+        });
 
-        <span class="row">
-            <span class="Span-c"><span class="pcenter">Tipo de falla presentada: </span></span>
-            <span class="Span-j">
-                @Html.TextBoxFor(Function(m) m.FailureType, New With {.Value = Model.FailureType, .Disabled = True})
-            </span>
-        </span>
+        // Diagnostico
+        $.ajax({
+            type: 'GET',
+            data: "{'OrderID':" + "'@OrderID'}",
+            dataType: 'html',
+            url: '@Url.Action("rp_diagnostic", "rp", New With {.OrderID = OrderID})',
+            success: function (result) {
+                //(alert('Success');
+                $("#rp_diagnostic").html(result);
+            },
+            error: function (error) {
+                alert('fail');
+            }
+        });
 
-        <span class="row">
-            <span class="Span-c"><span class="pcenter">Comentarios: </span></span>
-            <span class="Span-j">
-                @Html.TextBoxFor(Function(m) m.Comment, New With {.Value = Model.Comment, .Disabled = True})
-            </span>
-        </span>
-        <span class="row">
-            <span class="Span-b"><span class="pcenter">Incluir Flete</span></span>
-            <span class="Span-b">
-                @Html.TextBoxFor(Function(m) m.Delivery, New With {.Value = Model.Delivery, .Disabled = True})
-            </span>
-            <span class="Span-e">
-                <input type="submit" value="Regresar" class="Button" />
-            </span>
-        </span>   
+        // costeo
+        $.ajax({
+            type: 'GET',
+            data: "{'OrderID':" + "'@OrderID'}",
+            dataType: 'html',
+            url: '@Url.Action("rp_costpart", "rp", New With {.OrderID = OrderID})',
+            success: function (result) {
+                //(alert('Success');
+                $("#rp_costpart").html(result);
+                // Agregar los formatos de moneda
+                $(".moneda").numeric({ prefix: '$ ', cents: true });
+            },
+            error: function (error) {
+                alert('fail');
+            }
+        });
 
-     </div>
-End Using
+        // Compras
+        $.ajax({
+            type: 'GET',
+            data: "{'OrderID':" + "'@OrderID'}",
+            dataType: 'html',
+            url: '@Url.Action("rp_compras", "rp", New With {.OrderID = OrderID})',
+            success: function (result) {
+                //(alert('Success');
+                $("#rp_compras").html(result);
+                // Agregar los formatos de moneda
+                $(".moneda").numeric({ prefix: '$ ', cents: true });
+            },
+            error: function (error) {
+                alert('fail');
+            }
+        });
+
+        // Agregar los formatos de moneda
+        $(".moneda").numeric({ prefix: '$ ', cents: true });
+
+    });
+</script>

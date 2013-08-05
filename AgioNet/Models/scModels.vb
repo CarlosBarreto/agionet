@@ -396,6 +396,7 @@ End Class
 Public Class ApprovalRepairModel
     Private _OrderID As String
     Private _Approval As String
+    Private _Absorvido As String
     Private _Comments As String
     Private _ApproBy As String
 
@@ -414,6 +415,15 @@ Public Class ApprovalRepairModel
         End Get
         Set(value As String)
             _Approval = value
+        End Set
+    End Property
+
+    Public Property Absorvido As String
+        Get
+            Return _Absorvido
+        End Get
+        Set(value As String)
+            _Absorvido = value
         End Set
     End Property
 
@@ -654,7 +664,7 @@ Public Class CreateOrderModel
         End Set
     End Property
 
-    <Display(Name:="Falla presentada")> _
+    <Display(Name:="Falla presentada"), AllowHtml> _
     Public Property FailureType As String
         Get
             Return Me._failureType
@@ -711,7 +721,7 @@ Public Class CreateOrderModel
         End Get
     End Property
 
-    <Display(Name:="Modelo")> _
+    <Display(Name:="Modelo"), AllowHtml> _
     Public Property ProductModel As String
         Get
             Return Me._productModel
@@ -842,6 +852,61 @@ Public Class CreateOrderModel
     End Property
 
 
+    Public Property ReRepair As Boolean
+        Get
+            Return _ReRepair
+        End Get
+        Set(value As Boolean)
+            _ReRepair = value
+        End Set
+    End Property
+
+    Public Property OrderDate As String
+        Get
+            Return _OrderDate
+        End Get
+        Set(value As String)
+            _OrderDate = value
+        End Set
+    End Property
+
+    Public Property Cosmetic As String
+        Get
+            Return _Cosmetic
+        End Get
+        Set(value As String)
+            _Cosmetic = value
+        End Set
+    End Property
+
+    Public Property Accesories As String
+        Get
+            Return _Accesories
+        End Get
+        Set(value As String)
+            _Accesories = value
+        End Set
+    End Property
+
+    Public ReadOnly Property NumCliente As String
+        Get
+            If _NumCliente Is Nothing Then
+                _NumCliente = ""
+            End If
+
+            Return _NumCliente
+        End Get
+    End Property
+
+    Public Property AddressReference As String
+        Get
+            Return _AddressReference
+        End Get
+        Set(value As String)
+            _AddressReference = value
+        End Set
+    End Property
+
     ' Fields
     Private _Address As String
     Private _Address2 As String
@@ -875,9 +940,32 @@ Public Class CreateOrderModel
     Private _Telephone2 As String
     Private _Telephone3 As String
     Private _zipCode As String
+
+    Private _ReRepair As Boolean
+    Private _OrderDate As String
+    Private _Cosmetic As String
+    Private _Accesories As String
+    Private _NumCliente As String
+    Private _AddressReference As String
 End Class
 
-' 2013.02.28
+'2013.07.22
+Public Class CreateAssurantOrderModel
+    Inherits CreateOrderModel
+
+    Private _NotificacionServicio As String
+
+    Public Property NotificacionServicio As String
+        Get
+            Return _NotificacionServicio
+        End Get
+        Set(value As String)
+            _NotificacionServicio = value
+        End Set
+    End Property
+End Class
+
+' 2013.02.28 Upd 2013.05.07
 Public Class OrdenesDiagnosticadas
     Private _OrderID As String
     Private _Incoming As String
@@ -886,6 +974,9 @@ Public Class OrdenesDiagnosticadas
     Private _ProductDescription As String
     Private _PartNumber As String
     Private _SerialNumber As String
+    Private _Comprada As String
+    Private _ETA As String
+    Private _TipoReparacion As String
 
     Public Property OrderID As String
         Get
@@ -950,16 +1041,46 @@ Public Class OrdenesDiagnosticadas
         End Set
     End Property
 
+    Public Property Comprada As String
+        Get
+            Return _Comprada
+        End Get
+        Set(value As String)
+            _Comprada = value
+        End Set
+    End Property
+
+    Public Property ETA As String
+        Get
+
+            Return _ETA
+        End Get
+        Set(value As String)
+            _ETA = value
+        End Set
+    End Property
+
+    Public Property TipoReparacion As String
+        Get
+            Return _TipoReparacion
+        End Get
+        Set(value As String)
+            _TipoReparacion = value
+        End Set
+    End Property
 End Class
 
-' 2013.03.15
+' 2013.03.15 Upd 2013.05.08
 Public Class OrdenesCosteadasModel
     Private _OrderID As String
-    Private _Incoming As String
+    Private _Incoming As Date
+    Private _StartDiagnostic As Date
+    Private _CloseDiagnostic As Date
     Private _ProductModel As String
     Private _ProductDescription As String
     Private _PartNumber As String
     Private _SerialNumber As String
+    Private _CostDate As String
 
     '--- Propiedades
     Public Property OrderID As String
@@ -973,10 +1094,28 @@ Public Class OrdenesCosteadasModel
 
     Public Property Incoming As String
         Get
-            Return _Incoming
+            Return _Incoming.ToString
         End Get
         Set(value As String)
-            _Incoming = value
+            _Incoming = Convert.ToDateTime(value)
+        End Set
+    End Property
+
+    Public Property StartDiagnostic As String
+        Get
+            Return _StartDiagnostic.ToString
+        End Get
+        Set(value As String)
+            _StartDiagnostic = Convert.ToDateTime(value)
+        End Set
+    End Property
+
+    Public Property CloseDiagnostic As String
+        Get
+            Return _CloseDiagnostic.ToString
+        End Get
+        Set(value As String)
+            _CloseDiagnostic = Convert.ToDateTime(value)
         End Set
     End Property
 
@@ -1015,7 +1154,17 @@ Public Class OrdenesCosteadasModel
             _SerialNumber = value
         End Set
     End Property
+
+    Public Property CostDate As String
+        Get
+            Return _CostDate
+        End Get
+        Set(value As String)
+            _CostDate = value
+        End Set
+    End Property
 End Class
+
 ' 2013.02.13
 Public Class ReqApprovalModel
     ' Properties
@@ -1065,6 +1214,8 @@ End Class
 ' 2013-02.26
 Public Class SearchOrderModel
     Private _OrderID As String
+    Private _Nombre As String
+    Private _SerialNo As String
 
     Public Property OrderID As String
         Get
@@ -1073,6 +1224,24 @@ Public Class SearchOrderModel
         End Get
         Set(value As String)
             _OrderID = value
+        End Set
+    End Property
+
+    Public Property Nombre As String
+        Get
+            Return _Nombre
+        End Get
+        Set(value As String)
+            _Nombre = value
+        End Set
+    End Property
+
+    Public Property SerialNo As String
+        Get
+            Return _SerialNo
+        End Get
+        Set(value As String)
+            _SerialNo = value
         End Set
     End Property
 End Class
@@ -1088,7 +1257,8 @@ Public Class SubOrderListModel
     Private _LeadTime As String
     Private _Failure As String
     Private _Solution As String
-
+    Private _TipoReparacion As String
+    Private _Comentario As String
 
     '--- Propiedades
     Public Property OrderID As String
@@ -1172,8 +1342,23 @@ Public Class SubOrderListModel
         End Set
     End Property
 
+    Public Property TipoReparacion As String
+        Get
+            Return _TipoReparacion
+        End Get
+        Set(value As String)
+            _TipoReparacion = value
+        End Set
+    End Property
 
-
+    Public Property Comentario As String
+        Get
+            Return _Comentario
+        End Get
+        Set(value As String)
+            _Comentario = value
+        End Set
+    End Property
 End Class
 
 '2013.03.19
@@ -1281,4 +1466,1064 @@ Public Class CotizarClienteModel
             _SubUtilidad = value
         End Set
     End Property
+End Class
+
+'2013.04.16
+Public Class extDatosCotizacion
+    Private _Failure As String
+    Private _Retro As String
+    Private _Resumen As String
+    Private _FechaIngreso As String
+    Private _ComentarioCliente As String
+    Private _Delivery As String
+    Private _ProductType As String
+    Private _ReRepair As String
+
+    Public Property Failure As String
+        Get
+            Return _Failure
+        End Get
+        Set(value As String)
+            _Failure = value
+        End Set
+    End Property
+
+    Public Property Retro As String
+        Get
+            Return _Retro
+        End Get
+        Set(value As String)
+            _Retro = value
+        End Set
+    End Property
+
+    Public Property Resumen As String
+        Get
+            Return _Resumen
+        End Get
+        Set(value As String)
+            _Resumen = value
+        End Set
+    End Property
+
+    Public Property FechaIngreso As String
+        Get
+            Return _FechaIngreso
+        End Get
+        Set(value As String)
+            _FechaIngreso = value
+        End Set
+    End Property
+
+    Public Property ComentarioCliente As String
+        Get
+            Return _ComentarioCliente
+        End Get
+        Set(value As String)
+            _ComentarioCliente = value
+        End Set
+    End Property
+
+    Public Property Delivery As String
+        Get
+            Return _Delivery
+        End Get
+        Set(value As String)
+            _Delivery = value
+        End Set
+    End Property
+
+    Public Property ProductType As String
+        Get
+            Return _ProductType
+        End Get
+        Set(value As String)
+            _ProductType = value
+        End Set
+    End Property
+
+    Public Property Rerepair As String
+        Get
+            Return _ReRepair
+        End Get
+        Set(value As String)
+            _ReRepair = value
+        End Set
+    End Property
+End Class
+
+' 2013.04.17
+Public Class OrderPartInfoModel
+    Private _OrderID As String
+    Private _OrderDate As String
+    Private _ProductClass As String
+    Private _ProductType As String
+    Private _Trademark As String
+    Private _Model As String
+    Private _Description As String
+    Private _PartNo As String
+    Private _Commodity As String
+    Private _SerialNumber As String
+    Private _Revision As String
+    Private _ServiceType As String
+    Private _Failure As String
+    Private _Comentario As String
+    '----------------------------------
+    Private _sProductClass As String
+    Private _sProductType As String
+    Private _sTrademark As String
+    Private _sModel As String
+    Private _sDescription As String
+    Private _sPartNumber As String
+    Private _sALT As String
+    Private _sSerialNumber As String
+    Private _sRevision As String
+    Private _sFailure As String
+    Private _sSolution As String
+    Private _sSource As String
+    Private _sComment As String
+
+
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property OrderDate As String
+        Get
+            Return _OrderDate
+        End Get
+        Set(value As String)
+            _OrderDate = value
+        End Set
+    End Property
+
+    Public Property ProductClass As String
+        Get
+            Return _ProductClass
+        End Get
+        Set(value As String)
+            _ProductClass = value
+        End Set
+    End Property
+
+    Public Property ProductType As String
+        Get
+            Return _ProductType
+        End Get
+        Set(value As String)
+            _ProductType = value
+        End Set
+    End Property
+
+    Public Property Trademark As String
+        Get
+            Return _Trademark
+        End Get
+        Set(value As String)
+            _Trademark = value
+        End Set
+    End Property
+
+    Public Property Model As String
+        Get
+            Return _Model
+        End Get
+        Set(value As String)
+            _Model = value
+        End Set
+    End Property
+
+    Public Property Description As String
+        Get
+            Return _Description
+        End Get
+        Set(value As String)
+            _Description = value
+        End Set
+    End Property
+
+    Public Property PartNo As String
+        Get
+            Return _PartNo
+        End Get
+        Set(value As String)
+            _PartNo = value
+        End Set
+    End Property
+
+    Public Property Commodity As String
+        Get
+            Return _Commodity
+        End Get
+        Set(value As String)
+            _Commodity = value
+        End Set
+    End Property
+
+    Public Property SerialNumber As String
+        Get
+            Return _SerialNumber
+        End Get
+        Set(value As String)
+            _SerialNumber = value
+        End Set
+    End Property
+
+    Public Property Revision As String
+        Get
+            Return _Revision
+        End Get
+        Set(value As String)
+            _Revision = value
+        End Set
+    End Property
+
+    Public Property ServiceType As String
+        Get
+            Return _ServiceType
+        End Get
+        Set(value As String)
+            _ServiceType = value
+        End Set
+    End Property
+
+    Public Property Failure As String
+        Get
+            Return _Failure
+        End Get
+        Set(value As String)
+            _Failure = value
+        End Set
+    End Property
+
+    Public Property Comentario As String
+        Get
+            Return _Comentario
+        End Get
+        Set(value As String)
+            _Comentario = value
+        End Set
+    End Property
+
+    '----------------------------------
+    Public Property sProductClass As String
+        Get
+            Return _sProductClass
+        End Get
+        Set(value As String)
+            _sProductClass = value
+        End Set
+    End Property
+
+    Public Property sProductType As String
+        Get
+            Return _sProductType
+        End Get
+        Set(value As String)
+            _sProductType = value
+        End Set
+    End Property
+
+    Public Property sTrademark As String
+        Get
+            Return _sTrademark
+        End Get
+        Set(value As String)
+            _sTrademark = value
+        End Set
+    End Property
+
+    Public Property sModel As String
+        Get
+            Return _sModel
+        End Get
+        Set(value As String)
+            _sModel = value
+        End Set
+    End Property
+
+    Public Property sDescription As String
+        Get
+            Return _sDescription
+        End Get
+        Set(value As String)
+            _sDescription = value
+        End Set
+    End Property
+
+    Public Property sPartNumber As String
+        Get
+            Return _sPartNumber
+        End Get
+        Set(value As String)
+            _sPartNumber = value
+        End Set
+    End Property
+
+    Public Property sALT As String
+        Get
+            Return _sALT
+        End Get
+        Set(value As String)
+            _sALT = value
+        End Set
+    End Property
+
+    Public Property sSerialNumber As String
+        Get
+            Return _sSerialNumber
+        End Get
+        Set(value As String)
+            _sSerialNumber = value
+        End Set
+    End Property
+
+    Public Property sRevision As String
+        Get
+            Return _sRevision
+        End Get
+        Set(value As String)
+            _sRevision = value
+        End Set
+    End Property
+
+    Public Property sFailure As String
+        Get
+            Return _sFailure
+        End Get
+        Set(value As String)
+            _sFailure = value
+        End Set
+    End Property
+
+    Public Property sSolution As String
+        Get
+            Return _sSolution
+        End Get
+        Set(value As String)
+            _sSolution = value
+        End Set
+    End Property
+
+    Public Property sSource As String
+        Get
+            Return _sSource
+        End Get
+        Set(value As String)
+            _sSource = value
+        End Set
+    End Property
+
+    Public Property sComment As String
+        Get
+            Return _sComment
+        End Get
+        Set(value As String)
+            _sComment = value
+        End Set
+    End Property
+End Class
+
+' 2013.04.17 
+Public Class PrecioCotizacionModel
+
+    Private _OrderID As String
+    Private _PartNo As String
+    Private _Description As String
+    Private _Commodity As String
+    Private _SerialNo As String
+    Private _LeadTime As String
+    Private _Falla As String
+    Private _Solucion As String
+    Private _Precio As String
+    Private _TipoReparacion As String
+    Private _Comentario As String
+    '--------------
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property PartNo As String
+        Get
+            Return _PartNo
+        End Get
+        Set(value As String)
+            _PartNo = value
+        End Set
+    End Property
+
+    Public Property Description As String
+        Get
+            Return _Description
+        End Get
+        Set(value As String)
+            _Description = value
+        End Set
+    End Property
+
+    Public Property Commodity As String
+        Get
+            Return _Commodity
+        End Get
+        Set(value As String)
+            _Commodity = value
+        End Set
+    End Property
+
+    Public Property SerialNo As String
+        Get
+            Return _SerialNo
+        End Get
+        Set(value As String)
+            _SerialNo = value
+        End Set
+    End Property
+
+    Public Property LeadTime As String
+        Get
+            Return _LeadTime
+        End Get
+        Set(value As String)
+            _LeadTime = value
+        End Set
+    End Property
+
+    Public Property Falla As String
+        Get
+            Return _Falla
+        End Get
+        Set(value As String)
+            _Falla = value
+        End Set
+    End Property
+
+    Public Property Solucion As String
+        Get
+            Return _Solucion
+        End Get
+        Set(value As String)
+            _Solucion = value
+        End Set
+    End Property
+
+    Public Property Precio As String
+        Get
+            Return _Precio
+        End Get
+        Set(value As String)
+            _Precio = value
+        End Set
+    End Property
+
+    Public Property TipoReparacion As String
+        Get
+            Return _TipoReparacion
+        End Get
+        Set(value As String)
+            _TipoReparacion = value
+        End Set
+    End Property
+
+    Public Property Comentario As String
+        Get
+            Return _Comentario
+        End Get
+        Set(value As String)
+            _Comentario = value
+        End Set
+    End Property
+End Class
+
+' 2013.04.17
+Public Class DatosCotizacionExtModel
+    Private _OrderID As String
+    Private _Failure As String
+    Private _Retro As String
+    Private _Comments As String
+    Private _InDate As String
+    Private _ManoObra As String
+    Private _Viaje As String
+    Private _Subtotal As String
+    Private _IVA As String
+    Private _Total As String
+    Private _LeadTime As String
+    Private _Comment As String
+    Private _Delivery As String
+
+    '---------------
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property Failure As String
+        Get
+            Return _Failure
+        End Get
+        Set(value As String)
+            _Failure = value
+        End Set
+    End Property
+
+    Public Property Retro As String
+        Get
+            Return _Retro
+        End Get
+        Set(value As String)
+            _Retro = value
+        End Set
+    End Property
+
+    Public Property Comments As String
+        Get
+            Return _Comments
+        End Get
+        Set(value As String)
+            _Comments = value
+        End Set
+    End Property
+
+    Public Property InDate As String
+        Get
+            Return _InDate
+        End Get
+        Set(value As String)
+            _InDate = value
+        End Set
+    End Property
+
+    Public Property ManoObra As String
+        Get
+            Return _ManoObra
+        End Get
+        Set(value As String)
+            _ManoObra = value
+        End Set
+    End Property
+
+    Public Property Viaje As String
+        Get
+            Return _Viaje
+        End Get
+        Set(value As String)
+            _Viaje = value
+        End Set
+    End Property
+
+    Public Property Subtotal As String
+        Get
+            Return _Subtotal
+        End Get
+        Set(value As String)
+            _Subtotal = value
+        End Set
+    End Property
+
+    Public Property IVA As String
+        Get
+            Return _IVA
+        End Get
+        Set(value As String)
+            _IVA = value
+        End Set
+    End Property
+
+    Public Property Total As String
+        Get
+            Return _Total
+        End Get
+        Set(value As String)
+            _Total = value
+        End Set
+    End Property
+
+    Public Property leadTime As String
+        Get
+            Return _LeadTime
+        End Get
+        Set(value As String)
+            _LeadTime = value
+        End Set
+    End Property
+
+    Public Property Comment As String
+        Get
+            Return _Comment
+        End Get
+        Set(value As String)
+            _Comment = value
+        End Set
+    End Property
+
+    Public Property Delivery As String
+        Get
+            Return _Delivery
+        End Get
+        Set(value As String)
+            _Delivery = value
+        End Set
+    End Property
+
+End Class
+
+' 2013.04.18
+Public Class PendientesEnviarCotizacion
+    Private _OrderID As String
+    Private _FechaIngreso As String
+    Private _FechaDiagnostico As String
+    Private _FechaCotizacion As String
+    Private _LeadTime As String
+    Private _CostBy As String
+    Private _CustomerType As String
+
+    '---- 
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property FechaIngreso As String
+        Get
+            Return _FechaIngreso
+        End Get
+        Set(value As String)
+            _FechaIngreso = value
+        End Set
+    End Property
+
+    Public Property FechaDiagnostico As String
+        Get
+            Return _FechaDiagnostico
+        End Get
+        Set(value As String)
+            _FechaDiagnostico = value
+        End Set
+    End Property
+
+    Public Property FechaCotizacion As String
+        Get
+            Return _FechaCotizacion
+        End Get
+        Set(value As String)
+            _FechaCotizacion = value
+        End Set
+    End Property
+
+    Public Property LeadTime As String
+        Get
+            Return _LeadTime
+        End Get
+        Set(value As String)
+            _LeadTime = value
+        End Set
+    End Property
+
+    Public Property CostBy As String
+        Get
+            Return _CostBy
+        End Get
+        Set(value As String)
+            _CostBy = value
+        End Set
+    End Property
+
+    Public Property CustomerType As String
+        Get
+            Return _CustomerType
+        End Get
+        Set(value As String)
+            _CustomerType = value
+        End Set
+    End Property
+
+End Class
+
+' 2013.04.18
+Public Class EnviarCotizacionModel
+    Private _OrderID As String
+    Private _Comentario As String
+    
+    '-- 
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property Comentario As String
+        Get
+            Return _Comentario
+        End Get
+        Set(value As String)
+            _Comentario = value
+        End Set
+    End Property
+
+End Class
+
+' 2013.04.19 
+Public Class AprobarRepararListModel
+    Private _OrderID As String
+    Private _FechaIngreso As String
+    Private _EnvioCotizacion As String
+    Private _LeadTime As String
+    Private _PartNo As String
+    Private _Description As String
+    Private _ProductType As String
+
+    '---------
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property FechaIngreso As String
+        Get
+            Return _FechaIngreso
+        End Get
+        Set(value As String)
+            _FechaIngreso = value
+        End Set
+    End Property
+
+    Public Property EnvioCotizacion As String
+        Get
+            Return _EnvioCotizacion
+        End Get
+        Set(value As String)
+            _EnvioCotizacion = value
+        End Set
+    End Property
+
+    Public Property LeadTime As String
+        Get
+            Return _LeadTime
+        End Get
+        Set(value As String)
+            _LeadTime = value
+        End Set
+    End Property
+
+    Public Property PartNo As String
+        Get
+            Return _PartNo
+        End Get
+        Set(value As String)
+            _PartNo = value
+        End Set
+    End Property
+
+    Public Property Description As String
+        Get
+            Return _Description
+        End Get
+        Set(value As String)
+            _Description = value
+        End Set
+    End Property
+
+    Public Property ProductType As String
+        Get
+            Return _ProductType
+        End Get
+        Set(value As String)
+            _ProductType = value
+        End Set
+    End Property
+
+
+
+End Class
+
+' 2013.04.19
+Public Class AprobarRepararModel
+    Private _OrderID As String
+    Private _PartNumber As String
+    Private _Description As String
+    Private _Aprobado As String
+    Private _Failure As String
+    Private _Solution As String
+    Private _TipoReparacion As String
+    Private _FoundBy As String
+    Private _Comentario As String
+    '--- 
+
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property PartNumber As String
+        Get
+            Return _PartNumber
+        End Get
+        Set(value As String)
+            _PartNumber = value
+        End Set
+    End Property
+
+    Public Property Description As String
+        Get
+            Return _Description
+        End Get
+        Set(value As String)
+            _Description = value
+        End Set
+    End Property
+
+    Public Property Aprobado As String
+        Get
+            Return _Aprobado
+        End Get
+        Set(value As String)
+            _Aprobado = value
+        End Set
+    End Property
+
+    Public Property Failure As String
+        Get
+            Return _Failure
+        End Get
+        Set(value As String)
+            _Failure = value
+        End Set
+    End Property
+
+    Public Property Solution As String
+        Get
+            Return _Solution
+        End Get
+        Set(value As String)
+            _Solution = value
+        End Set
+    End Property
+
+    Public Property TipoReparacion As String
+        Get
+            Return _TipoReparacion
+        End Get
+        Set(value As String)
+            _TipoReparacion = value
+        End Set
+    End Property
+
+    Public Property FoundBy As String
+        Get
+            Return _FoundBy
+        End Get
+        Set(value As String)
+            _FoundBy = value
+        End Set
+    End Property
+
+    Public Property Comentario As String
+        Get
+            Return _Comentario
+        End Get
+        Set(value As String)
+            _Comentario = value
+        End Set
+    End Property
+End Class
+
+' 2013.04.23
+Public Class CotizacionInfoModel
+    Private _OrderID As String
+    Private _LeadTime As String
+    Private _Proveedor As String
+    Private _Comentario As String
+
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property LeadTime As String
+        Get
+            Return _LeadTime
+        End Get
+        Set(value As String)
+            _LeadTime = value
+        End Set
+    End Property
+
+    Public Property Proveedor As String
+        Get
+            Return _Proveedor
+        End Get
+        Set(value As String)
+            _Proveedor = value
+        End Set
+    End Property
+
+    Public Property Comentario As String
+        Get
+            Return _Comentario
+        End Get
+        Set(value As String)
+            _Comentario = value
+        End Set
+    End Property
+End Class
+
+' 2013.04.23
+Public Class GuiaCompraModel
+    Private _OrderID As String
+    Private _TrackNo As String
+
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property TrackNo As String
+        Get
+            Return _TrackNo
+        End Get
+        Set(value As String)
+            _TrackNo = value
+        End Set
+    End Property
+
+End Class
+
+Public Class ComprarPartesListModel
+    Private _OrderID As String
+    Private _Incoming As String
+    Private _PartNo As String
+    Private _ProductDescription As String
+    Private _Comprado As String
+    Private _ETAParte As String
+    Private _FechaCompromiso As String
+    Private _ApprovalDate As String
+    Private _TipoReparacion As String
+    Private _FuenteSuministro As String
+
+    Public Property OrderID As String
+        Get
+            Return _OrderID
+        End Get
+        Set(value As String)
+            _OrderID = value
+        End Set
+    End Property
+
+    Public Property Incoming As String
+        Get
+            Return _Incoming
+        End Get
+        Set(value As String)
+            _Incoming = value
+        End Set
+    End Property
+
+    Public Property PartNo As String
+        Get
+            Return _PartNo
+        End Get
+        Set(value As String)
+            _PartNo = value
+        End Set
+    End Property
+
+    Public Property ProductDescription As String
+        Get
+            Return _ProductDescription
+        End Get
+        Set(value As String)
+            _ProductDescription = value
+        End Set
+    End Property
+
+    Public Property Comprado As String
+        Get
+            Return _Comprado
+        End Get
+        Set(value As String)
+            _Comprado = value
+        End Set
+    End Property
+
+    Public Property ETAParte As String
+        Get
+            Return _ETAParte
+        End Get
+        Set(value As String)
+            _ETAParte = value
+        End Set
+    End Property
+
+    Public Property FechaCompromiso As String
+        Get
+            Return _FechaCompromiso
+        End Get
+        Set(value As String)
+            _FechaCompromiso = value
+        End Set
+    End Property
+
+    Public Property ApprovalDate As String
+        Get
+            Return _ApprovalDate
+        End Get
+        Set(value As String)
+            _ApprovalDate = value
+        End Set
+    End Property
+
+    Public Property TipoReparacion As String
+        Get
+            Return _TipoReparacion
+        End Get
+        Set(value As String)
+            _TipoReparacion = value
+        End Set
+    End Property
+
+    Public Property FuenteSuministro As String
+        Get
+            Return _FuenteSuministro
+        End Get
+        Set(value As String)
+            _FuenteSuministro = value
+        End Set
+    End Property
+
 End Class

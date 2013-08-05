@@ -17,20 +17,22 @@ Namespace AgioNet
                 If DR.HasRows Then
                     Do While DR.Read
                         myModel = New RegFailureModel With {.HasFailure = DR(0), .OrderID = DR(1), .Failure = DR(2), .Solution = DR(3), _
-                                                            .Source = DR(4), .Comment = DR(5), .User = DR(6)}
+                                                            .Source = DR(4), .Comment = DR(5), .User = DR(6), .TipoReparacion = DR(7)}
                     Loop
                 Else
                     myModel = New RegFailureModel With {.HasFailure = "0", .OrderID = "No data", .Failure = "No data", .Solution = "No data", _
-                                                            .Source = "No data", .Comment = "No data", .User = "No data"}
+                                                            .Source = "No data", .Comment = "No data", .User = "No data", .TipoReparacion = "no data"}
                 End If
             Catch ex As Exception
                 myModel = New RegFailureModel With {.HasFailure = "0", .OrderID = "No data", .Failure = "No data", .Solution = "No data", _
-                                                            .Source = "No data", .Comment = "No data", .User = "No data"}
+                                                            .Source = "No data", .Comment = "No data", .User = "No data", .TipoReparacion = "no data"}
                 TempData("ErrMsg") = ex.Message
             Finally
                 Me.DA.Dispose()
             End Try
             TempData("model") = myModel
+            TempData.Keep("Failure")
+
             Return PartialView("_AddFailure")
         End Function
 
@@ -214,6 +216,7 @@ Namespace AgioNet
             ' Me.Session.Add("OtherContent", model.TESTID)
             'Me.TempData.Item("TESTID") = model.TESTID
             'Return Me.View
+            TempData.Keep("Failure")
             Return PartialView("_CancelTest")
         End Function
 
@@ -298,6 +301,7 @@ Namespace AgioNet
         ' GET: /diagnostico/ExecuteTest
         <Authorize> _
         Public Function ExecuteTest(ByVal Model As TestListModel) As PartialViewResult
+            TempData.Keep("Failure")
             Return Me.PartialView("_ExecuteTest")
         End Function
 
@@ -325,6 +329,7 @@ Namespace AgioNet
             Finally
                 DA.Dispose()
             End Try
+            TempData.Keep("Failure")
 
             Return result
         End Function
@@ -412,16 +417,18 @@ Namespace AgioNet
 
                 If Me.DR.HasRows Then
                     Do While Me.DR.Read
-                        modelArray(index) = New PendingOrdersModel With {.OrderID = DR(0), .Customer = DR(1), .ProductType = DR(2), _
-                                            .SerialNo = DR(3), .Model = DR(4), .Description = DR(5)}
+                        modelArray(index) = New PendingOrdersModel With {.OrderID = DR(0), .ProductType = DR(1), _
+                                            .SerialNo = DR(2), .Model = DR(3), .Description = DR(4), .DateI = DR(5), _
+                                            .DateR = DR(6), .DateD = DR(7)}
                         index += 1
                     Loop
                     ' -- Actualizado por Carlos Barreto
                     ReDim Preserve modelArray(index - 1)
                 Else
                     index = 0
-                    modelArray(index) = New PendingOrdersModel With {.OrderID = "No Data", .Customer = "No Data", .ProductType = "No Data", _
-                        .SerialNo = "No Data", .Model = "No Data", .Description = "No Data"}
+                    modelArray(index) = New PendingOrdersModel With {.OrderID = "No Data", .ProductType = "No Data", _
+                                        .SerialNo = "No Data", .Model = "No Data", .Description = "No Data", .DateI = "no data", _
+                                        .DateR = "No Data", .DateD = "no data"}
                     index += 1
                     ' -- Actualizado por Carlos Barreto
                     ReDim Preserve modelArray(index - 1)
@@ -558,11 +565,12 @@ Namespace AgioNet
                             .Model = DR(25), _
                             .Description = DR(26), _
                             .PartNo = DR(27), _
-                            .SerialNo = DR(28), _
-                            .Revision = DR(29), _
-                            .ServiceType = DR(30), _
-                            .FailureType = DR(31), _
-                            .Comment = DR(32) _
+                            .commodity = DR(28),
+                            .SerialNo = DR(29), _
+                            .Revision = DR(30), _
+                            .ServiceType = DR(31), _
+                            .FailureType = DR(32), _
+                            .Comment = DR(33) _
                         }
                         model = model2
                     Loop
@@ -712,12 +720,12 @@ Namespace AgioNet
                     Dim reader As SqlDataReader = Me.DA.ExecuteSP("dg_GetTestListByOrder", Me.Session.Item("OrderID"), "")
                     If reader.HasRows Then
                         Do While reader.Read
-                            If Len(reader(3)) >= 35 Then strFailure = reader(3) & "..." Else strFailure = reader(3)
-                            If Len(reader(4)) >= 35 Then strLog = reader(4) & "..." Else strLog = reader(4)
+                            If Len(reader(4)) >= 35 Then strFailure = Mid(reader(4), 1, 30) & "..." Else strFailure = reader(4)
+                            If Len(reader(5)) >= 35 Then strLog = Mid(reader(5), 1, 30) & "..." Else strLog = reader(5)
 
                             modelArray(index) = New TestReportModel With {.OrderID = reader(0), .TestName = reader(1), _
-                                                .TestResult = reader(2), .Failure = strFailure, .TextLog = strLog, _
-                                                .TestStart = reader(5), .TestEnd = reader(6), .CreateBy = reader(7)}
+                                                .TestResult = reader(2), .CapFailure = reader(3), .Failure = strFailure, .TextLog = strLog, _
+                                                .TestStart = reader(6), .TestEnd = reader(7), .CreateBy = reader(8), .TipoReparacion = reader(9)}
                             index += 1
                         Loop
 
@@ -746,9 +754,8 @@ Namespace AgioNet
                 Catch exception1 As Exception
                     index = 0
                     modelArray(index) = New TestReportModel With {.OrderID = "No data", .TestName = "No data", .TestResult = "No data", _
-                                                                          .Failure = "No data", .TextLog = "No data", .TestStart = "No data", _
-                                                                          .TestEnd = "No data", .CreateBy = "No data"
-                                                                         }
+                                        .CapFailure = "No data", .Failure = "No data", .TextLog = "No data", .TestStart = "No data", _
+                                        .TestEnd = "No data", .CreateBy = "No data", .TipoReparacion = "No data"}
                     index += 1
                     '-- Actualizado por Carlos Barreto
                     ReDim Preserve modelArray(index - 1)
@@ -783,35 +790,29 @@ Namespace AgioNet
                     Me.TempData.Item("ErrMsg") = "Se ha mandado la solicitud de aprobación para la orden :" _
                         & Session.Item("OrderID")
 
-                    If Not Me.DR.IsClosed Then
-                        Me.DR.Close()
-                    End If
+                    '-- Enviar correo
+                    Dim OrderID As String = Mid(Me.Session.Item("OrderID"), 1, Me.Session.Item("OrderID").ToString.Length - 3) & "-01"
+                    email.HTMLBody = True
+                    emailAddress = mailing.getDistributionListReqApproval(User.Identity.Name, OrderID)
+                    txtSubject = "Solicitud de cotización para la orden : " & OrderID
+                    txtMessage = mailing.getDiagnosticEmail(OrderID)
 
-                    Me.DR = Me.DA.ExecuteSP("sys_getDistibutionList", "REQAPPROV")
-                    If Me.DR.HasRows Then
-                        Do While Me.DR.Read
-                            emailAddress = DR(0)
-                        Loop
-
-                        email.HTMLBody = True
-                        txtSubject = "Solicitud de cotización para la orden : " & Me.Session.Item("OrderID")
-                        txtMessage = "<p style='font-family: Arial; font-size:12px; width:800px;'> " & _
-                                     "Se ha registrado una solicitud de cotización de parte para la orden: <b>" & _
-                                     Session.Item("OrderID") & "</b>. Esta opción se encuentra disponible desde " & _
-                                     "Servicio a Clientes / 4.- Cotización de Partes<p>"
-
-                        email.SendEmail(emailAddress, txtSubject, txtMessage)
-                    End If
-                    Me.DA.Dispose()
+                    'txtMessage = "<p style='font-family: Arial; font-size:12px; width:800px;'> " & _
+                    '             "Se ha registrado una solicitud de cotización de parte para la orden: <b>" & _
+                    '             Session.Item("OrderID") & "</b>. Esta opción se encuentra disponible desde " & _
+                    '             "Servicio a Clientes / 4.- Cotización de Partes<p>"
+                    '
+                    email.SendEmail(emailAddress, txtSubject, txtMessage)
                 Else
                     Me.TempData.Item("ErrMsg") = Me.DA._LastErrorMessage
-                    Me.DA.Dispose()
                 End If
                 Return Me.RedirectToAction("DiagnosticMain")
 
             Catch exception1 As Exception
                 Me.TempData.Item("ErrMsg") = exception1.Message
                 Return RedirectToAction("DiagnosticMain")
+            Finally
+                Me.DA.Dispose()
             End Try
             Return Me.View
         End Function
@@ -936,6 +937,7 @@ Namespace AgioNet
 
                 Try
                     ' Obtener el listado de pruebas disponiblles
+                    Session("OrderID") = Mid(Session("OrderID"), 1, Session("OrderID").ToString.Length - 3) & "-01"
                     DR = Me.DA.ExecuteSP("dg_GetTestListByOrder", Session("OrderID"))
                     index = 0
                     If DA._LastErrorMessage = "" Then
@@ -999,6 +1001,7 @@ Namespace AgioNet
                                       .PartNumber = DR(8), .SerialNumber = DR(9), .FailureType = DR(10), .Comment = DR(11), _
                                       .DateLog = DR(12), .TextLog = DR(13)
                                 }
+                            TempData("Failure") = DR(10)
                         Loop
                     Else
                         'Si no hay datos, mostrar error
@@ -1020,6 +1023,7 @@ Namespace AgioNet
                 Session.Clear() 'Limpiar toda la sesion (El login se guarda en cookie)
                 TempData("ErrMsg") = ex.Message
                 TempData.Keep("Model")
+                TempData.Keep("Failure")
                 Retorno = Me.RedirectToAction("realizar_pruebas")
             Finally
                 DA.Dispose()
@@ -1174,10 +1178,61 @@ Namespace AgioNet
             Finally
                 DA.Dispose()
             End Try
-
+            TempData.Keep("Failure")
             Return Retorno
         End Function
 
+
+        '2013.04.15
+        ' GET: /diagnostico/Ordenes_En_Diagnostico
+        Public Function Ordenes_En_Diagnostico() As ActionResult
+            Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
+            Dim modelArray(100) As PendingOrdersModel
+            Dim index As Integer = 0
+            Dim response As ActionResult
+            Dim ErrorMsg As String = String.Empty
+            'ErrorMsg = TempData("ErrorMsg")
+
+            ' -- Limpiar el TempData
+            'TempData.Clear()
+            'TempData("ErrorMsg") = ErrorMsg
+
+            Try
+                Me.DR = Me.DA.ExecuteSP("rc_getOnDiagnosticOrders")
+                If (Me.DA._LastErrorMessage <> "") Then
+                    Throw New Exception(DA._LastErrorMessage)
+                End If
+
+                If Me.DR.HasRows Then
+                    Do While Me.DR.Read
+                        modelArray(index) = New PendingOrdersModel With {.OrderID = DR(0), .PartNo = DR(1), .ProductType = DR(2), _
+                                            .SerialNo = DR(3), .Model = DR(4), .Description = DR(5), .DateR = DR(6), .DateD = DR(7), _
+                                            .CreateBy = DR(8), .DiasTranscurridos = DR(9)}
+                        If index + 1 = modelArray.Length Then ReDim Preserve modelArray(index + 10)
+                        index += 1
+                    Loop
+                    ' -- Actualizado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                Else
+                    index = 0
+                    modelArray(index) = New PendingOrdersModel With {.OrderID = "No Data", .PartNo = "No Data", .ProductType = "No Data", _
+                        .SerialNo = "No Data", .Model = "No Data", .Description = "No Data"}
+                    index += 1
+                    ' -- Actualizado por Carlos Barreto
+                    ReDim Preserve modelArray(index - 1)
+                End If
+                response = Me.View
+            Catch ex As Exception
+                Me.TempData.Item("ErrMsg") = ex.Message
+                response = Me.RedirectToAction("index")
+            Finally
+                DA.Dispose()
+            End Try
+
+            Me.TempData.Item("Model") = modelArray
+            Return response
+
+        End Function
 
         ' Fields
         Protected Friend DA As DataAccess

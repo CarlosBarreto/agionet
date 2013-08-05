@@ -6,7 +6,22 @@ AgioNet
 </name>
 </assembly>
 <members>
-<member name="M:AgioNet.AgioNet.empaqueController.getReRepair(System.String,AgioNet.DataAccess@)">
+<member name="M:AgioNet.agGlobals.getCreateOrderEmailFormat(System.String,AgioNet.CreateOrderModel)">
+	<summary>
+ Funcion que genera el contenido del correo electrónico enviado al cliente cuando una orden es creada
+ </summary>
+	<param name="OrderID">ID de la Orden</param>
+	<param name="model">Datos de la Orden</param>
+	<returns>Cadena con la información a mandar</returns>
+	<remarks></remarks>
+</member><member name="M:AgioNet.agGlobals.CambiaLink(System.String)">
+	<summary>
+  Cadena que cambia un link guardado en la Base de Datos por un link funcional y recortado
+ </summary>
+	<param name="Cadena">cadena a revisar</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:AgioNet.AgioNet.empaqueController.getReRepair(System.String,AgioNet.DataAccess@)">
 	<summary>
   Obtiene el valor de Rerepair de una Orden
  </summary>
@@ -32,6 +47,14 @@ AgioNet
  Para determinar si hay registrada una Orden en la session
  </summary>
 	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:AgioNet.agEmail.SendEmail(System.String,System.String,System.String)">
+	<summary>
+ Envia un correo, tambien registra el correo en la base de datos en caso de que el correo no pueda ser enviado
+ </summary>
+	<param name="EmailAddress"></param>
+	<param name="txtSubject"></param>
+	<param name="txtMessage"></param>
 	<remarks></remarks>
 </member><member name="P:AgioNet.My.Resources.Resources.ResourceManager">
 	<summary>

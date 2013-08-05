@@ -20,8 +20,12 @@ End If
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>Clase de Producto: </strong> @read.ProductClass</span>
+    <span class="Span-e"><strong>Modelo: </strong> @read.ProductModel</span>
 </div>
+
+<!--div class="form-row">
+    <span class="Span-e"><strong>Clase de Producto: </strong> @read.ProductClass</span>
+</div-->
 
 <div class="form-row">
     <span class="Span-e"><strong>Tipo de Producto: </strong> @read.ProductType</span>
@@ -32,16 +36,15 @@ End If
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>Modelo: </strong> @read.ProductModel</span>
+    <span class="Span-e"><strong>Nún Parte: </strong> @read.PartNumber</span>
 </div>
 
 <div class="form-row">
     <span class="Span-e"><strong>Descripción: </strong> @read.ProductDescription</span>
 </div>
+<div class="form-row">&nbsp;</div>
        
-<div class="form-row">
-    <span class="Span-e"><strong>Nún Parte: </strong> @read.PartNumber</span>
-</div>
+
 
 <div class="form-row">
     <span class="Span-e"><strong>Num Serie: </strong> @read.SerialNumber</span>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/almacen/partes_compradas.vbhtml" hash="7a9782b5" filehash="ffffe8e2f7327420" flags="110000" assembly="App_Web_l0nacwli" type="ASP._Page_Views_almacen_partes_compradas_vbhtml">
+    <filedeps>
+        <filedep name="/Views/almacen/partes_compradas.vbhtml" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,190 @@
+﻿@charset "utf-8";
+/* CSS Document 
+ * Author: 		Carlos Barreto
+ * ScriptDate: 	September 2012
+*/
+
+/* Tipografías */
+@font-face {
+	font-family: 'Calibri';
+	font-weight: normal;
+	src: url('../../Content/fonts/calibri.ttf');
+}
+
+@font-face{
+    font-family:'HelveticaBlackCondensed';
+    src:url('../../Content/fonts/helvetica.woff') format('woff');
+}
+
+@font-face{
+	font-family:"BebasNeue";
+	src:url("../../Content/fonts/BebasNeue-webfont.eot");
+	src:url("../../Content/fonts/BebasNeue-webfont.eot?#iefix") format("embedded-opentype"),url("../../Content/fonts/BebasNeue-webfont.woff") format("woff"),url("../../Content/fonts/BebasNeue-webfont.ttf") format("truetype"),url("../../Content/fonts/BebasNeue-webfont.svg#BebasNeue") format("svg");
+	font-weight:normal;font-style:normal}
+
+/* Formato estandar de la pagina */
+HTML, BODY {
+	background-color:#eee;
+	font-family: "Calibri", Arial, Verdana;
+	font-size: 12px;
+    height:100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+#Header {
+    background-color:#D9D9D9;
+    border:0;
+    border-bottom:1px solid #808080;
+    border-color:#808080;
+    color: #000000;
+    display:block;
+    height:30px;
+    margin:0;
+    position:absolute;
+    width:100%;
+    z-index:500;
+}
+
+    #Header .logo {
+        display: block;
+        float: left;
+        margin-left:20px;
+        position:relative;
+        width: 100px;
+        
+    }
+
+    #Header #Separador {
+        float: right;
+        height: 30px;
+        position: relative;
+        top: 5px;
+        overflow: hidden;
+    }
+
+        #Header #Separador .Logoff {
+            color: #808080;
+            float: right;
+            font-family:Calibri, Arial;
+            font-size:14px;
+            height:30px;
+            margin-right:10px;
+            text-align:center;
+            top: 3px;
+            width:180px;
+        }
+
+            #Header #Separador .Logoff .menuser ul {
+                height:100%;
+                list-style: none;
+                padding: 0;
+                position:relative;
+                margin-top:5px;
+            }
+
+                #Header #Separador .Logoff .menuser ul:hover {
+                    background-color: #D0D0D0;
+                    color: #808080;
+                }
+
+            #Header #Separador .Logoff .menuser a {
+                color: #808080;
+                display: block;
+                height: 20px;
+                margin-top:2px;
+                padding-left:3px;
+                text-decoration:none;
+                width: 97%;
+            }
+
+            #Header #Separador .Logoff .menuser ul ul {
+                background-color:#D9D9D9;
+                border: 1px solid #797979;
+                height: 45px;
+                margin-top:-3px;
+                padding:0;
+                width: 180px;
+            }
+
+                #Header #Separador .Logoff .menuser ul ul a:hover {
+                    background-color: #D0D0D0;
+                    color: #808080;
+                }
+
+        #Header #Separador #menuPrincipal {
+            float: left;
+            height: 30px;
+            position: relative;
+        }
+
+            #Header #Separador #menuPrincipal UL {
+                display: inline;
+                color: #797979;
+                line-height: 27px;
+                margin-left: 12px;
+            }
+
+                #Header #Separador #menuPrincipal UL LI {
+                    display: inline;
+                    font-family: BebasNeue, HelveticaBlackCondensed, sans-serif, Arial;
+                    font-size: 22px; /*23 px*/
+                    font-weight: 400;
+                    padding: 0 8px 4px;
+                    text-shadow: 0 1px transparent, 0 1px white, 1px 0 transparent, 0 -1px transparent;
+                }
+
+                    #Header #Separador #menuPrincipal UL LI A {
+                        color: #797979;
+                        text-decoration: none;
+                    }
+
+                        #Header #Separador #menuPrincipal UL LI A:hover {
+                            color: #797979;
+                            text-decoration: underline;
+                        }
+
+#SubMenu {  
+    display:block;   
+    height:20px;
+    left:0;
+    margin:0;
+    margin-bottom:10px;
+    /*overflow-x: auto;*/
+    position:absolute;
+    top:37px;
+    width:100%;
+    z-index:400;
+}
+
+    #SubMenu .menu {
+        color: #000000;
+        font-family:  Arial;
+        font-size: 11px; /*23 px*/
+        padding-top: 3px;
+    }
+
+.ul_menu {
+    display: inline;
+    height: 100%;
+    list-style: none;
+    position: relative;
+}
+
+.ul_menu_li {
+    display: inline;
+    float:left;
+    padding: 0;
+    text-shadow: 0 1px transparent, 0 1px white, 1px 0 transparent, 0 -1px transparent;
+    margin-right: 10px;
+}
+
+    .ul_menu_li A {
+        color: #666;
+        text-decoration: none;
+    }
+
+    .ul_menu_li A:hover {
+        color: #797979;
+        text-decoration: underline;
+    }

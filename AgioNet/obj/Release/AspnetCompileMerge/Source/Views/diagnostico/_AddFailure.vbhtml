@@ -9,12 +9,37 @@
     Dim OptionList As List(Of SelectListItem) = New List(Of SelectListItem)
     Dim _opt As SelectListItem
     
-    _opt = New SelectListItem With {.Text = "Remplazo", .Value = "Remplazo"}
+    Dim opRemplazo As Boolean = False, opReparacion As Boolean = False, opNuevaParte As Boolean = False
+    Dim opComponente As Boolean = False, opNTF As Boolean = False
+    
+    Select Case read.TipoReparacion
+        Case "Reemplazo"
+            opRemplazo = True
+        Case "Reparación"
+            opReparacion = True
+        Case "Nueva Parte"
+            opNuevaParte = True
+        Case "Reparación Componente"
+            opComponente = True
+        Case "NTF"
+            opNTF = True
+    End Select
+    _opt = New SelectListItem With {.Text = "Reemplazo", .Value = "Reemplazo", .Selected = opRemplazo}
     OptionList.Add(_opt)
     
-    _opt = New SelectListItem With {.Text = "Reparación", .Value = "Reparación"}
+    _opt = New SelectListItem With {.Text = "Reparación", .Value = "Reparación", .Selected = opReparacion}
     OptionList.Add(_opt)
     
+    _opt = New SelectListItem With {.Text = "Nueva Parte", .Value = "Nueva Parte", .Selected = opNuevaParte}
+    OptionList.Add(_opt)
+
+    _opt = New SelectListItem With {.Text = "Reparación Componente", .Value = "Reparación Componente", .Selected = opComponente}
+    OptionList.Add(_opt)
+    
+    _opt = New SelectListItem With {.Text = "NTF", .Value = "NTF", .Selected = opNTF}
+    OptionList.Add(_opt)
+    
+    Dim Failure As String = TempData("Failure")
 End Code
 <script type="text/javascript"> 
     $(document).ready(function () {
@@ -26,6 +51,8 @@ End Code
             $(".TituloFormulario--dg").html("La prueba [@isTested.TestID] ya ha sido realizada.");
             $(".Button").css("visibility", "hidden");
         }
+
+        
     }); 
 </script>
 
@@ -51,7 +78,7 @@ End If
 
         <div class="row">
             <span class="Span-i">Diagnóstico / Falla Detectada</span>
-            <span class="Span-e">@Html.TextBoxFor(Function(m) m.Failure, New With {.Value = read.Failure})</span>
+            <span class="Span-e">@Html.TextBoxFor(Function(m) m.Failure, New With {.Value = Failure})</span>
         </div>
         <div class="row"></div>
 

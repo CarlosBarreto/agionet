@@ -168,7 +168,7 @@ Namespace AgioNet
         <HttpGet, Authorize> _
         Public Function hoja_individual(ByVal model As ScanOrderModel) As ActionResult
             Me.DA = New DataAccess(__SERVER__, __DATABASE__, __USER__, __PASS__)
-            Dim model2 As New CreateOrderModel
+            Dim model2 As New CreateAssurantOrderModel
             Dim code As String = String.Empty
             Try
                 Me.DR = Me.DA.ExecuteSP("sc_OrderMaster_GetOrderInfo", model.OrderID)
@@ -181,7 +181,7 @@ Namespace AgioNet
                 If Me.DR.HasRows Then
                     Do While Me.DR.Read
                         code = DR(0)
-                        model2 = New CreateOrderModel With { _
+                        model2 = New CreateAssurantOrderModel With { _
                             .CustomerName = DR(2), _
                             .RazonSocial = DR(3), _
                             .CustomerReference = DR(4), _
@@ -209,8 +209,15 @@ Namespace AgioNet
                             .SerialNumber = DR(27), _
                             .Revision = DR(28), _
                             .ServiceType = DR(29), _
-                            .FailureType = DR(30), _
-                            .Comment = DR(31) _
+                            .FailureType = DR(30) & " \\ " & DR(31), _
+                            .Comment = DR(31), _
+                            .CustomerType = DR(32), _
+                            .ReRepair = DR(33), _
+                            .OrderDate = DR(34), _
+                            .Cosmetic = DR(35), _
+                            .Accesories = DR(36), _
+                            .AddressReference = DR(37), _
+                            .NotificacionServicio = DR(38) _
                         }
                     Loop
                 End If
@@ -232,15 +239,54 @@ Namespace AgioNet
                     System.IO.File.WriteAllBytes(path, GenerarCodigo(Me.Server, code, "", 350, 40, 60))
                 End If
 
-                Dim report As New PDFIntransit
-                report.RutaLogo = Me.Server.MapPath("~/Content/images/logo-01.jpg")
+                'Dim report As New PDFIntransit
+                Dim report As New PDFReciboEquipo
+
+                '--- Inicializar 
+                report.PathImages = Me.Server.MapPath("~/Content/images")
+                report.Logo = "logo_agiotech.jpg"
+                Select Case model2.CustomerType
+                    Case "EndUser"
+                        report.LogoCliente = "logo-02.jpg"
+                    Case "Agiofix"
+                        report.LogoCliente = "logo-02.jpg"
+                    Case "TWG"
+                        report.LogoCliente = "logo_twg.jpg"
+                    Case "ASSURANT"
+                        report.LogoCliente = "logo_assurant.jpg"
+                    Case Else
+                        report.LogoCliente = "logo-02.jpg"
+                End Select
+
+                Select Case UCase(model2.ProductType)
+                    Case "AIO"
+                        report.imgInspeccion = "img_AIO.jpg"
+                    Case "DESKTOP"
+                        report.imgInspeccion = "img_desktop.jpg"
+                    Case "COMPUTADOR"
+                        report.imgInspeccion = "img_desktop.jpg"
+                    Case "LAPTOP"
+                        report.imgInspeccion = "img_laptop.jpg"
+                    Case "TABLET"
+                        report.imgInspeccion = "img_tablet.jpg"
+                    Case Else
+                        report.imgInspeccion = "img_rec3.jpg"
+                End Select
+
+                If model2.CustomerType = "EndUser" Or model2.CustomerType = "AgioFix" Then
+                    report.RutaLogo = Me.Server.MapPath("~/Content/images/logo-02.jpg")
+                Else
+                    report.RutaLogo = Me.Server.MapPath("~/Content/images/logo-01.jpg")
+                End If
+
                 report.RutaBarCode = path
                 report.RutaComments = Me.Server.MapPath("~/Content/images/comments.jpg")
                 report.Orderid = code
                 report.Model = model2
 
                 'RT.PrintPDF(report)
-                RT.ViewPDF(report, Me.Server.MapPath("~/Content/temp/") & code & ".pdf")
+                RT.ResponsePDF4MVC(report, Me.HttpContext.ApplicationInstance.Context)
+                'report, Me.Server.MapPath("~/Content/temp/") & code & ".pdf")
 
                 report = Nothing
 
@@ -252,13 +298,21 @@ Namespace AgioNet
                 Me.DA.Dispose()
 
                 Dim filename As String = Me.Server.MapPath("~/Content/temp/") & code & ".pdf"
+
+
+                'If Session("OrderID") <> "" Then
+                ' Session.Clear()
+                ' Session.Add("File", filename)
+                'Return RedirectToAction("crear_orden_assurant", "sc")
+                'Else
                 Return File(filename, "application/pdf", Server.HtmlEncode(filename))
+                'End If
             Catch ex As Exception
                 Me.TempData.Item("ErrMsg") = ex.Message
                 Return Me.RedirectToAction("index")
             End Try
 
-
+            
             '
         End Function
 
@@ -776,18 +830,19 @@ Namespace AgioNet
 
                 If Me.DR.HasRows Then
                     Do While Me.DR.Read
-                        modelArray(index) = New PendingProcessWarehouseModel With {.OrderID = DR(0), .CustomerName = DR(1), _
-                                            .ProductType = DR(2), .SerialNumber = DR(3), .ProductModel = DR(4), _
-                                            .ProductDescription = DR(5), .Ingresado = DR(6), .Procesado = DR(7)}
+                        modelArray(index) = New PendingProcessWarehouseModel With {.OrderID = DR(0), .ProductType = DR(1), _
+                                            .ProductModel = DR(2), .ProductDescription = DR(3), .FechaEmbarque = DR(4), _
+                                            .TrackNo = DR(5), .FechaIngreso = DR(6)}
+                        If index + 1 >= modelArray.Length Then ReDim Preserve modelArray(index + 100)
                         index += 1
                     Loop
                     ' -- Actualizado por Carlos Barreto
                     ReDim Preserve modelArray(index - 1)
                 Else
                     index = 0
-                    modelArray(index) = New PendingProcessWarehouseModel With {.OrderID = "No data", .CustomerName = "No data", _
-                                            .ProductType = "No data", .SerialNumber = "No data", .ProductModel = "No data", _
-                                            .ProductDescription = "No data", .Ingresado = "No data", .Procesado = "No data"}
+                    modelArray(index) = New PendingProcessWarehouseModel With {.OrderID = "No data", .ProductType = "No data", _
+                                            .ProductModel = "No data", .ProductDescription = "No data", .FechaEmbarque = "No data", _
+                                            .TrackNo = "No data", .FechaIngreso = "no data"}
                     ' -- Actualizado por Carlos Barreto
                     ReDim Preserve modelArray(index - 1)
                 End If

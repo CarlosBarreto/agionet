@@ -73,6 +73,13 @@ Module agGlobals
         Return des.EncryptData(plainText)
     End Function
 
+    ''' <summary>
+    ''' Funcion que genera el contenido del correo electrónico enviado al cliente cuando una orden es creada
+    ''' </summary>
+    ''' <param name="OrderID">ID de la Orden</param>
+    ''' <param name="model">Datos de la Orden</param>
+    ''' <returns>Cadena con la información a mandar</returns>
+    ''' <remarks></remarks>
     Public Function getCreateOrderEmailFormat(OrderID As String, model As CreateOrderModel) As String
         Dim builder As StringBuilder = New StringBuilder
 
@@ -87,7 +94,12 @@ Module agGlobals
         builder.AppendLine("    <table width=""100%"" cellpadding=""0"" cellspacing=""0"" border=""0""> ")
         builder.AppendLine("        <tr> ")
         builder.AppendLine("            <td style=""width:10%;""></td> ")
-        builder.AppendLine("            <td style=""width:80%;""><img src=""http://www.agiotech.com/_/img/menu/logo-01.png"" alt=""Agiotech Logo"" /> </td> ")
+        If model.CustomerType = "TWG" Or model.CustomerType = "ASS" Then
+            builder.AppendLine("            <td style=""width:80%;""><img src=""http://www.agiotech.com/_/img/menu/logo-01.png"" alt=""Agiotech Logo"" /> </td> ")
+        Else
+            builder.AppendLine("            <td style=""width:80%;""><img src=""http://www.agiotech.com/_/img/menu/logo-02.jpg"" alt=""Agiotech Logo"" /> </td> ")
+        End If
+
         builder.AppendLine("            <td style=""width:10%;""></td> ")
         builder.AppendLine("        </tr> ")
         builder.AppendLine("        <tr> ")
@@ -249,6 +261,19 @@ Module agGlobals
         builder.AppendLine("            </td> ")
         builder.AppendLine("            <td style=""width:10%;""></td> ")
         builder.AppendLine("        </tr> ")
+        If model.CustomerType = "EndUser" Or model.CustomerType = "AgioFix" Then
+            builder.AppendLine("        <tr> ")
+            builder.AppendLine("            <td style=""width:10%;""></td> ")
+            builder.AppendLine("            <td style=""width:80%;"">Si la orden no se ha recibido dentro de los 5 próximos días hábiles, se cancelará</td> ")
+            builder.AppendLine("            <td style=""width:10%;""></td> ")
+        End If
+
+        builder.AppendLine("        <tr> ")
+        builder.AppendLine("            <td style=""width:10%;""></td> ")
+        builder.AppendLine("            <td style=""width:80%;""><strong>Horarios de servicio: </strong> Lunes a Viernes de 9:00 a.m. a 6:00 p.m.</td> ")
+        builder.AppendLine("            <td style=""width:10%;""></td> ")
+        builder.AppendLine("        </tr> ")
+
         builder.AppendLine("        <tr> ")
         builder.AppendLine("            <td style=""width:10%;""></td> ")
         builder.AppendLine("            <td style=""width:80%;""></td> ")
@@ -259,6 +284,45 @@ Module agGlobals
         builder.AppendLine("</html> ")
         Return builder.ToString()
 
+    End Function
+
+    ''' <summary>
+    '''  Cadena que cambia un link guardado en la Base de Datos por un link funcional y recortado
+    ''' </summary>
+    ''' <param name="Cadena">cadena a revisar</param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function CambiaLink(Cadena As String) As String
+        Dim reg_Completo As New Regex("http://([^\s]*)")
+        Dim reg_Main As New Regex("([^/]*)")
+        Dim pattern(100) As String
+        Dim replacement(100) As String
+        Dim Response As String = String.Empty
+        Dim Index As Integer = 0
+
+        Dim mc As MatchCollection = reg_Completo.Matches(Cadena)
+        Dim mc2 As MatchCollection
+        If mc.Count > 0 Then
+            'Console.WriteLine("¡BINGO! hay {0} coincidencias", mc.Count)
+            For Each m In mc
+                'Console.WriteLine("0= |{0}|", m.Result("$0"))
+                pattern(Index) = m.Result("$0")
+                mc2 = reg_Main.Matches(m.Result("$1"))
+                'Console.WriteLine("3= |{0}|", mc2(0).Result("$0"))
+                replacement(Index) = "<a href=""" & pattern(Index) & """ target=""blank"" >" & mc2(0).Result("$0") & "</a>"
+                Index += 1
+            Next
+            'Else
+            '   Console.WriteLine("¡Sin coincidencias!")
+
+            Response = Cadena
+            Index = Index - 1
+            For i = 0 To Index
+                Response = Response.Replace(pattern(i), replacement(i))
+            Next
+        End If
+
+        Return Response
     End Function
 
     '// Nested Types
@@ -293,8 +357,8 @@ Module agGlobals
         Public Warranty As String
         Public ReRepair As String
         Public Comment As String
-
-
+        Public Customer As String
+        Public ProductClass As String
 
     End Structure
 

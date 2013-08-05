@@ -398,7 +398,15 @@ Public Class OrderInfoModel
         End Set
     End Property
 
-
+    '---- Public
+    Public Property Commodity As String
+        Get
+            Return _Commodity
+        End Get
+        Set(value As String)
+            _Commodity = value
+        End Set
+    End Property
     ' Fields
     Private _Address As String
     Private _Address2 As String
@@ -433,6 +441,7 @@ Public Class OrderInfoModel
     Private _Tel3 As String
     Private _Trademark As String
     Private _ZipCode As String
+    Private _Commodity As String
 End Class
 
 '2013.02.13
@@ -1143,11 +1152,13 @@ Public Class TestReportModel
     Private _OrderID As String
     Private _TestName As String
     Private _TestResult As String
+    Private _CapFailure As String
     Private _Failure As String
     Private _TextLog As String
     Private _TestStart As String
     Private _TestEnd As String
     Private _CreateBy As String
+    Private _TipoReparacion As String
 
     '-- Propiedades
     Public Property OrderID As String
@@ -1174,6 +1185,15 @@ Public Class TestReportModel
         End Get
         Set(value As String)
             _TestResult = value
+        End Set
+    End Property
+
+    Public Property CapFailure As String
+        Get
+            Return _CapFailure
+        End Get
+        Set(value As String)
+            _CapFailure = value
         End Set
     End Property
 
@@ -1222,6 +1242,14 @@ Public Class TestReportModel
         End Set
     End Property
 
+    Public Property TipoReparacion As String
+        Get
+            Return _TipoReparacion
+        End Get
+        Set(value As String)
+            _TipoReparacion = value
+        End Set
+    End Property
 End Class
 
 '2013.02.13
@@ -1309,8 +1337,8 @@ Public Class TestByOrderIDModel
     Private _Failure As String
     Private _CapFailure As String
     Private _TextLog As String
-    Private _TestStart As String
-    Private _TestEnd As String
+    Private _TestStart As DateTime
+    Private _TestEnd As DateTime
     Private _CreateBy As String
 
     '-----------------------------------------------------------------
@@ -1368,20 +1396,20 @@ Public Class TestByOrderIDModel
         End Set
     End Property
 
-    Public Property TestStart As String
+    Public Property TestStart As DateTime
         Get
             Return _TestStart
         End Get
-        Set(value As String)
+        Set(value As DateTime)
             _TestStart = value
         End Set
     End Property
 
-    Public Property TestEnd As String
+    Public Property TestEnd As DateTime
         Get
             Return _TestEnd
         End Get
-        Set(value As String)
+        Set(value As DateTime)
             _TestEnd = value
         End Set
     End Property
@@ -1395,6 +1423,7 @@ Public Class TestByOrderIDModel
         End Set
     End Property
 End Class
+
 
 
 

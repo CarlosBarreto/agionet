@@ -5,6 +5,7 @@
     Session("Section") = "sc"
     
     Dim Read As AgioNet.AppCostModel = TempData("model")
+    Dim TipoReparacion As String = TempData("TipoReparacion")
     'Dim Order As Object = TempData("OrderInfo")
     
     'Dim grid As WebGrid = New WebGrid(Read)
@@ -20,12 +21,31 @@ End Code
 
 <script type="text/javascript"> 
     $(document).ready(function () {
+        //Iniciar validacion
+        $("#Costo").val("0");
+        $("#Flete").val("0");
+        $("#GastosImportacion").val("0");
+
+        $("#Costo").numeric({ prefix: '$ ', cents: true });
+        $("#Flete").numeric({ prefix: '$ ', cents: true });
+        $("#GastosImportacion").numeric({ prefix: '$ ', cents: true });
+
         var data = "@Read.Comentario";
         if (data != "") {
             $("#Comentario").html("@Replace(Read.Comentario, vbNewLine, "\n")");
         }
 
-        $("#LeadTime").datepicker({ dateFormat: "dd/mm/yy" });
+        $("#LeadTime").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            showButtonPanel: true,
+            dateFormat: "dd/mm/yy",
+            firstDay: 1,
+            showOn: "both",
+            buttonImage: "@Url.Content("~/Content/css/agioTheme/images/calendar.gif")"
+        });
 
         $("#Costo").change(function () { 
             $("#Costo").numeric({ prefix: '$ ', cents: true });
@@ -53,10 +73,15 @@ End If
 <!-- Aquí se muestran los formularios -->
 <div id="main-ContIzquierda">
     <!-- Inicia diseño del formulario -->
-    <h2 class="TituloFormulario">Costear una Orden</h2>
+    <h2 class="TituloFormulario">Costear una Parte</h2>
     <div id="Formulario">
         @Using Html.BeginForm()
-            @<div id="Formulario2">
+            @<div id="Formulario6">
+                <div class="row">
+                    <span class="Span-a"><span class="PCenter">Tipo Reparación</span></span>
+                    <span class="Span-c"> @Html.TextBox("TipoReparacion", TipoReparacion, New With {.Disabled = "True"})</span>
+                </div>
+
                 <div class="row">
                   <span class="Span-a"> <span class="PCenter">Orden: </span> </span>
                   <span class="Span-c"> @Html.TextBoxFor(Function(m) m.OrderID, New With {.Value = Session("OrderID")}) </span>
@@ -78,7 +103,7 @@ End If
 
                 <div class="row">
                     <span class="Span-a"><span class="PCenter">LeadTime</span></span>
-                    <span class="Span-c"> @Html.TextBoxFor(Function(m) m.LeadTime, New With {.Value = Read.LeadTime}) </span>
+                    <span class="Span-c"> @Html.TextBoxFor(Function(m) m.LeadTime, New With {.Value = Read.LeadTime, .Style="width: 75%;"}) </span>
                     <span class="Span-a">(dd/mm/aaaa)</span>
                 </div>
                 
@@ -106,8 +131,9 @@ End If
             </div>
         End Using
 
+        </div>
     </div>
-</div>
+
 
 <!-- Aquí va la información de la orden -->
 <div id="main-ContDerecha" class="bg-fondoborder">

@@ -72,3 +72,4 @@ C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\obj\Debug\AgioNet.vbproj.G
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\obj\Debug\AgioNet.dll
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\obj\Debug\AgioNet.xml
 C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\obj\Debug\AgioNet.pdb
+C:\Users\Agiotech\Documents\Proyectos\AgioNet\AgioNet\obj\Debug\AgioNet.vbprojResolveAssemblyReference.cache

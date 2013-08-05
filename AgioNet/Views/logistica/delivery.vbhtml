@@ -47,16 +47,18 @@ End If
      </span>
 End Using
 </div>
-<div id="xx" style="display:block; height: 80%; width:100%; overflow-y:scroll;">
+<div id="xx" style="display:block; height: 80%; width:100%; overflow-y:auto; overflow-x:hidden;">
     <h2 class="TituloFormulario">Listado de Ordenes Pendientes de Entregar </h2>
 
     @grid.GetHtml(columns:=grid.Columns( _
+            grid.Column("Item", format:=Function(item) item.WebGrid.Rows.IndexOf(item) + 1), _
             grid.Column("OrderID", "Orden"), _
-            grid.Column("Customer", "Cliente"), _
             grid.Column("ProductType", "Tipo de producto"), _
-            grid.Column("SerialNo", "Numero de serie"), _
-            grid.Column("Model", "Modelo"), _
-            grid.Column("Description", "Descripcion") _
+            grid.Column("ProductModel", "Modelo"), _
+            grid.Column("ProductDescription", "Descripcion"), _
+            grid.Column("FechaEmbarque", "Fecha Embarque"), _
+            grid.Column("TrackNo", "Guía"), _
+            grid.Column("FechaIngreso", "Fecha Compromiso") _
     ))
 
 </div>

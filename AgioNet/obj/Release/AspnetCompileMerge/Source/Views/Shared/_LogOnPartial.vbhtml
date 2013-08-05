@@ -1,19 +1,4 @@
-﻿<script type="text/javascript">
-    $(document).ready(function () {
-        $('.menuser ul ul').css({
-            position: "absolute",
-            top: "30px",
-            display: "none"
-        });
-
-        $('.menuser li').hover(function () {
-            $(this).find('> ul').stop(true, true).slideDown('slow');
-        }, function () {
-            $(this).find('ul').stop(true, true).slideUp('slow');
-        });
-    });
-</script>
-@Code
+﻿@Code
     If Request.IsAuthenticated Then
         @<div class="menuser">
             <ul>

@@ -7,68 +7,6 @@ End Code
     <span class="Span-c"><strong>Orden: </strong> @read.OrderID</span>
 </div>
 
-<!--
-<div class="form-row">
-    <span class="Span-c"><strong>OrderDate:</strong>@read.OrderDate</span>
-    <span class="Span-b"><strong>Flete:</strong>@read.Flete</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-c"><strong>Tipo de Cliente: </strong> @read.CustomerType</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-c"><strong>Nombre del Cliente: </strong> @read.CustomerName</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-c"><strong>Razón Social: </strong> @read.RazonSocial</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-c"><strong>Referencia: </strong> @read.Reference</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-b"><strong>RFC: </strong> @read.RFC</span>
-    <span class="Span-c"><strong>Email: </strong> @read.Email</span>
-</div>
-
-<div class="form-row">
-   <span class="Span-c"><strong>: </strong> @read.</span> 
-</div>
-
-<div class="form-row">
-<span class="Span-d"><strong>Dirección: </strong> @read.Address No. @read.ENumber Int. @read.INumber </span>
-</div>
-
-<div class="form-row">
-    <span class="Span-d"><strong>Colonia: </strong> @read.Address2</span>
-</div>
-
-<div class="form-row">
-     <span class="Span-c"><strong>Ciudad: </strong> @read.City</span>
-     <span class="Span-b"><strong>Estado: </strong> @read.State</span>
-</div>
-<div class="form-row">
-     <span class="Span-c"><strong>País: </strong> @read.Country</span>
-     <span class="Span-b"><strong>C.P.: </strong> @read.ZipCode</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-b"><strong>Tel Casa: </strong> @read.Tel</span>
-    <span class="Span-b"><strong>Tel Ofi: </strong> @read.Tel2</span>
-    <span class="Span-b"><strong>Cel: </strong> @read.Tel3</span>
-</div>
-
-<div class="form-row">
-    <span class="Span-b"><strong>Tipo Rec: </strong> @read.Delivery</span>
-    <span class="Span-c"><strong>Horario Rec: </strong> @read.DeliveryTime</span>
-</div>
-
-    
- -->
-
 <div class="form-row">
     <span class="Span-e"><strong>Clase de Producto: </strong> @read.ProductClass</span>
 </div>
@@ -88,7 +26,9 @@ End Code
 <div class="form-row">
     <span class="Span-e"><strong>Descripción: </strong> @read.Description</span>
 </div>
-       
+<div class="form-row">&nbsp;</div>
+<div class="form-row">&nbsp;</div> 
+      
 <div class="form-row">
     <span class="Span-e"><strong>SKUNo: </strong> @read.PartNo</span>
 </div>
@@ -102,7 +42,7 @@ End Code
 </div>
 
 <div class="form-row">
-    <span class="Span-e"><strong>Tipo de Sericio: </strong> @read.ServiceType</span>
+    <span class="Span-e"><strong>Tipo de Servicio: </strong> @read.ServiceType</span>
 </div>
   
 <div class="form-row--ex">

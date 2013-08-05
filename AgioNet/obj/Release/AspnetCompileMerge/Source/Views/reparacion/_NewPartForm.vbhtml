@@ -31,7 +31,7 @@
 <!-- Inicia diseño del formulario -->
 <h2 class="TituloFormulario--dg">Agregar una nueva una parte / Completar</h2>
 
-@Using Ajax.BeginForm("reparacion", "reparacion", New AjaxOptions With {.UpdateTargetId = "tab-ContIzquierda"}, New With {.Method = "POST"})
+@Using Ajax.BeginForm("nueva_parte", "reparacion", New AjaxOptions With {.UpdateTargetId = "tab-ContIzquierda"}, New With {.Method = "POST"})
     @<div class="Content">
        <div id="Formulario">
         <div class="row">

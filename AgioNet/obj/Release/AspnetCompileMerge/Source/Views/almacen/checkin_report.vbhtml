@@ -46,8 +46,9 @@ End Using
 @If TempData("ErrMsg") = "" Then
     @<div id="gridd">
         @grid.GetHtml(columns:=grid.Columns( _
+            grid.Column("Item", format:=Function(item) item.WebGrid.Rows.IndexOf(item) + 1), _
             grid.Column("OrderID", "Orden"), _
-            grid.Column("OrderDate", "Fecha de Alta"), _
+            grid.Column("OrderDate", "Fecha de Creación"), _
             grid.Column("FechaIngreso", "Fecha de ingreso"), _
             grid.Column("Guia", "Guia"), _
             grid.Column("Longitud", "Longitud"), _

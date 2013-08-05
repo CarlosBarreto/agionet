@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/facturacion/send_invoice.vbhtml" hash="7a9782b5" filehash="2389facbdf79" flags="110000" assembly="App_Web_pcehz5gp" type="ASP._Page_Views_facturacion_send_invoice_vbhtml">
+    <filedeps>
+        <filedep name="/Views/facturacion/send_invoice.vbhtml" />
+    </filedeps>
+</preserve>

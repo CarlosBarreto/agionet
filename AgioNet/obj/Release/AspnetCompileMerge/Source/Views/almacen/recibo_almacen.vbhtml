@@ -6,7 +6,7 @@
 End Code
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#Comment").html("@User.Identity.Name : En proceso de recolección... ");
+        $("#Comment").html("@User.Identity.Name : Órden Recibida en Almacén... ");
 
         $("#Weight").change(function () {
             pushPeso();
